@@ -96,6 +96,89 @@
       }
     }
   },
+  "AboutVeganPage": {
+    "hero": {
+      "eyebrow": "Vegan 101",
+      "title": "Vegan 101",
+      "subtitle": "What to expect in the evolution of human kindness",
+      "ctaPrimary": "Why go vegan?",
+      "ctaSecondary": "Read the FAQs"
+    },
+    "whatIsVeganism": {
+      "title": "What is veganism?",
+      "description": "“Veganism is a way of living which seeks to exclude, as far as is possible and practicable all forms of exploitation of, and cruelty to, animals for food, clothing or any other purpose.”",
+      "quoteSource": "The Vegan Society",
+      "definition": "Vegan is a term used to describe products, such as food, clothing and cosmetics that do not contain animal ingredients and have not been tested on animals."
+    },
+    "whyGoVegan": {
+      "title": "Why go vegan?",
+      "readMore": "Read full story",
+      "sections": {
+        "animals": {
+          "title": "For the Animals",
+          "content": "At present, over 56 billion land animals are bred and killed every year. A staggering 70% of birds, and 60% of mammals are now livestock animals. The majority of these intelligent, sensitive beings live terrible lives confined in small cages on factory farms.",
+          "full": "At present, over 56 billion land animals are bred and killed every year. A staggering 70% of birds, and 60% of mammals are now livestock animals, with just 4% of animals living wild (humans = 36%).\n\nThis figure does not include fish, whose numbers are too great to measure, or the millions of animals killed for other human purposes.\n\nThe majority of these intelligent, sensitive beings live terrible lives confined in small cages on factory farms, before being sent to slaughter at a very young age (for example, the average slaughter age for a broiler chicken in the EU is just 5-7 weeks).\n\nAs more people learn about the horrific conditions under which animals live and die, they are shunning animal foods in favour of kinder vegan alternatives."
+        },
+        "planet": {
+          "title": "For Our Planet",
+          "content": "Animal agriculture is responsible for around 20-33 percent of all the world’s fresh water consumption, and is one of the leading causes of deforestation, biodiversity loss and fresh water pollution.",
+          "full": "In addition to being the second largest contributor of emissions (greater than all modes of transportation combined), animal agriculture is also responsible for around 20-33 percent of all the world’s fresh water consumption, and is one of the leading causes of deforestation, biodiversity loss and fresh water pollution.\n\nThe damage caused by animal agriculture extends to the oceans as well, with scientists now warning that our seas could be empty of fish by 2048.\n\nThe author of a comprehensive study conducted at the University of Oxford goes so far as to state that “A vegan diet is probably the single biggest way to reduce your impact on planet Earth, not just greenhouse gases, but global acidification (air pollution), eutrophication (water pollution), land use and water use.”"
+        },
+        "health": {
+          "title": "For Personal Health",
+          "content": "Studies show that cholesterol levels are lower in vegans than in the standard population, and that vegans have a lower chance of developing diabetes type 2.",
+          "full": "Two of the most pressing health issues of the modern age are coronary heart disease (linked to high levels of dangerous cholesterol) and diabetes type 2.\n\nStudies show that cholesterol levels are lower in vegans (whose diets tend to be higher in healthy fruits & vegetables, and lower in saturated fats) than in the standard population, and that vegans have a lower chance of developing diabetes."
+        },
+        "publicHealth": {
+          "title": "For Public Health",
+          "content": "Overcrowded factory farms are a breeding ground for disease. This fact has been made all the more evident by recent pandemics. Harmful bacteria such as campylobacter, salmonella and e.coli from animal products sicken millions of people every year.",
+          "full": "And it isn’t just those who actually consume animal products who get sick. Cross-contamination and runoffs from factory farms are putting everyone at risk.\n\nOvercrowded factory farms, as well as other facilities in which animals are routinely confined, are literally a breeding ground for disease. This fact has been made all the more evident by the recent COVID 19 pandemic, which originated in a live animal market.\n\nApart from the risks posed by corona, avian, and pig flu viruses, harmful bacteria such as campylobacter, salmonella and e.coli from animal products, sicken millions of people every year.\n\nAnother pressing issue is antibiotic resistance. Around 80% of all antibiotics are now fed to farm animals, not just to treat infections, but to keep them alive in unnatural conditions, and as growth promoters. This reckless overuse of our most precious drugs increases the risk of antibiotic resistance, meaning increasing antibiotic failure for human diseases."
+        },
+        "humanRights": {
+          "title": "For Human Rights",
+          "content": "At present, there are 815 million people on our planet who do not have enough to eat, yet, over half the world’s agricultural land is used for livestock farming. If human beings stopped using land to raise livestock, we could potentially end world hunger.",
+          "full": "At present, there are 815 million people on our planet who do not have enough to eat, yet, over half the world’s agricultural land is used for livestock farming, and 34% of human-edible crop calories are fed to animals in the meat and dairy industries.\n\nIf human beings stopped using land and edible crops to raise livestock animals, we could potentially end world hunger."
+        }
+      }
+    },
+    "kindnessCallout": {
+      "lineOne": "Kinder to <strong>animals</strong>, kinder to our <strong>planet</strong>, kinder to <strong>humans</strong>.",
+      "lineTwo": "Choose <strong>kindness</strong>, choose <strong>vegan</strong>."
+    },
+    "modal": {
+      "close": "Close"
+    },
+    "faqs": {
+      "title": "Vegan FAQs",
+      "items": {
+        "difficult": {
+          "question": "Is it difficult to live vegan?",
+          "answer": "No. It can take a little time to figure out in the beginning, but following a vegan lifestyle has never been easier. These days there is an abundance of vegan-friendly products readily available."
+        },
+        "eat": {
+          "question": "What do vegans eat?",
+          "answer": "Vegans eat the same basic things as everyone else: vegetables, fruit, rice, grains, tofu, beans, along with plant-based versions of burgers, hot dogs, pizza, ramen, and more."
+        },
+        "nutrition": {
+          "question": "Can I meet all my nutritional requirements?",
+          "answer": "Absolutely! According to both the British & American Dietetic Associations, a well-planned vegan diet is suitable for people of all ages."
+        },
+        "religion": {
+          "question": "Is veganism a religion or a cult?",
+          "answer": "Absolutely not. While some vegans follow religions, others don’t."
+        },
+        "unsure": {
+          "question": "I’m interested, but unsure. What should I do?",
+          "answer": "We suggest increasing the amount of vegan meals you eat, while continuing to educate yourself. Join Meetup events or online vegan groups to find friends and ask questions."
+        }
+      }
+    },
+    "footer": {
+      "tagline": "Choose kindness, choose vegan.",
+      "ctaPrimary": "Explore resources",
+      "ctaSecondary": "Back to home"
+    }
+  },
   "ResourcesPage": {
     "hero": {
       "eyebrow": "Resources",

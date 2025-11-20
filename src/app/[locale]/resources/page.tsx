@@ -1,4 +1,4 @@
-import {Link} from "@/i18n/routing";
+import {PageHero} from "@/components/PageHero";
 import {useLocale, useTranslations} from "next-intl";
 
 const sectionKeys = ["essentials", "knowledge", "business"] as const;
@@ -24,6 +24,8 @@ type SectionKey = (typeof sectionKeys)[number];
 export default function ResourcesPage() {
   const t = useTranslations("ResourcesPage");
   const locale = useLocale();
+  const heroBackground =
+    "linear-gradient(120deg, rgba(6,95,70,0.65), rgba(16,185,129,0.6)), url('https://images.unsplash.com/photo-1474073705359-5da2a8270c64?auto=format&fit=crop&w=1600&q=80')";
 
   const renderCards = (section: SectionKey) => (
     <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -56,40 +58,17 @@ export default function ResourcesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-white text-slate-900">
-      <section
-        className="relative isolate overflow-hidden border-b border-emerald-100"
-        style={{
-          backgroundImage:
-            "linear-gradient(120deg, rgba(6,95,70,0.65), rgba(16,185,129,0.6)), url('https://images.unsplash.com/photo-1474073705359-5da2a8270c64?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      >
-        <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-16 text-white md:flex-row md:items-center md:justify-between">
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-100">
-              {t("hero.eyebrow")}
-            </p>
-            <h1 className="text-3xl font-bold leading-tight md:text-4xl">{t("hero.title")}</h1>
-            <p className="text-base text-emerald-50 md:text-lg">{t("hero.description")}</p>
-          </div>
-          <div className="flex flex-col gap-3 text-sm font-semibold md:flex-row">
-            <a
-              href="#essentials"
-              className="rounded-full bg-white/90 px-6 py-3 text-center text-emerald-700 shadow-lg shadow-emerald-900/20 transition hover:bg-white"
-            >
-              {t("hero.ctaPrimary")}
-            </a>
-            <Link
-              href="/"
-              locale={locale}
-              className="rounded-full border border-white/70 px-6 py-3 text-center text-white transition hover:bg-white/10"
-            >
-              {t("hero.ctaSecondary")}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t("hero.eyebrow")}
+        title={t("hero.title")}
+        description={t("hero.description")}
+        locale={locale}
+        backgroundImage={heroBackground}
+        actions={[
+          {label: t("hero.ctaPrimary"), href: "#essentials", variant: "solid", type: "anchor"},
+          {label: t("hero.ctaSecondary"), href: "/", variant: "outline", type: "link"}
+        ]}
+      />
 
       <main className="mx-auto flex max-w-5xl flex-col gap-16 px-4 py-12">
         {sectionKeys.map((sectionKey) => (
