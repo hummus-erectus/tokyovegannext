@@ -1,0 +1,168 @@
+{
+  "HomePage": {
+    "brand": "Tokyo Vegan",
+    "nav": {
+      "activities": "活動",
+      "resources": "リソース",
+      "blog": "ブログ",
+      "events": "イベント"
+    },
+    "languageToggle": {
+      "english": "English",
+      "japanese": "日本語"
+    },
+    "hero": {
+      "eyebrow": "Tokyo Vegan",
+      "title": "東京ヴィーガンへようこそ！",
+      "description": "東京そして日本各地でプラントベースの暮らしを広げる、活気あふれるバイリンガルコミュニティの一員になりませんか。",
+      "primaryCta": "ミートアップに参加",
+      "secondaryCta": "リソースを見る",
+      "communityBlurb": "Tokyo Vegan Meetupは2006年の発足以来、ヴィーガン、ベジタリアン、フレキシタリアン、そしてヴィーガンに興味のあるすべての人を歓迎してきました。バイリンガルでのストーリーテリングと実践的なリソースを通じて、思いやりある暮らしを誰にとっても身近なものにしています。"
+    },
+    "stats": {
+      "founded": {"value": "2006", "label": "設立"},
+      "members": {"value": "9,800+", "label": "コミュニティメンバー"},
+      "events": {"value": "250+", "label": "開催イベント"}
+    },
+    "sections": {
+      "activities": {
+        "title": "活動",
+        "description": "アウトリーチ、サポート、バイリンガルのミートアップを通して、仲間と一緒に前進しています。",
+        "cards": {
+          "outreach": {
+            "title": "アウトリーチ",
+            "description": "街頭やトークイベント、メディア連携を通じて、健康・環境・アニマルウェルフェアにポジティブな変化をもたらすヴィーガンライフの魅力を発信します。",
+            "linkLabel": "Vegan 101 を見る"
+          },
+          "support": {
+            "title": "サポート",
+            "description": "買い物、料理、東京でのプラントベース生活に役立つ実践的なガイドをまとめています。",
+            "linkLabel": "リソース一覧へ"
+          },
+          "community": {
+            "title": "コミュニティ＆ミートアップ",
+            "description": "2006年から続くTokyo Vegan Meetupは、交流会やワークショップ、クリエイティブなキャンペーンで誰でも歓迎しています。",
+            "linkLabel": "イベントを見る"
+          }
+        }
+      },
+      "resources": {
+        "title": "ガイドをチェック",
+        "description": "初めての東京ヴィーガン旅でも、友人をサポートしたい時でも。スターターキットと厳選ガイドで準備は万全です。",
+        "items": {
+          "starterKits": {
+            "title": "スターターキット",
+            "description": "初心者や興味のある方に向けたバイリンガルのスターターキットをダウンロード。",
+            "linkLabel": "キットを見る"
+          },
+          "restaurants": {
+            "title": "レストランガイド",
+            "description": "東京中のプラントベースなレストラン、カフェ、ポップアップを紹介。",
+            "linkLabel": "スポットを探す"
+          },
+          "shopping": {
+            "title": "ショッピング＆料理",
+            "description": "食材の調達から毎日のレシピまで、ローカルで使えるヒントをまとめました。",
+            "linkLabel": "ヒントを見る"
+          },
+          "community": {
+            "title": "コミュニティ＆メディア",
+            "description": "読書会や映画上映、ニュースレターなど、思いやりのある暮らしを祝う場につながろう。",
+            "linkLabel": "参加する"
+          }
+        }
+      },
+      "blog": {
+        "title": "最新ブログ",
+        "description": "コミュニティのニュースや政策アップデート、ストーリーをお届けします。",
+        "posts": {
+          "maff": {
+            "title": "農林水産省がベジ・ヴィーガン加工食品JAS案の意見募集",
+            "excerpt": "ベジタリアン／ヴィーガン食品のJAS制定に向けたパブリックコメントに参加しよう。",
+            "href": "https://www.tokyovegan.org/jp/blog/public-comments-on-the-proposed-japanese-agricultural-standards"
+          },
+          "chicken": {
+            "title": "日本の鶏肉に関する事実",
+            "excerpt": "日本では毎年8億2千万羽以上の鶏が屠殺されています。実情を知り、アクションにつなげましょう。",
+            "href": "https://www.tokyovegan.org/jp/blog/chicken-facts-japan"
+          },
+          "council": {
+            "title": "ベジ議連 第5回レポート",
+            "excerpt": "政策立案者とヴィーガン団体の連携が深まる会合のハイライトを紹介。",
+            "href": "https://www.tokyovegan.org/jp/blog/fifth-general-meeting-of-the-vege-council-japan"
+          }
+        },
+        "cta": "すべての記事"
+      }
+    }
+  },
+  "ResourcesPage": {
+    "hero": {
+      "eyebrow": "リソース",
+      "title": "ヴィーガンとヴィーガンに興味のある人のための情報とおすすめ",
+      "description": "日本でのプラントベース生活をもっと身近にする厳選ガイド、メディア、ビジネス情報。",
+      "ctaPrimary": "エッセンシャルを見る",
+      "ctaSecondary": "ホームに戻る"
+    },
+    "sections": {
+      "essentials": {
+        "title": "エッセンシャル",
+        "description": "日本でプラントベースに暮らすための基本情報がそろっています。",
+        "items": {
+          "starterKits": {
+            "title": "スターターキット",
+            "description": "自分にも友人にも役立つバイリンガルのスターターキットをダウンロード。",
+            "href": "https://www.tokyovegan.org/jp/starter-kits"
+          },
+          "restaurants": {
+            "title": "レストラン",
+            "description": "東京各地のヴィーガン対応レストランやカフェ、ポップアップをチェック。",
+            "href": "https://www.tokyovegan.org/jp/restaurants"
+          },
+          "shopping": {
+            "title": "ショッピング",
+            "description": "食材や日用品、スペシャルティ商品をローカルで手に入れるためのヒント。",
+            "href": "https://www.tokyovegan.org/jp/shopping"
+          },
+          "cooking": {
+            "title": "料理",
+            "description": "日本で手に入りやすい食材を使ったレシピやアイデア。",
+            "href": "https://www.tokyovegan.org/jp/recipes"
+          },
+          "community": {
+            "title": "グループ＆リンク",
+            "description": "クラブやオンラインコミュニティ、ミートアップで仲間とつながろう。",
+            "href": "https://www.tokyovegan.org/jp/community"
+          }
+        }
+      },
+      "knowledge": {
+        "title": "ヴィーガンナレッジ",
+        "description": "英語と日本語の両方で楽しめるメディア。",
+        "items": {
+          "books": {
+            "title": "本",
+            "description": "健康・倫理・サステナビリティについて学べるおすすめ書籍。",
+            "href": "https://www.tokyovegan.org/jp/books"
+          },
+          "movies": {
+            "title": "映画",
+            "description": "学びとインスピレーションを与えてくれる映画やドキュメンタリー。",
+            "href": "https://www.tokyovegan.org/jp/movies"
+          }
+        }
+      },
+      "business": {
+        "title": "ビジネス向け",
+        "description": "認証やヴィーガン市場に関心のある企業向けの情報。",
+        "items": {
+          "catering": {
+            "title": "ケータリング",
+            "description": "プラントベースイベントに慣れたシェフやケータリングパートナー。",
+            "href": "https://www.tokyovegan.org/jp/caterers"
+          }
+        }
+      }
+    }
+  }
+}

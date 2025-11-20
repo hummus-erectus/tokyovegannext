@@ -1,0 +1,168 @@
+{
+  "HomePage": {
+    "brand": "Tokyo Vegan",
+    "nav": {
+      "activities": "Activities",
+      "resources": "Resources",
+      "blog": "Blog",
+      "events": "Events"
+    },
+    "languageToggle": {
+      "english": "English",
+      "japanese": "日本語"
+    },
+    "hero": {
+      "eyebrow": "Tokyo Vegan",
+      "title": "Welcome to Tokyo Vegan!",
+      "description": "Become part of the vibrant bilingual community empowering plant-based living throughout Tokyo and across Japan.",
+      "primaryCta": "Join a meetup",
+      "secondaryCta": "Explore resources",
+      "communityBlurb": "Tokyo Vegan Meetup has welcomed vegans, vegetarians, flexitarians, and the vegan-curious since 2006. We celebrate bilingual storytelling and practical resources that make compassionate living accessible to everyone."
+    },
+    "stats": {
+      "founded": {"value": "2006", "label": "Founded"},
+      "members": {"value": "9,800+", "label": "Community members"},
+      "events": {"value": "250+", "label": "Events hosted"}
+    },
+    "sections": {
+      "activities": {
+        "title": "Activities",
+        "description": "Together we run outreach, support newcomers, and host inclusive bilingual meetups.",
+        "cards": {
+          "outreach": {
+            "title": "Outreach",
+            "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
+            "linkLabel": "Learn about Vegan 101"
+          },
+          "support": {
+            "title": "Support",
+            "description": "Find practical guides for shopping, cooking, and living plant-based in Tokyo—from seasonal produce to local-friendly recipes.",
+            "linkLabel": "Browse resources"
+          },
+          "community": {
+            "title": "Community & Meetups",
+            "description": "Since 2006 the Tokyo Vegan Meetup has welcomed everyone to social gatherings, workshops, and creative campaigns.",
+            "linkLabel": "See events"
+          }
+        }
+      },
+      "resources": {
+        "title": "Explore our guides",
+        "description": "Planning your first Tokyo vegan adventure or helping a friend get started? Our starter kits and curated guides make it easy.",
+        "items": {
+          "starterKits": {
+            "title": "Starter Kits",
+            "description": "Download bilingual starter kits tailored for newcomers and curious friends.",
+            "linkLabel": "View kit"
+          },
+          "restaurants": {
+            "title": "Restaurant Guide",
+            "description": "Discover restaurants, cafés, and pop-ups embracing plant-forward menus across the city.",
+            "linkLabel": "Find places"
+          },
+          "shopping": {
+            "title": "Shopping & Cooking",
+            "description": "Source ingredients, learn everyday recipes, and support local vegan-friendly retailers.",
+            "linkLabel": "See tips"
+          },
+          "community": {
+            "title": "Community & Media",
+            "description": "Connect with book clubs, film nights, and newsletters that celebrate compassionate living.",
+            "linkLabel": "Join in"
+          }
+        }
+      },
+      "blog": {
+        "title": "Latest from the blog",
+        "description": "News, policy updates, and stories from the Tokyo Vegan community.",
+        "posts": {
+          "maff": {
+            "title": "MAFF seeks public comments on vegan food standards",
+            "excerpt": "Add your voice to the proposed Japanese Agricultural Standards for vegetarian and vegan products.",
+            "href": "https://www.tokyovegan.org/jp/blog/public-comments-on-the-proposed-japanese-agricultural-standards"
+          },
+          "chicken": {
+            "title": "Chicken facts in Japan",
+            "excerpt": "Over 820 million chickens are killed annually in Japan—learn the facts and how to advocate for change.",
+            "href": "https://www.tokyovegan.org/jp/blog/chicken-facts-japan"
+          },
+          "council": {
+            "title": "Report from the 5th Vege Council meeting",
+            "excerpt": "Key takeaways from the growing collaboration between policymakers and vegan advocates.",
+            "href": "https://www.tokyovegan.org/jp/blog/fifth-general-meeting-of-the-vege-council-japan"
+          }
+        },
+        "cta": "Read all posts"
+      }
+    }
+  },
+  "ResourcesPage": {
+    "hero": {
+      "eyebrow": "Resources",
+      "title": "Information and recommendations for vegans and the vegan-curious",
+      "description": "Curated guides, media, and business links to make plant-based living in Japan easier.",
+      "ctaPrimary": "Browse essentials",
+      "ctaSecondary": "Back to home"
+    },
+    "sections": {
+      "essentials": {
+        "title": "The Essentials",
+        "description": "Everything you need for plant-based living in Japan.",
+        "items": {
+          "starterKits": {
+            "title": "Starter kits",
+            "description": "Download bilingual starter kits for you or curious friends.",
+            "href": "https://www.tokyovegan.org/en/starter-kits"
+          },
+          "restaurants": {
+            "title": "Restaurants",
+            "description": "Find vegan-friendly restaurants, cafés, and pop-ups across Tokyo.",
+            "href": "https://www.tokyovegan.org/en/restaurants"
+          },
+          "shopping": {
+            "title": "Shopping",
+            "description": "Source groceries, pantry staples, and specialty ingredients locally.",
+            "href": "https://www.tokyovegan.org/en/shopping"
+          },
+          "cooking": {
+            "title": "Cooking",
+            "description": "Recipes and kitchen inspiration using ingredients you can find in Japan.",
+            "href": "https://www.tokyovegan.org/en/recipes"
+          },
+          "community": {
+            "title": "Group & page links",
+            "description": "Clubs, online groups, and meetups to connect with fellow vegans.",
+            "href": "https://www.tokyovegan.org/en/community"
+          }
+        }
+      },
+      "knowledge": {
+        "title": "Vegan Knowledge",
+        "description": "Media available in both English and Japanese.",
+        "items": {
+          "books": {
+            "title": "Books",
+            "description": "Recommended reads about health, ethics, and sustainability.",
+            "href": "https://www.tokyovegan.org/en/books"
+          },
+          "movies": {
+            "title": "Movies",
+            "description": "Films and documentaries that inform and inspire.",
+            "href": "https://www.tokyovegan.org/en/movies"
+          }
+        }
+      },
+      "business": {
+        "title": "For Businesses",
+        "description": "Information for companies interested in certification and the vegan space.",
+        "items": {
+          "catering": {
+            "title": "Catering",
+            "description": "Chefs and catering partners experienced with plant-based events.",
+            "href": "https://www.tokyovegan.org/en/caterers"
+          }
+        }
+      }
+    }
+  }
+}
