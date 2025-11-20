@@ -83,7 +83,7 @@ export default function HomePage() {
                   {t(`sections.activities.cards.${key}.description`)}
                 </p>
                 <Link
-                  href={`/${key}`}
+                  href={key === "outreach" ? "/about-vegan" : `/${key}`}
                   locale={locale}
                   className="mt-5 inline-flex items-center text-sm font-semibold text-emerald-600"
                 >
