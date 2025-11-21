@@ -3,8 +3,8 @@ import { ResourceCard } from "@/components/ResourceCard";
 import { getResources } from "@/lib/google-sheets";
 import { getTranslations } from "next-intl/server";
 
-// ISR revalidation time (1 hour)
-export const revalidate = 3600;
+// ISR revalidation time (10 mins)
+export const revalidate = 600;
 
 // You can move this to an environment variable if you have multiple sheets
 const SHEET_ID = process.env.GOOGLE_SHEET_ID_STARTER_KITS || "YOUR_SHEET_ID_HERE";
