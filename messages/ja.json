@@ -195,7 +195,7 @@
           "starterKits": {
             "title": "スターターキット",
             "description": "自分にも友人にも役立つバイリンガルのスターターキットをダウンロード。",
-            "href": "https://www.tokyovegan.org/jp/starter-kits"
+            "href": "/resources/starter-kits"
           },
           "restaurants": {
             "title": "レストラン",
