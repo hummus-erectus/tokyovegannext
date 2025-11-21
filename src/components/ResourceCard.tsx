@@ -9,6 +9,8 @@ interface ResourceCardProps {
   icon?: string;
   accentColor?: string; // e.g. "emerald", "amber"
   isExternal?: boolean;
+  languages?: ("en" | "ja")[];
+  locale?: "en" | "ja";
 }
 
 export function ResourceCard({
@@ -18,8 +20,11 @@ export function ResourceCard({
   imageUrl,
   icon = "📄",
   accentColor = "emerald",
-  isExternal = true
+  isExternal = true,
+  languages,
+  locale = "en"
 }: ResourceCardProps) {
+  const isJaPage = locale === "ja";
   // Map colors to Tailwind classes safely
   const colors: Record<string, { text: string; bg: string; border: string }> = {
     emerald: { text: "text-emerald-700", bg: "from-emerald-50 to-white", border: "shadow-emerald-50 hover:shadow-emerald-200" },
@@ -55,6 +60,16 @@ export function ResourceCard({
           <span className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 text-2xl ${theme.text}`}>
             {icon}
           </span>
+        )}
+        {languages && languages.length > 0 && (
+          <div className="mb-2 flex gap-1 text-xs font-semibold text-slate-500">
+            {languages.includes("en") && (
+              <span className="rounded-full bg-white/80 px-2 py-0.5 shadow-sm">{isJaPage ? "英語" : "EN"}</span>
+            )}
+            {languages.includes("ja") && (
+              <span className="rounded-full bg-white/80 px-2 py-0.5 shadow-sm">{isJaPage ? "日本語" : "JP"}</span>
+            )}
+          </div>
         )}
         
         <h3 className="text-xl font-semibold text-slate-900">{title}</h3>
