@@ -15,6 +15,7 @@ export interface ResourceItem {
   url: string;
   imageUrl?: string;
   category?: string;
+  languages: ("en" | "ja")[];
 }
 
 type SheetRow = {
@@ -42,21 +43,55 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
     const rows = await sheet.getRows();
 
     return rows
-      .map((row: SheetRow): ResourceItem => ({
-        id: row.get("id") as string,
-        active: row.get("active") === "TRUE",
-        title: {
-          en: row.get("title_en") as string,
-          ja: row.get("title_ja") as string,
-        },
-        description: {
-          en: row.get("description_en") as string,
-          ja: row.get("description_ja") as string,
-        },
-        url: row.get("url") as string,
-        imageUrl: row.get("image_url") as string | undefined,
-        category: row.get("category") as string | undefined,
-      }))
+      .map((row: SheetRow): ResourceItem => {
+        const id = row.get("id") as string;
+        const active = row.get("active") === "TRUE";
+        const titleEn = row.get("title_en") as string;
+        const titleJa = row.get("title_ja") as string;
+        const descriptionEn = row.get("description_en") as string;
+        const descriptionJa = row.get("description_ja") as string;
+        const url = row.get("url") as string;
+        const imageUrl = row.get("image_url") as string | undefined;
+        const category = row.get("category") as string | undefined;
+
+        const languagesRaw = ((row.get("languages") as string | undefined) ?? "")
+          .toString()
+          .toLowerCase()
+          .replace(/\s/g, "");
+
+        let languages: ("en" | "ja")[] = [];
+
+        if (languagesRaw === "en") {
+          languages = ["en"];
+        } else if (languagesRaw === "ja") {
+          languages = ["ja"];
+        } else if (languagesRaw === "en,ja" || languagesRaw === "ja,en" || languagesRaw === "bilingual") {
+          languages = ["en", "ja"];
+        } else {
+          if (titleEn) languages.push("en");
+          if (titleJa) languages.push("ja");
+          if (languages.length === 0) {
+            languages = ["en"];
+          }
+        }
+
+        return {
+          id,
+          active,
+          title: {
+            en: titleEn,
+            ja: titleJa,
+          },
+          description: {
+            en: descriptionEn,
+            ja: descriptionJa,
+          },
+          url,
+          imageUrl,
+          category,
+          languages,
+        };
+      })
       .filter((item) => item.active && !!item.id);
   } catch (error) {
     console.error("Error fetching from Google Sheets:", error);
@@ -72,7 +107,8 @@ function getMockResources(): ResourceItem[] {
       title: { en: "Tokyo Vegan Guide (Mock)", ja: "東京ヴィーガンガイド (仮)" },
       description: { en: "A complete guide to vegan living in Tokyo.", ja: "東京でのヴィーガン生活の完全ガイド。" },
       url: "https://example.com",
-      category: "Guide"
+      category: "Guide",
+      languages: ["en", "ja"]
     },
     {
       id: "2",
@@ -80,7 +116,8 @@ function getMockResources(): ResourceItem[] {
       title: { en: "Vegan Map (Mock)", ja: "ヴィーガンマップ (仮)" },
       description: { en: "Find restaurants near you.", ja: "近くのレストランを探す。" },
       url: "https://example.com/map",
-      category: "Map"
+      category: "Map",
+      languages: ["en", "ja"]
     }
   ];
 }

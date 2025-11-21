@@ -61,6 +61,8 @@ export default async function StarterKitsPage(props: Props) {
                 imageUrl={resource.imageUrl}
                 accentColor="emerald"
                 icon="🎒"
+                languages={resource.languages}
+                locale={locale}
               />
             ))}
           </div>
