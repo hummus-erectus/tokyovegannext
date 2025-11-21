@@ -17,6 +17,10 @@ export interface ResourceItem {
   category?: string;
 }
 
+type SheetRow = {
+  get: (key: string) => unknown;
+};
+
 // Initialize auth - see https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication
 const serviceAccountAuth = new JWT({
   email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -38,22 +42,22 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
     const rows = await sheet.getRows();
 
     return rows
-      .map((row) => ({
-        id: row.get("id"),
+      .map((row: SheetRow): ResourceItem => ({
+        id: row.get("id") as string,
         active: row.get("active") === "TRUE",
         title: {
-          en: row.get("title_en"),
-          ja: row.get("title_ja"),
+          en: row.get("title_en") as string,
+          ja: row.get("title_ja") as string,
         },
         description: {
-          en: row.get("description_en"),
-          ja: row.get("description_ja"),
+          en: row.get("description_en") as string,
+          ja: row.get("description_ja") as string,
         },
-        url: row.get("url"),
-        imageUrl: row.get("image_url"),
-        category: row.get("category"),
+        url: row.get("url") as string,
+        imageUrl: row.get("image_url") as string | undefined,
+        category: row.get("category") as string | undefined,
       }))
-      .filter((item): item is ResourceItem => item.active && !!item.id); // Type guard
+      .filter((item) => item.active && !!item.id);
   } catch (error) {
     console.error("Error fetching from Google Sheets:", error);
     return [];
