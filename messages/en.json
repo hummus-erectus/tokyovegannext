@@ -193,9 +193,9 @@
         "description": "Everything you need for plant-based living in Japan.",
         "items": {
           "starterKits": {
-            "title": "Starter kits",
-            "description": "Download bilingual starter kits for you or curious friends.",
-            "href": "https://www.tokyovegan.org/en/starter-kits"
+            "title": "Starter Kits",
+            "description": "Download bilingual starter kits tailored for newcomers and curious friends.",
+            "href": "/resources/starter-kits"
           },
           "restaurants": {
             "title": "Restaurants",
