@@ -35,7 +35,7 @@ type LanguageSwitchProps = {
 
 function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsProps) {
   return (
-    <div className={`flex ${direction === "row" ? "gap-6" : "flex-col gap-4"} text-sm font-medium text-slate-600`}>
+    <div className={`flex ${direction === "row" ? "gap-8" : "flex-col gap-4"} text-sm font-bold text-slate-600`}>
       {navLinks.map((link) =>
         link.type === "external" ? (
           <a
@@ -65,12 +65,12 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
 }
 
 function LanguageSwitch({variant = "pill", locale, pathname, translate}: LanguageSwitchProps) {
-  const baseClass = "rounded-full px-3 py-1 transition-colors";
+  const baseClass = "rounded-full px-4 py-1.5 transition-colors";
   return (
     <div
       className={
         variant === "pill"
-          ? "hidden items-center gap-1 rounded-full border border-emerald-200 bg-white p-1 text-xs font-semibold text-slate-500 md:flex"
+          ? "hidden items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50/50 p-1 text-xs font-bold text-slate-600 md:flex"
           : "flex flex-col gap-2 text-sm font-semibold"
       }
     >
@@ -83,7 +83,7 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
             variant === "pill"
               ? `${baseClass} ${
                   locale === toggle.locale
-                    ? "bg-emerald-100 text-emerald-900"
+                    ? "bg-white text-emerald-700 shadow-sm"
                     : "text-slate-500 hover:text-emerald-700"
                 }`
               : `rounded-full border px-3 py-2 text-center transition-colors ${
@@ -108,32 +108,34 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Link
           href="/"
           locale={locale}
-          className="text-lg font-semibold text-emerald-800 transition-colors hover:text-emerald-600"
+          className="text-xl font-bold tracking-tight text-emerald-900 transition-colors hover:text-emerald-700"
         >
           {t("brand")}
         </Link>
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           <NavItems locale={locale} translate={t} />
           <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
         </div>
         <button
-          className="md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-emerald-900 transition hover:bg-emerald-50 md:hidden"
           onClick={() => setOpen((prev) => !prev)}
           aria-label={open ? "Close navigation" : "Open navigation"}
         >
-          <span className="block h-0.5 w-6 bg-emerald-700 transition-all">
-            <span className="sr-only">menu</span>
+          <span className="block w-6 space-y-1.5">
+             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "translate-y-2 rotate-45" : ""}`} />
+             <span className={`block h-0.5 w-6 bg-current transition duration-300 ${open ? "opacity-0" : ""}`} />
+             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "-translate-y-2 -rotate-45" : ""}`} />
           </span>
         </button>
       </div>
 
       {open && (
         <div className="md:hidden">
-          <div className="space-y-6 border-t border-emerald-100 bg-white px-4 py-6 shadow-inner">
+          <div className="space-y-6 border-t border-emerald-100 bg-white px-4 py-6 shadow-lg">
             <NavItems
               direction="col"
               locale={locale}

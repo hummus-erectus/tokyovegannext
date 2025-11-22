@@ -19,6 +19,14 @@
       "secondaryCta": "Explore resources",
       "communityBlurb": "Tokyo Vegan Meetup has welcomed vegans, vegetarians, flexitarians, and the vegan-curious since 2006. We celebrate bilingual storytelling and practical resources that make compassionate living accessible to everyone."
     },
+    "meetup": {
+      "nextEvent": "Next Event",
+      "rsvp": "RSVP on Meetup",
+      "going": "going"
+    },
+    "instagram": {
+      "followUs": "Follow us on Instagram"
+    },
     "stats": {
       "founded": {"value": "2006", "label": "Founded"},
       "members": {"value": "9,800+", "label": "Community members"},
