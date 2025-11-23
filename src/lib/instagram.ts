@@ -7,60 +7,76 @@ export interface InstagramPost {
   permalink: string;
 }
 
-const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
-const INSTAGRAM_USER_ID = process.env.INSTAGRAM_USER_ID;
+const FEEDFRAMER_API_KEY = process.env.FEEDFRAMER_API_KEY;
+
+interface FeedframerPost {
+  id: string;
+  caption: string | null;
+  mediaUrl: string;
+  thumbnailUrl: string | null;
+  mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM" | "REELS";
+  permalink: string;
+}
+
+interface FeedframerResponse {
+  posts: FeedframerPost[];
+}
 
 export async function getLatestInstagramPosts(limit = 4): Promise<InstagramPost[]> {
-  if (!INSTAGRAM_ACCESS_TOKEN || !INSTAGRAM_USER_ID) {
+  if (!FEEDFRAMER_API_KEY) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn("[instagram] Missing INSTAGRAM_ACCESS_TOKEN or INSTAGRAM_USER_ID env vars");
+      console.warn("[instagram] Missing FEEDFRAMER_API_KEY env var");
     }
     return [];
   }
 
   const params = new URLSearchParams({
-    fields: "id,caption,media_url,permalink,media_type",
-    access_token: INSTAGRAM_ACCESS_TOKEN,
-    limit: String(limit),
+    api_key: FEEDFRAMER_API_KEY!,
+    "filter[type]": "CAROUSEL_ALBUM",
+    "page[size]": String(limit),
   });
 
-  const url = `https://graph.instagram.com/${INSTAGRAM_USER_ID}/media?${params.toString()}`;
+  const url = `https://feedframer.com/api/v1/me?${params.toString()}`;
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 600 },
+      next: {revalidate: 3600},
     });
 
     if (!response.ok) {
       if (process.env.NODE_ENV !== "production") {
-        console.error("[instagram] Failed to fetch posts:", response.status, response.statusText);
+        console.error("[instagram] Failed to fetch posts from FeedFramer:", response.status, response.statusText);
       }
       return [];
     }
 
-    type ApiMedia = {
-      id: string;
-      caption?: string;
-      media_url: string;
-      permalink: string;
-      media_type: string;
+    const json = (await response.json()) as FeedframerResponse;
+    const items = (json.posts ?? []).filter(
+      (item) => item.mediaType === "CAROUSEL_ALBUM",
+    );
+
+    const getImageUrl = (item: FeedframerPost): string => {
+      // Prefer thumbnail for video/reel content, main media URL for images
+      if ((item.mediaType === "VIDEO" || item.mediaType === "REELS") && item.thumbnailUrl) {
+        return item.thumbnailUrl;
+      }
+
+      if (item.mediaType === "IMAGE" || item.mediaType === "CAROUSEL_ALBUM") {
+        return item.mediaUrl;
+      }
+
+      return item.thumbnailUrl ?? item.mediaUrl;
     };
 
-    const json = (await response.json()) as { data?: ApiMedia[] };
-    const items = json.data ?? [];
-
-    return items
-      .filter((item) => item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM" || item.media_type === "VIDEO")
-      .slice(0, limit)
-      .map((item) => ({
-        id: item.id,
-        imageUrl: item.media_url,
-        caption: item.caption ?? "",
-        permalink: item.permalink,
-      }));
+    return items.slice(0, limit).map((item) => ({
+      id: item.id,
+      imageUrl: getImageUrl(item),
+      caption: item.caption ?? "",
+      permalink: item.permalink,
+    }));
   } catch (error) {
     if (process.env.NODE_ENV !== "production") {
-      console.error("[instagram] Error fetching posts", error);
+      console.error("[instagram] Error fetching posts from FeedFramer", error);
     }
     return [];
   }

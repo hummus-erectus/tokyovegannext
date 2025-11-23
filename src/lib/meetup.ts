@@ -35,14 +35,7 @@ export async function getNextMeetupEvent(): Promise<MeetupEvent | null> {
       return null;
     }
 
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[meetup] Raw ICS data', icsData);
-    }
-
     const jcalData = ICAL.parse(icsData);
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[meetup] Parsed jCal', jcalData);
-    }
     const comp = new ICAL.Component(jcalData);
     const vevents = comp.getAllSubcomponents('vevent');
 
@@ -79,17 +72,6 @@ export async function getNextMeetupEvent(): Promise<MeetupEvent | null> {
     if (futureEvents.length === 0) return null;
 
     const nextEvent = futureEvents[0];
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[meetup] Parsed next event', {
-        icsUrl: ICS_URL,
-        title: nextEvent.title,
-        url: nextEvent.url,
-        startDate: nextEvent.startDate,
-        endDate: nextEvent.endDate,
-        description: nextEvent.description,
-      });
-    }
 
     return {
       title: nextEvent.title,

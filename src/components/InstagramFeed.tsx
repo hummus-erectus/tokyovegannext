@@ -1,25 +1,41 @@
-"use client";
+import {getTranslations} from "next-intl/server";
+import {getLatestInstagramPosts, InstagramPost} from "@/lib/instagram";
 
-import {useEffect} from "react";
-import {useTranslations} from "next-intl";
+const MOCK_POSTS: InstagramPost[] = [
+  {
+    id: "1",
+    imageUrl:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800",
+    caption: "Delicious vegan ramen in Tokyo!",
+    permalink: "https://instagram.com/tokyoveganofficial",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800",
+    caption: "Community meetup at Yoyogi Park.",
+    permalink: "https://instagram.com/tokyoveganofficial",
+  },
+  {
+    id: "3",
+    imageUrl:
+      "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&q=80&w=800",
+    caption: "New vegan restaurant discovery in Shibuya.",
+    permalink: "https://instagram.com/tokyoveganofficial",
+  },
+  {
+    id: "4",
+    imageUrl:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800",
+    caption: "Vegan pizza night!",
+    permalink: "https://instagram.com/tokyoveganofficial",
+  },
+];
 
-const SOCIABLEKIT_EMBED_ID = "25625520";
-
-export function InstagramFeed() {
-  const t = useTranslations("HomePage.instagram");
-
-  useEffect(() => {
-    const scriptId = "sociablekit-instagram-feed-script";
-    if (document.getElementById(scriptId)) {
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://widgets.sociablekit.com/instagram-feed/widget.js";
-    script.defer = true;
-    document.body.appendChild(script);
-  }, []);
+export async function InstagramFeed() {
+  const t = await getTranslations("HomePage.instagram");
+  const posts = await getLatestInstagramPosts(6);
+  const displayPosts = posts.length ? posts : MOCK_POSTS;
 
   return (
     <div className="space-y-6">
@@ -37,12 +53,31 @@ export function InstagramFeed() {
         </a>
       </div>
 
-      <div className="rounded-2xl bg-slate-50 p-4">
-        <div
-          className="sk-instagram-feed"
-          data-embed-id={SOCIABLEKIT_EMBED_ID}
-        />
-      </div>
+      {(() => {
+        const rotations = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "rotate-0", "-rotate-1"];
+
+        return (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            {displayPosts.map((post, index) => (
+              <a
+                key={post.id}
+                href={post.permalink}
+                target="_blank"
+                rel="noreferrer"
+                className={`group relative z-0 mb-4 inline-block w-full transform break-inside-avoid transition duration-300 ease-out hover:z-30 hover:scale-105 ${rotations[index % rotations.length]}`}
+              >
+                <div className="overflow-hidden rounded-xl shadow-sm shadow-slate-400 transition group-hover:shadow-lg">
+                  <img
+                    src={post.imageUrl}
+                    alt={post.caption || "Instagram post"}
+                    className="w-full h-auto transition duration-500"
+                  />
+                </div>
+              </a>
+            ))}
+          </div>
+        );
+      })()}
     </div>
   );
 }
