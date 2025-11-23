@@ -19,6 +19,14 @@
       "secondaryCta": "リソースを見る",
       "communityBlurb": "Tokyo Vegan Meetupは2006年の発足以来、ヴィーガン、ベジタリアン、フレキシタリアン、そしてヴィーガンに興味のあるすべての人を歓迎してきました。バイリンガルでのストーリーテリングと実践的なリソースを通じて、思いやりある暮らしを誰にとっても身近なものにしています。"
     },
+    "meetup": {
+      "nextEvent": "次回のイベント",
+      "rsvp": "Meetupで申し込む",
+      "going": "参加予定"
+    },
+    "instagram": {
+      "followUs": "Instagramをフォロー"
+    },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
       "members": {"value": "9,800+", "label": "コミュニティメンバー"},
