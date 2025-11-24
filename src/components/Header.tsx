@@ -35,7 +35,7 @@ type LanguageSwitchProps = {
 
 function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsProps) {
   return (
-    <div className={`flex ${direction === "row" ? "gap-8" : "flex-col gap-4"} text-sm font-bold text-slate-600`}>
+    <div className={`flex ${direction === "row" ? "gap-8 items-center" : "flex-col gap-4"} font-bold text-slate-600`}>
       {navLinks.map((link) =>
         link.type === "external" ? (
           <a
@@ -43,7 +43,11 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="transition-colors hover:text-emerald-700"
+            className={`transition-colors ${
+              direction === "row" 
+                ? "rounded-full bg-[#FCD34D] px-6 py-2 text-slate-900 shadow-sm hover:bg-[#fbbf24] hover:shadow-md" 
+                : "text-emerald-600 hover:text-emerald-700"
+            }`}
             onClick={onNavigate}
           >
             {translate(`nav.${link.key}`)}
@@ -53,7 +57,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             key={link.key}
             href={link.href}
             locale={locale}
-            className="transition-colors hover:text-emerald-700"
+            className="transition-colors hover:text-emerald-600"
             onClick={onNavigate}
           >
             {translate(`nav.${link.key}`)}
@@ -107,12 +111,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-[#FCF7DA]/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Link
           href="/"
           locale={locale}
-          className="text-xl font-bold tracking-tight text-emerald-900 transition-colors hover:text-emerald-700"
+          className="font-hand text-4xl font-bold uppercase tracking-wide text-[#00A99D] transition-colors hover:text-emerald-700"
         >
           {t("brand")}
         </Link>

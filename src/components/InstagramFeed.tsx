@@ -1,4 +1,3 @@
-import {getTranslations} from "next-intl/server";
 import {getLatestInstagramPosts, InstagramPost} from "@/lib/instagram";
 
 const MOCK_POSTS: InstagramPost[] = [
@@ -33,45 +32,53 @@ const MOCK_POSTS: InstagramPost[] = [
 ];
 
 export async function InstagramFeed() {
-  const t = await getTranslations("HomePage.instagram");
   const posts = await getLatestInstagramPosts(6);
   const displayPosts = posts.length ? posts : MOCK_POSTS;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-xl font-bold text-slate-900 wrap-break-word sm:text-2xl">
-          @tokyoveganofficial
+    <div className="space-y-12">
+      <div className="flex flex-col items-center gap-4 text-center">
+        <h2 className="font-hand text-5xl font-bold text-slate-900 -rotate-2">
+          Instagram feed
         </h2>
         <a
           href="https://instagram.com/tokyoveganofficial"
           target="_blank"
           rel="noreferrer"
-          className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 sm:text-base"
+          className="font-hand text-2xl font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
         >
-          {t("followUs")}
+          @tokyoveganofficial
         </a>
       </div>
 
       {(() => {
-        const rotations = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "rotate-0", "-rotate-1"];
+        const rotations = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "rotate-1", "-rotate-2"];
+        const verticalOffsets = ["translate-y-0", "translate-y-4", "translate-y-2", "translate-y-6", "translate-y-0", "translate-y-4"];
 
         return (
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:gap-12">
             {displayPosts.map((post, index) => (
               <a
                 key={post.id}
                 href={post.permalink}
                 target="_blank"
                 rel="noreferrer"
-                className={`group relative z-0 mb-4 inline-block w-full transform break-inside-avoid transition duration-300 ease-out hover:z-30 hover:scale-105 ${rotations[index % rotations.length]}`}
+                className={`group relative z-0 inline-block w-full transform break-inside-avoid transition duration-300 ease-out hover:z-30 hover:scale-110 ${rotations[index % rotations.length]} ${verticalOffsets[index % verticalOffsets.length]}`}
               >
-                <div className="overflow-hidden rounded-xl shadow-sm shadow-slate-400 transition group-hover:shadow-lg">
-                  <img
-                    src={post.imageUrl}
-                    alt={post.caption || "Instagram post"}
-                    className="w-full h-auto transition duration-500"
-                  />
+                <div className="tape-top-center" />
+                <div className="flex flex-col bg-white p-3 pb-4 shadow-lg shadow-slate-300 transition group-hover:shadow-xl">
+                  <div className="w-full overflow-hidden bg-slate-100">
+                    <img
+                      src={post.imageUrl}
+                      alt={post.caption || "Instagram post"}
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                  <div className="mt-4 min-h-12 text-center">
+                     <p className="line-clamp-2 font-hand text-lg font-bold leading-tight text-slate-700">
+                       {post.caption || "Check this out!"}
+                     </p>
+                  </div>
                 </div>
               </a>
             ))}

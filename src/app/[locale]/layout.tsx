@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
 import {notFound} from "next/navigation";
-import {Geist, Geist_Mono} from "next/font/google";
+import {Geist, Geist_Mono, Amatic_SC} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {routing} from "@/i18n/routing";
@@ -15,6 +15,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const amatic = Amatic_SC({
+  variable: "--font-amatic",
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
@@ -39,9 +45,9 @@ export default async function LocaleLayout({children, params}: Props) {
 
   return (
     <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${amatic.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col bg-gradient-to-b from-emerald-50 via-white to-white text-slate-900">
+          <div className="flex min-h-screen flex-col bg-[#FCF7DA] text-slate-900">
             <Header />
             <main className="flex-1">
               {children}
