@@ -12,7 +12,7 @@
   --color-brand-cream: #FFFDD0;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-hand: var(--font-amatic);
+  --font-hand: var(--font-yomogi);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,6 +30,14 @@ body {
 
 /* Custom Utilities */
 .font-hand {
+  font-family: var(--font-yomogi), cursive;
+}
+
+html[lang="en"] .font-hand {
+  font-family: var(--font-amatic), cursive;
+}
+
+.font-hand-brand {
   font-family: var(--font-amatic), cursive;
 }
 

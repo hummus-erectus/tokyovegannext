@@ -116,7 +116,7 @@ export default function Header() {
         <Link
           href="/"
           locale={locale}
-          className="font-hand text-4xl font-bold uppercase tracking-wide text-[#00A99D] transition-colors hover:text-emerald-700"
+          className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-[#00A99D] transition-colors hover:text-emerald-700"
         >
           {t("brand")}
         </Link>

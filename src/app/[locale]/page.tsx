@@ -24,7 +24,7 @@ export default async function HomePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-left">
               <div className="space-y-4">
-                <h1 className="font-hand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
+                <h1 className="font-hand-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
                   {t("hero.title")}
                 </h1>
                 <p className="max-w-lg text-lg text-slate-700 sm:text-xl">
