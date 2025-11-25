@@ -80,7 +80,7 @@ export default async function HomePage() {
                     </div>
                   </div>
                </div>
-               
+
                {/* Decorative elements */}
                <div className="absolute -left-12 top-1/2 -z-10 h-64 w-64 -translate-y-1/2 rounded-full bg-emerald-100/50 blur-3xl" />
                <div className="absolute -right-12 bottom-0 -z-10 h-64 w-64 rounded-full bg-yellow-100/50 blur-3xl" />
@@ -143,32 +143,32 @@ export default async function HomePage() {
                      };
                      const href = getCardHref(key);
                      const isExternal = href.startsWith("http");
-                     
+
 
                      const cardStyles = {
-                      outreach: { 
-                         color: "sticky-green", 
-                         rotation: "-rotate-3", 
+                      outreach: {
+                         color: "sticky-green",
+                         rotation: "-rotate-3",
                          margin: "mt-0",
                          widthClass: "basis-[46%] max-w-[260px]",
                          layoutClass: ""
                       },
-                      support: { 
-                         color: "sticky-yellow", 
-                         rotation: "rotate-2", 
+                      support: {
+                         color: "sticky-yellow",
+                         rotation: "rotate-2",
                          margin: "mt-1",
                          widthClass: "basis-[46%] max-w-[260px]",
                          layoutClass: ""
                       },
-                      community: { 
-                         color: "sticky-cream", 
-                         rotation: "-rotate-2", 
+                      community: {
+                         color: "sticky-cream",
+                         rotation: "-rotate-2",
                          margin: "mt-3",
                          widthClass: "basis-[46%] max-w-[260px]",
                          layoutClass: ""
                       },
                     } as const;
-                      
+
 
                      const style = cardStyles[key];
 
@@ -190,7 +190,6 @@ export default async function HomePage() {
                           </div>
                         </div>
                       );
-                     
 
                      const wrapperClass = `block group ${style.layoutClass} ${style.widthClass} ${style.margin}`;
 
@@ -211,7 +210,7 @@ export default async function HomePage() {
       </section>
 
       {/* Resources Preview Section */}
-      <section className="bg-yellow-50/50 py-24" id="resources-preview">
+      {/* <section className="bg-yellow-50/50 py-24" id="resources-preview">
          <div className="mx-auto max-w-6xl space-y-12 px-4">
             <div className="text-center">
               <h2 className="font-hand text-6xl font-bold text-slate-900 rotate-1">
@@ -241,7 +240,7 @@ export default async function HomePage() {
               ))}
             </div>
          </div>
-      </section>
+      </section> */}
 
       {/* Blog Section */}
       <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-24" id="blog">
