@@ -63,7 +63,7 @@ export default async function HomePage() {
             </div>
 
             <div className="relative hidden lg:block">
-               <div className="tape-section rotate-2 transform transition hover:rotate-1">
+               <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
                     <div className="relative h-[500px] w-full overflow-hidden">
@@ -132,54 +132,74 @@ export default async function HomePage() {
                    </defs>
                  </svg>
                  <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4">
-                   {t("sections.activities.description")}
-                 </h3>
-                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 w-full">
-                    {activityCardKeys.map((key, index) => {
-                      const getCardHref = (k: typeof activityCardKeys[number]) => {
-                         if (k === "outreach") return "/about-vegan";
-                         if (k === "support") return "/resources";
-                         return "https://www.meetup.com/tokyovegan/";
-                      };
-                      const href = getCardHref(key);
-                      const isExternal = href.startsWith("http");
+                  {t("sections.activities.description")}
+                </h3>
+                <div className="flex w-full max-w-[560px] flex-wrap items-start justify-center gap-4 md:gap-8 mx-auto">
+                   {activityCardKeys.map((key) => {
+                     const getCardHref = (k: typeof activityCardKeys[number]) => {
+                        if (k === "outreach") return "/about-vegan";
+                        if (k === "support") return "/resources";
+                        return "https://www.meetup.com/tokyovegan/";
+                     };
+                     const href = getCardHref(key);
+                     const isExternal = href.startsWith("http");
+                     
+
+                     const cardStyles = {
+                      outreach: { 
+                         color: "sticky-green", 
+                         rotation: "-rotate-3", 
+                         margin: "mt-0",
+                         widthClass: "basis-[46%] max-w-[260px]",
+                         layoutClass: ""
+                      },
+                      support: { 
+                         color: "sticky-yellow", 
+                         rotation: "rotate-2", 
+                         margin: "mt-1",
+                         widthClass: "basis-[46%] max-w-[260px]",
+                         layoutClass: ""
+                      },
+                      community: { 
+                         color: "sticky-cream", 
+                         rotation: "-rotate-2", 
+                         margin: "mt-3",
+                         widthClass: "basis-[46%] max-w-[260px]",
+                         layoutClass: ""
+                      },
+                    } as const;
                       
-                      const stickyColors = ["sticky-yellow", "sticky-green", "sticky-cream"];
-                      const rotations = ["rotate-1", "-rotate-2", "rotate-2"];
-                      const stickyColor = stickyColors[index % stickyColors.length];
-                      const rotation = rotations[index % rotations.length];
+
+                     const style = cardStyles[key];
 
                       const content = (
-                        <div className={`sticky-container ${rotation} transition hover:scale-105`}>
+                        <div className={`sticky-container ${style.rotation} transition hover:scale-105 hover:z-10 duration-300`}>
                           <div className="sticky-outer">
                             <div className="sticky-wrapper">
-                               <div className={`sticky-content ${stickyColor} p-6 text-center`}>
-                                  <div className="mb-2 text-4xl">
+                               <div className={`sticky-content ${style.color} p-4 sm:p-6 text-center aspect-square flex flex-col items-center justify-center`}>
+                                  <div className="mb-2 sm:mb-4 text-4xl sm:text-5xl">
                                      {key === 'outreach' && '📣'}
                                      {key === 'support' && '🤝'}
                                      {key === 'community' && '🌱'}
                                   </div>
-                                  <h3 className="font-hand text-3xl font-bold text-slate-900">
+                                  <h3 className="font-hand text-2xl sm:text-4xl font-bold text-slate-900 leading-tight">
                                     {t(`sections.activities.cards.${key}.title`)}
                                   </h3>
-                                  {/* <p className="mt-2 flex-1 font-hand text-2xl leading-tight text-slate-800">
-                                    {t(`sections.activities.cards.${key}.description`)}
-                                  </p> */}
-                                  {/* <div className="mt-4 font-hand text-2xl font-bold text-slate-900">
-                                    {index % 2 === 0 ? 'Check it out!' : 'Learn more!'}
-                                  </div> */}
                                </div>
                             </div>
                           </div>
                         </div>
                       );
+                     
+
+                     const wrapperClass = `block group ${style.layoutClass} ${style.widthClass} ${style.margin}`;
 
                       return isExternal ? (
-                        <a key={key} href={href} target="_blank" rel="noreferrer" className="block w-full group">
+                        <a key={key} href={href} target="_blank" rel="noreferrer" className={wrapperClass}>
                            {content}
                         </a>
                       ) : (
-                        <Link key={key} href={href} locale={locale} className="block w-full group">
+                        <Link key={key} href={href} locale={locale} className={wrapperClass}>
                            {content}
                         </Link>
                       );

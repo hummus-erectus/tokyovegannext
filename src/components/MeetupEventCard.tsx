@@ -29,7 +29,7 @@ export function MeetupEventCard({
   })}`;
 
   return (
-    <div className="relative mx-auto w-full max-w-sm rotate-1 transform transition hover:rotate-0">
+    <div className="relative mx-auto w-full max-w-sm rotate-1">
       {/* Push Pin */}
       <div className="absolute -top-3 left-1/2 z-20 h-6 w-6 -translate-x-1/2 rounded-full bg-red-500 shadow-md ring-2 ring-red-600/50" />
       
