@@ -29,8 +29,15 @@ type LanguageSwitchProps = {
 };
 
 function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsProps) {
+  const isMobile = direction === "col";
   return (
-    <div className={`flex ${direction === "row" ? "gap-8 items-center" : "flex-col gap-4"} font-bold text-slate-600`}>
+    <div
+      className={`flex ${
+        isMobile
+          ? "flex-col items-center gap-6 font-hand text-2xl font-semibold text-emerald-900"
+          : "gap-8 items-center font-hand text-2xl font-bold text-emerald-900"
+      }`}
+    >
       {navLinks.map((link) =>
         link.type === "external" ? (
           <a
@@ -39,9 +46,9 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             target="_blank"
             rel="noreferrer"
             className={`transition-colors ${
-              direction === "row" 
-                ? "rounded-full bg-[#FCD34D] px-6 py-2 text-slate-900 shadow-sm hover:bg-[#fbbf24] hover:shadow-md" 
-                : "text-emerald-600 hover:text-emerald-700"
+              !isMobile
+                ? "rounded-full bg-[#FCD34D] px-6 py-2 text-emerald-950 font-bold shadow-sm hover:bg-[#fbbf24] hover:shadow-md"
+                : "text-emerald-800 hover:text-emerald-600"
             }`}
             onClick={onNavigate}
           >
@@ -52,7 +59,9 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             key={link.key}
             href={link.href}
             locale={locale}
-            className="transition-colors hover:text-emerald-600"
+            className={`transition-colors ${
+              isMobile ? "hover:text-emerald-600" : "hover:text-emerald-600"
+            }`}
             onClick={onNavigate}
           >
             {translate(`nav.${link.key}`)}
@@ -83,8 +92,8 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
         {...commonProps}
         className={
           targetLocale === "en"
-            ? "hidden text-xl font-bold text-slate-600 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-2xl"
-            : "hidden text-lg font-bold text-slate-600 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
+            ? "hidden text-xl font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-2xl"
+            : "hidden text-lg font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
         }
       >
         {translate(`languageToggle.${targetKey}`)}
@@ -97,8 +106,8 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
       {...commonProps}
       className={
         targetLocale === "en"
-          ? "rounded-full border border-transparent px-3 py-2 text-center text-xl font-semibold text-slate-600 transition-colors hover:text-emerald-700"
-          : "rounded-full border border-transparent px-3 py-2 text-center text-lg font-semibold text-slate-600 transition-colors hover:text-emerald-700"
+          ? "text-center text-2xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
+          : "text-center text-xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
       }
     >
       {translate(`languageToggle.${targetKey}`)}
@@ -152,8 +161,8 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden">
-          <div className="space-y-6 border-t border-emerald-100 bg-white px-4 py-6 shadow-lg">
+        <div className="absolute left-0 top-full w-full md:hidden">
+          <div className="flex flex-col items-center space-y-8 border-t-2 border-dashed border-emerald-100/50 bg-[#FCF7DA] px-4 py-10 shadow-xl">
             <NavItems
               direction="col"
               locale={locale}
