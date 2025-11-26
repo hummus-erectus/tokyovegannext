@@ -271,6 +271,7 @@ html[lang="en"] .font-hand {
 
 /* Individual strip variations for natural look */
 .flyer-strip-1 {
+  transform: skew(1deg, 0deg);
   background: linear-gradient(
     to right,
     var(--flyer-paper),
@@ -280,7 +281,7 @@ html[lang="en"] .font-hand {
 }
 
 .flyer-strip-2 {
-  transform: skew(-4deg, 0deg);
+  transform: skew(-3deg, 0deg);
   background: var(--flyer-paper);
 }
 
@@ -301,6 +302,7 @@ html[lang="en"] .font-hand {
 }
 
 .flyer-strip-3 {
+  transform: skew(-1.5deg, 0deg);
   background: linear-gradient(
     to right,
     var(--flyer-paper),
@@ -310,7 +312,7 @@ html[lang="en"] .font-hand {
 }
 
 .flyer-strip-4 {
-  transform: skew(-6deg, 0deg);
+  transform: skew(-5deg, 0deg);
   background: var(--flyer-paper);
 }
 
@@ -331,10 +333,32 @@ html[lang="en"] .font-hand {
 }
 
 /* Hover states preserve skew but add pull effect */
+.flyer-strip-1:hover {
+  transform: skew(1deg, 0deg) translateY(6px) rotate(1deg);
+}
+
 .flyer-strip-2:hover {
-  transform: skew(-4deg, 0deg) translateY(6px) rotate(1deg);
+  transform: skew(-3deg, 0deg) translateY(6px) rotate(1deg);
+}
+
+.flyer-strip-3:hover {
+  transform: skew(-1.5deg, 0deg) translateY(6px) rotate(0deg);
 }
 
 .flyer-strip-4:hover {
-  transform: skew(-6deg, 0deg) translateY(6px) rotate(-1deg);
+  transform: skew(-5deg, 0deg) translateY(6px) rotate(-1deg);
+}
+
+.flyer-strip-5 {
+  transform: skew(2deg, 0deg);
+  background: linear-gradient(
+    to right,
+    var(--flyer-paper),
+    40%,
+    var(--flyer-shadow-light)
+  );
+}
+
+.flyer-strip-5:hover {
+  transform: skew(2deg, 0deg) translateY(6px) rotate(-1deg);
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail, Instagram, Facebook } from "lucide-react";
-import { FaMeetup } from "react-icons/fa";
+import { FaMeetup, FaLinkedin } from "react-icons/fa";
 
 const contactItems = [
   {
@@ -27,6 +27,12 @@ const contactItems = [
     icon: Facebook,
     label: "Tokyo Vegan",
     href: "https://www.facebook.com/tokyoveganmeetup",
+  },
+  {
+    key: "linkedin",
+    icon: FaLinkedin,
+    label: "Tokyo Vegan",
+    href: "https://www.linkedin.com/company/tokyo-vegan/",
   },
 ];
 
