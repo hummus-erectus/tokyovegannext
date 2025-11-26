@@ -27,6 +27,10 @@
     "instagram": {
       "followUs": "Follow us on Instagram"
     },
+    "contact": {
+      "title": "Connect With Us",
+      "subtitle": "Tear off a tab and get in touch!"
+    },
     "stats": {
       "founded": {"value": "2006", "label": "Founded"},
       "members": {"value": "9,800+", "label": "Community members"},

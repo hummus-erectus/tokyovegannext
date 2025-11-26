@@ -2,6 +2,7 @@ import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
 import {MeetupEventCard} from "@/components/MeetupEventCard";
 import {InstagramFeed} from "@/components/InstagramFeed";
+import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {getNextMeetupEvent} from "@/lib/meetup";
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
@@ -283,6 +284,16 @@ export default async function HomePage() {
       {/* Instagram Section */}
       <section className="mx-auto w-full max-w-6xl px-4">
         <InstagramFeed />
+      </section>
+
+      {/* Contact Flyer Section */}
+      <section className="mx-auto w-full max-w-6xl px-4" id="contact">
+        <div className="flex flex-col items-center">
+          <TearOffFlyer
+            title={t("contact.title")}
+            subtitle={t("contact.subtitle")}
+          />
+        </div>
       </section>
     </div>
   );

@@ -27,6 +27,10 @@
     "instagram": {
       "followUs": "Instagramをフォロー"
     },
+    "contact": {
+      "title": "お問い合わせ",
+      "subtitle": "タブを引っ張って連絡しよう！"
+    },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
       "members": {"value": "9,800+", "label": "コミュニティメンバー"},
