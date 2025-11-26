@@ -22,8 +22,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden pt-12 lg:pt-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="flex flex-col justify-center space-y-8 text-left">
-              <div className="space-y-4">
+            <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
+              <div className="space-y-4 flex flex-col items-center lg:items-start">
                 <h1 className="font-hand-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
                   {t("hero.title")}
                 </h1>
@@ -50,7 +50,7 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-12 border-t border-emerald-100 pt-8">
+              <div className="flex flex-wrap gap-12 border-t border-emerald-100 pt-8 justify-center lg:justify-start">
                 {entries.map(([key, value]) => (
                   <div key={key}>
                     <p className="font-hand text-4xl font-bold text-emerald-600">{value.value}</p>
@@ -62,18 +62,18 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block">
-               <div className="tape-section rotate-2">
+            <div className="relative mt-12 max-w-md mx-auto lg:max-w-none lg:mx-0 lg:mt-0">
+               <div className="tape-section rotate-2 transition-transform hover:scale-[1.02] duration-500">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
-                    <div className="relative h-[500px] w-full overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800" 
+                    <div className="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:h-[500px]">
+                      <img
+                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800"
                         alt="Delicious vegan food"
                         className="h-full w-full object-cover"
                       />
-                      <div className="absolute inset-x-0 bottom-0 bg-white/90 p-6 text-center">
-                        <p className="font-hand text-2xl font-bold leading-relaxed text-slate-900">
+                      <div className="absolute inset-x-0 bottom-0 bg-white/90 p-4 sm:p-6 text-center">
+                        <p className="font-hand text-xl sm:text-2xl font-bold leading-relaxed text-slate-900">
                           &ldquo;{t("hero.communityBlurb")}&rdquo;
                         </p>
                       </div>

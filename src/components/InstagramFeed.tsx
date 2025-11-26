@@ -38,14 +38,11 @@ export async function InstagramFeed() {
   return (
     <div className="space-y-12">
       <div className="flex flex-col items-center gap-4 text-center">
-        <h2 className="font-hand text-5xl font-bold text-slate-900 -rotate-2">
-          Instagram feed
-        </h2>
         <a
           href="https://instagram.com/tokyoveganofficial"
           target="_blank"
           rel="noreferrer"
-          className="font-hand text-2xl font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
+          className="font-hand-brand text-5xl font-bold text-emerald-600 hover:text-emerald-700 hover:underline -rotate-2"
         >
           @tokyoveganofficial
         </a>
