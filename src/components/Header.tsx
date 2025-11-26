@@ -127,14 +127,26 @@ export default function Header() {
           <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
         </div>
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-full text-emerald-900 transition hover:bg-emerald-50 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-brand-green transition hover:bg-emerald-50 md:hidden"
           onClick={() => setOpen((prev) => !prev)}
           aria-label={open ? "Close navigation" : "Open navigation"}
         >
-          <span className="block w-6 space-y-1.5">
-             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "translate-y-2 rotate-45" : ""}`} />
-             <span className={`block h-0.5 w-6 bg-current transition duration-300 ${open ? "opacity-0" : ""}`} />
-             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "-translate-y-2 -rotate-45" : ""}`} />
+          <span className="relative block h-4 w-6">
+             <span
+               className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                 open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+               }`}
+             />
+             <span
+               className={`absolute left-0 right-0 top-1/2 h-[3px] bg-current transform -translate-y-1/2 transition duration-300 ${
+                 open ? "opacity-0" : ""
+               }`}
+             />
+             <span
+               className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                 open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+               }`}
+             />
           </span>
         </button>
       </div>
