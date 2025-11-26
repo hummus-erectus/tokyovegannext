@@ -14,11 +14,6 @@ const navLinks = [
   }
 ] as const;
 
-const languageToggle = [
-  {key: "japanese", locale: "ja"},
-  {key: "english", locale: "en"}
-] as const;
-
 type NavItemsProps = {
   direction?: "row" | "col";
   locale: string;
@@ -69,38 +64,45 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
 }
 
 function LanguageSwitch({variant = "pill", locale, pathname, translate}: LanguageSwitchProps) {
-  const baseClass = "rounded-full px-4 py-1.5 transition-colors";
+  const targetLocale = locale === "en" ? "ja" : "en";
+  const targetKey = targetLocale === "en" ? "english" : "japanese";
+  const fontStyle =
+    targetLocale === "en"
+      ? {fontFamily: "var(--font-amatic)"}
+      : {fontFamily: "var(--font-yomogi)"};
+
+  const commonProps = {
+    href: pathname || "/",
+    locale: targetLocale,
+    style: fontStyle,
+  } as const;
+
+  if (variant === "pill") {
+    return (
+      <Link
+        {...commonProps}
+        className={
+          targetLocale === "en"
+            ? "hidden text-xl font-bold text-slate-600 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-2xl"
+            : "hidden text-lg font-bold text-slate-600 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
+        }
+      >
+        {translate(`languageToggle.${targetKey}`)}
+      </Link>
+    );
+  }
+
   return (
-    <div
+    <Link
+      {...commonProps}
       className={
-        variant === "pill"
-          ? "hidden items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50/50 p-1 text-xs font-bold text-slate-600 md:flex"
-          : "flex flex-col gap-2 text-sm font-semibold"
+        targetLocale === "en"
+          ? "rounded-full border border-transparent px-3 py-2 text-center text-xl font-semibold text-slate-600 transition-colors hover:text-emerald-700"
+          : "rounded-full border border-transparent px-3 py-2 text-center text-lg font-semibold text-slate-600 transition-colors hover:text-emerald-700"
       }
     >
-      {languageToggle.map((toggle) => (
-        <Link
-          key={toggle.key}
-          href={pathname || "/"}
-          locale={toggle.locale}
-          className={
-            variant === "pill"
-              ? `${baseClass} ${
-                  locale === toggle.locale
-                    ? "bg-white text-emerald-700 shadow-sm"
-                    : "text-slate-500 hover:text-emerald-700"
-                }`
-              : `rounded-full border px-3 py-2 text-center transition-colors ${
-                  locale === toggle.locale
-                    ? "border-emerald-500 text-emerald-700"
-                    : "border-transparent text-slate-500 hover:text-emerald-700"
-                }`
-          }
-        >
-          {translate(`languageToggle.${toggle.key}`)}
-        </Link>
-      ))}
-    </div>
+      {translate(`languageToggle.${targetKey}`)}
+    </Link>
   );
 }
 
@@ -116,7 +118,7 @@ export default function Header() {
         <Link
           href="/"
           locale={locale}
-          className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-[#00A99D] transition-colors hover:text-emerald-700"
+          className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
         >
           {t("brand")}
         </Link>
