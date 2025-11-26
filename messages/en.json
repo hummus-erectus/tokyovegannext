@@ -27,6 +27,15 @@
     "instagram": {
       "followUs": "Follow us on Instagram"
     },
+    "footer": {
+      "tagline": "Spreading plant-based joy in Tokyo!",
+      "copyright": "Made with veggies & code.",
+      "links": {
+        "meetup": "Meetup",
+        "instagram": "Instagram",
+        "resources": "Resources"
+      }
+    },
     "contact": {
       "title": "Connect With Us",
       "subtitle": "Tear off a tab and get in touch!"

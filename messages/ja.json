@@ -27,6 +27,15 @@
     "instagram": {
       "followUs": "Instagramをフォロー"
     },
+    "footer": {
+      "tagline": "東京でプラントベースの喜びを広げています！",
+      "copyright": "野菜とコードで作られました。",
+      "links": {
+        "meetup": "Meetup",
+        "instagram": "Instagram",
+        "resources": "リソース"
+      }
+    },
     "contact": {
       "title": "お問い合わせ",
       "subtitle": "タブを引っ張って連絡しよう！"
