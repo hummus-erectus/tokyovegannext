@@ -3,6 +3,7 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {MeetupEventCard} from "@/components/MeetupEventCard";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
+import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
@@ -20,7 +21,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col gap-24 pb-24 text-slate-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 lg:pt-20">
+      <section className="relative overflow-visible pt-10 pb-16 lg:pt-12 lg:pb-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
@@ -51,7 +52,7 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-12 border-t border-emerald-100 pt-8 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-12 pt-2 justify-center lg:justify-start">
                 {entries.map(([key, value]) => (
                   <div key={key}>
                     <p className="font-hand text-4xl font-bold text-emerald-600">{value.value}</p>
@@ -64,20 +65,24 @@ export default async function HomePage() {
             </div>
 
             <div className="relative mt-12 max-w-md mx-auto lg:max-w-none lg:mx-0 lg:mt-0">
-               <div className="tape-section rotate-2 transition-transform hover:scale-[1.02] duration-500">
+               <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:h-[500px]">
-                      <img
-                        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800"
-                        alt="Delicious vegan food"
+                    <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
+                      <Image
+                        src="/images/group.jpg"
+                        alt="Tokyo Vegan Next community group at a meetup event"
+                        width={800}
+                        height={1000}
                         className="h-full w-full object-cover"
+                        sizes="(min-width: 1024px) 500px, 100vw"
+                        priority
                       />
-                      <div className="absolute inset-x-0 bottom-0 bg-white/90 p-4 sm:p-6 text-center">
-                        <p className="font-hand text-xl sm:text-2xl font-bold leading-relaxed text-slate-900">
-                          &ldquo;{t("hero.communityBlurb")}&rdquo;
-                        </p>
-                      </div>
+                    </div>
+                    <div className="mt-4 px-3 text-center -rotate-1">
+                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900">
+                        &ldquo;{t("hero.communityBlurb")}&rdquo;
+                      </p>
                     </div>
                   </div>
                </div>
