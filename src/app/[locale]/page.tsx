@@ -13,6 +13,7 @@ const blogPostKeys = ["maff", "chicken", "council"] as const;
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
   const locale = await getLocale();
+  const isJapanese = locale.startsWith("ja");
   const stats = t.raw("stats") as Record<string, {value: string; label: string}>;
   const entries = Object.entries(stats) as [string, {value: string; label: string}][ ];
 
@@ -103,10 +104,10 @@ export default async function HomePage() {
             </h2>
          </div>
 
-         <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
+         <div className="grid gap-16 lg:grid-cols-12 lg:items-center">
             {/* Left Column: Next Event Flyer */}
-            <div className="lg:col-span-5 xl:col-span-4">
-               <div className="flex flex-col items-center">
+            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0">
+               <div className="flex flex-col items-center max-w-sm mx-auto lg:max-w-none">
                   <h3 className="mb-8 font-hand text-4xl font-bold text-slate-900">
                     {t("meetup.nextEvent")}
                   </h3>
@@ -140,7 +141,7 @@ export default async function HomePage() {
                  <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4">
                   {t("sections.activities.description")}
                 </h3>
-                <div className="flex w-full max-w-[560px] flex-wrap items-start justify-center gap-4 md:gap-8 mx-auto">
+                <div className="mt-2 md:mt-10 grid w-full gap-8 sm:gap-12 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 px-6 sm:px-8 md:px-4">
                    {activityCardKeys.map((key) => {
                      const getCardHref = (k: typeof activityCardKeys[number]) => {
                         if (k === "outreach") return "/about-vegan";
@@ -151,65 +152,97 @@ export default async function HomePage() {
                      const isExternal = href.startsWith("http");
 
 
-                     const cardStyles = {
-                      outreach: {
-                         color: "sticky-green",
-                         rotation: "-rotate-3",
-                         margin: "mt-0",
-                         widthClass: "basis-[46%] max-w-[260px]",
-                         layoutClass: ""
-                      },
-                      support: {
-                         color: "sticky-yellow",
-                         rotation: "rotate-2",
-                         margin: "mt-1",
-                         widthClass: "basis-[46%] max-w-[260px]",
-                         layoutClass: ""
-                      },
-                      community: {
-                         color: "sticky-cream",
-                         rotation: "-rotate-2",
-                         margin: "mt-3",
-                         widthClass: "basis-[46%] max-w-[260px]",
-                         layoutClass: ""
-                      },
-                    } as const;
+                     const cardConfig = {
+                        outreach: {
+                           image: "/images/speaker.webp",
+                           color: "sticky-green",
+                           rotation: "rotate-3",
+                           marginTop: "mt-0 md:-mt-4 lg:mt-0",
+                           stickyPos: "-top-4 -right-1 sm:-top-6 sm:-right-2 md:-right-6",
+                           stickyRotation: "rotate-6"
+                        },
+                        support: {
+                           image: "/images/groceries.webp",
+                           color: "sticky-yellow",
+                           rotation: "-rotate-2",
+                           marginTop: "mt-0 md:mt-10 lg:mt-50 xl:mt-40",
+                           stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
+                           stickyRotation: "-rotate-8"
+                        },
+                        community: {
+                           image: "/images/picnics.webp",
+                           color: "sticky-cream",
+                           rotation: "-rotate-3",
+                           marginTop: "mt-0 md:mt-2 lg:-mt-42 xl:mt-10",
+                           stickyPos: "-top-3 -right-0 sm:-top-5 sm:-right-1 md:-right-4",
+                           stickyRotation: "-rotate-4"
+                        },
+                     };
 
+                     const config = cardConfig[key];
 
-                     const style = cardStyles[key];
+                     const titleClass = isJapanese
+                       ? "font-hand text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
+                       : "font-hand text-2xl sm:text-3xl font-bold text-slate-900";
 
-                      const content = (
-                        <div className={`sticky-container ${style.rotation} transition hover:scale-105 hover:z-10 duration-300`}>
-                          <div className="sticky-outer">
-                            <div className="sticky-wrapper">
-                               <div className={`sticky-content ${style.color} p-4 sm:p-6 text-center aspect-square flex flex-col items-center justify-center`}>
-                                  <div className="mb-2 sm:mb-4 text-4xl sm:text-5xl">
-                                     {key === 'outreach' && '📣'}
-                                     {key === 'support' && '🤝'}
-                                     {key === 'community' && '🌱'}
-                                  </div>
-                                  <h3 className="font-hand text-2xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                     const content = (
+                        <div className={`relative group ${config.marginTop} ${config.rotation}`}>
+                           {/* Tape Element */}
+                           <div className="tape-section">
+                              <div className="tape-top-center" />
+                           </div>
+
+                           {/* Polaroid Card */}
+                           <div className="bg-white p-4 pb-8 shadow-xl shadow-slate-300/60">
+                             <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+                                 <Image
+                                    src={config.image}
+                                    alt={t(`sections.activities.cards.${key}.title`)}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 280px, (max-width: 1024px) 33vw, 300px"
+                                 />
+                              </div>
+                             <div className="mt-4 text-center">
+                                 <h3 className={titleClass}>
                                     {t(`sections.activities.cards.${key}.title`)}
-                                  </h3>
-                               </div>
-                            </div>
-                          </div>
+                                 </h3>
+                              </div>
+                           </div>
+
+                           {/* Sticky Note Badge */}
+                           <div className={`absolute ${config.stickyPos} w-36 md:w-32 z-10 transition duration-300 hover:scale-110 hover:z-20`}>
+                              <div className={`sticky-container ${config.stickyRotation}`}>
+                                 <div className="sticky-outer">
+                                    <div className="sticky-wrapper">
+                                       <div className={`sticky-content ${config.color} p-3 text-center flex flex-col items-center justify-center shadow-lg min-h-[80px]`}>
+                                          <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
+                                             {t(`sections.activities.cards.${key}.stickyLabel`)}
+                                          </p>
+                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none">
+                                             Go &rarr;
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                      );
+                     );
 
-                     const wrapperClass = `block group ${style.layoutClass} ${style.widthClass} ${style.margin}`;
+                     const linkClass = "block w-full max-w-[280px] mx-auto md:max-w-[210px] lg:max-w-none";
 
-                      return isExternal ? (
-                        <a key={key} href={href} target="_blank" rel="noreferrer" className={wrapperClass}>
+                     return isExternal ? (
+                        <a key={key} href={href} target="_blank" rel="noreferrer" className={linkClass}>
                            {content}
                         </a>
-                      ) : (
-                        <Link key={key} href={href} locale={locale} className={wrapperClass}>
+                     ) : (
+                        <Link key={key} href={href} locale={locale} className={linkClass}>
                            {content}
                         </Link>
-                      );
-                    })}
-                 </div>
+                     );
+                   })}
+                </div>
               </div>
             </div>
          </div>

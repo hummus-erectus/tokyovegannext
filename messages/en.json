@@ -53,17 +53,20 @@
           "outreach": {
             "title": "Outreach",
             "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
-            "linkLabel": "Learn about Vegan 101"
+            "linkLabel": "Learn about Vegan 101",
+            "stickyLabel": "What's 'vegan'?"
           },
           "support": {
             "title": "Support",
             "description": "Find practical guides for shopping, cooking, and living plant-based in Tokyo—from seasonal produce to local-friendly recipes.",
-            "linkLabel": "Browse resources"
+            "linkLabel": "Browse resources",
+            "stickyLabel": "Resources"
           },
           "community": {
-            "title": "Community & Meetups",
+            "title": "Community",
             "description": "Since 2006 the Tokyo Vegan Meetup has welcomed everyone to social gatherings, workshops, and creative campaigns.",
-            "linkLabel": "See events"
+            "linkLabel": "See events",
+            "stickyLabel": "Meetups"
           }
         }
       },

@@ -53,17 +53,20 @@
           "outreach": {
             "title": "アウトリーチ",
             "description": "街頭やトークイベント、メディア連携を通じて、健康・環境・アニマルウェルフェアにポジティブな変化をもたらすヴィーガンライフの魅力を発信します。",
-            "linkLabel": "Vegan 101 を見る"
+            "linkLabel": "Vegan 101 を見る",
+            "stickyLabel": "ヴィーガン\nとは？"
           },
           "support": {
             "title": "サポート",
             "description": "買い物、料理、東京でのプラントベース生活に役立つ実践的なガイドをまとめています。",
-            "linkLabel": "リソース一覧へ"
+            "linkLabel": "リソース一覧へ",
+            "stickyLabel": "リソース"
           },
           "community": {
-            "title": "コミュニティ＆ミートアップ",
+            "title": "コミュニティ",
             "description": "2006年から続くTokyo Vegan Meetupは、交流会やワークショップ、クリエイティブなキャンペーンで誰でも歓迎しています。",
-            "linkLabel": "イベントを見る"
+            "linkLabel": "イベントを見る",
+            "stickyLabel": "ミートアップ"
           }
         }
       },
