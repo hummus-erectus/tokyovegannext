@@ -53,7 +53,7 @@ export default async function LocaleLayout({children, params}: Props) {
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} ${amatic.variable} ${yomogi.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col bg-[#FCF7DA] text-slate-900">
+          <div className="flex min-h-screen flex-col text-slate-900">
             <Header />
             <main className="flex-1">
               {children}
