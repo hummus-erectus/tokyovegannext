@@ -21,7 +21,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col gap-24 pb-24 text-slate-900">
       {/* Hero Section */}
-      <section className="relative overflow-visible pt-10 pb-16 lg:pt-12 lg:pb-20">
+      <section className="relative overflow-visible pt-10 pb-4 lg:pt-12 lg:pb-8">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
@@ -249,7 +249,7 @@ export default async function HomePage() {
       </section> */}
 
       {/* Blog Section */}
-      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-24" id="blog">
+      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4" id="blog">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
@@ -287,7 +287,7 @@ export default async function HomePage() {
       </section>
 
       {/* Instagram Section */}
-      <section className="mx-auto w-full max-w-6xl px-4">
+      <section className="mx-auto w-full max-w-6xl px-4 pb-4">
         <InstagramFeed />
       </section>
 
