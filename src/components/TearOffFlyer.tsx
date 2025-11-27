@@ -69,12 +69,15 @@ export function TearOffFlyer({
                 href={item.href}
                 target={item.href.startsWith("mailto") ? undefined : "_blank"}
                 rel={item.href.startsWith("mailto") ? undefined : "noreferrer"}
-                className="flyer-link-wrapper"
+                className="absolute inset-0 z-10"
                 aria-label={item.label}
               >
+                <span className="sr-only">{item.label}</span>
+              </a>
+              <div className="flyer-link-wrapper">
                 <Icon className="flyer-icon" aria-hidden="true" />
                 <span className="flyer-link-text">{item.label}</span>
-              </a>
+              </div>
             </li>
           );
         })}
