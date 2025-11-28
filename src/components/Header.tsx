@@ -2,7 +2,8 @@
 
 import {Link, usePathname} from "@/i18n/routing";
 import {useLocale, useTranslations} from "next-intl";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import Headroom from "react-headroom";
 
 const navLinks = [
   {key: "resources", href: "/resources", type: "internal"},
@@ -121,58 +122,120 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  return (
-    <header className="sticky top-0 z-50 bg-[#FCF7DA]/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
-        <Link
-          href="/"
-          locale={locale}
-          className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
-        >
-          {t("brand")}
-        </Link>
-        <div className="hidden items-center gap-8 md:flex">
-          <NavItems locale={locale} translate={t} />
-          <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
-        </div>
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-full text-brand-green transition hover:bg-emerald-50 md:hidden"
-          onClick={() => setOpen((prev) => !prev)}
-          aria-label={open ? "Close navigation" : "Open navigation"}
-        >
-          <span className="relative block h-4 w-6">
-             <span
-               className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
-                 open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
-               }`}
-             />
-             <span
-               className={`absolute left-0 right-0 top-1/2 h-[3px] bg-current transform -translate-y-1/2 transition duration-300 ${
-                 open ? "opacity-0" : ""
-               }`}
-             />
-             <span
-               className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
-                 open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
-               }`}
-             />
-          </span>
-        </button>
-      </div>
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-      {open && (
-        <div className="absolute left-0 top-full w-full md:hidden">
-          <div className="flex flex-col items-center space-y-8 border-t-2 border-dashed border-emerald-100/50 bg-[#FCF7DA] px-4 py-10 shadow-xl">
-            <NavItems
-              direction="col"
+  return (
+    <>
+      <Headroom
+        style={{ zIndex: 50 }}
+        pinStart={0}
+        upTolerance={1}
+        downTolerance={1}
+        className={open ? "headroom-open" : ""}
+      >
+        <header className="bg-[#FFFEF5] backdrop-blur-sm header-ripped">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
+            <Link
+              href="/"
               locale={locale}
-              translate={t}
-              onNavigate={() => setOpen(false)}
-            />
-            <LanguageSwitch variant="list" locale={locale} pathname={pathname || "/"} translate={t} />
+              className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
+            >
+              {t("brand")}
+            </Link>
+            <div className="hidden items-center gap-8 md:flex">
+              <NavItems locale={locale} translate={t} />
+              <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
+            </div>
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full text-brand-green transition hover:bg-emerald-50 md:hidden"
+              onClick={() => setOpen((prev) => !prev)}
+              aria-label={open ? "Close navigation" : "Open navigation"}
+            >
+              <span className="relative block h-4 w-6">
+                <span
+                  className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                    open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 right-0 top-1/2 h-[3px] bg-current transform -translate-y-1/2 transition duration-300 ${
+                    open ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                    open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+                  }`}
+                />
+              </span>
+            </button>
           </div>
+        </header>
+      </Headroom>
+      <MobileMenu
+        open={open}
+        locale={locale}
+        pathname={pathname || "/"}
+        translate={t}
+        onClose={() => setOpen(false)}
+      />
+    </>
+  );
+}
+
+function MobileMenu({
+  open,
+  locale,
+  pathname,
+  translate,
+  onClose,
+}: {
+  open: boolean;
+  locale: string;
+  pathname: string;
+  translate: ReturnType<typeof useTranslations>;
+  onClose: () => void;
+}) {
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/20 transition-opacity duration-300 md:hidden ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      {/* Mobile dropdown - overlays content */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-45 bg-[#FFFEF5] shadow-lg transform transition-transform duration-300 ease-out md:hidden ${
+          open
+            ? "translate-y-[72px]"
+            : "-translate-y-full pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col items-center space-y-8 px-4 py-10">
+          <NavItems
+            direction="col"
+            locale={locale}
+            translate={translate}
+            onNavigate={onClose}
+          />
+          <LanguageSwitch variant="list" locale={locale} pathname={pathname || "/"} translate={translate} />
         </div>
-      )}
-    </header>
+        {/* Ripped edge on mobile menu */}
+        <div className="header-ripped-edge" />
+      </div>
+    </>
   );
 }

@@ -44,6 +44,75 @@ html[lang="en"] .font-hand {
   font-family: var(--font-amatic), cursive;
 }
 
+.header-ripped {
+  position: relative;
+}
+
+.header-ripped::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url("/vectors/header-rip.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 800px auto;
+  pointer-events: none;
+}
+
+/* Headroom overrides - ensure ripped edge is visible when unpinned */
+.headroom-wrapper {
+  overflow: visible !important;
+}
+
+.headroom {
+  will-change: transform;
+  /* transition: transform 300ms ease-in-out !important; */
+  /* overflow: visible !important; */
+}
+
+.headroom--unfixed {
+  position: fixed;
+  transform: translateY(0);
+}
+
+/* .headroom--scrolled {
+  transition: transform 300ms ease-in-out;
+} */
+
+.headroom--unpinned {
+  position: fixed;
+  /* Translate up but leave 20px for the ripped edge */
+  transform: translateY(calc(-100% + 20px));
+}
+
+/* When the mobile menu is open, force the header fully into view */
+.headroom-open.headroom--unpinned {
+  transform: translateY(0);
+}
+
+.headroom--pinned {
+  position: fixed;
+  transform: translateY(0%);
+}
+
+/* Mobile menu ripped edge */
+.header-ripped-edge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url("/vectors/header-rip.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 800px auto;
+  pointer-events: none;
+  transform: translateY(100%);
+}
+
 .tape-section {
   position: relative;
 }
