@@ -3,6 +3,7 @@
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/routing";
 import {useLocale} from "next-intl";
+import Image from "next/image";
 
 export default function Footer() {
   const t = useTranslations("HomePage");
@@ -16,9 +17,15 @@ export default function Footer() {
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
         {/* Brand / Tagline */}
         <div className="space-y-2">
-          <h2 className="font-hand-brand text-5xl font-bold text-brand-green drop-shadow-sm">
-            {t("brand")}
-          </h2>
+          <div className="drop-shadow-sm">
+            <Image
+              src="/images/hanko_square.png"
+              alt={t("brand")}
+              width={140}
+              height={140}
+              className="mx-auto h-auto w-32"
+            />
+          </div>
           <p className="font-hand text-2xl font-bold text-emerald-800/70">
             {t("footer.tagline")}
           </p>
