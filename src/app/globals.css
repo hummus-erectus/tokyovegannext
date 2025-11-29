@@ -436,3 +436,14 @@ html[lang="en"] .font-hand {
 .flyer-strip-5:hover {
   transform: skew(2deg, 0deg) translateY(6px) rotate(-1deg);
 }
+
+/* 3D Card Lift Effect - lifts from tape hinge at top */
+.card-lift {
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.group:hover .card-lift {
+  transform: rotateX(-8deg);
+}

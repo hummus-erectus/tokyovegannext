@@ -1,3 +1,6 @@
+"use client";
+
+import {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -24,34 +27,45 @@ export function ResourceCard({
   languages,
   locale = "en"
 }: ResourceCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const isJaPage = locale === "ja";
-  // Map colors to Tailwind classes safely
-  const colors: Record<string, { text: string; bg: string; border: string }> = {
-    emerald: { text: "text-emerald-700", bg: "from-emerald-50 to-white", border: "shadow-emerald-50 hover:shadow-emerald-200" },
-    amber: { text: "text-amber-700", bg: "from-amber-50 to-white", border: "shadow-amber-50 hover:shadow-amber-200" },
-    rose: { text: "text-rose-700", bg: "from-rose-50 to-white", border: "shadow-rose-50 hover:shadow-rose-200" },
-    blue: { text: "text-blue-700", bg: "from-blue-50 to-white", border: "shadow-blue-50 hover:shadow-blue-200" },
-    slate: { text: "text-slate-700", bg: "from-slate-50 to-white", border: "shadow-slate-50 hover:shadow-slate-200" },
+  
+  const colors: Record<string, {text: string}> = {
+    emerald: {text: "text-emerald-700"},
+    amber: {text: "text-amber-700"},
+    rose: {text: "text-rose-700"},
+    blue: {text: "text-blue-700"},
+    slate: {text: "text-slate-700"}
   };
 
   const theme = colors[accentColor] || colors.emerald;
   const Component = isExternal ? "a" : Link;
-  const props = isExternal ? { target: "_blank", rel: "noreferrer" } : {};
+  const linkProps = isExternal ? { target: "_blank" as const, rel: "noreferrer" } : {};
 
   return (
-    <Component
-      href={href}
-      {...props}
-      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-white/50 bg-linear-to-br ${theme.bg} text-slate-900 shadow-lg ${theme.border} transition hover:-translate-y-1`}
+    <div 
+      className="h-full"
+      style={{perspective: "800px"}}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
+      <Component
+        href={href}
+        {...linkProps}
+        className="flex h-full flex-col overflow-hidden bg-white text-slate-900"
+        style={{
+          transformStyle: "preserve-3d",
+          transformOrigin: "top center",
+          transform: isHovered ? "rotateX(8deg)" : "rotateX(0deg)",
+          boxShadow: isHovered 
+            ? "0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1)" 
+            : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          transition: "transform 0.3s ease-out, box-shadow 0.3s ease-out",
+        }}
+      >
       {imageUrl && (
         <div className="relative h-48 w-full overflow-hidden bg-slate-100">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          <Image src={imageUrl} alt={title} fill className="object-cover" />
         </div>
       )}
       
@@ -79,6 +93,7 @@ export function ResourceCard({
           {isExternal ? "Visit →" : "Read more →"}
         </span>
       </div>
-    </Component>
+      </Component>
+    </div>
   );
 }
