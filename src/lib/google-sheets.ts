@@ -15,6 +15,7 @@ export interface ResourceItem {
   url: string;
   imageUrl?: string;
   category?: string;
+  type?: string; // e.g. "Online Shop", "Supermarket", etc.
   languages: ("en" | "ja")[];
 }
 
@@ -53,6 +54,7 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
         const url = row.get("url") as string;
         const imageUrl = row.get("image_url") as string | undefined;
         const category = row.get("category") as string | undefined;
+        const type = row.get("type") as string | undefined;
 
         const languagesRaw = ((row.get("languages") as string | undefined) ?? "")
           .toString()
@@ -89,6 +91,7 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
           url,
           imageUrl,
           category,
+          type,
           languages,
         };
       })

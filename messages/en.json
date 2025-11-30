@@ -229,7 +229,7 @@
           "shopping": {
             "title": "Shopping",
             "description": "Source groceries, pantry staples, and specialty ingredients locally.",
-            "href": "https://www.tokyovegan.org/en/shopping"
+            "href": "/resources/shopping"
           },
           "cooking": {
             "title": "Cooking",

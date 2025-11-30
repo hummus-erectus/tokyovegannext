@@ -229,7 +229,7 @@
           "shopping": {
             "title": "ショッピング",
             "description": "食材や日用品、スペシャルティ商品をローカルで手に入れるためのヒント。",
-            "href": "https://www.tokyovegan.org/jp/shopping"
+            "href": "/resources/shopping"
           },
           "cooking": {
             "title": "料理",
