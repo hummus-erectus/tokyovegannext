@@ -1,3 +1,4 @@
+import {ResourceCard} from "@/components/ResourceCard";
 import {Link} from "@/i18n/routing";
 import {useLocale, useTranslations} from "next-intl";
 
@@ -23,7 +24,8 @@ type SectionKey = (typeof sectionKeys)[number];
 
 export default function ResourcesPage() {
   const t = useTranslations("ResourcesPage");
-  const locale = useLocale();
+  const rawLocale = useLocale();
+  const locale: "en" | "ja" = rawLocale === "en" ? "en" : "ja";
 
   const renderCards = (section: SectionKey) => (
     <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 pt-8">
@@ -41,47 +43,31 @@ export default function ResourcesPage() {
 
         const isExternal = item.href.startsWith("http");
 
-        const cardContent = (
-          <div className="flex h-full flex-col bg-white p-6 shadow-lg shadow-slate-300/60 transition hover:-translate-y-1 hover:shadow-xl">
-            <div className="flex items-start justify-between">
-              <span className={`inline-flex h-12 w-12 items-center justify-center text-3xl ${meta.accent}`}>
-                {meta.icon}
-              </span>
-              <span className={`text-sm font-bold ${meta.accent} opacity-0 transition group-hover:opacity-100`}>
-                Visit →
-              </span>
-            </div>
-            
-            <h3 className={`mt-4 font-hand text-2xl font-bold text-slate-900 ${meta.accent.replace('text-', 'group-hover:text-')}`}>
-              {item.title}
-            </h3>
-            
-            <p className="mt-3 flex-1 text-base text-slate-600">
-              {item.description}
-            </p>
-          </div>
-        );
+        const accentColorMap: Record<string, string> = {
+          "text-emerald-700": "emerald",
+          "text-amber-700": "amber",
+          "text-rose-700": "rose",
+          "text-blue-700": "blue",
+          "text-slate-700": "slate",
+          // map other accents to closest existing palette
+          "text-indigo-700": "blue",
+          "text-teal-700": "blue",
+          "text-lime-700": "emerald"
+        };
+
+        const accentColor = accentColorMap[meta.accent] ?? "emerald";
 
         return (
           <div key={itemKey} className={`relative ${rotation} washi-tape-top`}>
-            {isExternal ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block h-full"
-              >
-                {cardContent}
-              </a>
-            ) : (
-              <Link
-                href={item.href}
-                locale={locale}
-                className="group block h-full"
-              >
-                {cardContent}
-              </Link>
-            )}
+            <ResourceCard
+              title={item.title}
+              description={item.description}
+              href={item.href}
+              icon={meta.icon}
+              accentColor={accentColor}
+              isExternal={isExternal}
+              locale={locale}
+            />
           </div>
         );
       })}
