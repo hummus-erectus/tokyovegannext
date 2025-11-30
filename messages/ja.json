@@ -224,7 +224,7 @@
           "restaurants": {
             "title": "レストラン",
             "description": "東京各地のヴィーガン対応レストランやカフェ、ポップアップをチェック。",
-            "href": "https://www.tokyovegan.org/jp/restaurants"
+            "href": "/resources/restaurants"
           },
           "shopping": {
             "title": "ショッピング",

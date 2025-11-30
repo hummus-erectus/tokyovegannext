@@ -224,7 +224,7 @@
           "restaurants": {
             "title": "Restaurants",
             "description": "Find vegan-friendly restaurants, cafés, and pop-ups across Tokyo.",
-            "href": "https://www.tokyovegan.org/en/restaurants"
+            "href": "/resources/restaurants"
           },
           "shopping": {
             "title": "Shopping",
