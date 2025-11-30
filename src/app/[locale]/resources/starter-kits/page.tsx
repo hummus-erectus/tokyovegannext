@@ -48,8 +48,7 @@ export default async function StarterKitsPage(props: Props) {
             const rotation = rotations[idx % rotations.length];
 
             return (
-              <div key={resource.id} className={`tape-section ${rotation}`}>
-                <div className="tape-top-center" />
+              <div key={resource.id} className={`relative ${rotation} washi-tape-top`}>
                 <ResourceCard
                   title={resource.title[locale] || resource.title["en"]} // Fallback to EN
                   description={resource.description[locale] || resource.description["en"]}

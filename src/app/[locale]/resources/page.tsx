@@ -63,8 +63,7 @@ export default function ResourcesPage() {
         );
 
         return (
-          <div key={itemKey} className={`tape-section ${rotation}`}>
-            <div className="tape-top-center" />
+          <div key={itemKey} className={`relative ${rotation} washi-tape-top`}>
             {isExternal ? (
               <a
                 href={item.href}

@@ -447,3 +447,32 @@ html[lang="en"] .font-hand {
 .group:hover .card-lift {
   transform: rotateX(-8deg);
 }
+
+/* Corgi Washi Tape for cards */
+.washi-tape-top {
+  position: relative;
+  z-index: 0; /* create a stacking context per card */
+}
+
+.washi-tape-top:hover,
+.washi-tape-top:has(.card-is-active) {
+  z-index: 20; /* bring the hovered or animating card (and its tape) above neighbors */
+}
+
+.washi-tape-top::before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 140px;
+  height: 48px;
+  background-image: url("/images/corgi-washi.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 10;
+  /* Tight, subtle shadow to feel like tape stuck on the card, not floating */
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35));
+}

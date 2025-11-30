@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {useState, type TransitionEvent} from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -28,6 +28,7 @@ export function ResourceCard({
   locale = "en"
 }: ResourceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const isJaPage = locale === "ja";
   
   const colors: Record<string, {text: string}> = {
@@ -42,17 +43,34 @@ export function ResourceCard({
   const Component = isExternal ? "a" : Link;
   const linkProps = isExternal ? { target: "_blank" as const, rel: "noreferrer" } : {};
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setIsActive(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
+    if (event.propertyName !== "transform") return;
+    if (!isHovered) {
+      setIsActive(false);
+    }
+  };
+
   return (
     <div 
       className="h-full"
       style={{perspective: "800px"}}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTransitionEnd={handleTransitionEnd}
     >
       <Component
         href={href}
         {...linkProps}
-        className="flex h-full flex-col overflow-hidden bg-white text-slate-900"
+        className={`flex h-full flex-col overflow-hidden bg-white text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={{
           transformStyle: "preserve-3d",
           transformOrigin: "top center",
