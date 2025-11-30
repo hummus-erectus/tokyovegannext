@@ -70,7 +70,7 @@ export function ResourceCard({
       <Component
         href={href}
         {...linkProps}
-        className={`flex h-full flex-col overflow-hidden bg-white text-slate-900 ${isActive ? "card-is-active" : ""}`}
+        className={`flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={{
           transformStyle: "preserve-3d",
           transformOrigin: "top center",
