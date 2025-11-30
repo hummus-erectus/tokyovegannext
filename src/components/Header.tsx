@@ -3,7 +3,7 @@
 import {Link, usePathname} from "@/i18n/routing";
 import {useHeadroom} from "@/hooks/useHeadroom";
 import {useLocale, useTranslations} from "next-intl";
-import {useEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 
 const navLinks = [
   {key: "resources", href: "/resources", type: "internal"},
@@ -121,6 +121,8 @@ export default function Header() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(96);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -146,9 +148,21 @@ export default function Header() {
     open ? "header-ripped header-ripped--mobile-open" : "header-ripped"
   }`;
 
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [open]);
+
   return (
     <>
-      <div style={headroomStyle} className={`headroom-wrapper ${headroomClass}`}>
+      <div ref={headerRef} style={headroomStyle} className={`headroom-wrapper ${headroomClass}`}>
         <header className={headerClass}>
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <Link
@@ -188,6 +202,7 @@ export default function Header() {
           </div>
         </header>
       </div>
+      <div aria-hidden="true" style={{ height: headerHeight }} />
       <MobileMenu
         open={open}
         locale={locale}
