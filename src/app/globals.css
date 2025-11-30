@@ -46,6 +46,7 @@ html[lang="en"] .font-hand {
 
 .header-ripped {
   position: relative;
+  --header-ripped-mobile-offset: 56px;
 }
 
 .header-ripped::after {
@@ -60,42 +61,19 @@ html[lang="en"] .font-hand {
   background-position: bottom left;
   background-size: 800px auto;
   pointer-events: none;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 250ms ease, opacity 250ms ease;
 }
 
-/* Headroom overrides - ensure ripped edge is visible when unpinned */
+.header-ripped--mobile-open::after {
+  transform: translateY(var(--header-ripped-mobile-offset));
+  opacity: 0;
+}
+
+/* Custom headroom wrapper - ensure ripped edge is visible */
 .headroom-wrapper {
   overflow: visible !important;
-}
-
-.headroom {
-  will-change: transform;
-  /* transition: transform 300ms ease-in-out !important; */
-  /* overflow: visible !important; */
-}
-
-.headroom--unfixed {
-  position: fixed;
-  transform: translateY(0);
-}
-
-/* .headroom--scrolled {
-  transition: transform 300ms ease-in-out;
-} */
-
-.headroom--unpinned {
-  position: fixed;
-  /* Translate up but leave 20px for the ripped edge */
-  transform: translateY(calc(-100% + 20px));
-}
-
-/* When the mobile menu is open, force the header fully into view */
-.headroom-open.headroom--unpinned {
-  transform: translateY(0);
-}
-
-.headroom--pinned {
-  position: fixed;
-  transform: translateY(0%);
 }
 
 /* Realistic Paper Texture for Cards */

@@ -1,9 +1,9 @@
 "use client";
 
 import {Link, usePathname} from "@/i18n/routing";
+import {useHeadroom} from "@/hooks/useHeadroom";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
-import Headroom from "react-headroom";
 
 const navLinks = [
   {key: "resources", href: "/resources", type: "internal"},
@@ -134,17 +134,23 @@ export default function Header() {
     };
   }, [open]);
 
+  const { style: headroomStyle, className: headroomClass } = useHeadroom({
+    upTolerance: 1,
+    downTolerance: 1,
+    pinStart: 0,
+    forcePinned: open,
+  });
+
+  // Hide ripped edge on mobile when menu is open (menu has its own ripped edge)
+  const headerClass = `bg-[#FFFEF5] backdrop-blur-sm ${
+    open ? "header-ripped header-ripped--mobile-open" : "header-ripped"
+  }`;
+
   return (
     <>
-      <Headroom
-        style={{ zIndex: 50 }}
-        pinStart={0}
-        upTolerance={1}
-        downTolerance={1}
-        className={open ? "headroom-open" : ""}
-      >
-        <header className="bg-[#FFFEF5] backdrop-blur-sm header-ripped">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
+      <div style={headroomStyle} className={`headroom-wrapper ${headroomClass}`}>
+        <header className={headerClass}>
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <Link
               href="/"
               locale={locale}
@@ -181,7 +187,7 @@ export default function Header() {
             </button>
           </div>
         </header>
-      </Headroom>
+      </div>
       <MobileMenu
         open={open}
         locale={locale}
@@ -220,11 +226,11 @@ function MobileMenu({
       <div
         className={`fixed top-0 left-0 right-0 z-45 bg-[#FFFEF5] shadow-lg transform transition-transform duration-300 ease-out md:hidden ${
           open
-            ? "translate-y-[72px]"
+            ? "translate-y-[56px]"
             : "-translate-y-full pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center space-y-8 px-4 py-10">
+        <div className="flex flex-col items-center space-y-6 px-4 py-8">
           <NavItems
             direction="col"
             locale={locale}
