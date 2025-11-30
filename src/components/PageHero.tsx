@@ -57,7 +57,7 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
   };
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-emerald-100" style={style}>
+    <section className="header-ripped relative isolate overflow-visible" style={style}>
       <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-16 text-white md:flex-row md:items-center md:justify-between">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-100">{eyebrow}</p>

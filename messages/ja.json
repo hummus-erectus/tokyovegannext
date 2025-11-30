@@ -13,11 +13,11 @@
     },
     "hero": {
       "eyebrow": "Tokyo Vegan",
-      "title": "東京ヴィーガンへようこそ！",
+      "title": "Welcome to Tokyo Vegan!",
       "description": "東京そして日本各地でプラントベースの暮らしを広げる、活気あふれるバイリンガルコミュニティの一員になりませんか。",
       "primaryCta": "ミートアップに参加",
       "secondaryCta": "リソースを見る",
-      "communityBlurb": "Tokyo Vegan Meetupは2006年の発足以来、ヴィーガン、ベジタリアン、フレキシタリアン、そしてヴィーガンに興味のあるすべての人を歓迎してきました。バイリンガルでのストーリーテリングと実践的なリソースを通じて、思いやりある暮らしを誰にとっても身近なものにしています。"
+      "communityBlurb": "2006年から続く、ヴィーガンライフを楽しむ温かいコミュニティ。"
     },
     "meetup": {
       "nextEvent": "次回のイベント",
@@ -26,6 +26,19 @@
     },
     "instagram": {
       "followUs": "Instagramをフォロー"
+    },
+    "footer": {
+      "tagline": "東京でプラントベースの喜びを広げています！",
+      "copyright": "野菜とコードで作られました。",
+      "links": {
+        "meetup": "Meetup",
+        "instagram": "Instagram",
+        "resources": "リソース"
+      }
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "subtitle": "タブを引っ張って連絡しよう！"
     },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
@@ -40,17 +53,20 @@
           "outreach": {
             "title": "アウトリーチ",
             "description": "街頭やトークイベント、メディア連携を通じて、健康・環境・アニマルウェルフェアにポジティブな変化をもたらすヴィーガンライフの魅力を発信します。",
-            "linkLabel": "Vegan 101 を見る"
+            "linkLabel": "Vegan 101 を見る",
+            "stickyLabel": "ヴィーガン\nとは？"
           },
           "support": {
             "title": "サポート",
             "description": "買い物、料理、東京でのプラントベース生活に役立つ実践的なガイドをまとめています。",
-            "linkLabel": "リソース一覧へ"
+            "linkLabel": "リソース一覧へ",
+            "stickyLabel": "リソース"
           },
           "community": {
-            "title": "コミュニティ＆ミートアップ",
+            "title": "コミュニティ",
             "description": "2006年から続くTokyo Vegan Meetupは、交流会やワークショップ、クリエイティブなキャンペーンで誰でも歓迎しています。",
-            "linkLabel": "イベントを見る"
+            "linkLabel": "イベントを見る",
+            "stickyLabel": "ミートアップ"
           }
         }
       },

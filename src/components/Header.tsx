@@ -1,8 +1,9 @@
 "use client";
 
 import {Link, usePathname} from "@/i18n/routing";
+import {useHeadroom} from "@/hooks/useHeadroom";
 import {useLocale, useTranslations} from "next-intl";
-import {useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 
 const navLinks = [
   {key: "resources", href: "/resources", type: "internal"},
@@ -12,11 +13,6 @@ const navLinks = [
     href: "https://www.tokyovegan.org/en/events",
     type: "external"
   }
-] as const;
-
-const languageToggle = [
-  {key: "japanese", locale: "ja"},
-  {key: "english", locale: "en"}
 ] as const;
 
 type NavItemsProps = {
@@ -34,8 +30,15 @@ type LanguageSwitchProps = {
 };
 
 function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsProps) {
+  const isMobile = direction === "col";
   return (
-    <div className={`flex ${direction === "row" ? "gap-8" : "flex-col gap-4"} text-sm font-bold text-slate-600`}>
+    <div
+      className={`flex ${
+        isMobile
+          ? "flex-col items-center gap-6 font-hand text-2xl font-semibold text-emerald-900"
+          : "gap-8 items-center font-hand text-2xl font-bold text-emerald-900"
+      }`}
+    >
       {navLinks.map((link) =>
         link.type === "external" ? (
           <a
@@ -43,7 +46,11 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="transition-colors hover:text-emerald-700"
+            className={`transition-colors ${
+              !isMobile
+                ? "rounded-full bg-[#FCD34D] px-6 py-2 text-emerald-950 font-bold shadow-sm hover:bg-[#fbbf24] hover:shadow-md"
+                : "text-emerald-800 hover:text-emerald-600"
+            }`}
             onClick={onNavigate}
           >
             {translate(`nav.${link.key}`)}
@@ -53,7 +60,9 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             key={link.key}
             href={link.href}
             locale={locale}
-            className="transition-colors hover:text-emerald-700"
+            className={`transition-colors ${
+              isMobile ? "hover:text-emerald-600" : "hover:text-emerald-600"
+            }`}
             onClick={onNavigate}
           >
             {translate(`nav.${link.key}`)}
@@ -65,38 +74,45 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
 }
 
 function LanguageSwitch({variant = "pill", locale, pathname, translate}: LanguageSwitchProps) {
-  const baseClass = "rounded-full px-4 py-1.5 transition-colors";
+  const targetLocale = locale === "en" ? "ja" : "en";
+  const targetKey = targetLocale === "en" ? "english" : "japanese";
+  const fontStyle =
+    targetLocale === "en"
+      ? {fontFamily: "var(--font-amatic)"}
+      : {fontFamily: "var(--font-yomogi)"};
+
+  const commonProps = {
+    href: pathname || "/",
+    locale: targetLocale,
+    style: fontStyle,
+  } as const;
+
+  if (variant === "pill") {
+    return (
+      <Link
+        {...commonProps}
+        className={
+          targetLocale === "en"
+            ? "hidden text-xl font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-2xl"
+            : "hidden text-lg font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
+        }
+      >
+        {translate(`languageToggle.${targetKey}`)}
+      </Link>
+    );
+  }
+
   return (
-    <div
+    <Link
+      {...commonProps}
       className={
-        variant === "pill"
-          ? "hidden items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50/50 p-1 text-xs font-bold text-slate-600 md:flex"
-          : "flex flex-col gap-2 text-sm font-semibold"
+        targetLocale === "en"
+          ? "text-center text-2xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
+          : "text-center text-xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
       }
     >
-      {languageToggle.map((toggle) => (
-        <Link
-          key={toggle.key}
-          href={pathname || "/"}
-          locale={toggle.locale}
-          className={
-            variant === "pill"
-              ? `${baseClass} ${
-                  locale === toggle.locale
-                    ? "bg-white text-emerald-700 shadow-sm"
-                    : "text-slate-500 hover:text-emerald-700"
-                }`
-              : `rounded-full border px-3 py-2 text-center transition-colors ${
-                  locale === toggle.locale
-                    ? "border-emerald-500 text-emerald-700"
-                    : "border-transparent text-slate-500 hover:text-emerald-700"
-                }`
-          }
-        >
-          {translate(`languageToggle.${toggle.key}`)}
-        </Link>
-      ))}
-    </div>
+      {translate(`languageToggle.${targetKey}`)}
+    </Link>
   );
 }
 
@@ -105,47 +121,142 @@ export default function Header() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(96);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const { style: headroomStyle, className: headroomClass } = useHeadroom({
+    upTolerance: 1,
+    downTolerance: 1,
+    pinStart: 0,
+    forcePinned: open,
+  });
+
+  // Hide ripped edge on mobile when menu is open (menu has its own ripped edge)
+  const headerClass = `bg-[#FFFEF5] backdrop-blur-sm ${
+    open ? "header-ripped header-ripped--mobile-open" : "header-ripped"
+  }`;
+
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
-        <Link
-          href="/"
-          locale={locale}
-          className="text-xl font-bold tracking-tight text-emerald-900 transition-colors hover:text-emerald-700"
-        >
-          {t("brand")}
-        </Link>
-        <div className="hidden items-center gap-8 md:flex">
-          <NavItems locale={locale} translate={t} />
-          <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
-        </div>
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-full text-emerald-900 transition hover:bg-emerald-50 md:hidden"
-          onClick={() => setOpen((prev) => !prev)}
-          aria-label={open ? "Close navigation" : "Open navigation"}
-        >
-          <span className="block w-6 space-y-1.5">
-             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "translate-y-2 rotate-45" : ""}`} />
-             <span className={`block h-0.5 w-6 bg-current transition duration-300 ${open ? "opacity-0" : ""}`} />
-             <span className={`block h-0.5 w-6 transform bg-current transition duration-300 ${open ? "-translate-y-2 -rotate-45" : ""}`} />
-          </span>
-        </button>
-      </div>
-
-      {open && (
-        <div className="md:hidden">
-          <div className="space-y-6 border-t border-emerald-100 bg-white px-4 py-6 shadow-lg">
-            <NavItems
-              direction="col"
+    <>
+      <div ref={headerRef} style={headroomStyle} className={`headroom-wrapper ${headroomClass}`}>
+        <header className={headerClass}>
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+            <Link
+              href="/"
               locale={locale}
-              translate={t}
-              onNavigate={() => setOpen(false)}
-            />
-            <LanguageSwitch variant="list" locale={locale} pathname={pathname || "/"} translate={t} />
+              className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
+            >
+              {t("brand")}
+            </Link>
+            <div className="hidden items-center gap-8 md:flex">
+              <NavItems locale={locale} translate={t} />
+              <LanguageSwitch variant="pill" locale={locale} pathname={pathname || "/"} translate={t} />
+            </div>
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full text-brand-green transition hover:bg-emerald-50 md:hidden"
+              onClick={() => setOpen((prev) => !prev)}
+              aria-label={open ? "Close navigation" : "Open navigation"}
+            >
+              <span className="relative block h-4 w-6">
+                <span
+                  className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                    open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 right-0 top-1/2 h-[3px] bg-current transform -translate-y-1/2 transition duration-300 ${
+                    open ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 right-0 h-[3px] bg-current transform transition duration-300 ${
+                    open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+                  }`}
+                />
+              </span>
+            </button>
           </div>
+        </header>
+      </div>
+      <div aria-hidden="true" style={{ height: headerHeight }} />
+      <MobileMenu
+        open={open}
+        locale={locale}
+        pathname={pathname || "/"}
+        translate={t}
+        onClose={() => setOpen(false)}
+      />
+    </>
+  );
+}
+
+function MobileMenu({
+  open,
+  locale,
+  pathname,
+  translate,
+  onClose,
+}: {
+  open: boolean;
+  locale: string;
+  pathname: string;
+  translate: ReturnType<typeof useTranslations>;
+  onClose: () => void;
+}) {
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/20 transition-opacity duration-300 md:hidden ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      {/* Mobile dropdown - overlays content */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-45 bg-[#FFFEF5] shadow-lg transform transition-transform duration-300 ease-out md:hidden ${
+          open
+            ? "translate-y-[56px]"
+            : "-translate-y-full pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col items-center space-y-6 px-4 py-8">
+          <NavItems
+            direction="col"
+            locale={locale}
+            translate={translate}
+            onNavigate={onClose}
+          />
+          <LanguageSwitch variant="list" locale={locale} pathname={pathname || "/"} translate={translate} />
         </div>
-      )}
-    </header>
+        {/* Ripped edge on mobile menu */}
+        <div className="header-ripped-edge" />
+      </div>
+    </>
   );
 }

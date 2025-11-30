@@ -1,4 +1,5 @@
-import {PageHero} from "@/components/PageHero";
+import {ResourceCard} from "@/components/ResourceCard";
+import {Link} from "@/i18n/routing";
 import {useLocale, useTranslations} from "next-intl";
 
 const sectionKeys = ["essentials", "knowledge", "business"] as const;
@@ -23,65 +24,93 @@ type SectionKey = (typeof sectionKeys)[number];
 
 export default function ResourcesPage() {
   const t = useTranslations("ResourcesPage");
-  const locale = useLocale();
-  const heroBackground =
-    "linear-gradient(120deg, rgba(6,95,70,0.65), rgba(16,185,129,0.6)), url('https://images.unsplash.com/photo-1474073705359-5da2a8270c64?auto=format&fit=crop&w=1600&q=80')";
+  const rawLocale = useLocale();
+  const locale: "en" | "ja" = rawLocale === "en" ? "en" : "ja";
 
   const renderCards = (section: SectionKey) => (
-    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-      {sectionItemMap[section].map((itemKey) => {
+    <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 pt-8">
+      {sectionItemMap[section].map((itemKey, idx) => {
         const item = t.raw(`sections.${section}.items.${itemKey}`) as {
           title: string;
           description: string;
           href: string;
         };
-        const meta = itemMeta[itemKey] ?? {icon: "", accent: "text-emerald-700", gradient: "from-emerald-50 to-white"};
+        const meta = itemMeta[itemKey] ?? {icon: "", accent: "text-emerald-700", gradient: ""};
+        
+        // Alternating rotations for a natural feel
+        const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"];
+        const rotation = rotations[idx % rotations.length];
+
+        const isExternal = item.href.startsWith("http");
+
+        const accentColorMap: Record<string, string> = {
+          "text-emerald-700": "emerald",
+          "text-amber-700": "amber",
+          "text-rose-700": "rose",
+          "text-blue-700": "blue",
+          "text-slate-700": "slate",
+          // map other accents to closest existing palette
+          "text-indigo-700": "blue",
+          "text-teal-700": "blue",
+          "text-lime-700": "emerald"
+        };
+
+        const accentColor = accentColorMap[meta.accent] ?? "emerald";
+
         return (
-          <a
-            key={itemKey}
-            href={item.href}
-            target="_blank"
-            rel="noreferrer"
-            className={`group flex h-full flex-col rounded-3xl border border-white/50 bg-gradient-to-br ${meta.gradient} p-6 text-slate-900 shadow-lg shadow-emerald-50 transition hover:-translate-y-1 hover:shadow-emerald-200`}
-          >
-            <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 text-2xl ${meta.accent}`}>
-              {meta.icon}
-            </span>
-            <h3 className="mt-6 text-xl font-semibold text-slate-900">{item.title}</h3>
-            <p className="mt-3 flex-1 text-sm text-slate-600">{item.description}</p>
-            <span className="mt-4 text-sm font-semibold text-emerald-700">Visit →</span>
-          </a>
+          <div key={itemKey} className={`relative ${rotation} washi-tape-top`}>
+            <ResourceCard
+              title={item.title}
+              description={item.description}
+              href={item.href}
+              icon={meta.icon}
+              accentColor={accentColor}
+              isExternal={isExternal}
+              locale={locale}
+            />
+          </div>
         );
       })}
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-white text-slate-900">
-      <PageHero
-        eyebrow={t("hero.eyebrow")}
-        title={t("hero.title")}
-        description={t("hero.description")}
-        locale={locale}
-        backgroundImage={heroBackground}
-        actions={[
-          {label: t("hero.ctaPrimary"), href: "#essentials", variant: "solid", type: "anchor"},
-          {label: t("hero.ctaSecondary"), href: "/", variant: "outline", type: "link"}
-        ]}
-      />
+    <div className="min-h-screen text-slate-900 pb-24">
+      {/* Custom "Pinned Paper" Hero */}
+      <section className="relative pt-12 pb-12 px-4">
+         <div className="mx-auto max-w-4xl">
+            <div className="tape-section rotate-1">
+               <div className="tape-top-center" />
+               <div className="bg-white p-8 md:p-16 shadow-xl shadow-slate-300/60 text-center">
+                  <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-600 mb-4">{t("hero.eyebrow")}</p>
+                  <h1 className="font-hand text-5xl md:text-7xl font-bold text-slate-900 mb-6">{t("hero.title")}</h1>
+                  <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{t("hero.description")}</p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                     <a href="#essentials" className="inline-flex items-center justify-center px-8 py-3 font-bold text-white bg-emerald-600 rounded-full shadow-md hover:bg-emerald-700 transition">
+                        {t("hero.ctaPrimary")}
+                     </a>
+                     <Link href="/" locale={locale} className="inline-flex items-center justify-center px-8 py-3 font-bold text-slate-700 bg-emerald-50 border-2 border-emerald-100 rounded-full hover:bg-emerald-100 transition">
+                        {t("hero.ctaSecondary")}
+                     </Link>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
 
-      <main className="mx-auto flex max-w-5xl flex-col gap-16 px-4 py-12">
+      <main className="mx-auto flex max-w-6xl flex-col gap-24 px-4 py-8">
         {sectionKeys.map((sectionKey) => (
           <section
             key={sectionKey}
             id={sectionKey === "essentials" ? "essentials" : undefined}
-            className="grid gap-8 lg:grid-cols-[1.1fr_2fr]"
+            className="grid gap-8 lg:grid-cols-[250px_1fr]"
           >
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-emerald-600">
+            <div className="space-y-4 lg:self-start pt-8">
+              <h2 className="font-hand text-5xl font-bold text-emerald-700 -rotate-2">
                 {t(`sections.${sectionKey}.title`)}
-              </p>
-              <p className="text-lg text-slate-600">
+              </h2>
+              <p className="text-xl text-slate-700 font-hand">
                 {t(`sections.${sectionKey}.description`)}
               </p>
             </div>

@@ -18,9 +18,6 @@ export function MeetupEventCard({
   const t = useTranslations("HomePage.meetup");
   const format = useFormatter();
 
-  const dayNumber = format.dateTime(startDate, { day: "2-digit" });
-  const monthShort = format.dateTime(startDate, { month: "short" });
-  const weekdayShort = format.dateTime(startDate, { weekday: "short" });
   const displayTime = `${format.dateTime(startDate, {
     hour: "numeric",
     minute: "numeric",
@@ -32,56 +29,41 @@ export function MeetupEventCard({
   })}`;
 
   return (
-    <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-200 ring-1 ring-slate-100 lg:flex">
-      <div className="relative h-64 lg:h-auto lg:w-2/5">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent lg:bg-linear-to-r" />
-        <div className="absolute bottom-4 left-4 text-white lg:hidden">
-          <p className="font-semibold text-emerald-400">{t("nextEvent")}</p>
-        </div>
-      </div>
-      <div className="p-8 lg:w-3/5">
-        <div className="mb-2 hidden lg:block">
-          <p className="text-sm font-bold uppercase tracking-wider text-emerald-600">
-            {t("nextEvent")}
-          </p>
-        </div>
-        <h3 className="mb-5 text-2xl font-bold leading-tight text-slate-900">{title}</h3>
-
-        <div className="mb-6 flex items-center gap-4 rounded-2xl bg-linear-to-br from-emerald-50 to-emerald-100/50 p-4 shadow-sm ring-1 ring-emerald-100">
-          <div className="flex shrink-0 flex-col items-center justify-center rounded-xl bg-white px-4 py-3 text-center shadow-md ring-1 ring-slate-100">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
-              {monthShort}
-            </span>
-            <span className="text-3xl font-extrabold leading-none text-slate-900">
-              {dayNumber}
-            </span>
-            <span className="text-xs font-semibold text-emerald-700">
-              {weekdayShort}
-            </span>
+    <div className="relative mx-auto w-full max-w-sm rotate-1">
+      {/* Push Pin */}
+      <div className="absolute -top-3 left-1/2 z-20 h-6 w-6 -translate-x-1/2 rounded-full bg-red-500 shadow-md ring-2 ring-red-600/50" />
+      
+      <div className="overflow-hidden rounded-sm bg-white p-4 shadow-xl shadow-slate-400/50">
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded-sm bg-slate-100">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent p-4">
+            <p className="font-hand text-2xl font-bold text-white">{t("nextEvent")}</p>
           </div>
-          <div className="flex min-w-0 flex-1 flex-col gap-1">
-            <span className="text-lg font-bold text-slate-900">
-              {displayTime}
-            </span>
-            <span className="text-sm text-slate-600">
+        </div>
+
+        <div className="mt-4 text-center">
+          <h3 className="mb-2 font-hand text-3xl font-bold leading-tight text-emerald-800">{title}</h3>
+          
+          <div className="my-4 flex flex-col items-center gap-1 border-y-2 border-dashed border-emerald-100 py-4">
+            <span className="text-lg font-bold text-slate-700">
               {format.dateTime(startDate, { weekday: "long", month: "long", day: "numeric" })}
             </span>
+            <span className="text-xl font-extrabold text-emerald-600">
+               {displayTime}
+            </span>
           </div>
-        </div>
 
-        <div className="mt-8">
           <a
             href={eventUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex w-full justify-center rounded-xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-lg shadow-emerald-200 transition hover:bg-emerald-700 hover:shadow-emerald-300 sm:w-auto"
+            className="font-hand group mt-2 inline-flex items-center text-2xl font-bold text-slate-800 transition-colors hover:text-emerald-600"
           >
-            {t("rsvp")}
+            {t("rsvp")} <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
           </a>
         </div>
       </div>

@@ -17,7 +17,7 @@
       "description": "Become part of the vibrant bilingual community empowering plant-based living throughout Tokyo and across Japan.",
       "primaryCta": "Join a meetup",
       "secondaryCta": "Explore resources",
-      "communityBlurb": "Tokyo Vegan Meetup has welcomed vegans, vegetarians, flexitarians, and the vegan-curious since 2006. We celebrate bilingual storytelling and practical resources that make compassionate living accessible to everyone."
+      "communityBlurb": "A welcoming community celebrating vegan life since 2006."
     },
     "meetup": {
       "nextEvent": "Next Event",
@@ -26,6 +26,19 @@
     },
     "instagram": {
       "followUs": "Follow us on Instagram"
+    },
+    "footer": {
+      "tagline": "Spreading plant-based joy in Tokyo!",
+      "copyright": "Made with veggies & code.",
+      "links": {
+        "meetup": "Meetup",
+        "instagram": "Instagram",
+        "resources": "Resources"
+      }
+    },
+    "contact": {
+      "title": "Connect With Us",
+      "subtitle": "Tear off a tab and get in touch!"
     },
     "stats": {
       "founded": {"value": "2006", "label": "Founded"},
@@ -40,17 +53,20 @@
           "outreach": {
             "title": "Outreach",
             "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
-            "linkLabel": "Learn about Vegan 101"
+            "linkLabel": "Learn about Vegan 101",
+            "stickyLabel": "What's 'vegan'?"
           },
           "support": {
             "title": "Support",
             "description": "Find practical guides for shopping, cooking, and living plant-based in Tokyo—from seasonal produce to local-friendly recipes.",
-            "linkLabel": "Browse resources"
+            "linkLabel": "Browse resources",
+            "stickyLabel": "Resources"
           },
           "community": {
-            "title": "Community & Meetups",
+            "title": "Community",
             "description": "Since 2006 the Tokyo Vegan Meetup has welcomed everyone to social gatherings, workshops, and creative campaigns.",
-            "linkLabel": "See events"
+            "linkLabel": "See events",
+            "stickyLabel": "Meetups"
           }
         }
       },

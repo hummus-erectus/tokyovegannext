@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #FCF7DA;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-green: #00A99D;
+  --color-brand-cream: #FFFDD0;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-hand: var(--font-yomogi);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +23,443 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: url("/images/mulberry.jpg");
+  background-repeat: repeat;
+  background-size: 1024px 1024px;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom Utilities */
+.font-hand {
+  font-family: var(--font-yomogi), cursive;
+}
+
+html[lang="en"] .font-hand {
+  font-family: var(--font-amatic), cursive;
+}
+
+.font-hand-brand {
+  font-family: var(--font-amatic), cursive;
+}
+
+.header-ripped {
+  position: relative;
+  --header-ripped-mobile-offset: 56px;
+}
+
+.header-ripped::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url("/vectors/header-rip.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 800px auto;
+  pointer-events: none;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 250ms ease, opacity 250ms ease;
+}
+
+.header-ripped--mobile-open::after {
+  transform: translateY(var(--header-ripped-mobile-offset));
+  opacity: 0;
+}
+
+/* Custom headroom wrapper - ensure ripped edge is visible */
+.headroom-wrapper {
+  overflow: visible !important;
+}
+
+/* Realistic Paper Texture for Cards */
+.bg-paper-texture {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* Mobile menu ripped edge */
+.header-ripped-edge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url("/vectors/header-rip.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 800px auto;
+  pointer-events: none;
+  transform: translateY(100%);
+}
+
+.tape-section {
+  position: relative;
+}
+
+.tape-top-center::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 120px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  backdrop-filter: blur(1px);
+}
+
+.polaroid-shadow {
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.post-it-shadow {
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky Note Effect */
+.sticky-container {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.sticky-outer {
+  display: flex;
+  padding-top: 92.5925926%;
+  position: relative;
+  width: 100%;
+}
+
+.sticky-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Removed drop-shadow filter */
+  transition: transform 0.3s ease;
+}
+
+/* Shadow specifically for the bottom curl */
+.sticky-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 20%; /* Start 20% down so the top looks flat */
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.15);
+  background: transparent;
+  transition: box-shadow 0.3s ease, top 0.3s ease;
+  border-radius: 0 0 20px 20px; /* Round the bottom of the shadow */
+}
+
+.sticky-container:hover .sticky-wrapper::after {
+  box-shadow: 0 20px 24px rgba(0, 0, 0, 0.2);
+  top: 25%; /* Push the start of the shadow down slightly on lift */
+}
+
+.sticky-container:hover {
+  transform: scale(1.05) translateY(-5px);
+  z-index: 10;
+}
+
+.sticky-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  clip-path: url(#stickyClip);
+}
+
+/* Gradients for specific colors */
+.sticky-yellow {
+  background: linear-gradient(180deg, #FCD34D 0%, #FCD34D 12%, #fbbf24 75%, #f59e0b 100%);
+}
+
+.sticky-green {
+  background: linear-gradient(180deg, #6EE7B7 0%, #6EE7B7 12%, #34d399 75%, #10b981 100%);
+}
+
+.sticky-cream {
+  background: linear-gradient(180deg, #FEF3C7 0%, #FEF3C7 12%, #fde68a 75%, #fcd34d 100%);
+}
+
+/* Tear-Off Flyer Styles */
+:root {
+  --flyer-paper: #FFFEF5;
+  --flyer-shadow: #a1a1aa;
+  --flyer-shadow-light: #d4d4d8;
+  --flyer-accent: #10b981;
+}
+
+.flyer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.flyer-paper {
+  position: relative;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  min-height: 120px;
+  background: linear-gradient(
+    135deg,
+    var(--flyer-paper),
+    85%,
+    var(--flyer-shadow-light)
+  );
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  border-radius: 2px;
+}
+
+/* Thumbtacks */
+.flyer-paper::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.flyer-paper::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.flyer-strips {
+  display: flex;
+  min-height: 18rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.flyer-strip {
+  position: relative;
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    var(--flyer-paper),
+    80%,
+    var(--flyer-shadow-light)
+  );
+  border-top: 1px dashed var(--flyer-shadow);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  transform-origin: center top;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+.flyer-strip:hover {
+  transform: translateY(4px) rotate(2deg);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  background: linear-gradient(
+    to right,
+    #f0fdf4,
+    80%,
+    #bbf7d0
+  );
+}
+
+.flyer-link-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  transform: rotate(90deg);
+  transform-origin: top left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 3.8rem;
+  margin-top: 1.2rem;
+  align-items: center;
+  text-decoration: none;
+  color: #334155;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  pointer-events: none;
+}
+
+.flyer-strip:hover .flyer-link-wrapper {
+  color: var(--flyer-accent);
+}
+
+.flyer-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.flyer-link-text {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 2px;
+}
+
+/* Individual strip variations for natural look */
+.flyer-strip-1 {
+  transform: skew(1deg, 0deg);
+  background: linear-gradient(
+    to right,
+    var(--flyer-paper),
+    60%,
+    var(--flyer-shadow-light)
+  );
+}
+
+.flyer-strip-2 {
+  transform: skew(-3deg, 0deg);
+  background: var(--flyer-paper);
+}
+
+.flyer-strip-2::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--flyer-shadow-light),
+    5%,
+    rgba(211, 211, 211, 0)
+  );
+}
+
+.flyer-strip-3 {
+  transform: skew(-1.5deg, 0deg);
+  background: linear-gradient(
+    to right,
+    var(--flyer-paper),
+    60%,
+    var(--flyer-shadow-light)
+  );
+}
+
+.flyer-strip-4 {
+  transform: skew(-5deg, 0deg);
+  background: var(--flyer-paper);
+}
+
+.flyer-strip-4::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--flyer-shadow-light),
+    5%,
+    rgba(211, 211, 211, 0)
+  );
+}
+
+/* Hover states preserve skew but add pull effect */
+.flyer-strip-1:hover {
+  transform: skew(1deg, 0deg) translateY(6px) rotate(1deg);
+}
+
+.flyer-strip-2:hover {
+  transform: skew(-3deg, 0deg) translateY(6px) rotate(1deg);
+}
+
+.flyer-strip-3:hover {
+  transform: skew(-1.5deg, 0deg) translateY(6px) rotate(0deg);
+}
+
+.flyer-strip-4:hover {
+  transform: skew(-5deg, 0deg) translateY(6px) rotate(-1deg);
+}
+
+.flyer-strip-5 {
+  transform: skew(2deg, 0deg);
+  background: linear-gradient(
+    to right,
+    var(--flyer-paper),
+    40%,
+    var(--flyer-shadow-light)
+  );
+}
+
+.flyer-strip-5:hover {
+  transform: skew(2deg, 0deg) translateY(6px) rotate(-1deg);
+}
+
+/* 3D Card Lift Effect - lifts from tape hinge at top */
+.card-lift {
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.group:hover .card-lift {
+  transform: rotateX(-8deg);
+}
+
+/* Corgi Washi Tape for cards */
+.washi-tape-top {
+  position: relative;
+  z-index: 0; /* create a stacking context per card */
+}
+
+.washi-tape-top:hover,
+.washi-tape-top:has(.card-is-active) {
+  z-index: 20; /* bring the hovered or animating card (and its tape) above neighbors */
+}
+
+.washi-tape-top::before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 140px;
+  height: 48px;
+  background-image: url("/images/corgi-washi.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 10;
+  /* Tight, subtle shadow to feel like tape stuck on the card, not floating */
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35));
 }
