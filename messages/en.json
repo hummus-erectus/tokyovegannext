@@ -234,7 +234,7 @@
           "cooking": {
             "title": "Cooking",
             "description": "Recipes and kitchen inspiration using ingredients you can find in Japan.",
-            "href": "https://www.tokyovegan.org/en/recipes"
+            "href": "/resources/cooking"
           },
           "community": {
             "title": "Group & page links",

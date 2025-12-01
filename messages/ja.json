@@ -234,7 +234,7 @@
           "cooking": {
             "title": "料理",
             "description": "日本で手に入りやすい食材を使ったレシピやアイデア。",
-            "href": "https://www.tokyovegan.org/jp/recipes"
+            "href": "/resources/cooking"
           },
           "community": {
             "title": "グループ＆リンク",
