@@ -8,6 +8,7 @@ export interface ResourcePageConfig {
   icon: string;
   accentColor: string;
   groupByType?: boolean; // If true, groups resources by their "type" field
+  categoryOrder?: string[]; // Optional order for categories when groupByType is true
 }
 
 // Category configuration for icons and accent colors per type
@@ -103,7 +104,13 @@ export async function ResourcePageTemplate({
       ) : groupedResources ? (
         // Grouped display by type
         <div className="space-y-16">
-          {Object.entries(groupedResources).map(([type, items]) => {
+          {(config.categoryOrder
+            ? config.categoryOrder
+                .filter((type) => groupedResources[type])
+                .concat(Object.keys(groupedResources).filter((t) => !config.categoryOrder!.includes(t)))
+            : Object.keys(groupedResources)
+          ).map((type) => {
+            const items = groupedResources[type];
             const catConfig = categoryConfig?.[type];
             const icon = catConfig?.icon || config.icon;
             const accentColor = catConfig?.accentColor || config.accentColor;
