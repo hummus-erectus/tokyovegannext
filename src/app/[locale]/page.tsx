@@ -3,11 +3,11 @@ import {getLocale, getTranslations} from "next-intl/server";
 import {MeetupEventCard} from "@/components/MeetupEventCard";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
+import {PaperButton} from "@/components/PaperButton";
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
-const resourceItemKeys = ["starterKits", "restaurants", "shopping", "community"] as const;
 const blogPostKeys = ["maff", "chicken", "council"] as const;
 
 export default async function HomePage() {
@@ -36,21 +36,27 @@ export default async function HomePage() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a
+                <PaperButton
                   href="https://www.meetup.com/tokyovegan/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-emerald-200/50 transition hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-xl"
+                  type="external"
+                  variant="solid"
+                  color="emerald"
+                  size="lg"
+                  className="font-bold shadow-md"
                 >
                   {t("hero.primaryCta")}
-                </a>
-                <Link
+                </PaperButton>
+                <PaperButton
                   href="/resources"
+                  type="link"
                   locale={locale}
-                  className="inline-flex items-center justify-center rounded-full bg-[#FCD34D] px-8 py-4 text-base font-bold text-slate-900 shadow-lg shadow-amber-200/50 transition hover:-translate-y-0.5 hover:bg-[#fbbf24] hover:shadow-xl"
+                  variant="solid"
+                  color="yellow"
+                  size="lg"
+                  className="font-bold shadow-md"
                 >
                   {t("hero.secondaryCta")}
-                </Link>
+                </PaperButton>
               </div>
 
               <div className="flex flex-wrap gap-12 pt-2 justify-center lg:justify-start">

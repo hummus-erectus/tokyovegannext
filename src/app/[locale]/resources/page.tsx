@@ -1,5 +1,5 @@
 import {ResourceCard} from "@/components/ResourceCard";
-import {Link} from "@/i18n/routing";
+import {PaperButton} from "@/components/PaperButton";
 import {useLocale, useTranslations} from "next-intl";
 
 const sectionKeys = ["essentials", "knowledge", "business"] as const;
@@ -87,12 +87,27 @@ export default function ResourcesPage() {
                   <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{t("hero.description")}</p>
                   
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                     <a href="#essentials" className="inline-flex items-center justify-center px-8 py-3 font-bold text-white bg-emerald-600 rounded-full shadow-md hover:bg-emerald-700 transition">
+                     <PaperButton
+                        href="#essentials"
+                        type="anchor"
+                        variant="solid"
+                        color="emerald"
+                        size="md"
+                        className="font-bold shadow-md"
+                     >
                         {t("hero.ctaPrimary")}
-                     </a>
-                     <Link href="/" locale={locale} className="inline-flex items-center justify-center px-8 py-3 font-bold text-slate-700 bg-emerald-50 border-2 border-emerald-100 rounded-full hover:bg-emerald-100 transition">
+                     </PaperButton>
+                     <PaperButton
+                        href="/"
+                        type="link"
+                        locale={locale}
+                        variant="outline"
+                        color="emerald"
+                        size="md"
+                        className="font-bold"
+                     >
                         {t("hero.ctaSecondary")}
-                     </Link>
+                     </PaperButton>
                   </div>
                </div>
             </div>

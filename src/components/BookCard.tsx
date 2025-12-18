@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import {PaperButton} from "@/components/PaperButton";
 
 export interface BookListItemProps {
   title: string;
@@ -118,17 +119,22 @@ function NoteCard({ title, author, description, href, languages, locale, reverse
             </p>
 
             <div className="mt-5 flex justify-end">
-              <a
+              <PaperButton
                 href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center rounded-full bg-[#ffdd55] px-4 py-2 text-sm font-bold text-slate-900 shadow-md border border-amber-300"
-                style={{
-                  transform: reverse ? "rotate(-2deg)" : "rotate(2deg)",
-                }}
+                type="external"
+                variant="sticker"
+                color="yellow"
+                size="sm"
+                className="px-4 py-2 font-bold shadow-md"
               >
-                {buyLabel}
-              </a>
+                <span
+                  style={{
+                    transform: reverse ? "rotate(-2deg)" : "rotate(2deg)",
+                  }}
+                >
+                  {buyLabel}
+                </span>
+              </PaperButton>
             </div>
           </div>
         </div>

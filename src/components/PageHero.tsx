@@ -1,9 +1,4 @@
-import {Link} from "@/i18n/routing";
-
-const actionVariantMap: Record<"solid" | "outline", string> = {
-  solid: "bg-white/90 text-slate-900 shadow-lg shadow-black/20 hover:bg-white",
-  outline: "border border-white/70 text-white hover:bg-white/10"
-};
+import {PaperButton} from "@/components/PaperButton";
 
 export type HeroAction = {
   label: string;
@@ -31,28 +26,22 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
     : undefined;
 
   const renderAction = (action: HeroAction, idx: number) => {
-    const variantClass = actionVariantMap[action.variant ?? "solid"];
-    const baseClass = `rounded-full px-6 py-3 text-center text-sm font-semibold transition ${variantClass}`;
+    const type = action.type === "link" ? "link" : action.type === "external" ? "external" : "anchor";
+    const variant = action.variant ?? "solid";
 
-    if (action.type === "link") {
-      return (
-        <Link key={idx} href={action.href} locale={locale} className={baseClass}>
-          {action.label}
-        </Link>
-      );
-    }
-
-    const isExternal = action.type === "external";
     return (
-      <a
+      <PaperButton
         key={idx}
         href={action.href}
-        className={baseClass}
-        target={isExternal ? "_blank" : undefined}
-        rel={isExternal ? "noreferrer" : undefined}
+        type={type}
+        locale={locale}
+        variant={variant}
+        color="white"
+        size="md"
+        className={variant === "solid" ? "shadow-lg shadow-black/20" : ""}
       >
         {action.label}
-      </a>
+      </PaperButton>
     );
   };
 
