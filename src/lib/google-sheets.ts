@@ -4,6 +4,7 @@ import { JWT } from "google-auth-library";
 export interface ResourceItem {
   id: string;
   active: boolean;
+  displayOn?: "both" | "en" | "ja";
   title: {
     en: string;
     ja: string;
@@ -14,6 +15,14 @@ export interface ResourceItem {
   };
   url: string;
   imageUrl?: string;
+  // Locale-specific images (for books with different covers per language)
+  imageUrlEn?: string;
+  imageUrlJa?: string;
+  // Author field (for books)
+  author?: {
+    en: string;
+    ja: string;
+  };
   category?: string;
   type?: string; // e.g. "Online Shop", "Supermarket", etc.
   languages: ("en" | "ja")[];
@@ -47,12 +56,27 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
       .map((row: SheetRow): ResourceItem => {
         const id = row.get("id") as string;
         const active = row.get("active") === "TRUE";
+
+        const displayOnRaw = ((row.get("display_on") as string | undefined) ?? "")
+          .toString()
+          .toLowerCase()
+          .trim();
+
+        const displayOn: ResourceItem["displayOn"] =
+          displayOnRaw === "en" || displayOnRaw === "ja" || displayOnRaw === "both"
+            ? displayOnRaw
+            : undefined;
+
         const titleEn = row.get("title_en") as string;
         const titleJa = row.get("title_ja") as string;
         const descriptionEn = row.get("description_en") as string;
         const descriptionJa = row.get("description_ja") as string;
         const url = row.get("url") as string;
         const imageUrl = row.get("image_url") as string | undefined;
+        const imageUrlEn = row.get("image_url_en") as string | undefined;
+        const imageUrlJa = row.get("image_url_ja") as string | undefined;
+        const authorEn = row.get("author_en") as string | undefined;
+        const authorJa = row.get("author_ja") as string | undefined;
         const category = row.get("category") as string | undefined;
         const type = row.get("type") as string | undefined;
 
@@ -63,7 +87,11 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
 
         let languages: ("en" | "ja")[] = [];
 
-        if (languagesRaw === "en") {
+        if (!languagesRaw && displayOn) {
+          if (displayOn === "en") languages = ["en"];
+          if (displayOn === "ja") languages = ["ja"];
+          if (displayOn === "both") languages = ["en", "ja"];
+        } else if (languagesRaw === "en") {
           languages = ["en"];
         } else if (languagesRaw === "ja") {
           languages = ["ja"];
@@ -80,6 +108,7 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
         return {
           id,
           active,
+          displayOn,
           title: {
             en: titleEn,
             ja: titleJa,
@@ -90,6 +119,9 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
           },
           url,
           imageUrl,
+          imageUrlEn,
+          imageUrlJa,
+          author: authorEn || authorJa ? { en: authorEn || "", ja: authorJa || "" } : undefined,
           category,
           type,
           languages,
@@ -107,6 +139,7 @@ function getMockResources(): ResourceItem[] {
     {
       id: "1",
       active: true,
+      displayOn: "both",
       title: { en: "Tokyo Vegan Guide (Mock)", ja: "東京ヴィーガンガイド (仮)" },
       description: { en: "A complete guide to vegan living in Tokyo.", ja: "東京でのヴィーガン生活の完全ガイド。" },
       url: "https://example.com",
@@ -116,6 +149,7 @@ function getMockResources(): ResourceItem[] {
     {
       id: "2",
       active: true,
+      displayOn: "both",
       title: { en: "Vegan Map (Mock)", ja: "ヴィーガンマップ (仮)" },
       description: { en: "Find restaurants near you.", ja: "近くのレストランを探す。" },
       url: "https://example.com/map",

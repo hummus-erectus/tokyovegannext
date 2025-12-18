@@ -250,7 +250,7 @@
           "books": {
             "title": "本",
             "description": "健康・倫理・サステナビリティについて学べるおすすめ書籍。",
-            "href": "https://www.tokyovegan.org/jp/books"
+            "href": "/resources/books"
           },
           "movies": {
             "title": "映画",

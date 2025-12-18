@@ -250,7 +250,7 @@
           "books": {
             "title": "Books",
             "description": "Recommended reads about health, ethics, and sustainability.",
-            "href": "https://www.tokyovegan.org/en/books"
+            "href": "/resources/books"
           },
           "movies": {
             "title": "Movies",
