@@ -224,22 +224,22 @@
           "restaurants": {
             "title": "Restaurants",
             "description": "Find vegan-friendly restaurants, cafés, and pop-ups across Tokyo.",
-            "href": "https://www.tokyovegan.org/en/restaurants"
+            "href": "/resources/restaurants"
           },
           "shopping": {
             "title": "Shopping",
             "description": "Source groceries, pantry staples, and specialty ingredients locally.",
-            "href": "https://www.tokyovegan.org/en/shopping"
+            "href": "/resources/shopping"
           },
           "cooking": {
             "title": "Cooking",
             "description": "Recipes and kitchen inspiration using ingredients you can find in Japan.",
-            "href": "https://www.tokyovegan.org/en/recipes"
+            "href": "/resources/cooking"
           },
           "community": {
             "title": "Group & page links",
             "description": "Clubs, online groups, and meetups to connect with fellow vegans.",
-            "href": "https://www.tokyovegan.org/en/community"
+            "href": "/resources/community"
           }
         }
       },
@@ -250,23 +250,12 @@
           "books": {
             "title": "Books",
             "description": "Recommended reads about health, ethics, and sustainability.",
-            "href": "https://www.tokyovegan.org/en/books"
+            "href": "/resources/books"
           },
           "movies": {
             "title": "Movies",
             "description": "Films and documentaries that inform and inspire.",
-            "href": "https://www.tokyovegan.org/en/movies"
-          }
-        }
-      },
-      "business": {
-        "title": "For Businesses",
-        "description": "Information for companies interested in certification and the vegan space.",
-        "items": {
-          "catering": {
-            "title": "Catering",
-            "description": "Chefs and catering partners experienced with plant-based events.",
-            "href": "https://www.tokyovegan.org/en/caterers"
+            "href": "/resources/movies"
           }
         }
       }

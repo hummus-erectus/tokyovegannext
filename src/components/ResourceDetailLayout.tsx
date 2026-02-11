@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {Link} from "@/i18n/routing";
+import {PaperButton} from "@/components/PaperButton";
 
 interface ResourceDetailLayoutProps {
   eyebrow: string;
@@ -32,13 +32,17 @@ export function ResourceDetailLayout({
               <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{description}</p>
 
               <div className="flex justify-center">
-                <Link
+                <PaperButton
                   href={backHref}
+                  type="link"
                   locale={locale}
-                  className="inline-flex items-center justify-center px-8 py-3 font-bold text-slate-700 bg-emerald-50 border-2 border-emerald-100 rounded-full hover:bg-emerald-100 transition"
+                  variant="outline"
+                  color="emerald"
+                  size="md"
+                  className="font-bold"
                 >
                   {backLabel}
-                </Link>
+                </PaperButton>
               </div>
             </div>
           </div>

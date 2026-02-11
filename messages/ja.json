@@ -224,22 +224,22 @@
           "restaurants": {
             "title": "レストラン",
             "description": "東京各地のヴィーガン対応レストランやカフェ、ポップアップをチェック。",
-            "href": "https://www.tokyovegan.org/jp/restaurants"
+            "href": "/resources/restaurants"
           },
           "shopping": {
             "title": "ショッピング",
             "description": "食材や日用品、スペシャルティ商品をローカルで手に入れるためのヒント。",
-            "href": "https://www.tokyovegan.org/jp/shopping"
+            "href": "/resources/shopping"
           },
           "cooking": {
             "title": "料理",
             "description": "日本で手に入りやすい食材を使ったレシピやアイデア。",
-            "href": "https://www.tokyovegan.org/jp/recipes"
+            "href": "/resources/cooking"
           },
           "community": {
             "title": "グループ＆リンク",
             "description": "クラブやオンラインコミュニティ、ミートアップで仲間とつながろう。",
-            "href": "https://www.tokyovegan.org/jp/community"
+            "href": "/resources/community"
           }
         }
       },
@@ -250,23 +250,12 @@
           "books": {
             "title": "本",
             "description": "健康・倫理・サステナビリティについて学べるおすすめ書籍。",
-            "href": "https://www.tokyovegan.org/jp/books"
+            "href": "/resources/books"
           },
           "movies": {
             "title": "映画",
             "description": "学びとインスピレーションを与えてくれる映画やドキュメンタリー。",
-            "href": "https://www.tokyovegan.org/jp/movies"
-          }
-        }
-      },
-      "business": {
-        "title": "ビジネス向け",
-        "description": "認証やヴィーガン市場に関心のある企業向けの情報。",
-        "items": {
-          "catering": {
-            "title": "ケータリング",
-            "description": "プラントベースイベントに慣れたシェフやケータリングパートナー。",
-            "href": "https://www.tokyovegan.org/jp/caterers"
+            "href": "/resources/movies"
           }
         }
       }
