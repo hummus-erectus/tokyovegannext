@@ -255,7 +255,7 @@
           "movies": {
             "title": "Movies",
             "description": "Films and documentaries that inform and inspire.",
-            "href": "https://www.tokyovegan.org/en/movies"
+            "href": "/resources/movies"
           }
         }
       },

@@ -255,7 +255,7 @@
           "movies": {
             "title": "映画",
             "description": "学びとインスピレーションを与えてくれる映画やドキュメンタリー。",
-            "href": "https://www.tokyovegan.org/jp/movies"
+            "href": "/resources/movies"
           }
         }
       },
