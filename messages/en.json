@@ -203,6 +203,18 @@
       "ctaSecondary": "Back to home"
     }
   },
+  "BlogPage": {
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Blog",
+      "description": "News, stories, and updates from the Tokyo Vegan community."
+    },
+    "empty": "No posts yet — check back soon!",
+    "backHome": "Back to home"
+  },
+  "BlogPostPage": {
+    "backToList": "Back to blog"
+  },
   "ResourcesPage": {
     "hero": {
       "eyebrow": "Resources",

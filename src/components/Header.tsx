@@ -7,7 +7,7 @@ import {useEffect, useLayoutEffect, useRef, useState} from "react";
 
 const navLinks = [
   {key: "resources", href: "/resources", type: "internal"},
-  {key: "blog", href: "/#blog", type: "internal"},
+  {key: "blog", href: "/blog", type: "internal"},
   {
     key: "events",
     href: "https://www.tokyovegan.org/en/events",

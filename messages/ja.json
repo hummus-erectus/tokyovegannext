@@ -203,6 +203,18 @@
       "ctaSecondary": "ホームに戻る"
     }
   },
+  "BlogPage": {
+    "hero": {
+      "eyebrow": "ブログ",
+      "title": "ブログ",
+      "description": "Tokyo Veganコミュニティからのニュース、ストーリー、最新情報。"
+    },
+    "empty": "まだ記事がありません。お楽しみに！",
+    "backHome": "ホームに戻る"
+  },
+  "BlogPostPage": {
+    "backToList": "ブログ一覧に戻る"
+  },
   "ResourcesPage": {
     "hero": {
       "eyebrow": "リソース",
