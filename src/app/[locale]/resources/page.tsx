@@ -2,22 +2,30 @@ import {ResourceCard} from "@/components/ResourceCard";
 import {PaperButton} from "@/components/PaperButton";
 import {useLocale, useTranslations} from "next-intl";
 
-const sectionKeys = ["essentials", "knowledge", "business"] as const;
+const sectionKeys = ["essentials", "knowledge"] as const;
 const sectionItemMap = {
   essentials: ["starterKits", "restaurants", "shopping", "cooking", "community"] as const,
-  knowledge: ["books", "movies"] as const,
-  business: ["catering"] as const
+  knowledge: ["books", "movies"] as const
 };
 
-const itemMeta: Record<string, {icon: string; accent: string; gradient: string}> = {
-  starterKits: {icon: "🎒", accent: "text-emerald-700", gradient: "from-emerald-50 to-white"},
-  restaurants: {icon: "🍜", accent: "text-amber-700", gradient: "from-amber-50 to-white"},
-  shopping: {icon: "🧺", accent: "text-rose-700", gradient: "from-rose-50 to-white"},
-  cooking: {icon: "🥢", accent: "text-slate-700", gradient: "from-slate-50 to-white"},
-  community: {icon: "🤝", accent: "text-indigo-700", gradient: "from-indigo-50 to-white"},
-  books: {icon: "📚", accent: "text-blue-700", gradient: "from-blue-50 to-white"},
-  movies: {icon: "🎬", accent: "text-teal-700", gradient: "from-teal-50 to-white"},
-  catering: {icon: "🍱", accent: "text-lime-700", gradient: "from-lime-50 to-white"}
+const itemMeta: Record<string, {icon: string; accent: string}> = {
+  starterKits: {icon: "🎒", accent: "text-emerald-700"},
+  restaurants: {icon: "🍜", accent: "text-amber-700"},
+  shopping: {icon: "🧺", accent: "text-rose-700"},
+  cooking: {icon: "🥢", accent: "text-slate-700"},
+  community: {icon: "🤝", accent: "text-indigo-700"},
+  books: {icon: "📚", accent: "text-blue-700"},
+  movies: {icon: "🎬", accent: "text-teal-700"}
+};
+
+const accentColorMap: Record<string, string> = {
+  "text-emerald-700": "emerald",
+  "text-amber-700": "amber",
+  "text-rose-700": "rose",
+  "text-blue-700": "blue",
+  "text-slate-700": "slate",
+  "text-indigo-700": "blue",
+  "text-teal-700": "blue"
 };
 
 type SectionKey = (typeof sectionKeys)[number];
@@ -35,26 +43,12 @@ export default function ResourcesPage() {
           description: string;
           href: string;
         };
-        const meta = itemMeta[itemKey] ?? {icon: "", accent: "text-emerald-700", gradient: ""};
-        
-        // Alternating rotations for a natural feel
+        const meta = itemMeta[itemKey] ?? {icon: "", accent: "text-emerald-700"};
+
         const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"];
         const rotation = rotations[idx % rotations.length];
 
         const isExternal = item.href.startsWith("http");
-
-        const accentColorMap: Record<string, string> = {
-          "text-emerald-700": "emerald",
-          "text-amber-700": "amber",
-          "text-rose-700": "rose",
-          "text-blue-700": "blue",
-          "text-slate-700": "slate",
-          // map other accents to closest existing palette
-          "text-indigo-700": "blue",
-          "text-teal-700": "blue",
-          "text-lime-700": "emerald"
-        };
-
         const accentColor = accentColorMap[meta.accent] ?? "emerald";
 
         return (
@@ -76,7 +70,6 @@ export default function ResourcesPage() {
 
   return (
     <div className="min-h-screen text-slate-900 pb-24">
-      {/* Custom "Pinned Paper" Hero */}
       <section className="relative pt-12 pb-12 px-4">
          <div className="mx-auto max-w-4xl">
             <div className="tape-section rotate-1">
@@ -85,7 +78,7 @@ export default function ResourcesPage() {
                   <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-600 mb-4">{t("hero.eyebrow")}</p>
                   <h1 className="font-hand text-5xl md:text-7xl font-bold text-slate-900 mb-6">{t("hero.title")}</h1>
                   <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{t("hero.description")}</p>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                      <PaperButton
                         href="#essentials"
@@ -118,7 +111,7 @@ export default function ResourcesPage() {
         {sectionKeys.map((sectionKey) => (
           <section
             key={sectionKey}
-            id={sectionKey === "essentials" ? "essentials" : undefined}
+            id={sectionKey}
             className="grid gap-8 lg:grid-cols-[250px_1fr]"
           >
             <div className="space-y-4 lg:self-start pt-8">

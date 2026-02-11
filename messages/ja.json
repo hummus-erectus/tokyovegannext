@@ -258,17 +258,6 @@
             "href": "/resources/movies"
           }
         }
-      },
-      "business": {
-        "title": "ビジネス向け",
-        "description": "認証やヴィーガン市場に関心のある企業向けの情報。",
-        "items": {
-          "catering": {
-            "title": "ケータリング",
-            "description": "プラントベースイベントに慣れたシェフやケータリングパートナー。",
-            "href": "https://www.tokyovegan.org/jp/caterers"
-          }
-        }
       }
     }
   }

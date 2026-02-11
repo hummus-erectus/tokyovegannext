@@ -258,17 +258,6 @@
             "href": "/resources/movies"
           }
         }
-      },
-      "business": {
-        "title": "For Businesses",
-        "description": "Information for companies interested in certification and the vegan space.",
-        "items": {
-          "catering": {
-            "title": "Catering",
-            "description": "Chefs and catering partners experienced with plant-based events.",
-            "href": "https://www.tokyovegan.org/en/caterers"
-          }
-        }
       }
     }
   }
