@@ -1,6 +1,6 @@
 import {ResourceCard} from "@/components/ResourceCard";
 import {PaperButton} from "@/components/PaperButton";
-import {useLocale, useTranslations} from "next-intl";
+import {getLocale, getTranslations} from "next-intl/server";
 
 const sectionKeys = ["essentials", "knowledge"] as const;
 const sectionItemMap = {
@@ -30,9 +30,9 @@ const accentColorMap: Record<string, string> = {
 
 type SectionKey = (typeof sectionKeys)[number];
 
-export default function ResourcesPage() {
-  const t = useTranslations("ResourcesPage");
-  const rawLocale = useLocale();
+export default async function ResourcesPage() {
+  const t = await getTranslations("ResourcesPage");
+  const rawLocale = await getLocale();
   const locale: "en" | "ja" = rawLocale === "en" ? "en" : "ja";
 
   const renderCards = (section: SectionKey) => (
