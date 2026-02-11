@@ -1,8 +1,8 @@
 "use client";
 
-import {useState, type TransitionEvent} from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {usePaperLift} from "@/hooks/usePaperLift";
 
 interface ResourceCardProps {
   title: string;
@@ -27,8 +27,7 @@ export function ResourceCard({
   languages,
   locale = "en"
 }: ResourceCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const {isActive, containerProps, cardStyle} = usePaperLift();
   const isJaPage = locale === "ja";
   
   const colors: Record<string, {text: string}> = {
@@ -43,43 +42,16 @@ export function ResourceCard({
   const Component = isExternal ? "a" : Link;
   const linkProps = isExternal ? { target: "_blank" as const, rel: "noreferrer" } : {};
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setIsActive(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
-    if (event.propertyName !== "transform") return;
-    if (!isHovered) {
-      setIsActive(false);
-    }
-  };
-
   return (
     <div 
       className="h-full"
-      style={{perspective: "800px"}}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTransitionEnd={handleTransitionEnd}
+      {...containerProps}
     >
       <Component
         href={href}
         {...linkProps}
         className={`flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? "card-is-active" : ""}`}
-        style={{
-          transformStyle: "preserve-3d",
-          transformOrigin: "top center",
-          transform: isHovered ? "rotateX(8deg)" : "rotateX(0deg)",
-          boxShadow: isHovered 
-            ? "0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1)" 
-            : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-          transition: "transform 0.3s ease-out, box-shadow 0.3s ease-out",
-        }}
+        style={cardStyle}
       >
       {imageUrl && (
         <div className="relative h-48 w-full overflow-hidden bg-slate-100">
