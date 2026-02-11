@@ -1,46 +1,61 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect, useRef, useState, type CSSProperties} from "react";
 
-const AccordionIcons = {
-  open: (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 text-emerald-600" aria-hidden>
-      <path d="M6 15l6-6 6 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  closed: (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 text-slate-400" aria-hidden>
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-};
-
-function AccordionItem({
+function FaqCard({
   question,
   answer,
   isOpen,
-  onClick
+  isClosing,
+  onClick,
 }: {
   question: string;
   answer: string;
   isOpen: boolean;
+  isClosing: boolean;
   onClick: () => void;
 }) {
+  const isElevated = isOpen || isClosing;
+  const slipStyle: CSSProperties = {
+    clipPath: isOpen ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+    transform: isOpen ? "translateY(0)" : "translateY(-12px)",
+    transition: "clip-path 0.3s ease-out, transform 0.3s ease-out",
+  };
+
   return (
-    <div className="border-b border-emerald-100 last:border-0">
+    <div className={`tape-section relative ${isElevated ? "z-20" : "z-10"}`}>
+      <div className="tape-top-center" />
+      {/* Question card */}
       <button
-        className="flex w-full items-center justify-between py-4 text-left font-semibold text-slate-800 transition-colors hover:text-emerald-700"
+        className="relative z-2 w-full text-left bg-white p-6 shadow-md shadow-slate-300/40 transition-shadow duration-300 hover:shadow-lg"
         onClick={onClick}
       >
-        <span>{question}</span>
-        {isOpen ? AccordionIcons.open : AccordionIcons.closed}
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="font-hand text-xl font-bold text-slate-800 sm:text-2xl">{question}</h3>
+          <svg
+            viewBox="0 0 24 24"
+            className={`mt-1 h-5 w-5 shrink-0 transition-transform duration-300 ${
+              isOpen ? "rotate-180 text-emerald-600" : "text-slate-400"
+            }`}
+            aria-hidden
+          >
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
       </button>
+      {/* Paper slip answer — pulled out without moving other cards */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`absolute left-4 right-4 top-full ${
+          isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
-        <p className="pb-4 text-slate-600">{answer}</p>
+        <div
+          className="bg-paper-texture border border-slate-200/60 px-5 py-5 shadow-lg shadow-slate-300/40"
+          style={slipStyle}
+        >
+          <div className="h-px w-full border-t border-dashed border-emerald-200/70" />
+          <p className="mt-4 text-slate-600 leading-relaxed">{answer}</p>
+        </div>
       </div>
     </div>
   );
@@ -54,16 +69,59 @@ export type FaqItem = {
 
 export function FaqAccordion({items}: {items: FaqItem[]}) {
   const [openFaq, setOpenFaq] = useState<string | null>(null);
+  const [closingFaq, setClosingFaq] = useState<string | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nextOpenRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  const startClose = (key: string, nextKey: string | null = null) => {
+    setClosingFaq(key);
+    setOpenFaq(null);
+    nextOpenRef.current = nextKey;
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setClosingFaq(null);
+      if (nextOpenRef.current) {
+        setOpenFaq(nextOpenRef.current);
+      }
+      nextOpenRef.current = null;
+    }, 300);
+  };
+
+  const handleToggle = (key: string) => {
+    if (openFaq === key) {
+      startClose(key);
+      return;
+    }
+
+    if (openFaq) {
+      startClose(openFaq, key);
+      return;
+    }
+
+    if (closingFaq) {
+      nextOpenRef.current = key;
+      return;
+    }
+
+    setOpenFaq(key);
+  };
 
   return (
-    <div className="rounded-3xl border border-emerald-100 bg-white px-6 py-2 shadow-lg shadow-emerald-50">
+    <div className="flex flex-col gap-6 max-w-3xl mx-auto">
       {items.map((item) => (
-        <AccordionItem
+        <FaqCard
           key={item.key}
           question={item.question}
           answer={item.answer}
           isOpen={openFaq === item.key}
-          onClick={() => setOpenFaq(openFaq === item.key ? null : item.key)}
+          isClosing={closingFaq === item.key}
+          onClick={() => handleToggle(item.key)}
         />
       ))}
     </div>
