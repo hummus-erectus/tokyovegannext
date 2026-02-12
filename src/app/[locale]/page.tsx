@@ -4,11 +4,23 @@ import {MeetupEventCard} from "@/components/MeetupEventCard";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
+import {HomeBlogCard} from "@/components/HomeBlogCard";
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
+import {client} from "@/sanity/client";
+import {urlFor} from "@/sanity/image";
+
+const LATEST_POSTS_QUERY = `*[_type == "post" && language == $language && defined(slug.current) && publishedAt < now()] | order(publishedAt desc)[0...4] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  publishedAt,
+  "authorName": author->name
+}`;
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
-const blogPostKeys = ["maff", "chicken", "council"] as const;
 
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
@@ -18,6 +30,9 @@ export default async function HomePage() {
   const entries = Object.entries(stats) as [string, {value: string; label: string}][ ];
 
   const nextEvent = await getNextMeetupEvent();
+
+  const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
+  const rotations = ['rotate-1', '-rotate-1', 'rotate-2'] as const;
 
   return (
     <div className="flex flex-col gap-24 pb-24 text-slate-900">
@@ -288,41 +303,55 @@ export default async function HomePage() {
       </section> */}
 
       {/* Blog Section */}
-      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4" id="blog">
+      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4 overflow-x-clip" id="blog">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
             </div>
-            <a
+            <Link
+              href="/blog"
+              locale={locale}
               className="font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
-              href="https://www.tokyovegan.org/jp/blog"
-              target="_blank"
-              rel="noreferrer"
             >
               {t("sections.blog.cta")} →
-            </a>
+            </Link>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {blogPostKeys.map((key) => {
-              const post = t.raw(`sections.blog.posts.${key}`) as {title: string; excerpt: string; href: string};
-              return (
-                <a
-                  key={key}
-                  href={post.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex h-full flex-col justify-between bg-white p-8 shadow-lg shadow-slate-200/50 transition hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <div className="space-y-4">
-                    <div className="h-2 w-12 bg-emerald-100" />
-                    <h3 className="font-hand text-4xl font-bold text-slate-900 group-hover:text-emerald-700">{post.title}</h3>
-                    <p className="text-slate-600">{post.excerpt}</p>
+          {latestPosts.length > 0 ? (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {latestPosts.map((post: {
+                _id: string
+                title: string
+                slug: { current: string }
+                excerpt?: string
+                mainImage?: { asset: { _ref: string }; alt?: string }
+                publishedAt?: string
+                authorName?: string
+              }, idx: number) => {
+                const rotation = rotations[idx % rotations.length]
+                const imageUrl = post.mainImage
+                  ? urlFor(post.mainImage).width(600).height(400).url()
+                  : undefined
+                return (
+                  <div key={post._id} className={`relative ${rotation} washi-tape-top${idx === 3 ? ' lg:hidden' : ''}`}>
+                    <HomeBlogCard
+                      title={post.title}
+                      excerpt={post.excerpt || ''}
+                      slug={post.slug.current}
+                      locale={locale}
+                      imageUrl={imageUrl}
+                      imageAlt={post.mainImage?.alt}
+                      publishedAt={post.publishedAt}
+                      authorName={post.authorName}
+                    />
                   </div>
-                  <span className="mt-6 font-hand text-2xl font-bold text-emerald-700 group-hover:underline">Read more →</span>
-                </a>
-              );
-            })}
-          </div>
+                )
+              })}
+            </div>
+          ) : (
+            <p className="text-center font-hand text-2xl text-slate-500">
+              {locale === 'ja' ? 'まだ記事がありません' : 'No posts yet — check back soon!'}
+            </p>
+          )}
       </section>
 
       {/* Instagram Section */}
