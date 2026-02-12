@@ -490,12 +490,15 @@ html[lang="en"] .font-hand {
 /* Corgi Washi Tape for cards */
 .washi-tape-top {
   position: relative;
-  z-index: 0; /* create a stacking context per card */
+  z-index: 0; /* stacking context per card */
 }
 
-.washi-tape-top:hover,
 .washi-tape-top:has(.card-is-active) {
-  z-index: 20; /* bring the hovered or animating card (and its tape) above neighbors */
+  z-index: 10; /* transitioning-out card: above default but below active */
+}
+
+.washi-tape-top:hover {
+  z-index: 20; /* actively hovered card always wins */
 }
 
 .washi-tape-top::before {
