@@ -16,11 +16,6 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $l
   excerpt,
   "authorName": author->name,
   "authorImage": author->image,
-  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-    title,
-    slug,
-    language
-  }
 }`
 
 type Props = {
@@ -123,12 +118,6 @@ export default async function BlogPostPage({ params }: Props) {
     ? urlFor(post.authorImage).width(80).height(80).url()
     : null
 
-  // Find translation in the other language
-  const otherLang = locale === 'ja' ? 'en' : 'ja'
-  const translation = post._translations?.find(
-    (t: { language: string; slug?: { current: string } }) => t.language === otherLang && t.slug?.current
-  )
-
   return (
     <div className="min-h-screen text-slate-900 pb-24">
       <article className="mx-auto max-w-3xl px-4 pt-12">
@@ -173,15 +162,6 @@ export default async function BlogPostPage({ params }: Props) {
                 <span className="text-sm text-slate-500">{formattedDate}</span>
               )}
 
-              {/* Translation link */}
-              {translation && (
-                <Link
-                  href={`/${otherLang}/blog/${translation.slug.current}`}
-                  className="ml-auto inline-block bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 post-it-shadow hover:bg-amber-200 transition-colors"
-                >
-                  {locale === 'ja' ? 'Read in English' : '日本語で読む'}
-                </Link>
-              )}
             </div>
 
             {/* Main image */}

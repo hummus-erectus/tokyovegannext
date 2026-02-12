@@ -1,4 +1,16 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, type SlugIsUniqueValidator } from 'sanity'
+
+const isUniquePerLanguage: SlugIsUniqueValidator = async (slug, context) => {
+  const { document, getClient } = context
+  const client = getClient({ apiVersion: '2024-01-01' })
+  const id = document?._id.replace(/^drafts\./, '')
+  const language = document?.language
+  const count = await client.fetch(
+    `count(*[_type == "post" && slug.current == $slug && language == $language && !(_id in [$id, $draftId])])`,
+    { slug, language, id, draftId: `drafts.${id}` }
+  )
+  return count === 0
+}
 
 export const post = defineType({
   name: 'post',
@@ -15,9 +27,11 @@ export const post = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      description: 'Use the same slug for both EN and JP versions of a post so the language switcher works correctly.',
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: isUniquePerLanguage,
       },
       validation: (rule) => rule.required(),
     }),
