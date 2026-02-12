@@ -50,10 +50,10 @@ export async function InstagramFeed() {
 
       {(() => {
         const rotations = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "rotate-1", "-rotate-2"];
-        const verticalOffsets = ["translate-y-0", "translate-y-4", "translate-y-2", "translate-y-6", "translate-y-0", "translate-y-4"];
+        const verticalOffsets = ["translate-y-0", "translate-y-4", "translate-y-2", "translate-y-0", "translate-y-0", "translate-y-4"];
 
         return (
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:gap-12">
+          <div className="grid grid-cols-2 items-center gap-4 md:gap-8 md:grid-cols-3 lg:gap-12">
             {displayPosts.map((post, index) => (
               <a
                 key={post.id}
@@ -63,18 +63,13 @@ export async function InstagramFeed() {
                 className={`group relative z-0 inline-block w-full transform break-inside-avoid transition duration-300 ease-out hover:z-30 hover:scale-110 ${rotations[index % rotations.length]} ${verticalOffsets[index % verticalOffsets.length]}`}
               >
                 <div className="tape-top-center" />
-                <div className="flex flex-col bg-white p-3 pb-4 shadow-lg shadow-slate-300 transition group-hover:shadow-xl">
-                  <div className="w-full overflow-hidden bg-slate-100">
+                <div className="flex flex-col items-center justify-center bg-white p-2 md:p-3 shadow-lg shadow-slate-300 transition group-hover:shadow-xl">
+                  <div className="w-full overflow-hidden bg-slate-100 flex items-center">
                     <img
                       src={post.imageUrl}
                       alt={post.caption || "Instagram post"}
-                      className="w-full h-auto object-contain"
+                      className="w-full h-auto object-cover"
                     />
-                  </div>
-                  <div className="mt-4 min-h-12 text-center">
-                     <p className="line-clamp-2 font-hand text-lg font-bold leading-tight text-slate-700">
-                       {post.caption || "Check this out!"}
-                     </p>
                   </div>
                 </div>
               </a>
