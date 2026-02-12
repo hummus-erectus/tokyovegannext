@@ -22,74 +22,79 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>
 }
 
-const ptComponents: PortableTextComponents = {
-  types: {
-    image: ({ value }) => {
-      if (!value?.asset?._ref) return null
-      const url = urlFor(value).width(800).auto('format').url()
-      return (
-        <figure className="my-8 rotate-1">
-          <div className="inline-block bg-white p-3 polaroid-shadow">
-            <Image
-              src={url}
-              alt={value.alt || ''}
-              width={800}
-              height={500}
-              className="max-w-full h-auto"
-            />
-          </div>
-          {value.caption && (
-            <figcaption className="mt-2 text-center text-sm text-slate-500 font-hand">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      )
+function buildPtComponents(): PortableTextComponents {
+  let imageIndex = 0
+  return {
+    types: {
+      image: ({ value }) => {
+        if (!value?.asset?._ref) return null
+        const url = urlFor(value).width(800).auto('format').url()
+        const rotation = imageIndex % 2 === 0 ? 'rotate-1' : '-rotate-1'
+        imageIndex++
+        return (
+          <figure className={`my-8 ${rotation}`}>
+            <div className="relative photo-slit" style={{ '--clip': '40px' } as React.CSSProperties}>
+              <Image
+                src={url}
+                alt={value.alt || ''}
+                width={800}
+                height={500}
+                className="max-w-full h-auto block"
+              />
+            </div>
+            {value.caption && (
+              <figcaption className="mt-2 text-center text-sm text-slate-500 font-hand">
+                {value.caption}
+              </figcaption>
+            )}
+          </figure>
+        )
+      },
     },
-  },
-  block: {
-    h2: ({ children }) => (
-      <h2 className="font-hand text-3xl md:text-4xl font-bold text-emerald-700 mt-10 mb-4 -rotate-1">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="font-hand text-2xl md:text-3xl font-bold text-slate-800 mt-8 mb-3">
-        {children}
-      </h3>
-    ),
-    normal: ({ children }) => (
-      <p className="text-base md:text-lg leading-relaxed text-slate-700 mb-4">
-        {children}
-      </p>
-    ),
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-emerald-400 pl-4 italic text-slate-600 my-6 bg-white/50 py-2">
-        {children}
-      </blockquote>
-    ),
-  },
-  marks: {
-    strong: ({ children }) => <strong className="font-bold text-slate-900">{children}</strong>,
-    em: ({ children }) => <em className="italic">{children}</em>,
-    link: ({ value, children }) => {
-      const href = value?.href || ''
-      const isExternal = href.startsWith('http')
-      return (
-        <a
-          href={href}
-          className="text-emerald-700 underline underline-offset-2 hover:text-emerald-500 transition-colors"
-          {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
-        >
+    block: {
+      h2: ({ children }) => (
+        <h2 className="font-hand text-3xl md:text-4xl font-bold text-emerald-700 mt-10 mb-4 -rotate-1">
           {children}
-        </a>
-      )
+        </h2>
+      ),
+      h3: ({ children }) => (
+        <h3 className="font-hand text-2xl md:text-3xl font-bold text-slate-800 mt-8 mb-3">
+          {children}
+        </h3>
+      ),
+      normal: ({ children }) => (
+        <p className="text-base md:text-lg leading-relaxed text-slate-700 mb-4">
+          {children}
+        </p>
+      ),
+      blockquote: ({ children }) => (
+        <blockquote className="border-l-4 border-emerald-400 pl-4 italic text-slate-600 my-6 bg-white/50 py-2">
+          {children}
+        </blockquote>
+      ),
     },
-  },
-  list: {
-    bullet: ({ children }) => <ul className="list-disc pl-6 space-y-2 mb-4 text-slate-700">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal pl-6 space-y-2 mb-4 text-slate-700">{children}</ol>,
-  },
+    marks: {
+      strong: ({ children }) => <strong className="font-bold text-slate-900">{children}</strong>,
+      em: ({ children }) => <em className="italic">{children}</em>,
+      link: ({ value, children }) => {
+        const href = value?.href || ''
+        const isExternal = href.startsWith('http')
+        return (
+          <a
+            href={href}
+            className="text-emerald-700 underline underline-offset-2 hover:text-emerald-500 transition-colors"
+            {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            {children}
+          </a>
+        )
+      },
+    },
+    list: {
+      bullet: ({ children }) => <ul className="list-disc pl-6 space-y-2 mb-4 text-slate-700">{children}</ul>,
+      number: ({ children }) => <ol className="list-decimal pl-6 space-y-2 mb-4 text-slate-700">{children}</ol>,
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -167,13 +172,13 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Main image */}
             {mainImageUrl && (
               <div className="mb-10 -rotate-1">
-                <div className="inline-block bg-white p-3 polaroid-shadow w-full">
+                <div className="relative photo-slit" style={{ '--clip': '40px' } as React.CSSProperties}>
                   <Image
                     src={mainImageUrl}
                     alt={post.mainImage?.alt || post.title}
                     width={1200}
                     height={600}
-                    className="w-full h-auto"
+                    className="w-full h-auto block"
                   />
                 </div>
               </div>
@@ -182,7 +187,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Body */}
             {post.body && (
               <div className="prose-custom">
-                <PortableText value={post.body} components={ptComponents} />
+                <PortableText value={post.body} components={buildPtComponents()} />
               </div>
             )}
           </div>
