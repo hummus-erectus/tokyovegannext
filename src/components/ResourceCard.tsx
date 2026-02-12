@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import {Link} from "@/i18n/routing";
 import Image from "next/image";
 import {usePaperLift} from "@/hooks/usePaperLift";
 
@@ -40,7 +40,7 @@ export function ResourceCard({
 
   const theme = colors[accentColor] || colors.emerald;
   const Component = isExternal ? "a" : Link;
-  const linkProps = isExternal ? { target: "_blank" as const, rel: "noreferrer" } : {};
+  const linkProps = isExternal ? { target: "_blank" as const, rel: "noreferrer" } : { locale };
 
   return (
     <div 
