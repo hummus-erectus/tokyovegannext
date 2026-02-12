@@ -303,7 +303,7 @@ export default async function HomePage() {
       </section> */}
 
       {/* Blog Section */}
-      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4 overflow-hidden" id="blog">
+      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4 overflow-x-clip" id="blog">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
