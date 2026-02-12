@@ -4,6 +4,8 @@ import { BlogPostCard } from '@/components/BlogPostCard'
 import { PaperButton } from '@/components/PaperButton'
 import { getTranslations } from 'next-intl/server'
 
+export const revalidate = 3600
+
 const POSTS_QUERY = `*[_type == "post" && language == $language && defined(slug.current) && publishedAt < now()] | order(publishedAt desc) {
   _id,
   title,

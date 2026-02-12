@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
+export const revalidate = 3600
+
 const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $language][0] {
   _id,
   title,
@@ -39,6 +41,7 @@ function buildPtComponents(): PortableTextComponents {
                 alt={value.alt || ''}
                 width={800}
                 height={500}
+                sizes="(max-width: 768px) 100vw, 700px"
                 className="max-w-full h-auto block"
               />
             </div>
@@ -178,6 +181,7 @@ export default async function BlogPostPage({ params }: Props) {
                     alt={post.mainImage?.alt || post.title}
                     width={1200}
                     height={600}
+                    sizes="(max-width: 768px) 100vw, 700px"
                     className="w-full h-auto block"
                   />
                 </div>
