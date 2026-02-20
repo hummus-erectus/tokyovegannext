@@ -190,7 +190,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Body */}
             {post.body && (
-              <div className="prose-custom">
+              <div className="prose-custom" style={{ overflowWrap: 'break-word' }}>
                 <PortableText value={post.body} components={buildPtComponents()} />
               </div>
             )}
