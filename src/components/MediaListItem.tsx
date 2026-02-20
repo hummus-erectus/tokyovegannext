@@ -58,8 +58,8 @@ function IndexCard({title, reverse, meta, children, action}: IndexCardProps) {
       }}
     >
       {/* Tape decorations */}
-      <div className="pointer-events-none absolute right-2 top-2 z-20 h-7 w-28 origin-center translate-x-1/3 -translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
-      <div className="pointer-events-none absolute bottom-2 left-2 z-20 h-7 w-28 origin-center -translate-x-1/3 translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
+      <div className="pointer-events-none absolute right-2 top-2 z-20 h-7 w-28 origin-center rotate-40 rounded-sm bg-amber-200/70 shadow-sm overflow-hidden" />
+      <div className="pointer-events-none absolute bottom-2 left-2 z-20 h-7 w-28 origin-center rotate-40 rounded-sm bg-amber-200/70 shadow-sm overflow-hidden" />
 
       <div
         className="relative overflow-hidden bg-white shadow-md font-mono"

@@ -1,4 +1,4 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
 import {notFound} from "next/navigation";
@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   description: "Connecting and supporting the Tokyo vegan community",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{locale: string}>;
@@ -53,9 +58,9 @@ export default async function LocaleLayout({children, params}: Props) {
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} ${amatic.variable} ${yomogi.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col text-slate-900">
+          <div className="flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
             <Header />
-            <main className="flex-1">
+            <main className="flex-1 w-full relative">
               {children}
             </main>
             <Footer />

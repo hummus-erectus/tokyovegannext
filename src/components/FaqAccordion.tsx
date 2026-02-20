@@ -50,11 +50,11 @@ function FaqCard({
         }`}
       >
         <div
-          className="bg-paper-texture border border-slate-200/60 px-5 py-5 shadow-lg shadow-slate-300/40"
+          className="bg-paper-texture border border-slate-200/60 px-5 py-5 shadow-lg shadow-slate-300/40 overflow-hidden"
           style={slipStyle}
         >
           <div className="h-px w-full border-t border-dashed border-emerald-200/70" />
-          <p className="mt-4 text-slate-600 leading-relaxed">{answer}</p>
+          <p className="mt-4 text-slate-600 leading-relaxed overflow-wrap-break-word">{answer}</p>
         </div>
       </div>
     </div>

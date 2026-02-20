@@ -23,7 +23,8 @@
 }
 
 html {
-  scrollbar-gutter: stable;
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 body {
@@ -33,6 +34,8 @@ body {
   background-size: 1024px 1024px;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Custom Utilities */
@@ -78,6 +81,7 @@ html[lang="en"] .font-hand {
 /* Custom headroom wrapper - ensure ripped edge is visible */
 .headroom-wrapper {
   overflow: visible !important;
+  max-width: 100%;
 }
 
 /* Realistic Paper Texture for Cards */
