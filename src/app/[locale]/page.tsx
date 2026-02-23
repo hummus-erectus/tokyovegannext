@@ -74,15 +74,29 @@ export default async function HomePage() {
                 </PaperButton>
               </div>
 
-              <div className="flex flex-wrap gap-12 pt-2 justify-center lg:justify-start">
-                {entries.map(([key, value]) => (
-                  <div key={key}>
-                    <p className="font-hand text-4xl font-bold text-emerald-600">{value.value}</p>
-                    <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                      {value.label}
-                    </p>
-                  </div>
-                ))}
+              <div className="flex flex-nowrap items-center justify-center lg:justify-start gap-2 sm:gap-4 lg:gap-6 pt-4 w-full max-w-lg">
+                {entries.map(([key, value]) => {
+                  const imageKeyMap: Record<string, string> = {
+                    founded: "founded",
+                    members: "members",
+                    events: "hosted"
+                  };
+                  const imageKey = imageKeyMap[key] || key;
+                  const langSuffix = isJapanese ? "_jp" : "_en";
+                  const imagePath = `/images/${imageKey}${langSuffix}.webp`;
+
+                  return (
+                    <div key={key} className="relative flex-1 min-w-0 max-w-[120px] sm:max-w-[100px] lg:max-w-[110px]">
+                      <Image
+                        src={imagePath}
+                        alt={`${value.label}: ${value.value}`}
+                        width={200}
+                        height={200}
+                        className="w-full h-auto object-contain drop-shadow-sm"
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
