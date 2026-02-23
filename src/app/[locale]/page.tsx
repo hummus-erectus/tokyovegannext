@@ -123,9 +123,6 @@ export default async function HomePage() {
                   </div>
                </div>
 
-               {/* Decorative elements */}
-               <div className="absolute left-0 top-1/2 -z-10 h-64 w-64 -translate-y-1/2 -translate-x-1/2 rounded-full bg-emerald-100/50 blur-3xl overflow-hidden" />
-               <div className="absolute right-0 bottom-0 -z-10 h-64 w-64 translate-x-1/2 rounded-full bg-yellow-100/50 blur-3xl overflow-hidden" />
             </div>
           </div>
         </div>
