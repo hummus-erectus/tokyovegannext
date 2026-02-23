@@ -82,8 +82,7 @@ export default async function HomePage() {
                     events: "hosted"
                   };
                   const imageKey = imageKeyMap[key] || key;
-                  // Temporary fallback to _en for ja until ja images are ready
-                  const langSuffix = isJapanese ? "_en" : "_en";
+                  const langSuffix = isJapanese ? "_jp" : "_en";
                   const imagePath = `/images/${imageKey}${langSuffix}.webp`;
 
                   return (
