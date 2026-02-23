@@ -86,7 +86,7 @@ export default async function HomePage() {
                   const imagePath = `/images/${imageKey}${langSuffix}.webp`;
 
                   return (
-                    <div key={key} className="relative flex-1 min-w-0 max-w-[80px] sm:max-w-[100px] lg:max-w-[110px]">
+                    <div key={key} className="relative flex-1 min-w-0 max-w-[120px] sm:max-w-[100px] lg:max-w-[110px]">
                       <Image
                         src={imagePath}
                         alt={`${value.label}: ${value.value}`}
