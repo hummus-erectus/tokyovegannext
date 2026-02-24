@@ -51,6 +51,25 @@ html[lang="en"] .font-hand {
   font-family: var(--font-amatic), cursive;
 }
 
+/* Hand-drawn underline effect */
+.underline-hand {
+  text-decoration: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0,5 Q20,3 40,6 T80,4 T100,5' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 6px;
+  padding-bottom: 2px;
+  transition: background-size 0.3s ease-out;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.group:hover .group-hover\:underline-hand,
+.underline-hand:hover,
+.underline-hand-active {
+  background-size: 100% 6px;
+}
+
 .header-ripped {
   position: relative;
   --header-ripped-mobile-offset: 56px;
@@ -71,6 +90,105 @@ html[lang="en"] .font-hand {
   transform: translateY(0);
   opacity: 1;
   transition: transform 250ms ease, opacity 250ms ease;
+  z-index: 10;
+}
+
+.header-ripped-bottom {
+  position: relative;
+}
+
+.header-ripped-bottom::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url("/vectors/header-rip.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 800px auto;
+  pointer-events: none;
+  transform: rotate(180deg);
+  z-index: 10;
+}
+
+/* Masked Torn Paper - Seamless Texture Variant */
+
+/* Wrapper that applies the drop-shadow around the whole torn paper shape */
+.paper-torn-shadow {
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.18)) drop-shadow(0 -4px 8px rgba(15, 23, 42, 0.12));
+  position: relative;
+  z-index: 10;
+}
+
+.paper-texture-seamless {
+  background-color: #FFFFFF;
+  background-image: url("/images/exclusive-paper.png");
+  background-repeat: repeat;
+  background-size: 500px auto; /* Adjust based on image scale */
+  background-attachment: fixed;
+}
+
+.header-ripped-mask {
+  position: relative;
+}
+
+/* Recreate the drop shadow that we removed from the SVG */
+.header-ripped-mask::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  /* Use the same background as the main container for seamless look */
+  background-color: #FFFFFF;
+  background-image: url("/images/exclusive-paper.png");
+  background-repeat: repeat;
+  background-size: 500px auto;
+  background-attachment: fixed;
+  /* The magic: mask out the shape of the torn edge */
+  -webkit-mask-image: url("/vectors/header-rip-mask.svg");
+  mask-image: url("/vectors/header-rip-mask.svg");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-position: 0 calc(100% - 20px);
+  mask-position: 0 calc(100% - 20px);
+  -webkit-mask-size: 800px auto;
+  mask-size: 800px auto;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.header-ripped-bottom-mask {
+  position: relative;
+}
+
+.header-ripped-bottom-mask::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  /* Use the same background as the main container for seamless look */
+  background-color: #FFFFFF;
+  background-image: url("/images/exclusive-paper.png");
+  background-repeat: repeat;
+  background-size: 500px auto;
+  background-attachment: fixed;
+  /* Use pre-flipped SVG — no CSS transform needed, so background-attachment: fixed works */
+  -webkit-mask-image: url("/vectors/header-rip-mask-flipped.svg");
+  mask-image: url("/vectors/header-rip-mask-flipped.svg");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-position: 0 20px;
+  mask-position: 0 20px;
+  -webkit-mask-size: 800px auto;
+  mask-size: 800px auto;
+  pointer-events: none;
+  z-index: 10;
 }
 
 .header-ripped--mobile-open::after {
@@ -132,7 +250,7 @@ html[lang="en"] .font-hand {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Photo slit effect — clip corners + codepen shadow */
+/* Photo slit effect — clip corners + shadow */
 .photo-slit {
   position: relative;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.18));
@@ -157,7 +275,7 @@ html[lang="en"] .font-hand {
   position: absolute;
   border: var(--clip, 35px) solid transparent;
   border-top: var(--clip, 35px) solid transparent;
-  border-left-width: calc(var(--clip, 35px) + 10px);
+  border-left-width: calc(var(--clip, 35px) * 1.29);
   top: calc(var(--clip, 35px) * -1.23);
   left: calc(var(--clip, 35px) * -1.33);
   box-shadow: 0px -7px 6px -9px black;
@@ -172,7 +290,7 @@ html[lang="en"] .font-hand {
   position: absolute;
   border: var(--clip, 35px) solid transparent;
   border-bottom: var(--clip, 35px) solid transparent;
-  border-right-width: calc(var(--clip, 35px) + 10px);
+  border-right-width: calc(var(--clip, 35px) * 1.29);
   bottom: calc(var(--clip, 35px) * -1.23);
   right: calc(var(--clip, 35px) * -1.33);
   box-shadow: 0px 7px 6px -9px black;

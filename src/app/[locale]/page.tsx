@@ -32,7 +32,6 @@ export default async function HomePage() {
   const nextEvent = await getNextMeetupEvent();
 
   const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
-  const rotations = ['rotate-1', '-rotate-1', 'rotate-2'] as const;
 
   return (
     <div className="flex flex-col gap-24 pb-24 text-slate-900">
@@ -314,7 +313,9 @@ export default async function HomePage() {
       </section> */}
 
       {/* Blog Section */}
-      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4 overflow-x-clip" id="blog">
+      <div className="paper-torn-shadow">
+      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-8 pb-16 relative" id="blog">
+        <div className="mx-auto w-full max-w-6xl space-y-12 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
@@ -322,9 +323,9 @@ export default async function HomePage() {
             <Link
               href="/blog"
               locale={locale}
-              className="font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
+              className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
             >
-              {t("sections.blog.cta")} →
+              <span className="underline-hand group-hover:underline-hand whitespace-nowrap">{t("sections.blog.cta")}</span>
             </Link>
           </div>
           {latestPosts.length > 0 ? (
@@ -338,12 +339,11 @@ export default async function HomePage() {
                 publishedAt?: string
                 authorName?: string
               }, idx: number) => {
-                const rotation = rotations[idx % rotations.length]
                 const imageUrl = post.mainImage
                   ? urlFor(post.mainImage).width(600).height(400).url()
                   : undefined
                 return (
-                  <div key={post._id} className={`relative ${rotation} washi-tape-top${idx === 3 ? ' lg:hidden' : ''}`}>
+                  <div key={post._id} className={idx === 3 ? 'lg:hidden' : ''}>
                     <HomeBlogCard
                       title={post.title}
                       excerpt={post.excerpt || ''}
@@ -363,7 +363,9 @@ export default async function HomePage() {
               {locale === 'ja' ? 'まだ記事がありません' : 'No posts yet — check back soon!'}
             </p>
           )}
+        </div>
       </section>
+      </div>
 
       {/* Instagram Section */}
       <section className="mx-auto w-full max-w-6xl px-4 pb-4">
