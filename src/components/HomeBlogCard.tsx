@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { RoughHighlight } from './RoughHighlight'
 
 interface HomeBlogCardProps {
   title: string
@@ -24,6 +26,8 @@ export function HomeBlogCard({
   publishedAt,
   authorName,
 }: HomeBlogCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+
   const formattedDate = publishedAt
     ? new Date(publishedAt).toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
         year: 'numeric',
@@ -36,6 +40,8 @@ export function HomeBlogCard({
     <Link
       href={`/${locale}/blog/${slug}`}
       className="group flex h-full flex-col text-slate-900 transition-all duration-500"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {imageUrl && (
         <div className="mb-6">
@@ -54,7 +60,15 @@ export function HomeBlogCard({
 
       <div className="flex flex-1 flex-col px-2">
         <h3 className="font-hand text-2xl sm:text-3xl font-bold text-slate-900">
-          <span className="underline-hand group-hover:underline-hand">{title}</span>
+          <RoughHighlight
+            type="highlight"
+            multiline={true}
+            color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
+            className="group-hover:[&>span]:text-slate-900!" // prevent link color change if any
+            show={isHovered}
+          >
+            <span>{title}</span>
+          </RoughHighlight>
         </h3>
 
         {(formattedDate || authorName) && (
@@ -76,4 +90,5 @@ export function HomeBlogCard({
     </Link>
   )
 }
+
 

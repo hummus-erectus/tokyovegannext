@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePaperLift } from '@/hooks/usePaperLift'
+import { RoughHighlight } from './RoughHighlight'
 
 interface BlogPostCardProps {
   title: string
@@ -39,7 +40,7 @@ export function BlogPostCard({
     <div className="h-full" {...containerProps}>
       <Link
         href={`/${locale}/blog/${slug}`}
-        className={`flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? 'card-is-active' : ''}`}
+        className={`group flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? 'card-is-active' : ''}`}
         style={cardStyle}
       >
         {imageUrl && (
@@ -55,7 +56,17 @@ export function BlogPostCard({
         )}
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-xl font-semibold text-slate-900">{title}</h3>
+          <h3 className="text-xl font-semibold text-slate-900">
+            <RoughHighlight
+              type="highlight"
+              multiline={true}
+              color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
+              className="group-hover:[&>span]:text-slate-900!" // prevent link color change
+              show={isActive} // Sync with the paper lift hover state
+            >
+              <span>{title}</span>
+            </RoughHighlight>
+          </h3>
 
           {(formattedDate || authorName) && (
             <p className="mt-1 text-xs text-slate-500">
