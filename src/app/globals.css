@@ -124,7 +124,7 @@ html[lang="en"] .font-hand {
 
 .paper-texture-seamless {
   background-color: #FFFFFF;
-  background-image: url("/images/exclusive-paper.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/images/exclusive-paper.png");
   background-repeat: repeat;
   background-size: 500px auto; /* Adjust based on image scale */
   background-attachment: fixed;
@@ -144,7 +144,7 @@ html[lang="en"] .font-hand {
   height: 40px;
   /* Use the same background as the main container for seamless look */
   background-color: #FFFFFF;
-  background-image: url("/images/exclusive-paper.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/images/exclusive-paper.png");
   background-repeat: repeat;
   background-size: 500px auto;
   background-attachment: fixed;
@@ -174,7 +174,7 @@ html[lang="en"] .font-hand {
   height: 40px;
   /* Use the same background as the main container for seamless look */
   background-color: #FFFFFF;
-  background-image: url("/images/exclusive-paper.png");
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/images/exclusive-paper.png");
   background-repeat: repeat;
   background-size: 500px auto;
   background-attachment: fixed;
