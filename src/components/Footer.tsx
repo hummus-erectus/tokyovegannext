@@ -16,7 +16,7 @@ export default function Footer() {
   const [hoverRes, setHoverRes] = useState(false);
 
   return (
-    <footer className="relative z-10 mt-16 bg-emerald-50/90 px-4 pb-8 pt-10 text-emerald-900 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-sm">
+    <footer className="relative z-10 mt-8 bg-emerald-50/90 px-4 pb-8 pt-10 text-emerald-900 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-sm">
       {/* Perforated edge effect */}
       <div className="absolute left-0 right-0 top-[-4px] border-t-8 border-dotted border-emerald-300/60" />
 

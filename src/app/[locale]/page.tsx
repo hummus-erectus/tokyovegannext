@@ -35,9 +35,9 @@ export default async function HomePage() {
   const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
 
   return (
-    <div className="flex flex-col gap-24 pb-24 text-slate-900">
+    <div className="flex flex-col gap-12 md:gap-16 lg:gap-20 text-slate-900">
       {/* Hero Section */}
-      <section className="relative overflow-visible pt-10 pb-4 lg:pt-12 lg:pb-8">
+      <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
@@ -100,7 +100,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative mt-12 max-w-md mx-auto lg:max-w-none lg:mx-0 lg:mt-0">
+            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
                <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
@@ -132,15 +132,21 @@ export default async function HomePage() {
 
       {/* Community Board Section (Next Event + Activities) */}
       <section id="activities" className="mx-auto w-full max-w-6xl px-4">
-         <div className="mb-12 text-center">
+         <div className="mb-4 text-center">
             <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
                {t("sections.activities.title")}
             </h2>
          </div>
+         
+         <h3 className="mb-12 font-hand text-3xl font-bold text-slate-900 group w-full text-center hidden lg:block xl:hidden">
+            <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
+               <span>{t("sections.activities.description")}</span>
+            </RoughHighlight>
+         </h3>
 
-         <div className="grid gap-16 lg:grid-cols-12 lg:items-center">
+         <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
             {/* Left Column: Next Event Flyer */}
-            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0">
+            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 mt-4 lg:mt-0">
                <div className="flex flex-col items-center max-w-sm mx-auto lg:max-w-none">
                   <h3 className="mb-8 font-hand text-4xl font-bold text-slate-900">
                     {t("meetup.nextEvent")}
@@ -167,7 +173,7 @@ export default async function HomePage() {
             </div>
 
             {/* Right Column: Post-it Notes */}
-            <div className="lg:col-span-7 xl:col-span-8">
+            <div className="lg:col-span-7 xl:col-span-8 mt-8 lg:mt-0">
               <div className="flex flex-col items-center lg:items-start">
                  <svg width="0" height="0" className="absolute">
                    <defs>
@@ -176,7 +182,7 @@ export default async function HomePage() {
                      </clipPath>
                    </defs>
                  </svg>
-                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4 group w-full text-center lg:text-left">
+                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4 group w-full text-center lg:hidden xl:block xl:text-left">
                   <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
                     <span>{t("sections.activities.description")}</span>
                   </RoughHighlight>
@@ -325,8 +331,8 @@ export default async function HomePage() {
 
       {/* Blog Section */}
       <div className="paper-torn-shadow">
-      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-8 pb-16 relative" id="blog">
-        <div className="mx-auto w-full max-w-6xl space-y-12 px-4 overflow-x-clip">
+      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative" id="blog">
+        <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
@@ -381,7 +387,7 @@ export default async function HomePage() {
       </div>
 
       {/* Instagram Section */}
-      <section className="mx-auto w-full max-w-6xl px-4 pb-4">
+      <section className="mx-auto w-full max-w-6xl px-4">
         <InstagramFeed />
       </section>
 
