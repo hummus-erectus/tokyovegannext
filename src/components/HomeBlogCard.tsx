@@ -84,7 +84,9 @@ export function HomeBlogCard({
         </p>
 
         <span className="mt-4 font-hand text-xl font-bold text-emerald-700 transition-colors group-hover:text-emerald-500">
-          {locale === 'ja' ? '続きを読む →' : 'Read more →'}
+          <RoughHighlight type="underline" color="#10b981" strokeWidth={2} hover={true} show={isHovered}>
+            <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
+          </RoughHighlight>
         </span>
       </div>
     </Link>

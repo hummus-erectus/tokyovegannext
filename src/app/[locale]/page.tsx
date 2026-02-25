@@ -5,6 +5,7 @@ import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
+import { RoughHighlight } from '@/components/RoughHighlight';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
@@ -325,7 +326,9 @@ export default async function HomePage() {
               locale={locale}
               className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
             >
-              <span className="underline-hand group-hover:underline-hand whitespace-nowrap">{t("sections.blog.cta")}</span>
+              <RoughHighlight type="underline" color="#10b981" strokeWidth={3} hover={true}>
+                <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
+              </RoughHighlight>
             </Link>
           </div>
           {latestPosts.length > 0 ? (

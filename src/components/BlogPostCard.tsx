@@ -79,7 +79,9 @@ export function BlogPostCard({
           <p className="mt-3 flex-1 text-sm text-slate-600 line-clamp-3">{excerpt}</p>
 
           <span className="mt-4 text-sm font-semibold text-emerald-700">
-            {locale === 'ja' ? '続きを読む →' : 'Read more →'}
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isActive}>
+              <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
+            </RoughHighlight>
           </span>
         </div>
       </Link>
