@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePaperLift } from '@/hooks/usePaperLift'
+import { RoughHighlight } from './RoughHighlight'
 
 interface HomeBlogCardProps {
   title: string
@@ -25,7 +26,7 @@ export function HomeBlogCard({
   publishedAt,
   authorName,
 }: HomeBlogCardProps) {
-  const { isActive, containerProps, cardStyle } = usePaperLift()
+  const [isHovered, setIsHovered] = useState(false)
 
   const formattedDate = publishedAt
     ? new Date(publishedAt).toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
@@ -36,42 +37,61 @@ export function HomeBlogCard({
     : null
 
   return (
-    <div className="h-full" {...containerProps}>
-      <Link
-        href={`/${locale}/blog/${slug}`}
-        className={`flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? 'card-is-active' : ''}`}
-        style={cardStyle}
-      >
-        {imageUrl && (
-          <div className="relative h-32 sm:h-40 md:h-48 w-full overflow-hidden bg-slate-100">
+    <Link
+      href={`/${locale}/blog/${slug}`}
+      className="group flex h-full flex-col text-slate-900 transition-all duration-500"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {imageUrl && (
+        <div className="mb-6">
+          <div className="relative photo-slit" style={{ '--clip': '30px' } as React.CSSProperties}>
             <Image
               src={imageUrl}
               alt={imageAlt || title}
-              fill
+              width={600}
+              height={450}
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full aspect-4/3 object-cover transition-all duration-500 group-hover:grayscale"
             />
           </div>
+        </div>
+      )}
+
+      <div className="flex flex-1 flex-col px-2">
+        <h3 className="font-hand text-2xl sm:text-3xl font-bold text-slate-900">
+          <RoughHighlight
+            type="highlight"
+            multiline={true}
+            color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
+            className="group-hover:[&>span]:text-slate-900!" // prevent link color change if any
+            trigger="hover"
+            show={isHovered}
+          >
+            <span>{title}</span>
+          </RoughHighlight>
+        </h3>
+
+        {(formattedDate || authorName) && (
+          <p className="mt-2 font-hand text-lg text-slate-600 font-bold">
+            {formattedDate}
+            {formattedDate && authorName && ' · '}
+            {authorName}
+          </p>
         )}
 
-        <div className="flex flex-1 flex-col p-4 sm:p-6">
-          <h3 className="text-lg sm:text-xl font-semibold text-slate-900">{title}</h3>
+        <p className="mt-3 flex-1 text-base text-slate-700 line-clamp-3 leading-relaxed">
+          {excerpt}
+        </p>
 
-          {(formattedDate || authorName) && (
-            <p className="mt-1 text-xs text-slate-500">
-              {formattedDate}
-              {formattedDate && authorName && ' · '}
-              {authorName}
-            </p>
-          )}
-
-          <p className="mt-3 flex-1 text-sm text-slate-600 line-clamp-3">{excerpt}</p>
-
-          <span className="mt-4 text-sm font-semibold text-emerald-700">
-            {locale === 'ja' ? '続きを読む →' : 'Read more →'}
-          </span>
-        </div>
-      </Link>
-    </div>
+        <span className="mt-4 font-hand text-xl font-bold text-emerald-700 transition-colors group-hover:text-emerald-500">
+          <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={isHovered}>
+            <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
+          </RoughHighlight>
+        </span>
+      </div>
+    </Link>
   )
 }
+
+

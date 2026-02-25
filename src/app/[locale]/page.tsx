@@ -5,6 +5,7 @@ import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
+import { RoughHighlight } from '@/components/RoughHighlight';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
@@ -32,12 +33,11 @@ export default async function HomePage() {
   const nextEvent = await getNextMeetupEvent();
 
   const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
-  const rotations = ['rotate-1', '-rotate-1', 'rotate-2'] as const;
 
   return (
-    <div className="flex flex-col gap-24 pb-24 text-slate-900">
+    <div className="flex flex-col gap-12 md:gap-16 lg:gap-20 text-slate-900">
       {/* Hero Section */}
-      <section className="relative overflow-visible pt-10 pb-4 lg:pt-12 lg:pb-8">
+      <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
@@ -100,7 +100,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative mt-12 max-w-md mx-auto lg:max-w-none lg:mx-0 lg:mt-0">
+            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
                <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
@@ -116,16 +116,15 @@ export default async function HomePage() {
                       />
                     </div>
                     <div className="mt-4 px-3 text-center -rotate-1">
-                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900">
-                        &ldquo;{t("hero.communityBlurb")}&rdquo;
+                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
+                        <RoughHighlight type="highlight" multiline={true} color="rgba(167, 243, 208, 0.4)" trigger="hover">
+                          <span>&ldquo;{t("hero.communityBlurb")}&rdquo;</span>
+                        </RoughHighlight>
                       </p>
                     </div>
                   </div>
                </div>
 
-               {/* Decorative elements */}
-               <div className="absolute left-0 top-1/2 -z-10 h-64 w-64 -translate-y-1/2 -translate-x-1/2 rounded-full bg-emerald-100/50 blur-3xl overflow-hidden" />
-               <div className="absolute right-0 bottom-0 -z-10 h-64 w-64 translate-x-1/2 rounded-full bg-yellow-100/50 blur-3xl overflow-hidden" />
             </div>
           </div>
         </div>
@@ -133,15 +132,21 @@ export default async function HomePage() {
 
       {/* Community Board Section (Next Event + Activities) */}
       <section id="activities" className="mx-auto w-full max-w-6xl px-4">
-         <div className="mb-12 text-center">
+         <div className="mb-4 text-center">
             <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
                {t("sections.activities.title")}
             </h2>
          </div>
+         
+         <h3 className="mb-12 font-hand text-3xl font-bold text-slate-900 group w-full text-center hidden lg:block xl:hidden">
+            <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
+               <span>{t("sections.activities.description")}</span>
+            </RoughHighlight>
+         </h3>
 
-         <div className="grid gap-16 lg:grid-cols-12 lg:items-center">
+         <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
             {/* Left Column: Next Event Flyer */}
-            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0">
+            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 mt-4 lg:mt-0">
                <div className="flex flex-col items-center max-w-sm mx-auto lg:max-w-none">
                   <h3 className="mb-8 font-hand text-4xl font-bold text-slate-900">
                     {t("meetup.nextEvent")}
@@ -157,14 +162,18 @@ export default async function HomePage() {
                   ) : (
                     <div className="flex aspect-3/4 w-full max-w-sm flex-col items-center justify-center rounded-sm bg-slate-100 p-8 text-center shadow-inner">
                        <p className="font-hand text-2xl text-slate-500">No upcoming events scheduled</p>
-                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600 hover:underline">Check Meetup Page →</a>
+                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600">
+                         <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+                           <span>Check Meetup Page →</span>
+                         </RoughHighlight>
+                       </a>
                     </div>
                   )}
                </div>
             </div>
 
             {/* Right Column: Post-it Notes */}
-            <div className="lg:col-span-7 xl:col-span-8">
+            <div className="lg:col-span-7 xl:col-span-8 mt-8 lg:mt-0">
               <div className="flex flex-col items-center lg:items-start">
                  <svg width="0" height="0" className="absolute">
                    <defs>
@@ -173,8 +182,10 @@ export default async function HomePage() {
                      </clipPath>
                    </defs>
                  </svg>
-                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4">
-                  {t("sections.activities.description")}
+                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4 group w-full text-center lg:hidden xl:block xl:text-left">
+                  <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
+                    <span>{t("sections.activities.description")}</span>
+                  </RoughHighlight>
                 </h3>
                 <div className="mt-2 md:mt-10 grid w-full gap-8 sm:gap-12 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 px-6 sm:px-8 md:px-4">
                    {activityCardKeys.map((key) => {
@@ -254,8 +265,10 @@ export default async function HomePage() {
                                           <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
                                              {t(`sections.activities.cards.${key}.stickyLabel`)}
                                           </p>
-                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none">
-                                             Go &rarr;
+                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none group-hover:text-slate-900 transition-colors">
+                                            <RoughHighlight type="underline" color="rgba(15, 23, 42, 0.4)" strokeWidth={1.5} trigger="hover">
+                                               <span>Go &rarr;</span>
+                                            </RoughHighlight>
                                           </p>
                                        </div>
                                     </div>
@@ -317,7 +330,9 @@ export default async function HomePage() {
       </section> */}
 
       {/* Blog Section */}
-      <section className="mx-auto w-full max-w-6xl space-y-12 px-4 pb-4 overflow-x-clip" id="blog">
+      <div className="paper-torn-shadow">
+      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative" id="blog">
+        <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
@@ -325,9 +340,11 @@ export default async function HomePage() {
             <Link
               href="/blog"
               locale={locale}
-              className="font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
+              className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
             >
-              {t("sections.blog.cta")} →
+              <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
+                <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
+              </RoughHighlight>
             </Link>
           </div>
           {latestPosts.length > 0 ? (
@@ -341,12 +358,11 @@ export default async function HomePage() {
                 publishedAt?: string
                 authorName?: string
               }, idx: number) => {
-                const rotation = rotations[idx % rotations.length]
                 const imageUrl = post.mainImage
                   ? urlFor(post.mainImage).width(600).height(400).url()
                   : undefined
                 return (
-                  <div key={post._id} className={`relative ${rotation} washi-tape-top${idx === 3 ? ' lg:hidden' : ''}`}>
+                  <div key={post._id} className={idx === 3 ? 'lg:hidden' : ''}>
                     <HomeBlogCard
                       title={post.title}
                       excerpt={post.excerpt || ''}
@@ -366,10 +382,12 @@ export default async function HomePage() {
               {locale === 'ja' ? 'まだ記事がありません' : 'No posts yet — check back soon!'}
             </p>
           )}
+        </div>
       </section>
+      </div>
 
       {/* Instagram Section */}
-      <section className="mx-auto w-full max-w-6xl px-4 pb-4">
+      <section className="mx-auto w-full max-w-6xl px-4">
         <InstagramFeed />
       </section>
 
