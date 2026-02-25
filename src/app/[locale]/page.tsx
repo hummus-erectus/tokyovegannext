@@ -116,8 +116,10 @@ export default async function HomePage() {
                       />
                     </div>
                     <div className="mt-4 px-3 text-center -rotate-1">
-                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900">
-                        &ldquo;{t("hero.communityBlurb")}&rdquo;
+                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
+                        <RoughHighlight type="highlight" multiline={true} color="rgba(167, 243, 208, 0.4)" trigger="hover">
+                          <span>&ldquo;{t("hero.communityBlurb")}&rdquo;</span>
+                        </RoughHighlight>
                       </p>
                     </div>
                   </div>
@@ -154,7 +156,11 @@ export default async function HomePage() {
                   ) : (
                     <div className="flex aspect-3/4 w-full max-w-sm flex-col items-center justify-center rounded-sm bg-slate-100 p-8 text-center shadow-inner">
                        <p className="font-hand text-2xl text-slate-500">No upcoming events scheduled</p>
-                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600 hover:underline">Check Meetup Page →</a>
+                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600">
+                         <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+                           <span>Check Meetup Page →</span>
+                         </RoughHighlight>
+                       </a>
                     </div>
                   )}
                </div>
@@ -170,8 +176,10 @@ export default async function HomePage() {
                      </clipPath>
                    </defs>
                  </svg>
-                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4">
-                  {t("sections.activities.description")}
+                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4 group w-full text-center lg:text-left">
+                  <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
+                    <span>{t("sections.activities.description")}</span>
+                  </RoughHighlight>
                 </h3>
                 <div className="mt-2 md:mt-10 grid w-full gap-8 sm:gap-12 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 px-6 sm:px-8 md:px-4">
                    {activityCardKeys.map((key) => {
@@ -251,8 +259,10 @@ export default async function HomePage() {
                                           <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
                                              {t(`sections.activities.cards.${key}.stickyLabel`)}
                                           </p>
-                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none">
-                                             Go &rarr;
+                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none group-hover:text-slate-900 transition-colors">
+                                            <RoughHighlight type="underline" color="rgba(15, 23, 42, 0.4)" strokeWidth={1.5} trigger="hover">
+                                               <span>Go &rarr;</span>
+                                            </RoughHighlight>
                                           </p>
                                        </div>
                                     </div>
@@ -326,7 +336,7 @@ export default async function HomePage() {
               locale={locale}
               className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
             >
-              <RoughHighlight type="underline" color="#10b981" strokeWidth={3} hover={true}>
+              <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                 <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
               </RoughHighlight>
             </Link>

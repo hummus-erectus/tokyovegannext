@@ -65,6 +65,7 @@ export function HomeBlogCard({
             multiline={true}
             color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
             className="group-hover:[&>span]:text-slate-900!" // prevent link color change if any
+            trigger="hover"
             show={isHovered}
           >
             <span>{title}</span>
@@ -84,7 +85,7 @@ export function HomeBlogCard({
         </p>
 
         <span className="mt-4 font-hand text-xl font-bold text-emerald-700 transition-colors group-hover:text-emerald-500">
-          <RoughHighlight type="underline" color="#10b981" strokeWidth={2} hover={true} show={isHovered}>
+          <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={isHovered}>
             <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
           </RoughHighlight>
         </span>
