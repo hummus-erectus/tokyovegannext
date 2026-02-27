@@ -5,15 +5,11 @@ import {useHeadroom} from "@/hooks/useHeadroom";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 
-const navLinks = [
-  {key: "resources", href: "/resources", type: "internal"},
-  {key: "blog", href: "/blog", type: "internal"},
-  {
-    key: "events",
-    href: "https://www.tokyovegan.org/en/events",
-    type: "external"
-  }
-] as const;
+const navLinks: { key: "events" | "resources" | "blog"; href: string; type: "internal" | "external" }[] = [
+  {key: "events", href: "/#newsletter", type: "internal"},
+  {key: "resources", href: "/#activities", type: "internal"},
+  {key: "blog", href: "/#blog", type: "internal"}
+];
 
 type NavItemsProps = {
   direction?: "row" | "col";
@@ -40,7 +36,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
       }`}
     >
       {navLinks.map((link) =>
-        link.type === "external" ? (
+        "type" in link && link.type === "external" ? (
           <a
             key={link.key}
             href={link.href}
@@ -169,6 +165,13 @@ export default function Header() {
               href="/"
               locale={locale}
               className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
+              onClick={(e) => {
+                setOpen(false);
+                if (pathname === "/") {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
             >
               {t("brand")}
             </Link>

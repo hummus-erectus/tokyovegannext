@@ -14,8 +14,8 @@
     "hero": {
       "eyebrow": "Tokyo Vegan",
       "title": "Welcome to Tokyo Vegan!",
-      "description": "東京そして日本各地でプラントベースの暮らしを広げる、活気あふれるバイリンガルコミュニティの一員になりませんか。",
-      "primaryCta": "ミートアップに参加",
+      "description": "リソースを探し、バイリンガルのミートアップに参加して、日本各地でプラントベースの暮らしを広げる活気あるコミュニティの一員になりませんか。",
+      "primaryCta": "イベントに参加",
       "secondaryCta": "リソースを見る",
       "communityBlurb": "2006年から続く、ヴィーガンライフを楽しむ温かいコミュニティ。"
     },
@@ -39,6 +39,17 @@
     "contact": {
       "title": "お問い合わせ",
       "subtitle": "タブを引っ張って連絡しよう！"
+    },
+    "newsletter": {
+      "sectionTitle": "コミュニティに参加",
+      "title": "ミートアップを見逃さない！",
+      "description": "イベントのお知らせやコミュニティの最新情報をメールでお届けします。",
+      "emailPlaceholder": "your@email.com",
+      "submit": "登録する！",
+      "successTitle": "登録完了！",
+      "successMessage": "確認メールをご確認ください。",
+      "errorMessage": "エラーが発生しました。もう一度お試しください。",
+      "privacy": "プライバシーを尊重します。いつでも配信停止できます。"
     },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
