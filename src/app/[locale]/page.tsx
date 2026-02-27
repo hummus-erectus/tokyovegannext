@@ -8,7 +8,6 @@ import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
 import { RoughHighlight } from '@/components/RoughHighlight';
 import Image from "next/image";
-import Script from "next/script";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
 import {urlFor} from "@/sanity/image";
@@ -54,8 +53,9 @@ export default async function HomePage() {
 
               <div className="flex flex-wrap gap-4">
                 <PaperButton
-                  href="https://www.meetup.com/tokyovegan/"
-                  type="external"
+                  href="#newsletter"
+                  type="link"
+                  locale={locale}
                   variant="solid"
                   color="emerald"
                   size="lg"
@@ -64,7 +64,7 @@ export default async function HomePage() {
                   {t("hero.primaryCta")}
                 </PaperButton>
                 <PaperButton
-                  href="/resources"
+                  href="#activities"
                   type="link"
                   locale={locale}
                   variant="solid"
@@ -133,27 +133,21 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter + Next Event */}
-      <section className="mx-auto w-full max-w-6xl px-4">
-         <div className="grid gap-12 md:grid-cols-2 md:items-start">
-            {/* Newsletter — first on mobile for maximum visibility */}
-            <div className="px-4 sm:px-6 md:px-0">
-               <div className="flex flex-col items-center max-w-sm mx-auto md:max-w-none">
-                  <NewsletterSignup />
-               </div>
-            </div>
-
-            {/* Next Event */}
-            <div className="px-4 sm:px-6 md:px-0">
-               <div className="flex flex-col items-center max-w-sm mx-auto md:max-w-none">
-                  <h3 className="mb-8 font-hand text-4xl font-bold text-slate-900">
-                    {t("meetup.nextEvent")}
-                  </h3>
+      <section id="newsletter" className="mx-auto w-full max-w-5xl px-4 scroll-mt-24">
+         <div className="mb-10 text-center">
+            <h2 className="font-hand text-5xl sm:text-6xl font-bold text-emerald-800 -rotate-1">
+               {t("newsletter.sectionTitle")}
+            </h2>
+         </div>
+         <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
+            {/* Next Event — second on mobile, LEFT on desktop */}
+            <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
+               <div className="flex flex-col items-center mx-auto w-full">
                   {nextEvent ? (
                     <MeetupEventCard
                       title={nextEvent.title}
                       startDate={nextEvent.startDate}
                       endDate={nextEvent.endDate}
-                      imageUrl="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1000"
                       eventUrl={nextEvent.url}
                     />
                   ) : (
@@ -168,11 +162,18 @@ export default async function HomePage() {
                   )}
                </div>
             </div>
+
+            {/* Newsletter — first on mobile for visibility, RIGHT on desktop */}
+            <div className="order-1 md:order-2 px-4 sm:px-6 md:px-0">
+               <div className="flex flex-col items-center mx-auto w-full">
+                  <NewsletterSignup />
+               </div>
+            </div>
          </div>
       </section>
 
       {/* Activities Section (Polaroid cards) */}
-      <section id="activities" className="mx-auto w-full max-w-6xl px-4">
+      <section id="activities" className="mx-auto w-full max-w-6xl px-4 scroll-mt-24">
          <div className="mb-4 text-center">
             <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
                {t("sections.activities.title")}
@@ -335,7 +336,7 @@ export default async function HomePage() {
 
       {/* Blog Section */}
       <div className="paper-torn-shadow">
-      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative" id="blog">
+      <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative scroll-mt-24" id="blog">
         <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -405,8 +406,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SendFox form script */}
-      <Script src="https://cdn.sendfox.com/js/form.js" strategy="lazyOnload" />
     </div>
   );
 }

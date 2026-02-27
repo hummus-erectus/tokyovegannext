@@ -14,8 +14,8 @@
     "hero": {
       "eyebrow": "Tokyo Vegan",
       "title": "Welcome to Tokyo Vegan!",
-      "description": "Become part of the vibrant bilingual community empowering plant-based living throughout Tokyo and across Japan.",
-      "primaryCta": "Join a meetup",
+      "description": "Discover resources, join our bilingual meetups, and become part of a vibrant community empowering plant-based living across Japan.",
+      "primaryCta": "Join an event",
       "secondaryCta": "Explore resources",
       "communityBlurb": "A welcoming community celebrating vegan life since 2006."
     },
@@ -41,10 +41,14 @@
       "subtitle": "Tear off a tab and get in touch!"
     },
     "newsletter": {
-      "title": "Stay in the Loop!",
-      "description": "Get updates on events, activities, and vegan news in Tokyo straight to your inbox.",
+      "sectionTitle": "Join the Community",
+      "title": "Never Miss a Meetup!",
+      "description": "Get event announcements and community updates straight to your inbox.",
       "emailPlaceholder": "your@email.com",
-      "submit": "Sign me up!",
+      "submit": "Count me in!",
+      "successTitle": "You're in!",
+      "successMessage": "Check your inbox to confirm your subscription.",
+      "errorMessage": "Something went wrong. Please try again.",
       "privacy": "We respect your privacy. Unsubscribe anytime."
     },
     "stats": {
