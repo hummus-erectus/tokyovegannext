@@ -40,6 +40,13 @@
       "title": "Connect With Us",
       "subtitle": "Tear off a tab and get in touch!"
     },
+    "newsletter": {
+      "title": "Stay in the Loop!",
+      "description": "Get updates on events, activities, and vegan news in Tokyo straight to your inbox.",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Sign me up!",
+      "privacy": "We respect your privacy. Unsubscribe anytime."
+    },
     "stats": {
       "founded": {"value": "2006", "label": "Founded"},
       "members": {"value": "9,800+", "label": "Community members"},

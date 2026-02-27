@@ -1,12 +1,14 @@
 import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
 import {MeetupEventCard} from "@/components/MeetupEventCard";
+import {NewsletterSignup} from "@/components/NewsletterSignup";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
 import { RoughHighlight } from '@/components/RoughHighlight';
 import Image from "next/image";
+import Script from "next/script";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
 import {urlFor} from "@/sanity/image";
@@ -130,24 +132,19 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Community Board Section (Next Event + Activities) */}
-      <section id="activities" className="mx-auto w-full max-w-6xl px-4">
-         <div className="mb-4 text-center">
-            <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
-               {t("sections.activities.title")}
-            </h2>
-         </div>
-         
-         <h3 className="mb-12 font-hand text-3xl font-bold text-slate-900 group w-full text-center hidden lg:block xl:hidden">
-            <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
-               <span>{t("sections.activities.description")}</span>
-            </RoughHighlight>
-         </h3>
+      {/* Newsletter + Next Event */}
+      <section className="mx-auto w-full max-w-6xl px-4">
+         <div className="grid gap-12 md:grid-cols-2 md:items-start">
+            {/* Newsletter — first on mobile for maximum visibility */}
+            <div className="px-4 sm:px-6 md:px-0">
+               <div className="flex flex-col items-center max-w-sm mx-auto md:max-w-none">
+                  <NewsletterSignup />
+               </div>
+            </div>
 
-         <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
-            {/* Left Column: Next Event Flyer */}
-            <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 mt-4 lg:mt-0">
-               <div className="flex flex-col items-center max-w-sm mx-auto lg:max-w-none">
+            {/* Next Event */}
+            <div className="px-4 sm:px-6 md:px-0">
+               <div className="flex flex-col items-center max-w-sm mx-auto md:max-w-none">
                   <h3 className="mb-8 font-hand text-4xl font-bold text-slate-900">
                     {t("meetup.nextEvent")}
                   </h3>
@@ -171,127 +168,134 @@ export default async function HomePage() {
                   )}
                </div>
             </div>
+         </div>
+      </section>
 
-            {/* Right Column: Post-it Notes */}
-            <div className="lg:col-span-7 xl:col-span-8 mt-8 lg:mt-0">
-              <div className="flex flex-col items-center lg:items-start">
-                 <svg width="0" height="0" className="absolute">
-                   <defs>
-                     <clipPath id="stickyClip" clipPathUnits="objectBoundingBox">
-                       <path d="M 0 0 Q 0 0.69, 0.03 0.96 0.03 0.96, 1 0.96 Q 0.96 0.69, 0.96 0 0.96 0, 0 0" strokeLinejoin="round" strokeLinecap="square" />
-                     </clipPath>
-                   </defs>
-                 </svg>
-                 <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 pl-4 group w-full text-center lg:hidden xl:block xl:text-left">
-                  <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
-                    <span>{t("sections.activities.description")}</span>
-                  </RoughHighlight>
-                </h3>
-                <div className="mt-2 md:mt-10 grid w-full gap-8 sm:gap-12 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 px-6 sm:px-8 md:px-4">
-                   {activityCardKeys.map((key) => {
-                     const getCardHref = (k: typeof activityCardKeys[number]) => {
-                        if (k === "outreach") return "/about-vegan";
-                        if (k === "support") return "/resources";
-                        return "https://www.meetup.com/tokyovegan/";
-                     };
-                     const href = getCardHref(key);
-                     const isExternal = href.startsWith("http");
+      {/* Activities Section (Polaroid cards) */}
+      <section id="activities" className="mx-auto w-full max-w-6xl px-4">
+         <div className="mb-4 text-center">
+            <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
+               {t("sections.activities.title")}
+            </h2>
+         </div>
+         
+         <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 group w-full text-center">
+            <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
+               <span>{t("sections.activities.description")}</span>
+            </RoughHighlight>
+         </h3>
+
+         <div className="flex flex-col items-center">
+            <svg width="0" height="0" className="absolute">
+              <defs>
+                <clipPath id="stickyClip" clipPathUnits="objectBoundingBox">
+                  <path d="M 0 0 Q 0 0.69, 0.03 0.96 0.03 0.96, 1 0.96 Q 0.96 0.69, 0.96 0 0.96 0, 0 0" strokeLinejoin="round" strokeLinecap="square" />
+                </clipPath>
+              </defs>
+            </svg>
+            <div className="mt-2 md:mt-6 grid w-full gap-8 sm:gap-12 md:grid-cols-3 px-6 sm:px-8 md:px-4">
+               {activityCardKeys.map((key) => {
+                 const getCardHref = (k: typeof activityCardKeys[number]) => {
+                    if (k === "outreach") return "/about-vegan";
+                    if (k === "support") return "/resources";
+                    return "https://www.meetup.com/tokyovegan/";
+                 };
+                 const href = getCardHref(key);
+                 const isExternal = href.startsWith("http");
 
 
-                     const cardConfig = {
-                        outreach: {
-                           image: "/images/speaker.webp",
-                           color: "sticky-green",
-                           rotation: "rotate-3",
-                           marginTop: "mt-0 md:-mt-4 lg:mt-0",
-                           stickyPos: "-top-4 -right-1 sm:-top-6 sm:-right-2 md:-right-6",
-                           stickyRotation: "rotate-6"
-                        },
-                        support: {
-                           image: "/images/groceries.webp",
-                           color: "sticky-yellow",
-                           rotation: "-rotate-2",
-                           marginTop: "mt-0 md:mt-10 lg:mt-50 xl:mt-40",
-                           stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
-                           stickyRotation: "-rotate-8"
-                        },
-                        community: {
-                           image: "/images/picnics.webp",
-                           color: "sticky-cream",
-                           rotation: "-rotate-3",
-                           marginTop: "mt-0 md:mt-2 lg:-mt-42 xl:mt-10",
-                           stickyPos: "-top-3 -right-0 sm:-top-5 sm:-right-1 md:-right-4",
-                           stickyRotation: "-rotate-4"
-                        },
-                     };
+                 const cardConfig = {
+                    outreach: {
+                       image: "/images/speaker.webp",
+                       color: "sticky-green",
+                       rotation: "rotate-3",
+                       marginTop: "mt-0 md:-mt-4",
+                       stickyPos: "-top-4 -right-1 sm:-top-6 sm:-right-2 md:-right-6",
+                       stickyRotation: "rotate-6"
+                    },
+                    support: {
+                       image: "/images/groceries.webp",
+                       color: "sticky-yellow",
+                       rotation: "-rotate-2",
+                       marginTop: "mt-0 md:mt-10",
+                       stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
+                       stickyRotation: "-rotate-8"
+                    },
+                    community: {
+                       image: "/images/picnics.webp",
+                       color: "sticky-cream",
+                       rotation: "-rotate-3",
+                       marginTop: "mt-0 md:mt-2",
+                       stickyPos: "-top-3 -right-0 sm:-top-5 sm:-right-1 md:-right-4",
+                       stickyRotation: "-rotate-4"
+                    },
+                 };
 
-                     const config = cardConfig[key];
+                 const config = cardConfig[key];
 
-                     const titleClass = isJapanese
-                       ? "font-hand text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
-                       : "font-hand text-2xl sm:text-3xl font-bold text-slate-900";
+                 const titleClass = isJapanese
+                   ? "font-hand text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
+                   : "font-hand text-2xl sm:text-3xl font-bold text-slate-900";
 
-                     const content = (
-                        <div className={`relative group ${config.marginTop} ${config.rotation}`}>
-                           {/* Tape Element */}
-                           <div className="tape-section">
-                              <div className="tape-top-center" />
-                           </div>
+                 const content = (
+                    <div className={`relative group ${config.marginTop} ${config.rotation}`}>
+                       {/* Tape Element */}
+                       <div className="tape-section">
+                          <div className="tape-top-center" />
+                       </div>
 
-                           {/* Polaroid Card */}
-                           <div className="bg-white p-4 pb-8 shadow-xl shadow-slate-300/60">
-                             <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
-                                 <Image
-                                    src={config.image}
-                                    alt={t(`sections.activities.cards.${key}.title`)}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 280px, (max-width: 1024px) 33vw, 300px"
-                                 />
-                              </div>
-                             <div className="mt-4 text-center">
-                                 <h3 className={titleClass}>
-                                    {t(`sections.activities.cards.${key}.title`)}
-                                 </h3>
-                              </div>
-                           </div>
+                       {/* Polaroid Card */}
+                       <div className="bg-white p-4 pb-8 shadow-xl shadow-slate-300/60">
+                         <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+                             <Image
+                                src={config.image}
+                                alt={t(`sections.activities.cards.${key}.title`)}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 280px, (max-width: 1024px) 33vw, 300px"
+                             />
+                          </div>
+                         <div className="mt-4 text-center">
+                             <h3 className={titleClass}>
+                                {t(`sections.activities.cards.${key}.title`)}
+                             </h3>
+                          </div>
+                       </div>
 
-                           {/* Sticky Note Badge */}
-                           <div className={`absolute ${config.stickyPos} w-36 md:w-32 z-10 transition duration-300 hover:scale-110 hover:z-20`}>
-                              <div className={`sticky-container ${config.stickyRotation}`}>
-                                 <div className="sticky-outer">
-                                    <div className="sticky-wrapper">
-                                       <div className={`sticky-content ${config.color} p-3 text-center flex flex-col items-center justify-center shadow-lg min-h-[80px]`}>
-                                          <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
-                                             {t(`sections.activities.cards.${key}.stickyLabel`)}
-                                          </p>
-                                          <p className="font-hand text-base font-bold text-slate-800/80 leading-none group-hover:text-slate-900 transition-colors">
-                                            <RoughHighlight type="underline" color="rgba(15, 23, 42, 0.4)" strokeWidth={1.5} trigger="hover">
-                                               <span>Go &rarr;</span>
-                                            </RoughHighlight>
-                                          </p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     );
+                       {/* Sticky Note Badge */}
+                       <div className={`absolute ${config.stickyPos} w-36 md:w-32 z-10 transition duration-300 hover:scale-110 hover:z-20`}>
+                          <div className={`sticky-container ${config.stickyRotation}`}>
+                             <div className="sticky-outer">
+                                <div className="sticky-wrapper">
+                                   <div className={`sticky-content ${config.color} p-3 text-center flex flex-col items-center justify-center shadow-lg min-h-[80px]`}>
+                                      <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
+                                         {t(`sections.activities.cards.${key}.stickyLabel`)}
+                                      </p>
+                                      <p className="font-hand text-base font-bold text-slate-800/80 leading-none group-hover:text-slate-900 transition-colors">
+                                        <RoughHighlight type="underline" color="rgba(15, 23, 42, 0.4)" strokeWidth={1.5} trigger="hover">
+                                           <span>Go &rarr;</span>
+                                        </RoughHighlight>
+                                      </p>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 );
 
-                     const linkClass = "block w-full max-w-[280px] mx-auto md:max-w-[210px] lg:max-w-none";
+                 const linkClass = "block w-full max-w-[280px] mx-auto md:max-w-[210px] lg:max-w-none";
 
-                     return isExternal ? (
-                        <a key={key} href={href} target="_blank" rel="noreferrer" className={linkClass}>
-                           {content}
-                        </a>
-                     ) : (
-                        <Link key={key} href={href} locale={locale} className={linkClass}>
-                           {content}
-                        </Link>
-                     );
-                   })}
-                </div>
-              </div>
+                 return isExternal ? (
+                    <a key={key} href={href} target="_blank" rel="noreferrer" className={linkClass}>
+                       {content}
+                    </a>
+                 ) : (
+                    <Link key={key} href={href} locale={locale} className={linkClass}>
+                       {content}
+                    </Link>
+                 );
+               })}
             </div>
          </div>
       </section>
@@ -400,6 +404,9 @@ export default async function HomePage() {
           />
         </div>
       </section>
+
+      {/* SendFox form script */}
+      <Script src="https://cdn.sendfox.com/js/form.js" strategy="lazyOnload" />
     </div>
   );
 }

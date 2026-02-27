@@ -40,6 +40,13 @@
       "title": "お問い合わせ",
       "subtitle": "タブを引っ張って連絡しよう！"
     },
+    "newsletter": {
+      "title": "最新情報をお届け！",
+      "description": "イベントや活動、東京のヴィーガンニュースをメールでお届けします。",
+      "emailPlaceholder": "your@email.com",
+      "submit": "登録する",
+      "privacy": "プライバシーを尊重します。いつでも配信停止できます。"
+    },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
       "members": {"value": "9,800+", "label": "コミュニティメンバー"},
