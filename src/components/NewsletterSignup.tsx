@@ -7,26 +7,30 @@ export function NewsletterSignup() {
   const t = useTranslations("HomePage.newsletter");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMsg("");
 
     try {
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("a_password", ""); // honeypot
-
-      await fetch("https://sendfox.com/form/1d8w65/1goor6", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
-        body: formData,
-        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
 
-      // mode: no-cors means we can't read the response, but the request goes through
-      setStatus("success");
-      setEmail("");
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error ?? t("errorMessage"));
+        setStatus("error");
+      }
     } catch {
+      setErrorMsg(t("errorMessage"));
       setStatus("error");
     }
   }
@@ -73,12 +77,12 @@ export function NewsletterSignup() {
           <form onSubmit={handleSubmit}>
             <div className="space-y-3">
               <div>
-                <label htmlFor="sendfox_form_email" className="sr-only">
+                <label htmlFor="beehiiv_form_email" className="sr-only">
                   Email
                 </label>
                 <input
                   type="email"
-                  id="sendfox_form_email"
+                  id="beehiiv_form_email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t("emailPlaceholder")}
@@ -98,7 +102,7 @@ export function NewsletterSignup() {
 
             {status === "error" && (
               <p className="mt-2 text-center text-sm text-red-500">
-                {t("errorMessage")}
+                {errorMsg}
               </p>
             )}
 
