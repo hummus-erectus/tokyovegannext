@@ -65,7 +65,7 @@ export function HomeBlogCard({
             multiline={true}
             color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
             className="group-hover:[&>span]:text-slate-900!" // prevent link color change if any
-            trigger="hover"
+            trigger="none"
             show={isHovered}
           >
             <span>{title}</span>

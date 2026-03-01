@@ -4,6 +4,7 @@ import {Link, usePathname} from "@/i18n/routing";
 import {useHeadroom} from "@/hooks/useHeadroom";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {RoughHighlight} from "./RoughHighlight";
 
 const navLinks: { key: "events" | "resources" | "blog"; href: string; type: "internal" | "external" }[] = [
   {key: "events", href: "/#newsletter", type: "internal"},
@@ -49,7 +50,9 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             }`}
             onClick={onNavigate}
           >
-            {translate(`nav.${link.key}`)}
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+              <span className="relative z-10">{translate(`nav.${link.key}`)}</span>
+            </RoughHighlight>
           </a>
         ) : (
           <Link
@@ -61,7 +64,9 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             }`}
             onClick={onNavigate}
           >
-            {translate(`nav.${link.key}`)}
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+              <span className="relative z-10">{translate(`nav.${link.key}`)}</span>
+            </RoughHighlight>
           </Link>
         )
       )}
@@ -93,7 +98,9 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
             : "hidden text-lg font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
         }
       >
-        {translate(`languageToggle.${targetKey}`)}
+        <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+          <span className="relative z-10">{translate(`languageToggle.${targetKey}`)}</span>
+        </RoughHighlight>
       </Link>
     );
   }
@@ -107,7 +114,9 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
           : "text-center text-xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
       }
     >
-      {translate(`languageToggle.${targetKey}`)}
+      <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+        <span className="relative z-10">{translate(`languageToggle.${targetKey}`)}</span>
+      </RoughHighlight>
     </Link>
   );
 }
