@@ -45,9 +45,9 @@ export function RoughHighlight({
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Determine if we should show based on controlled prop or trigger state
-  const shouldShow = 
-    trigger === 'hover' ? isHovered : 
-    trigger === 'visible' ? isVisible : 
+  const shouldShow =
+    trigger === 'hover' ? isHovered :
+    trigger === 'visible' ? isVisible :
     controlledShow;
 
   const handleMouseEnter = () => {

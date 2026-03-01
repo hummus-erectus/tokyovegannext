@@ -53,33 +53,34 @@
     },
     "stats": {
       "founded": {"value": "2006", "label": "Founded"},
-      "members": {"value": "9,800+", "label": "Community members"},
+      "members": {"value": "9,000+", "label": "Community members"},
       "events": {"value": "250+", "label": "Events hosted"}
     },
     "sections": {
       "activities": {
-        "title": "Activities",
-        "description": "Together we run outreach, support newcomers, and host inclusive bilingual meetups.",
+        "title": "Resources",
+        "description": "Discover guides and inspiration to make your plant-based journey easier.",
         "cards": {
           "outreach": {
-            "title": "Outreach",
+            "title": "Vegan 101",
             "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
             "linkLabel": "Learn about Vegan 101",
             "stickyLabel": "What's 'vegan'?"
           },
           "support": {
-            "title": "Support",
+            "title": "Starter Kits",
             "description": "Find practical guides for shopping, cooking, and living plant-based in Tokyo—from seasonal produce to local-friendly recipes.",
             "linkLabel": "Browse resources",
-            "stickyLabel": "Resources"
+            "stickyLabel": "Get started"
           },
           "community": {
-            "title": "Community",
+            "title": "Shopping",
             "description": "Since 2006 the Tokyo Vegan Meetup has welcomed everyone to social gatherings, workshops, and creative campaigns.",
             "linkLabel": "See events",
-            "stickyLabel": "Meetups"
+            "stickyLabel": "Local tips"
           }
-        }
+        },
+        "cta": "Browse all resources"
       },
       "resources": {
         "title": "Explore our guides",
@@ -282,6 +283,40 @@
           }
         }
       }
+    }
+  },
+  "EventsPage": {
+    "hero": {
+      "eyebrow": "Events",
+      "title": "Upcoming Events",
+      "description": "Join our inclusive, bilingual meetups and connect with a vibrant community celebrating plant-based living in Tokyo and beyond."
+    },
+    "types": {
+      "title": "What we do",
+      "description": "We host a variety of events for vegans, vegetarians, and the veg-curious.",
+      "social": {
+        "title": "Social Gatherings",
+        "description": "Casual meetups at vegan-friendly restaurants and parks. Perfect for meeting new people and enjoying great food together."
+      },
+      "workshops": {
+        "title": "Workshops & Talks",
+        "description": "Educational sessions covering topics like cooking, nutrition, animal rights, and sustainable living."
+      },
+      "outreach": {
+        "title": "Outreach & Activism",
+        "description": "Peaceful street outreach, cleanups, and campaigns to raise awareness about veganism and animal welfare."
+      }
+    },
+    "meetup": {
+      "title": "Join our Meetup Group",
+      "description": "We organize most of our events through Meetup.com. Join our group of over 9,000 members to stay updated on our latest activities!",
+      "cta": "View Tokyo Vegan Meetup"
+    },
+    "newsletter": {
+      "title": "Never Miss a Meetup!",
+      "description": "Get event announcements and community updates straight to your inbox.",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Count me in!"
     }
   }
 }

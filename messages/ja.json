@@ -53,33 +53,34 @@
     },
     "stats": {
       "founded": {"value": "2006", "label": "設立"},
-      "members": {"value": "9,800+", "label": "コミュニティメンバー"},
+      "members": {"value": "9,000+", "label": "コミュニティメンバー"},
       "events": {"value": "250+", "label": "開催イベント"}
     },
     "sections": {
       "activities": {
-        "title": "活動",
-        "description": "アウトリーチ、サポート、バイリンガルのミートアップを通して、仲間と一緒に前進しています。",
+        "title": "リソース",
+        "description": "プラントベースの暮らしをもっと身近にするガイドやヒントを見つけましょう。",
         "cards": {
           "outreach": {
-            "title": "アウトリーチ",
+            "title": "ヴィーガン101",
             "description": "街頭やトークイベント、メディア連携を通じて、健康・環境・アニマルウェルフェアにポジティブな変化をもたらすヴィーガンライフの魅力を発信します。",
             "linkLabel": "Vegan 101 を見る",
             "stickyLabel": "ヴィーガン\nとは？"
           },
           "support": {
-            "title": "サポート",
+            "title": "スターターキット",
             "description": "買い物、料理、東京でのプラントベース生活に役立つ実践的なガイドをまとめています。",
             "linkLabel": "リソース一覧へ",
-            "stickyLabel": "リソース"
+            "stickyLabel": "始めよう"
           },
           "community": {
-            "title": "コミュニティ",
+            "title": "ショッピング",
             "description": "2006年から続くTokyo Vegan Meetupは、交流会やワークショップ、クリエイティブなキャンペーンで誰でも歓迎しています。",
             "linkLabel": "イベントを見る",
-            "stickyLabel": "ミートアップ"
+            "stickyLabel": "ローカル\n情報"
           }
-        }
+        },
+        "cta": "すべてのリソースを見る"
       },
       "resources": {
         "title": "ガイドをチェック",
@@ -282,6 +283,40 @@
           }
         }
       }
+    }
+  },
+  "EventsPage": {
+    "hero": {
+      "eyebrow": "イベント",
+      "title": "開催予定のイベント",
+      "description": "誰もが参加できるバイリンガルのミートアップで、プラントベースの暮らしを楽しむコミュニティとつながりましょう。"
+    },
+    "types": {
+      "title": "主な活動",
+      "description": "ヴィーガン、ベジタリアン、そしてヴィーガンに興味がある方向けに様々なイベントを開催しています。",
+      "social": {
+        "title": "交流会",
+        "description": "ヴィーガン対応のレストランや公園でのカジュアルな集まり。新しい友達を作ったり、美味しい食事をシェアするのに最適です。"
+      },
+      "workshops": {
+        "title": "ワークショップ＆トーク",
+        "description": "料理、栄養、動物の権利、サステナブルな暮らしなどのテーマについて学ぶセッション。"
+      },
+      "outreach": {
+        "title": "アウトリーチ＆啓発活動",
+        "description": "ヴィーガニズムやアニマルウェルフェアの認知を高めるための平和的な街頭活動、クリーンアップ、キャンペーン。"
+      }
+    },
+    "meetup": {
+      "title": "Meetupグループに参加する",
+      "description": "ほとんどのイベントはMeetup.comを通じて企画しています。9,000人以上のメンバーがいるグループに参加して、最新の活動情報をゲットしましょう！",
+      "cta": "Tokyo Vegan Meetupを見る"
+    },
+    "newsletter": {
+      "title": "ミートアップを見逃さない！",
+      "description": "イベントのお知らせやコミュニティの最新情報をメールでお届けします。",
+      "emailPlaceholder": "your@email.com",
+      "submit": "登録する！"
     }
   }
 }

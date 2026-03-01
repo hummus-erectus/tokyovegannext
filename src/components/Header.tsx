@@ -7,9 +7,9 @@ import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {RoughHighlight} from "./RoughHighlight";
 
 const navLinks: { key: "events" | "resources" | "blog"; href: string; type: "internal" | "external" }[] = [
-  {key: "events", href: "/#newsletter", type: "internal"},
-  {key: "resources", href: "/#activities", type: "internal"},
-  {key: "blog", href: "/#blog", type: "internal"}
+  {key: "events", href: "/events", type: "internal"},
+  {key: "resources", href: "/resources", type: "internal"},
+  {key: "blog", href: "/blog", type: "internal"}
 ];
 
 type NavItemsProps = {
@@ -36,8 +36,8 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
           : "gap-8 items-center font-hand text-2xl font-bold text-emerald-900"
       }`}
     >
-      {navLinks.map((link) =>
-        "type" in link && link.type === "external" ? (
+      {navLinks.map((link) => {
+        return "type" in link && link.type === "external" ? (
           <a
             key={link.key}
             href={link.href}
@@ -59,22 +59,20 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             key={link.key}
             href={link.href}
             locale={locale}
-            className={`transition-colors ${
-              isMobile ? "hover:text-emerald-600" : "hover:text-emerald-600"
-            }`}
+            className="transition-colors hover:text-emerald-600"
             onClick={onNavigate}
           >
             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
-              <span className="relative z-10">{translate(`nav.${link.key}`)}</span>
+            <span className="relative z-10">{translate(`nav.${link.key}`)}</span>
             </RoughHighlight>
           </Link>
-        )
-      )}
+        );
+      })}
     </div>
   );
 }
 
-function LanguageSwitch({variant = "pill", locale, pathname, translate}: LanguageSwitchProps) {
+function LanguageSwitch({locale, pathname, translate}: LanguageSwitchProps) {
   const targetLocale = locale === "en" ? "ja" : "en";
   const targetKey = targetLocale === "en" ? "english" : "japanese";
   const fontStyle =
@@ -88,23 +86,6 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
     style: fontStyle,
   } as const;
 
-  if (variant === "pill") {
-    return (
-      <Link
-        {...commonProps}
-        className={
-          targetLocale === "en"
-            ? "hidden text-xl font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-2xl"
-            : "hidden text-lg font-bold text-emerald-900 underline-offset-4 hover:text-emerald-700 hover:underline md:inline md:text-xl"
-        }
-      >
-        <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
-          <span className="relative z-10">{translate(`languageToggle.${targetKey}`)}</span>
-        </RoughHighlight>
-      </Link>
-    );
-  }
-
   return (
     <Link
       {...commonProps}
@@ -114,8 +95,8 @@ function LanguageSwitch({variant = "pill", locale, pathname, translate}: Languag
           : "text-center text-xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
       }
     >
-      <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
-        <span className="relative z-10">{translate(`languageToggle.${targetKey}`)}</span>
+      <RoughHighlight type="box" color="#10b981" strokeWidth={2} trigger="hover">
+        <span className="relative z-10 px-2">{translate(`languageToggle.${targetKey}`)}</span>
       </RoughHighlight>
     </Link>
   );

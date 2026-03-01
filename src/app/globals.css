@@ -246,6 +246,52 @@ html[lang="en"] .font-hand {
   backdrop-filter: blur(1px);
 }
 
+/* Polaroid title highlight - replicates rough-notation's 2-pass drawing */
+.polaroid-title-highlight {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.polaroid-title-highlight::before,
+.polaroid-title-highlight::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  background: rgba(167, 243, 208, 0.35);
+  z-index: -1;
+}
+
+.polaroid-title-highlight::before {
+  top: 10%;
+  left: -3%;
+  right: -3%;
+  bottom: 10%;
+  border-radius: 3px 8px 5px 7px;
+  transform: rotate(-0.5deg) scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.polaroid-title-highlight::after {
+  top: 5%;
+  left: -1%;
+  right: -1%;
+  bottom: 15%;
+  border-radius: 7px 3px 8px 4px;
+  transform: rotate(0.5deg) scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.group:hover .polaroid-title-highlight::before {
+  transform: rotate(-0.5deg) scaleX(1);
+}
+
+.group:hover .polaroid-title-highlight::after {
+  transform: rotate(0.5deg) scaleX(1);
+}
+
 .polaroid-shadow {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -340,14 +386,10 @@ html[lang="en"] .font-hand {
   border-radius: 0 0 20px 20px; /* Round the bottom of the shadow */
 }
 
-.sticky-container:hover .sticky-wrapper::after {
+/* Make sticky note lift when the parent group is hovered */
+.group:hover .sticky-wrapper::after {
   box-shadow: 0 20px 24px rgba(0, 0, 0, 0.2);
   top: 25%; /* Push the start of the shadow down slightly on lift */
-}
-
-.sticky-container:hover {
-  transform: scale(1.05) translateY(-5px);
-  z-index: 10;
 }
 
 .sticky-content {
