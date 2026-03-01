@@ -136,9 +136,13 @@ export default async function HomePage() {
       {/* Newsletter + Next Event */}
       <section id="newsletter" className="mx-auto w-full max-w-5xl px-4 scroll-mt-24">
          <div className="mb-10 text-center">
-            <h2 className="font-hand text-5xl sm:text-6xl font-bold text-emerald-800 -rotate-1">
-               {t("newsletter.sectionTitle")}
-            </h2>
+            <Link href="/events" locale={locale} className="group inline-block text-emerald-700">
+               <h2 className="font-hand text-5xl sm:text-6xl font-bold -rotate-1">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
+                     <span>{t("newsletter.sectionTitle")}</span>
+                  </RoughHighlight>
+               </h2>
+            </Link>
          </div>
          <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
             {/* Next Event — second on mobile, LEFT on desktop */}
@@ -154,7 +158,7 @@ export default async function HomePage() {
                   ) : (
                     <div className="flex aspect-3/4 w-full max-w-sm flex-col items-center justify-center rounded-sm bg-slate-100 p-8 text-center shadow-inner">
                        <p className="font-hand text-2xl text-slate-500">No upcoming events scheduled</p>
-                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600">
+                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-700">
                          <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
                            <span>Check Meetup Page →</span>
                          </RoughHighlight>
@@ -176,9 +180,13 @@ export default async function HomePage() {
       {/* Activities Section (Polaroid cards) */}
       <section id="activities" className="mx-auto w-full max-w-6xl px-4 scroll-mt-24">
          <div className="mb-4 text-center">
-            <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
-               {t("sections.activities.title")}
-            </h2>
+            <Link href="/resources" locale={locale} className="group inline-block text-emerald-700">
+               <h2 className="font-hand text-6xl font-bold -rotate-1">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
+                     <span>{t("sections.activities.title")}</span>
+                  </RoughHighlight>
+               </h2>
+            </Link>
          </div>
          
          <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 group w-full text-center">
@@ -295,7 +303,7 @@ export default async function HomePage() {
             <Link
               href="/blog"
               locale={locale}
-              className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
+              className="group font-hand text-3xl font-bold text-emerald-700 transition-colors"
             >
               <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                 <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>

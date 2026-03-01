@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/routing";
 import {useLocale} from "next-intl";
@@ -10,10 +9,6 @@ import { RoughHighlight } from "./RoughHighlight";
 export default function Footer() {
   const t = useTranslations("HomePage");
   const locale = useLocale();
-
-  const [hoverMeetup, setHoverMeetup] = useState(false);
-  const [hoverInsta, setHoverInsta] = useState(false);
-  const [hoverRes, setHoverRes] = useState(false);
 
   return (
     <footer className="relative z-10 mt-8 bg-emerald-50/90 px-4 pb-8 pt-10 text-emerald-900 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-sm">
@@ -38,16 +33,14 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap justify-center gap-6 font-hand text-xl font-bold text-emerald-900">
+        <div className="flex flex-wrap justify-center gap-6 font-hand text-xl font-bold text-emerald-700">
           <a
             href="https://www.meetup.com/tokyovegan/"
             target="_blank"
             rel="noreferrer"
             className="group relative transition-transform"
-            onMouseEnter={() => setHoverMeetup(true)}
-            onMouseLeave={() => setHoverMeetup(false)}
           >
-            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={hoverMeetup}>
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
               <span className="relative z-10">
                 {t("footer.links.meetup")}
               </span>
@@ -59,10 +52,8 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
             className="group relative transition-transform"
-            onMouseEnter={() => setHoverInsta(true)}
-            onMouseLeave={() => setHoverInsta(false)}
           >
-             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={hoverInsta}>
+             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
                <span className="relative z-10">
                 {t("footer.links.instagram")}
               </span>
@@ -73,10 +64,8 @@ export default function Footer() {
             href="/resources"
             locale={locale}
             className="group relative transition-transform"
-            onMouseEnter={() => setHoverRes(true)}
-            onMouseLeave={() => setHoverRes(false)}
           >
-             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={hoverRes}>
+             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
                <span className="relative z-10">
                 {t("footer.links.resources")}
               </span>
