@@ -7,6 +7,7 @@ import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
 import { RoughHighlight } from '@/components/RoughHighlight';
+import { PolaroidCard } from '@/components/PolaroidCard';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
@@ -198,8 +199,8 @@ export default async function HomePage() {
                {activityCardKeys.map((key) => {
                  const getCardHref = (k: typeof activityCardKeys[number]) => {
                     if (k === "outreach") return "/about-vegan";
-                    if (k === "support") return "/resources";
-                    return "https://www.meetup.com/tokyovegan/";
+                    if (k === "support") return "/resources/starter-kits";
+                    return "/resources/shopping";
                  };
                  const href = getCardHref(key);
                  const isExternal = href.startsWith("http");
@@ -207,15 +208,15 @@ export default async function HomePage() {
 
                  const cardConfig = {
                     outreach: {
-                       image: "/images/speaker.webp",
+                       image: "/images/speaker.webp", // Will keep speaker for Vegan 101 for now or we can change it
                        color: "sticky-green",
                        rotation: "rotate-3",
                        marginTop: "mt-0 md:-mt-4",
-                       stickyPos: "-top-4 -right-1 sm:-top-6 sm:-right-2 md:-right-6",
-                       stickyRotation: "rotate-6"
+                       stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
+                       stickyRotation: "-rotate-6"
                     },
                     support: {
-                       image: "/images/groceries.webp",
+                       image: "/images/picnics.webp", // Changing to picnic for starter kits (friendly/intro vibe)
                        color: "sticky-yellow",
                        rotation: "-rotate-2",
                        marginTop: "mt-0 md:mt-10",
@@ -223,7 +224,7 @@ export default async function HomePage() {
                        stickyRotation: "-rotate-8"
                     },
                     community: {
-                       image: "/images/picnics.webp",
+                       image: "/images/groceries.webp", // Changing to groceries for shopping
                        color: "sticky-cream",
                        rotation: "-rotate-3",
                        marginTop: "mt-0 md:mt-2",
@@ -239,50 +240,18 @@ export default async function HomePage() {
                    : "font-hand text-2xl sm:text-3xl font-bold text-slate-900";
 
                  const content = (
-                    <div className={`relative group ${config.marginTop} ${config.rotation}`}>
-                       {/* Tape Element */}
-                       <div className="tape-section">
-                          <div className="tape-top-center" />
-                       </div>
-
-                       {/* Polaroid Card */}
-                       <div className="bg-white p-4 pb-8 shadow-xl shadow-slate-300/60">
-                         <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
-                             <Image
-                                src={config.image}
-                                alt={t(`sections.activities.cards.${key}.title`)}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 280px, (max-width: 1024px) 33vw, 300px"
-                             />
-                          </div>
-                         <div className="mt-4 text-center">
-                             <h3 className={titleClass}>
-                                {t(`sections.activities.cards.${key}.title`)}
-                             </h3>
-                          </div>
-                       </div>
-
-                       {/* Sticky Note Badge */}
-                       <div className={`absolute ${config.stickyPos} w-36 md:w-32 z-10 transition duration-300 hover:scale-110 hover:z-20`}>
-                          <div className={`sticky-container ${config.stickyRotation}`}>
-                             <div className="sticky-outer">
-                                <div className="sticky-wrapper">
-                                   <div className={`sticky-content ${config.color} p-3 text-center flex flex-col items-center justify-center shadow-lg min-h-[80px]`}>
-                                      <p className={`font-hand font-bold text-slate-900 leading-tight mb-1 ${isJapanese ? "text-base" : "text-lg"} ${key === "community" && isJapanese ? "whitespace-nowrap" : ""}`}>
-                                         {t(`sections.activities.cards.${key}.stickyLabel`)}
-                                      </p>
-                                      <p className="font-hand text-base font-bold text-slate-800/80 leading-none group-hover:text-slate-900 transition-colors">
-                                        <RoughHighlight type="underline" color="rgba(15, 23, 42, 0.4)" strokeWidth={1.5} trigger="hover">
-                                           <span>Go &rarr;</span>
-                                        </RoughHighlight>
-                                      </p>
-                                   </div>
-                                </div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
+                   <PolaroidCard
+                     title={t(`sections.activities.cards.${key}.title`)}
+                     stickyLabel={t(`sections.activities.cards.${key}.stickyLabel`)}
+                     image={config.image}
+                     color={config.color}
+                     rotation={config.rotation}
+                     marginTop={config.marginTop}
+                     stickyPos={config.stickyPos}
+                     stickyRotation={config.stickyRotation}
+                     titleClass={titleClass}
+                     isJapanese={isJapanese}
+                   />
                  );
 
                  const linkClass = "block w-full max-w-[280px] mx-auto md:max-w-[210px] lg:max-w-none";
@@ -299,40 +268,21 @@ export default async function HomePage() {
                })}
             </div>
          </div>
-      </section>
 
-      {/* Resources Preview Section */}
-      {/* <section className="bg-yellow-50/50 py-24" id="resources-preview">
-         <div className="mx-auto max-w-6xl space-y-12 px-4">
-            <div className="text-center">
-              <h2 className="font-hand text-6xl font-bold text-slate-900 rotate-1">
-                {t("sections.resources.description")}
-              </h2>
-              <p className="mt-4 font-hand text-3xl text-emerald-600">
-                {t("sections.resources.title")}
-              </p>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {resourceItemKeys.map((key) => (
-                <div key={key} className="group flex flex-col rounded-sm bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg ring-1 ring-slate-100">
-                  <h3 className="font-hand text-3xl font-bold text-slate-900 group-hover:text-emerald-700">
-                    {t(`sections.resources.items.${key}.title`)}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm text-slate-600">
-                    {t(`sections.resources.items.${key}.description`)}
-                  </p>
-                  <Link
-                    href={`/resources#${key}`}
-                    locale={locale}
-                    className="mt-4 inline-flex items-center font-hand text-2xl font-bold text-emerald-600"
-                  >
-                    {t(`sections.resources.items.${key}.linkLabel`)} →
-                  </Link>
-                </div>
-              ))}
-            </div>
+         <div className="mt-16 text-center">
+            <PaperButton
+               href="/resources"
+               type="link"
+               locale={locale}
+               variant="solid"
+               color="emerald"
+               size="lg"
+               className="font-bold shadow-md inline-block transform hover:scale-105 transition-transform"
+            >
+               {t("sections.activities.cta")}
+            </PaperButton>
          </div>
-      </section> */}
+      </section>
 
       {/* Blog Section */}
       <div className="paper-torn-shadow">

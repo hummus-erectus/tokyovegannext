@@ -58,28 +58,29 @@
     },
     "sections": {
       "activities": {
-        "title": "Activities",
-        "description": "Together we run outreach, support newcomers, and host inclusive bilingual meetups.",
+        "title": "Resources",
+        "description": "Discover guides and inspiration to make your plant-based journey easier.",
         "cards": {
           "outreach": {
-            "title": "Outreach",
+            "title": "Vegan 101",
             "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
             "linkLabel": "Learn about Vegan 101",
             "stickyLabel": "What's 'vegan'?"
           },
           "support": {
-            "title": "Support",
+            "title": "Starter Kits",
             "description": "Find practical guides for shopping, cooking, and living plant-based in Tokyo—from seasonal produce to local-friendly recipes.",
             "linkLabel": "Browse resources",
-            "stickyLabel": "Resources"
+            "stickyLabel": "Get started"
           },
           "community": {
-            "title": "Community",
+            "title": "Shopping",
             "description": "Since 2006 the Tokyo Vegan Meetup has welcomed everyone to social gatherings, workshops, and creative campaigns.",
             "linkLabel": "See events",
-            "stickyLabel": "Meetups"
+            "stickyLabel": "Local tips"
           }
-        }
+        },
+        "cta": "Browse all resources"
       },
       "resources": {
         "title": "Explore our guides",

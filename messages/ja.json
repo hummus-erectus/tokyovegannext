@@ -58,28 +58,29 @@
     },
     "sections": {
       "activities": {
-        "title": "活動",
-        "description": "アウトリーチ、サポート、バイリンガルのミートアップを通して、仲間と一緒に前進しています。",
+        "title": "リソース",
+        "description": "プラントベースの暮らしをもっと身近にするガイドやヒントを見つけましょう。",
         "cards": {
           "outreach": {
-            "title": "アウトリーチ",
+            "title": "ヴィーガン101",
             "description": "街頭やトークイベント、メディア連携を通じて、健康・環境・アニマルウェルフェアにポジティブな変化をもたらすヴィーガンライフの魅力を発信します。",
             "linkLabel": "Vegan 101 を見る",
             "stickyLabel": "ヴィーガン\nとは？"
           },
           "support": {
-            "title": "サポート",
+            "title": "スターターキット",
             "description": "買い物、料理、東京でのプラントベース生活に役立つ実践的なガイドをまとめています。",
             "linkLabel": "リソース一覧へ",
-            "stickyLabel": "リソース"
+            "stickyLabel": "始めよう"
           },
           "community": {
-            "title": "コミュニティ",
+            "title": "ショッピング",
             "description": "2006年から続くTokyo Vegan Meetupは、交流会やワークショップ、クリエイティブなキャンペーンで誰でも歓迎しています。",
             "linkLabel": "イベントを見る",
-            "stickyLabel": "ミートアップ"
+            "stickyLabel": "ローカル\n情報"
           }
-        }
+        },
+        "cta": "すべてのリソースを見る"
       },
       "resources": {
         "title": "ガイドをチェック",
