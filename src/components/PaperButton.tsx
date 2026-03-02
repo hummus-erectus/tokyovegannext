@@ -1,3 +1,5 @@
+'use client';
+
 import {Link} from "@/i18n/routing";
 import {ReactNode} from "react";
 
@@ -70,7 +72,26 @@ export function PaperButton({
     className ? ` ${className}` : ""
   }`;
 
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   if (type === "link") {
+    // If it's a hash link disguised as a Next.js link, still handle smooth scrolling
+    if (href.startsWith('#')) {
+       return (
+         <a href={href} className={combinedClassName} onClick={handleAnchorClick}>
+           {children}
+         </a>
+       );
+    }
     return (
       <Link href={href} locale={locale} className={combinedClassName}>
         {children}
@@ -78,7 +99,7 @@ export function PaperButton({
     );
   }
 
-  const isExternal = type === "external";
+  const isExternal = type === "external" && !href.startsWith('#');
 
   return (
     <a
@@ -86,6 +107,7 @@ export function PaperButton({
       className={combinedClassName}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer" : undefined}
+      onClick={handleAnchorClick}
     >
       {children}
     </a>
