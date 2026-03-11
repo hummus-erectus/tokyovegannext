@@ -1,5 +1,6 @@
 import {ResourceCard} from "@/components/ResourceCard";
 import {PaperButton} from "@/components/PaperButton";
+import {FeaturedResourceCard} from "@/components/FeaturedResourceCard";
 import {getLocale, getTranslations} from "next-intl/server";
 
 const sectionKeys = ["essentials", "knowledge"] as const;
@@ -70,6 +71,7 @@ export default async function ResourcesPage() {
 
   return (
     <div className="min-h-screen text-slate-900 pb-24">
+      {/* Hero */}
       <section className="relative pt-12 pb-12 px-4">
          <div className="mx-auto max-w-4xl">
             <div className="tape-section rotate-1">
@@ -81,7 +83,7 @@ export default async function ResourcesPage() {
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                      <PaperButton
-                        href="#essentials"
+                        href="#featured"
                         type="anchor"
                         variant="solid"
                         color="emerald"
@@ -108,11 +110,27 @@ export default async function ResourcesPage() {
       </section>
 
       <main className="mx-auto flex max-w-6xl flex-col gap-24 px-4 py-8">
+        {/* Featured: Vegan 101 */}
+        <section id="featured" className="scroll-mt-32">
+          <FeaturedResourceCard
+            locale={locale}
+            href="/about-vegan"
+            badge={t("featured.badge")}
+            eyebrow={t("featured.eyebrow")}
+            title={t("featured.title")}
+            description={t("featured.description")}
+            cta={t("featured.cta")}
+            imageSrc="/images/speaker.webp"
+            imageAlt="Vegan 101 — introduction to veganism"
+          />
+        </section>
+
+        {/* Resource sections */}
         {sectionKeys.map((sectionKey) => (
           <section
             key={sectionKey}
             id={sectionKey}
-            className="grid gap-8 lg:grid-cols-[250px_1fr]"
+            className="grid gap-8 lg:grid-cols-[250px_1fr] scroll-mt-32"
           >
             <div className="space-y-4 lg:self-start pt-8">
               <h2 className="font-hand text-5xl font-bold text-emerald-700 -rotate-2">

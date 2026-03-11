@@ -230,10 +230,17 @@
   "ResourcesPage": {
     "hero": {
       "eyebrow": "Resources",
-      "title": "Information and recommendations for vegans and the vegan-curious",
+      "title": "Your guide to plant-based living in Japan",
       "description": "Curated guides, media, and business links to make plant-based living in Japan easier.",
       "ctaPrimary": "Browse essentials",
       "ctaSecondary": "Back to home"
+    },
+    "featured": {
+      "eyebrow": "Start Here",
+      "title": "Vegan 101",
+      "description": "New to veganism or just curious? Our Vegan 101 guide covers everything — why people go vegan, what vegans eat, FAQs, and how to get started on your own journey.",
+      "cta": "Explore Vegan 101",
+      "badge": "Recommended"
     },
     "sections": {
       "essentials": {
