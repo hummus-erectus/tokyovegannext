@@ -134,7 +134,7 @@
   },
   "AboutVeganPage": {
     "hero": {
-      "eyebrow": "Vegan 101",
+      "eyebrow": "Start Here",
       "title": "Vegan 101",
       "subtitle": "What to expect in the evolution of human kindness",
       "ctaPrimary": "Why go vegan?",
@@ -217,8 +217,8 @@
   },
   "BlogPage": {
     "hero": {
-      "eyebrow": "Blog",
-      "title": "Blog",
+      "eyebrow": "Latest News",
+      "title": "The Tokyo Vegan Blog",
       "description": "News, stories, and updates from the Tokyo Vegan community."
     },
     "empty": "No posts yet — check back soon!",
@@ -294,8 +294,8 @@
   },
   "EventsPage": {
     "hero": {
-      "eyebrow": "Events",
-      "title": "Upcoming Events",
+      "eyebrow": "Get involved",
+      "title": "Upcoming Events & Meetups",
       "description": "Join our inclusive, bilingual meetups and connect with a vibrant community celebrating plant-based living in Tokyo and beyond."
     },
     "types": {

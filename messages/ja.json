@@ -134,11 +134,11 @@
   },
   "AboutVeganPage": {
     "hero": {
-      "eyebrow": "ヴィーガン101",
-      "title": "ヴィーガンとは？",
+      "eyebrow": "はじめての方へ",
+      "title": "ヴィーガン101",
       "subtitle": "優しさの進化に期待すること",
       "ctaPrimary": "なぜヴィーガン？",
-      "ctaSecondary": "FAQを読む"
+      "ctaSecondary": "よくある質問を読む"
     },
     "whatIsVeganism": {
       "title": "ヴィーガンとは何ですか？",
@@ -217,8 +217,8 @@
   },
   "BlogPage": {
     "hero": {
-      "eyebrow": "ブログ",
-      "title": "ブログ",
+      "eyebrow": "最新ニュース",
+      "title": "Tokyo Vegan ブログ",
       "description": "Tokyo Veganコミュニティからのニュース、ストーリー、最新情報。"
     },
     "empty": "まだ記事がありません。お楽しみに！",

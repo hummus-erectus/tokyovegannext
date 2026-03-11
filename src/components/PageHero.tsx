@@ -1,4 +1,5 @@
 import {PaperButton} from "@/components/PaperButton";
+import {RoughHighlight} from "@/components/RoughHighlight";
 
 export type HeroAction = {
   label: string;
@@ -35,10 +36,10 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
         href={action.href}
         type={type}
         locale={locale}
-        variant={variant}
-        color="white"
+        variant={variant === "solid" ? "solid" : "outline"}
+        color="emerald"
         size="md"
-        className={variant === "solid" ? "shadow-lg shadow-black/20" : ""}
+        className="font-bold shadow-sm"
       >
         {action.label}
       </PaperButton>
@@ -46,14 +47,17 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
   };
 
   return (
-    <section className="header-ripped relative isolate overflow-visible" style={style}>
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-16 text-white md:flex-row md:items-center md:justify-between">
-        <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-100">{eyebrow}</p>
-          <h1 className="text-3xl font-bold leading-tight md:text-4xl">{title}</h1>
-          <p className="text-base text-emerald-50 md:text-lg">{description}</p>
+    <section className="relative pt-12 pb-8 px-4" style={style}>
+      <div className="mx-auto max-w-4xl text-center">
+        <div className="inline-block mb-4">
+          <RoughHighlight type="box" color="#10b981" strokeWidth={2} show={true}>
+            <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-700 px-3 py-1">{eyebrow}</p>
+          </RoughHighlight>
         </div>
-        {actions.length > 0 && <div className="flex flex-col gap-3 text-sm font-semibold md:flex-row">{actions.map(renderAction)}</div>}
+        <h1 className="font-hand text-5xl md:text-6xl font-bold text-slate-900 mb-4 -rotate-1">{title}</h1>
+        <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8 font-medium">{description}</p>
+        
+        {actions.length > 0 && <div className="flex flex-col sm:flex-row gap-4 justify-center">{actions.map(renderAction)}</div>}
       </div>
     </section>
   );

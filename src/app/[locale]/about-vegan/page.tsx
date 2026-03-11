@@ -1,7 +1,15 @@
 import {FaqAccordion} from "@/components/FaqAccordion";
-import {WhyGoVeganCards, type ReasonCopy} from "@/components/WhyGoVeganCards";
+import {WhyGoVeganCards} from "@/components/WhyGoVeganCards";
+import {PageHero} from "@/components/PageHero";
 import {PaperButton} from "@/components/PaperButton";
 import {getLocale, getTranslations} from "next-intl/server";
+
+export type ReasonCopy = {
+  title: string;
+  short: string;
+  content: string;
+  full: string;
+};
 
 const whyGoVeganCards = [
   {
@@ -70,42 +78,16 @@ export default async function AboutVeganPage() {
 
   return (
     <div className="min-h-screen pb-24 text-slate-900">
-      {/* Hero — taped paper card */}
-      <section className="relative pt-12 pb-12 px-4">
-        <div className="mx-auto max-w-4xl">
-          <div className="tape-section -rotate-1">
-            <div className="tape-top-center" />
-            <div className="bg-white p-8 md:p-16 shadow-xl shadow-slate-300/60 text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-600 mb-4">{t("hero.eyebrow")}</p>
-              <h1 className="font-hand text-5xl md:text-7xl font-bold text-slate-900 mb-6">{t("hero.title")}</h1>
-              <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{t("hero.subtitle")}</p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <PaperButton
-                  href="#why-go-vegan"
-                  type="anchor"
-                  variant="solid"
-                  color="emerald"
-                  size="md"
-                  className="font-bold shadow-md"
-                >
-                  {t("hero.ctaPrimary")}
-                </PaperButton>
-                <PaperButton
-                  href="#faqs"
-                  type="anchor"
-                  variant="outline"
-                  color="emerald"
-                  size="md"
-                  className="font-bold"
-                >
-                  {t("hero.ctaSecondary")}
-                </PaperButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t("hero.eyebrow")}
+        title={t("hero.title")}
+        description={t("hero.subtitle")}
+        locale={locale}
+        actions={[
+          {label: t("hero.ctaPrimary"), href: "#why-go-vegan", type: "anchor", variant: "solid"},
+          {label: t("hero.ctaSecondary"), href: "#faqs", type: "anchor", variant: "outline"}
+        ]}
+      />
 
       <main className="mx-auto flex max-w-6xl flex-col gap-24 px-4 py-8">
         {/* What is Veganism? — taped paper with blockquote */}

@@ -36,7 +36,7 @@ export default async function EventsPage(props: {
         locale={locale}
       />
 
-      <div className="relative -mt-12 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 z-10 pb-24">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 z-10 pb-24">
         {/* Next Event Banner */}
         <section className="mb-24">
           <div className="bg-white p-6 sm:p-8 md:p-10 transform -rotate-1 shadow-[0_8px_30px_rgb(0,0,0,0.12)] relative">
