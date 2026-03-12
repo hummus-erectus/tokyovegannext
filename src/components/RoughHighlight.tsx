@@ -133,12 +133,16 @@ export function RoughHighlight({
 
   return (
     <span
-      ref={elementRef}
-      className={`inline ${className}`}
+      className="relative"
       onMouseEnter={trigger === 'hover' ? handleMouseEnter : undefined}
       onMouseLeave={trigger === 'hover' ? handleMouseLeave : undefined}
     >
-      {children}
+      <span
+        ref={elementRef}
+        className={`inline ${className}`}
+      >
+        {children}
+      </span>
     </span>
   );
 }
