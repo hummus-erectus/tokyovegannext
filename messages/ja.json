@@ -148,6 +148,7 @@
     },
     "whyGoVegan": {
       "title": "なぜヴィーガン？",
+      "subtitle": "植物由来の暮らしを選ぶ5つの強力な理由。",
       "readMore": "全文を読む",
       "sections": {
         "animals": {
@@ -186,6 +187,7 @@
     },
     "faqs": {
       "title": "ヴィーガンに関するFAQ",
+      "subtitle": "ヴィーガン生活についてのよくある質問。",
       "items": {
         "difficult": {
           "question": "ヴィーガンになるのは難しいですか？",

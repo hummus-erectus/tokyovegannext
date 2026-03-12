@@ -1,5 +1,6 @@
 import {FaqAccordion} from "@/components/FaqAccordion";
 import {WhyGoVeganCards} from "@/components/WhyGoVeganCards";
+import {RoughHighlight} from "@/components/RoughHighlight";
 import {PageHero} from "@/components/PageHero";
 import {PaperButton} from "@/components/PaperButton";
 import {getLocale, getTranslations} from "next-intl/server";
@@ -103,9 +104,13 @@ export default async function AboutVeganPage() {
                 <blockquote className="font-hand text-2xl md:text-3xl font-bold leading-relaxed text-slate-800">
                   &ldquo;{t("whatIsVeganism.description")}&rdquo;
                 </blockquote>
-                <figcaption className="mt-6 text-sm font-semibold uppercase tracking-wide text-emerald-600">
-                  — {t("whatIsVeganism.quoteSource")}
-                </figcaption>
+                <a href="https://www.vegansociety.com/" target="_blank" rel="noopener noreferrer" className="inline-block mt-6 group">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+                    <figcaption className="text-sm font-semibold uppercase tracking-wide text-emerald-600 group-hover:text-emerald-700 transition-colors">
+                      {t("whatIsVeganism.quoteSource")}
+                    </figcaption>
+                  </RoughHighlight>
+                </a>
               </figure>
             </div>
           </div>
@@ -115,7 +120,7 @@ export default async function AboutVeganPage() {
         <section id="why-go-vegan" className="scroll-mt-32 space-y-8">
           <div className="text-center space-y-2">
             <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">{t("whyGoVegan.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("hero.subtitle")}</p>
+            <p className="font-hand text-2xl text-slate-600">{t("whyGoVegan.subtitle")}</p>
           </div>
           <WhyGoVeganCards
             cards={whyGoVeganCards}
@@ -147,7 +152,7 @@ export default async function AboutVeganPage() {
         <section id="faqs" className="scroll-mt-32 space-y-2">
           <div className="text-center space-y-2">
             <h2 className="font-hand text-6xl font-bold text-slate-900 rotate-1">{t("faqs.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("hero.subtitle")}</p>
+            <p className="font-hand text-2xl text-slate-600">{t("faqs.subtitle")}</p>
           </div>
           <FaqAccordion items={faqItems} />
         </section>

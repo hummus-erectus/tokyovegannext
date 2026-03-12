@@ -148,6 +148,7 @@
     },
     "whyGoVegan": {
       "title": "Why go vegan?",
+      "subtitle": "Five powerful reasons to choose compassion over cruelty.",
       "readMore": "Read full story",
       "sections": {
         "animals": {
@@ -186,6 +187,7 @@
     },
     "faqs": {
       "title": "Vegan FAQs",
+      "subtitle": "Common questions about the vegan lifestyle.",
       "items": {
         "difficult": {
           "question": "Is it difficult to live vegan?",
