@@ -103,7 +103,18 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
+            <div className="relative w-[calc(100%-2rem)] sm:w-full max-w-md mx-auto lg:w-[calc(100%-3rem)] xl:w-full lg:max-w-none lg:mx-0 mt-8 lg:mt-0">
+               {/* Origami Pig */}
+               <div className="absolute -top-4 -right-8 lg:-top-6 lg:-right-16 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+                 <Image
+                   src="/images/pig.webp"
+                   alt="Origami Pig"
+                   width={300}
+                   height={300}
+                   className="w-full h-auto object-contain"
+                 />
+               </div>
+
                <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
