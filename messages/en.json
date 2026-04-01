@@ -24,6 +24,12 @@
       "rsvp": "RSVP on Meetup",
       "going": "going"
     },
+    "meetupFlyer": {
+      "title": "Join Us on Meetup!",
+      "description": "Bilingual dinners, talks and more in Tokyo.",
+      "members": "9,000+ members",
+      "cta": "Join the group"
+    },
     "instagram": {
       "followUs": "Follow us on Instagram"
     },

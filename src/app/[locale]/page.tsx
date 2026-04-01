@@ -1,6 +1,6 @@
 import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
-import {MeetupEventCard} from "@/components/MeetupEventCard";
+import {EventFlyer} from "@/components/EventFlyer";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
@@ -159,23 +159,14 @@ export default async function HomePage() {
             {/* Next Event — second on mobile, LEFT on desktop */}
             <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
                <div className="flex flex-col items-center mx-auto w-full">
-                  {nextEvent ? (
-                    <MeetupEventCard
-                      title={nextEvent.title}
-                      startDate={nextEvent.startDate}
-                      endDate={nextEvent.endDate}
-                      eventUrl={nextEvent.url}
-                    />
-                  ) : (
-                    <div className="flex aspect-3/4 w-full max-w-sm flex-col items-center justify-center rounded-sm bg-slate-100 p-8 text-center shadow-inner">
-                       <p className="font-hand text-2xl text-slate-500">No upcoming events scheduled</p>
-                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-700">
-                         <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
-                           <span>Check Meetup Page →</span>
-                         </RoughHighlight>
-                       </a>
-                    </div>
-                  )}
+                  <EventFlyer
+                    event={nextEvent ? {
+                      title: nextEvent.title,
+                      startDate: nextEvent.startDate,
+                      endDate: nextEvent.endDate,
+                      eventUrl: nextEvent.url,
+                    } : undefined}
+                  />
                </div>
             </div>
 
@@ -199,7 +190,7 @@ export default async function HomePage() {
                </h2>
             </Link>
          </div>
-         
+
          <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 group w-full text-center">
             <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
                <span>{t("sections.activities.description")}</span>

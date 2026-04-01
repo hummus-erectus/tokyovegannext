@@ -24,6 +24,12 @@
       "rsvp": "Meetupで申し込む",
       "going": "参加予定"
     },
+    "meetupFlyer": {
+      "title": "Meetupに参加しよう！",
+      "description": "東京で開催されるバイリンガルのディナーやトークイベントなど。",
+      "members": "9,000人以上のメンバー",
+      "cta": "グループに参加"
+    },
     "instagram": {
       "followUs": "Instagramをフォロー"
     },
