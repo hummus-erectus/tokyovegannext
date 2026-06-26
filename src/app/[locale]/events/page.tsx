@@ -1,7 +1,7 @@
 import {getTranslations, setRequestLocale} from "next-intl/server";
 import {PageHero} from "@/components/PageHero";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
-import {MeetupEventCard} from "@/components/MeetupEventCard";
+import {EventFlyer} from "@/components/EventFlyer";
 import { getNextMeetupEvent } from "@/lib/meetup";
 import Image from "next/image";
 
@@ -12,20 +12,19 @@ export default async function EventsPage(props: {
   const locale = params.locale;
   setRequestLocale(locale);
   const t = await getTranslations("EventsPage");
-  
-  // Fetch next meetup event
+
+  // Fetch next meetup event (null if none scheduled or fetch fails)
   const nextEvent = await getNextMeetupEvent();
 
-  // Create a dummy event for fallback if fetching fails
-  const dummyEvent = {
-    title: "Tokyo Vegan Meetup - Shinjuku Dinner",
-    // We use a fixed date relative to a known point to avoid Date.now() in render
-    startDate: new Date("2026-03-08T19:00:00+09:00"), 
-    endDate: new Date("2026-03-08T21:00:00+09:00"), 
-    url: "https://www.meetup.com/vegan-389/"
-  };
-
-  const eventToDisplay = nextEvent || dummyEvent;
+  // Map to EventFlyer's expected shape
+  const event = nextEvent
+    ? {
+        title: nextEvent.title,
+        startDate: nextEvent.startDate,
+        endDate: nextEvent.endDate,
+        eventUrl: nextEvent.url,
+      }
+    : undefined;
 
   return (
     <main className="flex-1 bg-[url('/images/mulberry.jpg')] bg-repeat">
@@ -42,30 +41,38 @@ export default async function EventsPage(props: {
           <div className="bg-white p-6 sm:p-8 md:p-10 transform -rotate-1 shadow-[0_8px_30px_rgb(0,0,0,0.12)] relative">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1 w-full max-w-md">
-                <MeetupEventCard 
-                  title={eventToDisplay.title}
-                  startDate={eventToDisplay.startDate}
-                  endDate={eventToDisplay.endDate}
-                  eventUrl={eventToDisplay.url}
-                />
+                <EventFlyer event={event} />
               </div>
-              <div className="flex-1 text-center md:text-left space-y-6">
-                <h3 className="text-2xl font-bold text-emerald-900 font-hand">
-                  {t("meetup.title")}
-                </h3>
-                <p className="text-emerald-800/80 leading-relaxed font-medium">
-                  {t("meetup.description")}
-                </p>
-                <div className="pt-4">
-                  <a
-                    href="https://www.meetup.com/vegan-389/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-[#FCD34D] px-8 py-3 rounded-full text-emerald-950 font-bold font-hand text-xl shadow-sm hover:bg-[#fbbf24] hover:shadow-md transition-all hover:scale-105 active:scale-95"
-                  >
-                    {t("meetup.cta")}
-                  </a>
+              <div className="flex-1 w-full space-y-6">
+                <div className="text-center md:text-left space-y-6">
+                  <h3 className="text-2xl font-bold text-emerald-900 font-hand">
+                    <a
+                      href="https://www.meetup.com/tokyovegan/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline-hand hover:text-emerald-700 transition-colors"
+                    >
+                      {t("meetup.title")}
+                    </a>
+                  </h3>
+                  <p className="text-emerald-800/80 leading-relaxed font-medium">
+                    {t("meetup.description")}
+                  </p>
                 </div>
+                <a
+                  href="https://www.meetup.com/tokyovegan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="photo-slit relative block transition-transform hover:scale-[1.02]"
+                >
+                  <Image
+                    src="/images/group.jpg"
+                    alt="Tokyo Vegan Meetup group"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
+                </a>
               </div>
             </div>
             {/* Washi tape decoration */}
@@ -105,7 +112,7 @@ export default async function EventsPage(props: {
             </div>
 
             {/* Workshops Card */}
-            <div className="bg-white p-6 shadow-md relative group hover:-translate-y-1 transition-transform md:mt-12">
+            <div className="bg-white p-6 shadow-md relative group hover:-translate-y-1 transition-transform">
               <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
                 <Image
                   src="/images/speaker.webp"
