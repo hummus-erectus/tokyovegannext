@@ -32,8 +32,8 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
     <div
       className={`flex ${
         isMobile
-          ? "flex-col items-center gap-6 font-hand text-2xl font-semibold text-emerald-900"
-          : "gap-8 items-center font-hand text-2xl font-bold text-emerald-900"
+          ? "flex-col items-center gap-6 font-hand text-2xl font-semibold text-emerald-700"
+          : "gap-8 items-center font-hand text-2xl font-bold text-emerald-700"
       }`}
     >
       {navLinks.map((link) => {
@@ -46,7 +46,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             className={`transition-colors ${
               !isMobile
                 ? "rounded-full bg-[#FCD34D] px-6 py-2 text-emerald-950 font-bold shadow-sm hover:bg-[#fbbf24] hover:shadow-md"
-                : "text-emerald-800 hover:text-emerald-600"
+                : "text-emerald-700"
             }`}
             onClick={onNavigate}
           >
@@ -59,7 +59,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             key={link.key}
             href={link.href}
             locale={locale}
-            className="transition-colors hover:text-emerald-600"
+            className="transition-colors"
             onClick={onNavigate}
           >
             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
@@ -91,8 +91,8 @@ function LanguageSwitch({locale, pathname, translate}: LanguageSwitchProps) {
       {...commonProps}
       className={
         targetLocale === "en"
-          ? "text-center text-2xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
-          : "text-center text-xl font-bold text-emerald-900 transition-colors hover:text-emerald-700"
+          ? "text-center text-2xl font-bold text-emerald-700 transition-colors"
+          : "text-center text-xl font-bold text-emerald-700 transition-colors"
       }
     >
       <RoughHighlight type="box" color="#10b981" strokeWidth={2} trigger="hover">

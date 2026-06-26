@@ -1,12 +1,9 @@
 'use client';
 
-import { useState } from "react";
 import { InstagramPost } from "@/lib/instagram";
 import { RoughHighlight } from "./RoughHighlight";
 
 export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div className="space-y-12">
       <div className="flex flex-col items-center gap-4 text-center">
@@ -14,11 +11,9 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
           href="https://instagram.com/tokyoveganofficial"
           target="_blank"
           rel="noreferrer"
-          className="font-hand-brand text-5xl font-bold text-emerald-600 hover:text-emerald-700 -rotate-2"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className="group font-hand-brand text-5xl font-bold text-emerald-700 -rotate-2"
         >
-          <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover" show={isHovered}>
+          <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
             <span>@tokyoveganofficial</span>
           </RoughHighlight>
         </a>

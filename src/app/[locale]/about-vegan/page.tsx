@@ -1,7 +1,16 @@
 import {FaqAccordion} from "@/components/FaqAccordion";
-import {WhyGoVeganCards, type ReasonCopy} from "@/components/WhyGoVeganCards";
+import {WhyGoVeganCards} from "@/components/WhyGoVeganCards";
+import {RoughHighlight} from "@/components/RoughHighlight";
+import {PageHero} from "@/components/PageHero";
 import {PaperButton} from "@/components/PaperButton";
 import {getLocale, getTranslations} from "next-intl/server";
+
+export type ReasonCopy = {
+  title: string;
+  short: string;
+  content: string;
+  full: string;
+};
 
 const whyGoVeganCards = [
   {
@@ -70,42 +79,16 @@ export default async function AboutVeganPage() {
 
   return (
     <div className="min-h-screen pb-24 text-slate-900">
-      {/* Hero — taped paper card */}
-      <section className="relative pt-12 pb-12 px-4">
-        <div className="mx-auto max-w-4xl">
-          <div className="tape-section -rotate-1">
-            <div className="tape-top-center" />
-            <div className="bg-white p-8 md:p-16 shadow-xl shadow-slate-300/60 text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-600 mb-4">{t("hero.eyebrow")}</p>
-              <h1 className="font-hand text-5xl md:text-7xl font-bold text-slate-900 mb-6">{t("hero.title")}</h1>
-              <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8">{t("hero.subtitle")}</p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <PaperButton
-                  href="#why-go-vegan"
-                  type="anchor"
-                  variant="solid"
-                  color="emerald"
-                  size="md"
-                  className="font-bold shadow-md"
-                >
-                  {t("hero.ctaPrimary")}
-                </PaperButton>
-                <PaperButton
-                  href="#faqs"
-                  type="anchor"
-                  variant="outline"
-                  color="emerald"
-                  size="md"
-                  className="font-bold"
-                >
-                  {t("hero.ctaSecondary")}
-                </PaperButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t("hero.eyebrow")}
+        title={t("hero.title")}
+        description={t("hero.subtitle")}
+        locale={locale}
+        actions={[
+          {label: t("hero.ctaPrimary"), href: "#why-go-vegan", type: "anchor", variant: "solid"},
+          {label: t("hero.ctaSecondary"), href: "#faqs", type: "anchor", variant: "outline"}
+        ]}
+      />
 
       <main className="mx-auto flex max-w-6xl flex-col gap-24 px-4 py-8">
         {/* What is Veganism? — taped paper with blockquote */}
@@ -121,9 +104,13 @@ export default async function AboutVeganPage() {
                 <blockquote className="font-hand text-2xl md:text-3xl font-bold leading-relaxed text-slate-800">
                   &ldquo;{t("whatIsVeganism.description")}&rdquo;
                 </blockquote>
-                <figcaption className="mt-6 text-sm font-semibold uppercase tracking-wide text-emerald-600">
-                  — {t("whatIsVeganism.quoteSource")}
-                </figcaption>
+                <a href="https://www.vegansociety.com/" target="_blank" rel="noopener noreferrer" className="inline-block mt-6 group">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
+                    <figcaption className="text-sm font-semibold uppercase tracking-wide text-emerald-600 group-hover:text-emerald-700 transition-colors">
+                      {t("whatIsVeganism.quoteSource")}
+                    </figcaption>
+                  </RoughHighlight>
+                </a>
               </figure>
             </div>
           </div>
@@ -133,7 +120,7 @@ export default async function AboutVeganPage() {
         <section id="why-go-vegan" className="scroll-mt-32 space-y-8">
           <div className="text-center space-y-2">
             <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">{t("whyGoVegan.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("hero.subtitle")}</p>
+            <p className="font-hand text-2xl text-slate-600">{t("whyGoVegan.subtitle")}</p>
           </div>
           <WhyGoVeganCards
             cards={whyGoVeganCards}
@@ -165,7 +152,7 @@ export default async function AboutVeganPage() {
         <section id="faqs" className="scroll-mt-32 space-y-2">
           <div className="text-center space-y-2">
             <h2 className="font-hand text-6xl font-bold text-slate-900 rotate-1">{t("faqs.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("hero.subtitle")}</p>
+            <p className="font-hand text-2xl text-slate-600">{t("faqs.subtitle")}</p>
           </div>
           <FaqAccordion items={faqItems} />
         </section>

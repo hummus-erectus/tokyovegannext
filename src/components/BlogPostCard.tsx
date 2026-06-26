@@ -26,7 +26,7 @@ export function BlogPostCard({
   publishedAt,
   authorName,
 }: BlogPostCardProps) {
-  const { isActive, containerProps, cardStyle } = usePaperLift()
+  const { isHovered, isActive, containerProps, cardStyle } = usePaperLift()
 
   const formattedDate = publishedAt
     ? new Date(publishedAt).toLocaleDateString(locale === 'ja' ? 'ja-JP' : 'en-US', {
@@ -56,13 +56,13 @@ export function BlogPostCard({
         )}
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-xl font-semibold text-slate-900">
+          <h3 className="font-hand text-2xl font-bold text-slate-900">
             <RoughHighlight
               type="highlight"
               multiline={true}
               color="rgba(167, 243, 208, 0.4)" // emerald-200 with opacity
               className="group-hover:[&>span]:text-slate-900!" // prevent link color change
-              show={isActive} // Sync with the paper lift hover state
+              show={isHovered}
             >
               <span>{title}</span>
             </RoughHighlight>
@@ -78,8 +78,8 @@ export function BlogPostCard({
 
           <p className="mt-3 flex-1 text-sm text-slate-600 line-clamp-3">{excerpt}</p>
 
-          <span className="mt-4 text-sm font-semibold text-emerald-700">
-            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isActive}>
+          <span className="mt-4 font-hand text-lg font-bold text-emerald-700">
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isHovered}>
               <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
             </RoughHighlight>
           </span>

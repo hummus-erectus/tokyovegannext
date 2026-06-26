@@ -24,6 +24,12 @@
       "rsvp": "RSVP on Meetup",
       "going": "going"
     },
+    "meetupFlyer": {
+      "title": "Join Us on Meetup!",
+      "description": "Bilingual dinners, talks and more in Tokyo.",
+      "members": "9,000+ members",
+      "cta": "Join the group"
+    },
     "instagram": {
       "followUs": "Follow us on Instagram"
     },
@@ -134,7 +140,7 @@
   },
   "AboutVeganPage": {
     "hero": {
-      "eyebrow": "Vegan 101",
+      "eyebrow": "Start Here",
       "title": "Vegan 101",
       "subtitle": "What to expect in the evolution of human kindness",
       "ctaPrimary": "Why go vegan?",
@@ -148,7 +154,8 @@
     },
     "whyGoVegan": {
       "title": "Why go vegan?",
-      "readMore": "Read full story",
+      "subtitle": "Five powerful reasons to choose compassion over cruelty.",
+      "readMore": "Read more",
       "sections": {
         "animals": {
           "title": "For the Animals",
@@ -186,6 +193,7 @@
     },
     "faqs": {
       "title": "Vegan FAQs",
+      "subtitle": "Common questions about the vegan lifestyle.",
       "items": {
         "difficult": {
           "question": "Is it difficult to live vegan?",
@@ -217,8 +225,8 @@
   },
   "BlogPage": {
     "hero": {
-      "eyebrow": "Blog",
-      "title": "Blog",
+      "eyebrow": "Latest News",
+      "title": "The Tokyo Vegan Blog",
       "description": "News, stories, and updates from the Tokyo Vegan community."
     },
     "empty": "No posts yet — check back soon!",
@@ -230,10 +238,17 @@
   "ResourcesPage": {
     "hero": {
       "eyebrow": "Resources",
-      "title": "Information and recommendations for vegans and the vegan-curious",
+      "title": "Your guide to plant-based living in Japan",
       "description": "Curated guides, media, and business links to make plant-based living in Japan easier.",
       "ctaPrimary": "Browse essentials",
       "ctaSecondary": "Back to home"
+    },
+    "featured": {
+      "eyebrow": "Start Here",
+      "title": "Vegan 101",
+      "description": "New to veganism or just curious? Our Vegan 101 guide covers everything — why people go vegan, what vegans eat, FAQs, and how to get started on your own journey.",
+      "cta": "Explore Vegan 101",
+      "badge": "Recommended"
     },
     "sections": {
       "essentials": {
@@ -287,8 +302,8 @@
   },
   "EventsPage": {
     "hero": {
-      "eyebrow": "Events",
-      "title": "Upcoming Events",
+      "eyebrow": "Get involved",
+      "title": "Upcoming Events & Meetups",
       "description": "Join our inclusive, bilingual meetups and connect with a vibrant community celebrating plant-based living in Tokyo and beyond."
     },
     "types": {

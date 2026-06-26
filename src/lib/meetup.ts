@@ -1,6 +1,6 @@
 import ICAL from 'ical.js';
 
-const ICS_URL = process.env.MEETUP_ICS_URL ?? 'https://www.meetup.com/vegan-389/events/ical/';
+const ICS_URL = process.env.MEETUP_ICS_URL ?? 'https://www.meetup.com/tokyovegan/events/ical/';
 
 export interface MeetupEvent {
   title: string;

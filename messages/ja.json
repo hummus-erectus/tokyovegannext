@@ -24,6 +24,12 @@
       "rsvp": "Meetupで申し込む",
       "going": "参加予定"
     },
+    "meetupFlyer": {
+      "title": "Meetupに参加しよう！",
+      "description": "東京で開催されるバイリンガルのディナーやトークイベントなど。",
+      "members": "9,000人以上のメンバー",
+      "cta": "グループに参加"
+    },
     "instagram": {
       "followUs": "Instagramをフォロー"
     },
@@ -134,11 +140,11 @@
   },
   "AboutVeganPage": {
     "hero": {
-      "eyebrow": "ヴィーガン101",
-      "title": "ヴィーガンとは？",
+      "eyebrow": "はじめての方へ",
+      "title": "ヴィーガン101",
       "subtitle": "優しさの進化に期待すること",
       "ctaPrimary": "なぜヴィーガン？",
-      "ctaSecondary": "FAQを読む"
+      "ctaSecondary": "よくある質問を読む"
     },
     "whatIsVeganism": {
       "title": "ヴィーガンとは何ですか？",
@@ -148,7 +154,8 @@
     },
     "whyGoVegan": {
       "title": "なぜヴィーガン？",
-      "readMore": "全文を読む",
+      "subtitle": "植物由来の暮らしを選ぶ5つの強力な理由。",
+      "readMore": "もっと読む",
       "sections": {
         "animals": {
           "title": "動物のために",
@@ -186,6 +193,7 @@
     },
     "faqs": {
       "title": "ヴィーガンに関するFAQ",
+      "subtitle": "ヴィーガン生活についてのよくある質問。",
       "items": {
         "difficult": {
           "question": "ヴィーガンになるのは難しいですか？",
@@ -217,8 +225,8 @@
   },
   "BlogPage": {
     "hero": {
-      "eyebrow": "ブログ",
-      "title": "ブログ",
+      "eyebrow": "最新ニュース",
+      "title": "Tokyo Vegan ブログ",
       "description": "Tokyo Veganコミュニティからのニュース、ストーリー、最新情報。"
     },
     "empty": "まだ記事がありません。お楽しみに！",
@@ -230,10 +238,17 @@
   "ResourcesPage": {
     "hero": {
       "eyebrow": "リソース",
-      "title": "ヴィーガンとヴィーガンに興味のある人のための情報とおすすめ",
+      "title": "日本でのプラントベース生活ガイド",
       "description": "日本でのプラントベース生活をもっと身近にする厳選ガイド、メディア、ビジネス情報。",
       "ctaPrimary": "エッセンシャルを見る",
       "ctaSecondary": "ホームに戻る"
+    },
+    "featured": {
+      "eyebrow": "まずはここから",
+      "title": "ヴィーガン101",
+      "description": "ヴィーガンに興味がある方へ。なぜヴィーガンになるのか、何を食べるのか、よくある質問、始め方まで — すべてをまとめたガイドです。",
+      "cta": "ヴィーガン101を見る",
+      "badge": "おすすめ"
     },
     "sections": {
       "essentials": {

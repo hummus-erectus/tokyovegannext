@@ -3,6 +3,7 @@
 import {useState} from "react";
 import Image from "next/image";
 import {Modal} from "@/components/Modal";
+import {RoughHighlight} from "@/components/RoughHighlight";
 import {usePaperLift} from "@/hooks/usePaperLift";
 
 type CardKey = "animals" | "planet" | "health" | "publicHealth" | "humanRights";
@@ -40,13 +41,13 @@ function WhyGoVeganCard({
   readMoreLabel: string;
   onSelect: () => void;
 }) {
-  const {isActive, containerProps, cardStyle} = usePaperLift();
+  const {isHovered, isActive, containerProps, cardStyle} = usePaperLift();
 
   return (
     <div className="h-full" {...containerProps}>
       <button
         onClick={onSelect}
-        className={`group flex h-full w-full flex-col overflow-hidden bg-paper-texture text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
+        className={`group flex h-full w-full cursor-pointer flex-col overflow-hidden bg-paper-texture text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={cardStyle}
       >
         <div className={`relative h-48 w-full overflow-hidden bg-linear-to-br ${accent}`}>
@@ -59,13 +60,21 @@ function WhyGoVeganCard({
           />
         </div>
         <div className="flex flex-1 flex-col px-6 py-6">
-          <h3 className="font-hand text-2xl font-bold text-slate-900 transition-colors group-hover:text-emerald-800">{reason.title}</h3>
+          <h3 className="font-hand text-2xl font-bold text-slate-900">
+            <RoughHighlight
+              type="highlight"
+              multiline={true}
+              color="rgba(167, 243, 208, 0.4)"
+              show={isHovered}
+            >
+              <span>{reason.title}</span>
+            </RoughHighlight>
+          </h3>
           <p className="mt-3 flex-1 text-slate-600">{reason.content}</p>
-          <span className="mt-4 inline-flex w-fit items-center font-hand text-lg font-bold text-emerald-700 underline-offset-2 transition-colors group-hover:text-emerald-900 group-hover:underline">
-            {readMoreLabel}
-            <svg className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+          <span className="mt-4 inline-flex w-fit items-center font-hand text-lg font-bold text-emerald-700">
+            <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isHovered}>
+              <span className="whitespace-nowrap">{readMoreLabel} →</span>
+            </RoughHighlight>
           </span>
         </div>
       </button>

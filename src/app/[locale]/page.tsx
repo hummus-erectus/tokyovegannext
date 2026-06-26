@@ -1,6 +1,6 @@
 import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
-import {MeetupEventCard} from "@/components/MeetupEventCard";
+import {EventFlyer} from "@/components/EventFlyer";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
 import {InstagramFeed} from "@/components/InstagramFeed";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
@@ -103,7 +103,18 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
+            <div className="relative w-[calc(100%-2rem)] sm:w-full max-w-md mx-auto lg:w-[calc(100%-3rem)] xl:w-full lg:max-w-none lg:mx-0 mt-8 lg:mt-0">
+               {/* Origami Pig */}
+               <div className="absolute -top-4 -right-8 lg:-top-6 lg:-right-16 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+                 <Image
+                   src="/images/pig.webp"
+                   alt="Origami Pig"
+                   width={300}
+                   height={300}
+                   className="w-full h-auto object-contain"
+                 />
+               </div>
+
                <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
                   <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
@@ -134,33 +145,38 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter + Next Event */}
-      <section id="newsletter" className="mx-auto w-full max-w-5xl px-4 scroll-mt-24">
+      <section id="newsletter" className="relative mx-auto w-full max-w-5xl px-4 pt-18 sm:pt-0 lg:pt-8 scroll-mt-24">
+         {/* Origami Chicken */}
+         <div className="absolute -top-6 left-1/2 -translate-x-1/2 sm:left-2 sm:translate-x-0 lg:-left-4 z-20 w-24 sm:w-32 lg:w-40 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
+           <Image
+             src="/images/chicken.webp"
+             alt="Origami Chicken"
+             width={300}
+             height={300}
+             className="w-full h-auto object-contain"
+           />
+         </div>
          <div className="mb-10 text-center">
-            <h2 className="font-hand text-5xl sm:text-6xl font-bold text-emerald-800 -rotate-1">
-               {t("newsletter.sectionTitle")}
-            </h2>
+            <Link href="/events" locale={locale} className="group inline-block text-emerald-700">
+               <h2 className="font-hand text-5xl sm:text-6xl font-bold -rotate-1">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
+                     <span>{t("newsletter.sectionTitle")}</span>
+                  </RoughHighlight>
+               </h2>
+            </Link>
          </div>
          <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
             {/* Next Event — second on mobile, LEFT on desktop */}
             <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
                <div className="flex flex-col items-center mx-auto w-full">
-                  {nextEvent ? (
-                    <MeetupEventCard
-                      title={nextEvent.title}
-                      startDate={nextEvent.startDate}
-                      endDate={nextEvent.endDate}
-                      eventUrl={nextEvent.url}
-                    />
-                  ) : (
-                    <div className="flex aspect-3/4 w-full max-w-sm flex-col items-center justify-center rounded-sm bg-slate-100 p-8 text-center shadow-inner">
-                       <p className="font-hand text-2xl text-slate-500">No upcoming events scheduled</p>
-                       <a href="https://www.meetup.com/tokyovegan/" className="mt-4 font-bold text-emerald-600">
-                         <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
-                           <span>Check Meetup Page →</span>
-                         </RoughHighlight>
-                       </a>
-                    </div>
-                  )}
+                  <EventFlyer
+                    event={nextEvent ? {
+                      title: nextEvent.title,
+                      startDate: nextEvent.startDate,
+                      endDate: nextEvent.endDate,
+                      eventUrl: nextEvent.url,
+                    } : undefined}
+                  />
                </div>
             </div>
 
@@ -174,13 +190,27 @@ export default async function HomePage() {
       </section>
 
       {/* Activities Section (Polaroid cards) */}
-      <section id="activities" className="mx-auto w-full max-w-6xl px-4 scroll-mt-24">
-         <div className="mb-4 text-center">
-            <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">
-               {t("sections.activities.title")}
-            </h2>
+      <section id="activities" className="relative mx-auto w-full max-w-6xl px-4 scroll-mt-24">
+         {/* Origami Bull */}
+         <div className="absolute -top-8 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
+           <Image
+             src="/images/bull.webp"
+             alt="Origami Bull"
+             width={300}
+             height={300}
+             className="w-full h-auto object-contain"
+           />
          </div>
-         
+         <div className="mb-4 text-center">
+            <Link href="/resources" locale={locale} className="group inline-block text-emerald-700">
+               <h2 className="font-hand text-6xl font-bold -rotate-1">
+                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
+                     <span>{t("sections.activities.title")}</span>
+                  </RoughHighlight>
+               </h2>
+            </Link>
+         </div>
+
          <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 group w-full text-center">
             <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
                <span>{t("sections.activities.description")}</span>
@@ -295,7 +325,7 @@ export default async function HomePage() {
             <Link
               href="/blog"
               locale={locale}
-              className="group font-hand text-3xl font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
+              className="group font-hand text-3xl font-bold text-emerald-700 transition-colors"
             >
               <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                 <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>

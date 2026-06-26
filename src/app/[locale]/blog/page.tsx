@@ -1,6 +1,7 @@
 import { client } from '@/sanity/client'
 import { urlFor } from '@/sanity/image'
 import { BlogPostCard } from '@/components/BlogPostCard'
+import { PageHero } from '@/components/PageHero'
 import { PaperButton } from '@/components/PaperButton'
 import { getTranslations } from 'next-intl/server'
 
@@ -31,24 +32,12 @@ export default async function BlogListPage({ params }: Props) {
   return (
     <div className="min-h-screen text-slate-900 pb-24">
       {/* Hero */}
-      <section className="relative pt-12 pb-12 px-4">
-        <div className="mx-auto max-w-4xl">
-          <div className="tape-section rotate-1">
-            <div className="tape-top-center" />
-            <div className="bg-white p-8 md:p-16 shadow-xl shadow-slate-300/60 text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-600 mb-4">
-                {t('hero.eyebrow')}
-              </p>
-              <h1 className="font-hand text-5xl md:text-7xl font-bold text-slate-900 mb-6">
-                {t('hero.title')}
-              </h1>
-              <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto">
-                {t('hero.description')}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t('hero.eyebrow')}
+        title={t('hero.title')}
+        description={t('hero.description')}
+        locale={locale}
+      />
 
       {/* Posts Grid */}
       <main className="mx-auto max-w-6xl px-4 py-8">
