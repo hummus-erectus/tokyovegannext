@@ -145,7 +145,17 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter + Next Event */}
-      <section id="newsletter" className="mx-auto w-full max-w-5xl px-4 scroll-mt-24">
+      <section id="newsletter" className="relative mx-auto w-full max-w-5xl px-4 pt-18 sm:pt-0 lg:pt-8 scroll-mt-24">
+         {/* Origami Chicken */}
+         <div className="absolute -top-6 left-1/2 -translate-x-1/2 sm:left-2 sm:translate-x-0 lg:-left-4 z-20 w-24 sm:w-32 lg:w-40 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
+           <Image
+             src="/images/chicken.webp"
+             alt="Origami Chicken"
+             width={300}
+             height={300}
+             className="w-full h-auto object-contain"
+           />
+         </div>
          <div className="mb-10 text-center">
             <Link href="/events" locale={locale} className="group inline-block text-emerald-700">
                <h2 className="font-hand text-5xl sm:text-6xl font-bold -rotate-1">
@@ -180,7 +190,17 @@ export default async function HomePage() {
       </section>
 
       {/* Activities Section (Polaroid cards) */}
-      <section id="activities" className="mx-auto w-full max-w-6xl px-4 scroll-mt-24">
+      <section id="activities" className="relative mx-auto w-full max-w-6xl px-4 scroll-mt-24">
+         {/* Origami Bull */}
+         <div className="absolute -top-8 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
+           <Image
+             src="/images/bull.webp"
+             alt="Origami Bull"
+             width={300}
+             height={300}
+             className="w-full h-auto object-contain"
+           />
+         </div>
          <div className="mb-4 text-center">
             <Link href="/resources" locale={locale} className="group inline-block text-emerald-700">
                <h2 className="font-hand text-6xl font-bold -rotate-1">
