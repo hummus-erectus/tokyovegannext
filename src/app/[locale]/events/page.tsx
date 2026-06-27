@@ -45,7 +45,7 @@ export default async function EventsPage(props: {
               </div>
               <div className="flex-1 w-full space-y-6">
                 <div className="text-center md:text-left space-y-6">
-                  <h3 className="text-2xl font-bold text-emerald-900 font-hand">
+                  <h3 className="text-2xl font-bold text-emerald-900 font-heading">
                     <a
                       href="https://www.meetup.com/tokyovegan/"
                       target="_blank"
@@ -83,7 +83,7 @@ export default async function EventsPage(props: {
         {/* Event Types Grid */}
         <section className="mb-24 space-y-12">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="font-hand-brand text-4xl sm:text-5xl font-bold text-emerald-900 mb-6 tracking-wide">
+            <h2 className="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mb-6 tracking-wide">
               {t("types.title")}
             </h2>
             <p className="text-emerald-800/80 text-lg font-medium">
@@ -103,7 +103,7 @@ export default async function EventsPage(props: {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="font-hand text-2xl font-bold text-emerald-900 mb-3">
+              <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
                 {t("types.social.title")}
               </h3>
               <p className="text-emerald-800/80 font-medium">
@@ -122,7 +122,7 @@ export default async function EventsPage(props: {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="font-hand text-2xl font-bold text-emerald-900 mb-3">
+              <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
                 {t("types.workshops.title")}
               </h3>
               <p className="text-emerald-800/80 font-medium">
@@ -141,7 +141,7 @@ export default async function EventsPage(props: {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="font-hand text-2xl font-bold text-emerald-900 mb-3">
+              <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
                 {t("types.outreach.title")}
               </h3>
               <p className="text-emerald-800/80 font-medium">

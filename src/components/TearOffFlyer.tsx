@@ -49,7 +49,7 @@ export function TearOffFlyer({
     <div className="flyer-container">
       {/* Main Paper */}
       <div className="flyer-paper">
-        <h2 className="font-hand text-4xl sm:text-5xl font-bold text-slate-900 mb-2">
+        <h2 className="font-heading text-4xl sm:text-5xl font-bold text-slate-900 mb-2">
           {title}
         </h2>
         <p className="text-slate-600 text-sm sm:text-base">{subtitle}</p>

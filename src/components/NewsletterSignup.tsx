@@ -54,7 +54,7 @@ export function NewsletterSignup() {
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
           </div>
-          <h3 className="font-hand text-5xl font-bold text-emerald-800 leading-none">
+          <h3 className="font-heading text-5xl font-bold text-emerald-800 leading-none">
             {t("title")}
           </h3>
         </div>
@@ -66,7 +66,7 @@ export function NewsletterSignup() {
 
         {status === "success" ? (
           <div className="text-center py-6">
-            <p className="font-hand text-3xl font-bold text-emerald-700 mb-2">
+            <p className="font-heading text-3xl font-bold text-emerald-700 mb-2">
               {t("successTitle")}
             </p>
             <p className="text-sm text-slate-600">
@@ -94,7 +94,7 @@ export function NewsletterSignup() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-hand text-2xl font-bold py-3.5 px-6 shadow-md hover:shadow-lg transition-all duration-200 active:translate-y-px rounded-sm"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-ui text-2xl font-bold py-3.5 px-6 shadow-md hover:shadow-lg transition-all duration-200 active:translate-y-px rounded-sm"
               >
                 {status === "submitting" ? "..." : t("submit")}
               </button>

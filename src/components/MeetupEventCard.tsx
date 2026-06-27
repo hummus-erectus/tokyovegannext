@@ -44,12 +44,12 @@ export function MeetupEventCard({
         <div className="p-6 pt-8 pb-8 text-center bg-paper-texture flex-1 flex flex-col justify-center">
           <div className="inline-block mb-4">
             <div className="border-[3px] border-slate-800/20 px-3 py-1 -rotate-2 rounded-sm inline-block">
-              <span className="font-hand text-sm font-bold tracking-widest text-slate-500 uppercase">
+              <span className="font-decorative text-sm font-bold tracking-widest text-slate-500 uppercase">
                 {t("nextEvent")}
               </span>
             </div>
           </div>
-          <h3 className="mb-2 font-hand text-3xl sm:text-4xl font-bold leading-tight text-slate-800 wrap-break-word">
+          <h3 className="mb-2 font-heading text-3xl sm:text-4xl font-bold leading-tight text-slate-800 wrap-break-word">
             {title}
           </h3>
         </div>
@@ -79,7 +79,7 @@ export function MeetupEventCard({
               href={eventUrl}
               target="_blank"
               rel="noreferrer"
-              className="font-hand group inline-flex items-center text-2xl font-bold text-slate-800 transition-colors hover:text-emerald-600"
+              className="font-decorative group inline-flex items-center text-2xl font-bold text-slate-800 transition-colors hover:text-emerald-600"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >

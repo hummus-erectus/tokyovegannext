@@ -32,8 +32,8 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
     <div
       className={`flex ${
         isMobile
-          ? "flex-col items-center gap-6 font-hand text-2xl font-semibold text-emerald-700"
-          : "gap-8 items-center font-hand text-2xl font-bold text-emerald-700"
+          ? "flex-col items-center gap-6 font-ui text-2xl font-semibold text-emerald-700"
+          : "gap-8 items-center font-ui text-2xl font-bold text-emerald-700"
       }`}
     >
       {navLinks.map((link) => {
@@ -75,10 +75,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
 function LanguageSwitch({locale, pathname, translate}: LanguageSwitchProps) {
   const targetLocale = locale === "en" ? "ja" : "en";
   const targetKey = targetLocale === "en" ? "english" : "japanese";
-  const fontStyle =
-    targetLocale === "en"
-      ? {fontFamily: "var(--font-amatic)"}
-      : {fontFamily: "var(--font-yomogi)"};
+  const fontStyle = {fontFamily: "var(--font-noto-sans-jp)"};
 
   const commonProps = {
     href: pathname || "/",
@@ -91,8 +88,8 @@ function LanguageSwitch({locale, pathname, translate}: LanguageSwitchProps) {
       {...commonProps}
       className={
         targetLocale === "en"
-          ? "text-center text-2xl font-bold text-emerald-700 transition-colors"
-          : "text-center text-xl font-bold text-emerald-700 transition-colors"
+          ? "text-center text-2xl leading-none font-bold text-emerald-700 transition-colors"
+          : "text-center text-xl leading-none font-bold text-emerald-700 transition-colors"
       }
     >
       <RoughHighlight type="box" color="#10b981" strokeWidth={2} trigger="hover">
@@ -154,7 +151,7 @@ export default function Header() {
             <Link
               href="/"
               locale={locale}
-              className="font-hand-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
+              className="font-brand text-4xl font-bold uppercase tracking-wide text-brand-green transition-colors hover:text-emerald-700"
               onClick={(e) => {
                 setOpen(false);
                 if (pathname === "/") {

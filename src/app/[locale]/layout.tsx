@@ -2,19 +2,32 @@ import type {Metadata, Viewport} from "next";
 import {NextIntlClientProvider} from "next-intl";
 import {getMessages} from "next-intl/server";
 import {notFound} from "next/navigation";
-import {Geist, Geist_Mono, Amatic_SC, Yomogi} from "next/font/google";
+import {Klee_One, Noto_Sans, Noto_Sans_JP, Inter, Amatic_SC, Caveat} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {routing} from "@/i18n/routing";
 import "../globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const klee = Klee_One({
+  variable: "--font-klee",
+  weight: ["400", "600"],
+  subsets: ["latin"],
+  preload: false,
+});
+
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSansJp = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+  preload: false,
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -24,9 +37,9 @@ const amatic = Amatic_SC({
   subsets: ["latin"],
 });
 
-const yomogi = Yomogi({
-  variable: "--font-yomogi",
-  weight: "400",
+const caveat = Caveat({
+  variable: "--font-caveat",
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
@@ -56,7 +69,7 @@ export default async function LocaleLayout({children, params}: Props) {
 
   return (
     <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${amatic.variable} ${yomogi.variable} antialiased`}>
+      <body className={`${klee.variable} ${notoSans.variable} ${notoSansJp.variable} ${inter.variable} ${amatic.variable} ${caveat.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <div className="flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
             <Header />

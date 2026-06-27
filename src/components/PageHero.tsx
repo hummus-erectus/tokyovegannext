@@ -54,7 +54,7 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
             <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-700 px-3 py-1">{eyebrow}</p>
           </RoughHighlight>
         </div>
-        <h1 className="font-hand text-5xl md:text-6xl font-bold text-slate-900 mb-4 -rotate-1">{title}</h1>
+        <h1 className="font-heading text-5xl md:text-6xl font-bold text-slate-900 mb-4 -rotate-1">{title}</h1>
         <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8 font-medium">{description}</p>
         
         {actions.length > 0 && <div className="flex flex-col sm:flex-row gap-4 justify-center">{actions.map(renderAction)}</div>}

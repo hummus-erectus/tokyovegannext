@@ -11,7 +11,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
           href="https://instagram.com/tokyoveganofficial"
           target="_blank"
           rel="noreferrer"
-          className="group font-hand-brand text-5xl font-bold text-emerald-700 -rotate-2"
+          className="group font-brand text-5xl font-bold text-emerald-700 -rotate-2"
         >
           <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
             <span>@tokyoveganofficial</span>

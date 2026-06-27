@@ -27,13 +27,13 @@ export default function Footer() {
               className="mx-auto h-auto w-32"
             />
           </div>
-          <p className="font-hand text-2xl font-bold text-emerald-800/70">
+          <p className="font-decorative text-2xl font-bold text-emerald-800/70">
             {t("footer.tagline")}
           </p>
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap justify-center gap-6 font-hand text-xl font-bold text-emerald-700">
+        <div className="flex flex-wrap justify-center gap-6 font-ui text-xl font-bold text-emerald-700">
           <a
             href="https://www.meetup.com/tokyovegan/"
             target="_blank"
@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="font-hand text-xl text-emerald-700/50">
+        <div className="font-ui text-xl text-emerald-700/50">
           <p>
             © {new Date().getFullYear()} Tokyo Vegan. {t("footer.copyright")}
           </p>

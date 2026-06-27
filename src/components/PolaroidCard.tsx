@@ -62,7 +62,7 @@ export function PolaroidCard({
           <div className="sticky-outer">
             <div className="sticky-wrapper">
               <div className={`sticky-content ${color} p-4 text-center flex flex-col items-center justify-center shadow-lg min-h-[100px]`}>
-                <p className={`font-hand font-bold text-slate-900 leading-tight ${isJapanese ? "text-2xl" : "text-3xl"}`} style={{ whiteSpace: "pre-wrap" }}>
+                <p className={`font-decorative font-bold text-slate-900 leading-tight ${isJapanese ? "text-2xl" : "text-3xl"}`} style={{ whiteSpace: "pre-wrap" }}>
                   {stickyLabel}
                 </p>
               </div>

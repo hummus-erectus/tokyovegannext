@@ -60,7 +60,7 @@ function NextEventFlyer({
 
         {/* Top accent band */}
         <div className="event-flyer-band bg-emerald-600 pt-6 pb-3 sm:pt-7">
-          <span className="font-hand text-xl font-bold uppercase tracking-[0.2em] text-white/95 sm:text-2xl">
+          <span className="font-decorative text-xl font-bold uppercase tracking-[0.2em] text-white/95 sm:text-2xl">
             ★ {t('nextEvent')} ★
           </span>
         </div>
@@ -68,7 +68,7 @@ function NextEventFlyer({
         {/* Body */}
         <div className="relative z-2 flex flex-1 flex-col items-center justify-center px-6 py-8 text-center">
           <h3
-            className="mb-4 font-hand font-bold leading-tight text-slate-800 wrap-break-word"
+            className="mb-4 font-heading font-bold leading-tight text-slate-800 wrap-break-word"
             style={{ fontSize: 'clamp(1.5rem, 8cqw, 2.25rem)' }}
             title={title}
           >
@@ -96,7 +96,7 @@ function NextEventFlyer({
             </RoughHighlight>
           </div>
 
-          <span className="mb-6 font-hand text-2xl font-bold text-slate-800 sm:text-3xl">
+          <span className="mb-6 font-heading text-2xl font-bold text-slate-800 sm:text-3xl">
             {displayTime}
           </span>
 
@@ -105,7 +105,7 @@ function NextEventFlyer({
             href={eventUrl}
             target="_blank"
             rel="noreferrer"
-            className="group/cta relative z-6 inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-hand text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-emerald-600 hover:border-emerald-600 hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
+            className="group/cta relative z-6 inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-ui text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-emerald-600 hover:border-emerald-600 hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
           >
             <FaMeetup className="h-5 w-5" />
             <span>{t('rsvp')}</span>
@@ -115,7 +115,7 @@ function NextEventFlyer({
 
         {/* Bottom decorative band */}
         <div className="event-flyer-band bg-emerald-600 mt-auto py-3">
-          <span className="font-hand text-base font-bold uppercase tracking-[0.25em] text-white/90 sm:text-lg">
+          <span className="font-decorative text-base font-bold uppercase tracking-[0.25em] text-white/90 sm:text-lg">
             ★ Tokyo Vegan ★
           </span>
         </div>
@@ -143,14 +143,14 @@ function MeetupFlyer() {
           {/* Large Meetup logo */}
           <div className="mb-6 flex flex-col items-center justify-center text-[#ED1C40]">
             <FaMeetup className="h-32 w-32 drop-shadow-sm" />
-            <span className="mt-1 block font-hand text-3xl font-bold leading-tight text-emerald-800">
+            <span className="mt-1 block font-brand text-3xl font-bold leading-tight text-emerald-800">
               Tokyo Vegan
               <br />
               Meetup Group
             </span>
           </div>
 
-          <h3 className="mb-3 font-hand text-3xl font-bold leading-none sm:text-4xl md:text-5xl">
+          <h3 className="mb-3 font-heading text-3xl font-bold leading-none sm:text-4xl md:text-5xl">
             {t('title')}
           </h3>
 
@@ -163,7 +163,7 @@ function MeetupFlyer() {
             href="https://www.meetup.com/tokyovegan/"
             target="_blank"
             rel="noreferrer"
-            className="group/cta relative z-6 mt-auto inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-hand text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-[#ED1C40] hover:border-[#ED1C40] hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
+            className="group/cta relative z-6 mt-auto inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-ui text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-[#ED1C40] hover:border-[#ED1C40] hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
           >
             <FaMeetup className="h-5 w-5" />
             <span>{t('cta')}</span>

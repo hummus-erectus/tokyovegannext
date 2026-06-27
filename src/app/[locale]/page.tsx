@@ -44,7 +44,7 @@ export default async function HomePage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
               <div className="space-y-4 flex flex-col items-center lg:items-start">
-                <h1 className="font-hand-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
+                <h1 className="font-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
                   {t("hero.title")}
                 </h1>
                 <p className="max-w-lg text-lg text-slate-700 sm:text-xl">
@@ -130,7 +130,7 @@ export default async function HomePage() {
                       />
                     </div>
                     <div className="mt-4 px-3 text-center -rotate-1">
-                      <p className="font-hand text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
+                      <p className="font-decorative text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
                         <RoughHighlight type="highlight" multiline={true} color="rgba(167, 243, 208, 0.4)" trigger="hover">
                           <span>&ldquo;{t("hero.communityBlurb")}&rdquo;</span>
                         </RoughHighlight>
@@ -158,7 +158,7 @@ export default async function HomePage() {
          </div>
          <div className="mb-10 text-center">
             <Link href="/events" locale={locale} className="group inline-block text-emerald-700">
-               <h2 className="font-hand text-5xl sm:text-6xl font-bold -rotate-1">
+               <h2 className="font-heading text-5xl sm:text-6xl font-bold -rotate-1">
                   <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                      <span>{t("newsletter.sectionTitle")}</span>
                   </RoughHighlight>
@@ -203,7 +203,7 @@ export default async function HomePage() {
          </div>
          <div className="mb-4 text-center">
             <Link href="/resources" locale={locale} className="group inline-block text-emerald-700">
-               <h2 className="font-hand text-6xl font-bold -rotate-1">
+               <h2 className="font-heading text-6xl font-bold -rotate-1">
                   <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                      <span>{t("sections.activities.title")}</span>
                   </RoughHighlight>
@@ -211,7 +211,7 @@ export default async function HomePage() {
             </Link>
          </div>
 
-         <h3 className="mb-8 font-hand text-3xl font-bold text-slate-900 group w-full text-center">
+         <h3 className="mb-8 font-heading text-3xl font-bold text-slate-900 group w-full text-center">
             <RoughHighlight type="highlight" multiline={true} color="rgba(253, 224, 71, 0.4)" trigger="hover">
                <span>{t("sections.activities.description")}</span>
             </RoughHighlight>
@@ -266,8 +266,8 @@ export default async function HomePage() {
                  const config = cardConfig[key];
 
                  const titleClass = isJapanese
-                   ? "font-hand text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
-                   : "font-hand text-2xl sm:text-3xl font-bold text-slate-900";
+                   ? "font-heading text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
+                   : "font-heading text-2xl sm:text-3xl font-bold text-slate-900";
 
                  const content = (
                    <PolaroidCard
@@ -320,12 +320,12 @@ export default async function HomePage() {
         <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="font-hand text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
+              <h2 className="font-heading text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
             </div>
             <Link
               href="/blog"
               locale={locale}
-              className="group font-hand text-3xl font-bold text-emerald-700 transition-colors"
+              className="group font-decorative text-3xl font-bold text-emerald-700 transition-colors"
             >
               <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                 <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
@@ -363,7 +363,7 @@ export default async function HomePage() {
               })}
             </div>
           ) : (
-            <p className="text-center font-hand text-2xl text-slate-500">
+            <p className="text-center font-decorative text-2xl text-slate-500">
               {locale === 'ja' ? 'まだ記事がありません' : 'No posts yet — check back soon!'}
             </p>
           )}
