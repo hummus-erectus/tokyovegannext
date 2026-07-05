@@ -63,7 +63,7 @@ export default async function EventsPage(props: {
                   href="https://www.meetup.com/tokyovegan/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="photo-slit relative block transition-transform hover:scale-[1.02]"
+                  className="photo-slit relative block"
                 >
                   <Image
                     src="/images/group.jpg"
@@ -100,7 +100,7 @@ export default async function EventsPage(props: {
                   alt="Social Gathering"
                   width={600}
                   height={400}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
@@ -119,7 +119,7 @@ export default async function EventsPage(props: {
                   alt="Workshop"
                   width={600}
                   height={400}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
@@ -138,7 +138,7 @@ export default async function EventsPage(props: {
                   alt="Outreach"
                   width={600}
                   height={400}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="font-heading text-2xl font-bold text-emerald-900 mb-3">
