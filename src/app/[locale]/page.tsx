@@ -8,6 +8,7 @@ import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
 import { RoughHighlight } from '@/components/RoughHighlight';
 import { PolaroidCard } from '@/components/PolaroidCard';
+import { SectionLabel } from '@/components/SectionLabel';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
@@ -144,31 +145,35 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Newsletter + Next Event */}
-      <section id="newsletter" className="relative mx-auto w-full max-w-5xl px-4 pt-18 sm:pt-0 lg:pt-8 scroll-mt-24">
-         {/* Origami Chicken */}
-         <div className="absolute -top-6 left-1/2 -translate-x-1/2 sm:left-2 sm:translate-x-0 lg:-left-4 z-20 w-24 sm:w-32 lg:w-40 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
-           <Image
-             src="/images/chicken.webp"
-             alt="Origami Chicken"
-             width={300}
-             height={300}
-             className="w-full h-auto object-contain"
-           />
-         </div>
-         <div className="mb-10 text-center">
-            <Link href="/events" locale={locale} className="group inline-block text-emerald-700">
-               <h2 className="font-heading text-5xl sm:text-6xl font-bold -rotate-1">
-                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
-                     <span>{t("newsletter.sectionTitle")}</span>
-                  </RoughHighlight>
-               </h2>
-            </Link>
-         </div>
-         <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
-            {/* Next Event — second on mobile, LEFT on desktop */}
-            <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
-               <div className="flex flex-col items-center mx-auto w-full">
+      {/* Newsletter + Next Event — Corkboard */}
+      <section id="newsletter" className="relative w-full scroll-mt-24">
+        <div className="corkboard py-20 sm:py-24 lg:py-28">
+          <div className="relative mx-auto w-full max-w-5xl px-4">
+            {/* Origami Chicken — perched on the corkboard, above the title */}
+            <div className="absolute -top-16 left-4 sm:-top-20 sm:left-2 lg:left-4 z-30 w-20 sm:w-28 lg:w-36 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
+              <Image
+                src="/images/chicken.webp"
+                alt="Origami Chicken"
+                width={300}
+                height={300}
+                className="w-full h-auto object-contain"
+              />
+            </div>
+            <div className="mb-14 text-center">
+              <SectionLabel
+                href="/events"
+                locale={locale}
+                highlightColor="#10b981"
+                rotation="-rotate-1"
+                textClassName="text-slate-900"
+              >
+                {t("newsletter.sectionTitle")}
+              </SectionLabel>
+            </div>
+            <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
+              {/* Next Event — second on mobile, LEFT on desktop */}
+              <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
+                <div className="flex flex-col items-center mx-auto w-full">
                   <EventFlyer
                     event={nextEvent ? {
                       title: nextEvent.title,
@@ -177,16 +182,18 @@ export default async function HomePage() {
                       eventUrl: nextEvent.url,
                     } : undefined}
                   />
-               </div>
-            </div>
+                </div>
+              </div>
 
-            {/* Newsletter — first on mobile for visibility, RIGHT on desktop */}
-            <div className="order-1 md:order-2 px-4 sm:px-6 md:px-0">
-               <div className="flex flex-col items-center mx-auto w-full">
+              {/* Newsletter — first on mobile for visibility, RIGHT on desktop */}
+              <div className="order-1 md:order-2 px-4 sm:px-6 md:px-0">
+                <div className="flex flex-col items-center mx-auto w-full">
                   <NewsletterSignup />
-               </div>
+                </div>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </section>
 
       {/* Activities Section (Polaroid cards) */}
@@ -202,13 +209,15 @@ export default async function HomePage() {
            />
          </div>
          <div className="mb-4 text-center">
-            <Link href="/resources" locale={locale} className="group inline-block text-emerald-700">
-               <h2 className="font-heading text-6xl font-bold -rotate-1">
-                  <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
-                     <span>{t("sections.activities.title")}</span>
-                  </RoughHighlight>
-               </h2>
-            </Link>
+            <SectionLabel
+              href="/resources"
+              locale={locale}
+              highlightColor="#10b981"
+              rotation="-rotate-1"
+              textClassName="text-slate-900"
+            >
+              {t("sections.activities.title")}
+            </SectionLabel>
          </div>
 
          <h3 className="mb-8 font-heading text-3xl font-bold text-slate-900 group w-full text-center">
@@ -377,12 +386,14 @@ export default async function HomePage() {
       </section>
 
       {/* Contact Flyer Section */}
-      <section className="mx-auto w-full max-w-6xl px-4" id="contact">
-        <div className="flex flex-col items-center">
-          <TearOffFlyer
-            title={t("contact.title")}
-            subtitle={t("contact.subtitle")}
-          />
+      <section className="relative w-full pt-12 pb-16 scroll-mt-24" id="contact">
+        <div className="corkboard py-16 sm:py-20">
+          <div className="mx-auto w-full max-w-2xl px-4">
+            <TearOffFlyer
+              title={t("contact.title")}
+              subtitle={t("contact.subtitle")}
+            />
+          </div>
         </div>
       </section>
 

@@ -37,10 +37,9 @@ export function NewsletterSignup() {
 
   return (
     <div className="relative mx-auto w-full max-w-sm rotate-1">
-      {/* Tape Element */}
-      <div className="tape-section">
-        <div className="tape-top-center" />
-      </div>
+      {/* Pushpins — top corners, pinned to corkboard */}
+      <div className="pushpin pushpin-red" style={{ top: "4px", left: "12px", transform: "none" }} />
+      <div className="pushpin pushpin-blue" style={{ top: "4px", right: "12px", left: "auto", transform: "none" }} />
 
       <div className="relative bg-emerald-50 p-6 pt-8 pb-7 paper-shadow-rest border border-emerald-100/60">
         {/* Decorative corner fold */}
