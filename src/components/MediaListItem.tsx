@@ -19,7 +19,7 @@ function PolaroidCover({title, imageUrl, fallbackImage, reverse}: PolaroidCoverP
 
       {/* Polaroid-style frame */}
       <div
-        className="relative bg-white p-3 pb-6 shadow-lg"
+        className="relative bg-white p-3 pb-6 paper-shadow-rest"
         style={{
           transform: reverse ? "rotate(2deg)" : "rotate(-2deg)",
         }}
@@ -61,7 +61,7 @@ function IndexCard({title, reverse, meta, children, action}: IndexCardProps) {
       <div className="pointer-events-none absolute right-2 top-2 z-20 h-7 w-28 origin-center translate-x-1/3 -translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
       <div className="pointer-events-none absolute bottom-2 left-2 z-20 h-7 w-28 origin-center -translate-x-1/3 translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
       <div
-        className="relative overflow-hidden bg-white shadow-md font-mono"
+        className="relative overflow-hidden paper-card paper-shadow-rest font-mono"
         style={{
           backgroundImage:
             "repeating-linear-gradient(#ffffff, #ffffff 25px, #9198e5 26px, #9198e5 27px)",

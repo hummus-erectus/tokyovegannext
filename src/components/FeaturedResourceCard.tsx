@@ -1,9 +1,9 @@
 "use client";
 
-import {useState} from "react";
 import Image from "next/image";
 import {Link} from "@/i18n/routing";
 import {RoughHighlight} from "@/components/RoughHighlight";
+import {usePaperLift} from "@/hooks/usePaperLift";
 
 type FeaturedResourceCardProps = {
   locale: "en" | "ja";
@@ -28,21 +28,18 @@ export function FeaturedResourceCard({
   imageSrc,
   imageAlt
 }: FeaturedResourceCardProps) {
-  const [isActive, setIsActive] = useState(false);
+  const {isHovered, containerProps, cardStyle} = usePaperLift();
 
   return (
     <Link
       href={href}
       locale={locale}
       className="group block"
-      onMouseEnter={() => setIsActive(true)}
-      onMouseLeave={() => setIsActive(false)}
-      onFocus={() => setIsActive(true)}
-      onBlur={() => setIsActive(false)}
+      {...containerProps}
     >
       <div className="tape-section -rotate-1">
         <div className="tape-top-center" />
-        <div className="bg-white p-6 sm:p-8 md:p-10 shadow-xl shadow-slate-300/60 transition-shadow duration-300 group-hover:shadow-2xl">
+        <div className="paper-card p-6 sm:p-8 md:p-10" style={cardStyle}>
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10 lg:gap-12">
             <div className="relative w-full max-w-[320px] shrink-0 sm:max-w-[400px] md:max-w-sm lg:max-w-md">
               <div className="absolute -top-3 -right-2 z-20 rotate-12 sm:-top-4 sm:-right-3 md:-top-5 md:-right-5">
@@ -54,7 +51,7 @@ export function FeaturedResourceCard({
                 </div>
               </div>
 
-              <div className="rotate-1 bg-white p-3 pb-6 shadow-lg shadow-slate-300/40 transition-transform duration-300 group-hover:rotate-2">
+              <div className="rotate-1 paper-card p-3 pb-6 paper-shadow-rest transition-transform duration-300 group-hover:rotate-2">
                 <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
                     src={imageSrc}
@@ -75,7 +72,7 @@ export function FeaturedResourceCard({
                   multiline={true}
                   color="rgba(167, 243, 208, 0.4)"
                   className="group-hover:[&>span]:text-slate-900!"
-                  show={isActive}
+                  show={isHovered}
                 >
                   <span>{title}</span>
                 </RoughHighlight>

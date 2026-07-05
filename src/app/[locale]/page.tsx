@@ -117,7 +117,7 @@ export default async function HomePage() {
 
                <div className="tape-section rotate-2">
                   <div className="tape-top-center" />
-                  <div className="bg-white p-3 pb-8 shadow-xl shadow-slate-300/60">
+                  <div className="paper-card p-3 pb-8 paper-shadow-rest">
                     <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
                       <Image
                         src="/images/group.jpg"

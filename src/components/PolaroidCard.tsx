@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { usePaperLift } from '@/hooks/usePaperLift';
 
 interface PolaroidCardProps {
   title: string;
@@ -27,12 +28,15 @@ export function PolaroidCard({
   titleClass,
   isJapanese,
 }: PolaroidCardProps) {
+  const { containerProps, cardStyle } = usePaperLift();
+
   return (
     <div
-      className={`relative group ${marginTop} ${rotation} transition-transform duration-300`}
+      className={`relative group ${marginTop} ${rotation}`}
+      {...containerProps}
     >
       {/* Polaroid Card containing Tape */}
-      <div className="relative bg-white p-4 pb-8 shadow-xl shadow-slate-300/60 transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl">
+      <div className="relative paper-card p-4 pb-8" style={cardStyle}>
         {/* Tape Element */}
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 w-24">
           <div className="tape-section">

@@ -27,7 +27,7 @@ function FaqCard({
       <div className="tape-top-center" />
       {/* Question card */}
       <button
-        className="relative z-2 w-full text-left bg-white p-6 shadow-md shadow-slate-300/40 transition-shadow duration-300 hover:shadow-lg"
+        className="relative z-2 w-full text-left bg-white p-6 paper-shadow-rest transition-shadow duration-300 hover:paper-shadow-lift"
         onClick={onClick}
       >
         <div className="flex items-start justify-between gap-4">
@@ -50,7 +50,7 @@ function FaqCard({
         }`}
       >
         <div
-          className="bg-paper-texture border border-slate-200/60 px-5 py-5 shadow-lg shadow-slate-300/40 overflow-hidden"
+          className="paper-card border border-slate-200/60 px-5 py-5 paper-shadow-lift overflow-hidden"
           style={slipStyle}
         >
           <div className="h-px w-full border-t border-dashed border-emerald-200/70" />

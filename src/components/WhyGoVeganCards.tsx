@@ -47,7 +47,7 @@ function WhyGoVeganCard({
     <div className="h-full" {...containerProps}>
       <button
         onClick={onSelect}
-        className={`group flex h-full w-full cursor-pointer flex-col overflow-hidden bg-paper-texture text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
+        className={`group flex h-full w-full cursor-pointer flex-col overflow-hidden paper-card text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={cardStyle}
       >
         <div className={`relative h-48 w-full overflow-hidden bg-linear-to-br ${accent}`}>
@@ -109,7 +109,7 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
         {activeReason && activeReasonCopy && activeReasonMedia ? (
           <div className="tape-section -rotate-1">
             <div className="tape-top-center" />
-            <div className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden bg-white shadow-2xl shadow-slate-400/30">
+            <div className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden paper-card paper-shadow-lift">
               <div className="relative h-56 w-full shrink-0 overflow-hidden bg-slate-100">
                 <Image src={activeReasonMedia.image.src} alt={activeReasonMedia.image.alt} fill className="object-cover" />
                 <button

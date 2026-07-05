@@ -42,7 +42,7 @@ export function NewsletterSignup() {
         <div className="tape-top-center" />
       </div>
 
-      <div className="relative bg-emerald-50 p-6 pt-8 pb-7 shadow-xl shadow-slate-400/40 border border-emerald-100/60">
+      <div className="relative bg-emerald-50 p-6 pt-8 pb-7 paper-shadow-rest border border-emerald-100/60">
         {/* Decorative corner fold */}
         <div className="absolute top-0 right-0 w-0 h-0 border-t-28 border-t-white border-l-28 border-l-transparent z-10" />
 

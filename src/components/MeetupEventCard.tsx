@@ -38,10 +38,10 @@ export function MeetupEventCard({
         <div className="tape-top-center" />
       </div>
 
-      <div className="overflow-hidden bg-white shadow-xl shadow-slate-400/40 border border-slate-200/60 flex flex-col">
+      <div className="overflow-hidden paper-card paper-shadow-rest border border-slate-200/60 flex flex-col">
         
         {/* Top half with paper texture */}
-        <div className="p-6 pt-8 pb-8 text-center bg-paper-texture flex-1 flex flex-col justify-center">
+        <div className="p-6 pt-8 pb-8 text-center paper-card flex-1 flex flex-col justify-center">
           <div className="inline-block mb-4">
             <div className="border-[3px] border-slate-800/20 px-3 py-1 -rotate-2 rounded-sm inline-block">
               <span className="font-decorative text-sm font-bold tracking-widest text-slate-500 uppercase">

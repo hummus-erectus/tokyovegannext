@@ -34,7 +34,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
                 className={`group relative z-0 inline-block w-full transform break-inside-avoid transition duration-300 ease-out hover:z-30 hover:scale-110 ${rotations[index % rotations.length]} ${verticalOffsets[index % verticalOffsets.length]}`}
               >
                 <div className="tape-top-center" />
-                <div className="flex flex-col items-center justify-center bg-white p-2 md:p-3 shadow-lg shadow-slate-300 transition group-hover:shadow-xl">
+                <div className="flex flex-col items-center justify-center paper-card p-2 md:p-3 paper-shadow-rest transition group-hover:paper-shadow-lift">
                   <div className="w-full overflow-hidden bg-slate-100 flex items-center">
                     <img
                       src={post.imageUrl}
