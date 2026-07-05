@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com"
       },
       {
+        protocol: "https",
+        hostname: "books.google.co.jp"
+      },
+      {
+        protocol: "https",
+        hostname: "lanternpub.wpenginepowered.com"
+      },
+      {
         protocol: 'https',
         hostname: 'res.cloudinary.com', // Allow Cloudinary images
       },
