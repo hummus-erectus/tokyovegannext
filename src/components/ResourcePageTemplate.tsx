@@ -118,7 +118,7 @@ export async function ResourcePageTemplate({
 
             return (
               <section key={type} className="space-y-6">
-                <h2 className="font-hand text-4xl font-bold text-slate-800 -rotate-1">
+                <h2 className="font-heading text-4xl font-bold text-slate-800 -rotate-1">
                   {label}
                 </h2>
                 <ResourceGrid

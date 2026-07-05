@@ -46,7 +46,7 @@ function buildPtComponents(): PortableTextComponents {
               />
             </div>
             {value.caption && (
-              <figcaption className="mt-2 text-center text-sm text-slate-500 font-hand">
+              <figcaption className="mt-2 text-center text-sm text-slate-500 font-decorative">
                 {value.caption}
               </figcaption>
             )}
@@ -56,12 +56,12 @@ function buildPtComponents(): PortableTextComponents {
     },
     block: {
       h2: ({ children }) => (
-        <h2 className="font-hand text-3xl md:text-4xl font-bold text-emerald-700 mt-10 mb-4 -rotate-1">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-emerald-700 mt-10 mb-4 -rotate-1">
           {children}
         </h2>
       ),
       h3: ({ children }) => (
-        <h3 className="font-hand text-2xl md:text-3xl font-bold text-slate-800 mt-8 mb-3">
+        <h3 className="font-heading text-2xl md:text-3xl font-bold text-slate-800 mt-8 mb-3">
           {children}
         </h3>
       ),
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mb-8">
           <Link
             href={`/${locale}/blog`}
-            className="font-hand text-lg text-emerald-700 hover:text-emerald-500 transition-colors"
+            className="font-decorative text-lg text-emerald-700 hover:text-emerald-500 transition-colors"
           >
             ← {t('backToList')}
           </Link>
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="tape-top-center" />
           <div className="bg-paper-texture p-6 md:p-12 shadow-xl shadow-slate-300/60">
             {/* Title */}
-            <h1 className="font-hand text-4xl md:text-6xl font-bold text-slate-900 mb-4 -rotate-1">
+            <h1 className="font-heading text-4xl md:text-6xl font-bold text-slate-900 mb-4 -rotate-1">
               {post.title}
             </h1>
 
@@ -201,7 +201,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-12 text-center">
           <Link
             href={`/${locale}/blog`}
-            className="font-hand text-xl text-emerald-700 hover:text-emerald-500 transition-colors"
+            className="font-decorative text-xl text-emerald-700 hover:text-emerald-500 transition-colors"
           >
             ← {t('backToList')}
           </Link>

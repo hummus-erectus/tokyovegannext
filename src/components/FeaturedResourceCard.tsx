@@ -50,7 +50,7 @@ export function FeaturedResourceCard({
                   className="border border-amber-300/60 bg-[#FCD34D] px-4 py-2 shadow-md"
                   style={{clipPath: "polygon(3% 8%, 97% 2%, 100% 92%, 4% 98%)"}}
                 >
-                  <span className="font-hand text-base font-bold text-slate-900 sm:text-lg md:text-xl">{badge}</span>
+                  <span className="font-decorative text-base font-bold text-slate-900 sm:text-lg md:text-xl">{badge}</span>
                 </div>
               </div>
 
@@ -64,12 +64,12 @@ export function FeaturedResourceCard({
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
-                <p className="mt-3 -rotate-1 text-center font-hand text-lg text-slate-500">{eyebrow}</p>
+                <p className="mt-3 -rotate-1 text-center font-decorative text-lg text-slate-500">{eyebrow}</p>
               </div>
             </div>
 
             <div className="flex flex-1 flex-col justify-center text-center md:text-left">
-              <h2 className="mb-4 font-hand text-5xl font-bold text-slate-900 -rotate-1 md:text-6xl">
+              <h2 className="mb-4 font-heading text-5xl font-bold text-slate-900 -rotate-1 md:text-6xl">
                 <RoughHighlight
                   type="highlight"
                   multiline={true}

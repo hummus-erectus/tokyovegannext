@@ -78,7 +78,7 @@ export default async function BlogListPage({ params }: Props) {
             <div className="tape-section mx-auto max-w-md">
               <div className="tape-top-center" />
               <div className="bg-white p-8 shadow-lg text-center">
-                <p className="font-hand text-3xl text-slate-500">
+                <p className="font-decorative text-3xl text-slate-500">
                   {t('empty')}
                 </p>
                 <div className="mt-6">

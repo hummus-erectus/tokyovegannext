@@ -31,7 +31,7 @@ function FaqCard({
         onClick={onClick}
       >
         <div className="flex items-start justify-between gap-4">
-          <h3 className="font-hand text-xl font-bold text-slate-800 sm:text-2xl">{question}</h3>
+          <h3 className="font-heading text-xl font-bold text-slate-800 sm:text-2xl">{question}</h3>
           <svg
             viewBox="0 0 24 24"
             className={`mt-1 h-5 w-5 shrink-0 transition-transform duration-300 ${

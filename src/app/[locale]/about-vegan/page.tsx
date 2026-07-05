@@ -95,13 +95,13 @@ export default async function AboutVeganPage() {
         <section id="what-is-veganism" className="scroll-mt-32">
           <div className="grid gap-12 lg:grid-cols-[250px_1fr] items-start">
             <div className="space-y-4 lg:self-start pt-4">
-              <h2 className="font-hand text-5xl font-bold text-emerald-700 rotate-1">{t("whatIsVeganism.title")}</h2>
+              <h2 className="font-heading text-5xl font-bold text-emerald-700 rotate-1">{t("whatIsVeganism.title")}</h2>
               <p className="text-lg text-slate-700">{t("whatIsVeganism.definition")}</p>
             </div>
             <div className="tape-section rotate-1">
               <div className="tape-top-center" />
               <figure className="bg-white p-8 md:p-10 shadow-xl shadow-slate-300/60">
-                <blockquote className="font-hand text-2xl md:text-3xl font-bold leading-relaxed text-slate-800">
+                <blockquote className="font-heading text-2xl md:text-3xl font-bold leading-relaxed text-slate-800">
                   &ldquo;{t("whatIsVeganism.description")}&rdquo;
                 </blockquote>
                 <a href="https://www.vegansociety.com/" target="_blank" rel="noopener noreferrer" className="inline-block mt-6 group">
@@ -119,8 +119,8 @@ export default async function AboutVeganPage() {
         {/* Why Go Vegan? */}
         <section id="why-go-vegan" className="scroll-mt-32 space-y-8">
           <div className="text-center space-y-2">
-            <h2 className="font-hand text-6xl font-bold text-emerald-800 -rotate-1">{t("whyGoVegan.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("whyGoVegan.subtitle")}</p>
+            <h2 className="font-heading text-6xl font-bold text-emerald-800 -rotate-1">{t("whyGoVegan.title")}</h2>
+            <p className="font-decorative text-2xl text-slate-600">{t("whyGoVegan.subtitle")}</p>
           </div>
           <WhyGoVeganCards
             cards={whyGoVeganCards}
@@ -136,11 +136,11 @@ export default async function AboutVeganPage() {
               <div className="tape-top-center" />
               <div className="bg-[#FEF3C7] p-8 shadow-lg shadow-slate-300/40 text-center">
                 <p
-                  className="font-hand text-xl md:text-2xl font-bold leading-relaxed text-slate-800"
+                  className="font-decorative text-xl md:text-2xl font-bold leading-relaxed text-slate-800"
                   dangerouslySetInnerHTML={{__html: t.raw("kindnessCallout.lineOne")}}
                 />
                 <p
-                  className="mt-4 font-hand text-3xl md:text-4xl font-bold text-emerald-700"
+                  className="mt-4 font-heading text-3xl md:text-4xl font-bold text-emerald-700"
                   dangerouslySetInnerHTML={{__html: t.raw("kindnessCallout.lineTwo")}}
                 />
               </div>
@@ -151,8 +151,8 @@ export default async function AboutVeganPage() {
         {/* FAQs */}
         <section id="faqs" className="scroll-mt-32 space-y-2">
           <div className="text-center space-y-2">
-            <h2 className="font-hand text-6xl font-bold text-slate-900 rotate-1">{t("faqs.title")}</h2>
-            <p className="font-hand text-2xl text-slate-600">{t("faqs.subtitle")}</p>
+            <h2 className="font-heading text-6xl font-bold text-slate-900 rotate-1">{t("faqs.title")}</h2>
+            <p className="font-decorative text-2xl text-slate-600">{t("faqs.subtitle")}</p>
           </div>
           <FaqAccordion items={faqItems} />
         </section>
@@ -162,7 +162,7 @@ export default async function AboutVeganPage() {
           <div className="tape-section rotate-1 max-w-xl w-full">
             <div className="tape-top-center" />
             <div className="bg-white p-8 md:p-12 shadow-xl shadow-slate-300/60 text-center">
-              <h2 className="font-hand text-4xl md:text-5xl font-bold text-slate-900">{t("footer.tagline")}</h2>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-slate-900">{t("footer.tagline")}</h2>
               <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                 <PaperButton
                   href="/resources"

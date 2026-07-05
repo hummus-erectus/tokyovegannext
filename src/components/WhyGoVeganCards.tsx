@@ -60,7 +60,7 @@ function WhyGoVeganCard({
           />
         </div>
         <div className="flex flex-1 flex-col px-6 py-6">
-          <h3 className="font-hand text-2xl font-bold text-slate-900">
+          <h3 className="font-heading text-2xl font-bold text-slate-900">
             <RoughHighlight
               type="highlight"
               multiline={true}
@@ -71,7 +71,7 @@ function WhyGoVeganCard({
             </RoughHighlight>
           </h3>
           <p className="mt-3 flex-1 text-slate-600">{reason.content}</p>
-          <span className="mt-4 inline-flex w-fit items-center font-hand text-lg font-bold text-emerald-700">
+          <span className="mt-4 inline-flex w-fit items-center font-decorative text-lg font-bold text-emerald-700">
             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isHovered}>
               <span className="whitespace-nowrap">{readMoreLabel} →</span>
             </RoughHighlight>
@@ -126,7 +126,7 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
               <div className="flex flex-1 flex-col overflow-y-auto px-6 py-8 text-slate-700">
                 <div className="space-y-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-600">{sectionTitle}</p>
-                  <h3 className="font-hand text-3xl font-bold text-slate-900">{activeReasonCopy.title}</h3>
+                  <h3 className="font-heading text-3xl font-bold text-slate-900">{activeReasonCopy.title}</h3>
                   <p className="whitespace-pre-line leading-relaxed">{activeReasonCopy.full}</p>
                 </div>
                 <div className="mt-8 border-t border-slate-200 pt-4">

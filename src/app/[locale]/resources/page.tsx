@@ -106,10 +106,10 @@ export default async function ResourcesPage() {
             className="grid gap-8 lg:grid-cols-[250px_1fr] scroll-mt-32"
           >
             <div className="space-y-4 lg:self-start pt-8">
-              <h2 className="font-hand text-5xl font-bold text-emerald-700 -rotate-2">
+              <h2 className="font-heading text-5xl font-bold text-emerald-700 -rotate-2">
                 {t(`sections.${sectionKey}.title`)}
               </h2>
-              <p className="text-xl text-slate-700 font-hand">
+              <p className="text-xl text-slate-700 font-decorative">
                 {t(`sections.${sectionKey}.description`)}
               </p>
             </div>

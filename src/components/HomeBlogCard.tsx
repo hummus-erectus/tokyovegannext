@@ -59,7 +59,7 @@ export function HomeBlogCard({
       )}
 
       <div className="flex flex-1 flex-col px-2">
-        <h3 className="font-hand text-2xl sm:text-3xl font-bold text-slate-900">
+        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-slate-900">
           <RoughHighlight
             type="highlight"
             multiline={true}
@@ -73,7 +73,7 @@ export function HomeBlogCard({
         </h3>
 
         {(formattedDate || authorName) && (
-          <p className="mt-2 font-hand text-lg text-slate-600 font-bold">
+          <p className="mt-2 font-decorative text-lg text-slate-600 font-bold">
             {formattedDate}
             {formattedDate && authorName && ' · '}
             {authorName}
@@ -84,7 +84,7 @@ export function HomeBlogCard({
           {excerpt}
         </p>
 
-        <span className="mt-4 font-hand text-xl font-bold text-emerald-700 transition-colors group-hover:text-emerald-500">
+        <span className="mt-4 font-decorative text-xl font-bold text-emerald-700 transition-colors group-hover:text-emerald-500">
           <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover" show={isHovered}>
             <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
           </RoughHighlight>

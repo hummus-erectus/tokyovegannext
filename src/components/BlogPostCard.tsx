@@ -56,7 +56,7 @@ export function BlogPostCard({
         )}
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="font-hand text-2xl font-bold text-slate-900">
+          <h3 className="font-heading text-2xl font-bold text-slate-900">
             <RoughHighlight
               type="highlight"
               multiline={true}
@@ -78,7 +78,7 @@ export function BlogPostCard({
 
           <p className="mt-3 flex-1 text-sm text-slate-600 line-clamp-3">{excerpt}</p>
 
-          <span className="mt-4 font-hand text-lg font-bold text-emerald-700">
+          <span className="mt-4 font-decorative text-lg font-bold text-emerald-700">
             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} show={isHovered}>
               <span className="whitespace-nowrap">{locale === 'ja' ? '続きを読む →' : 'Read more →'}</span>
             </RoughHighlight>
