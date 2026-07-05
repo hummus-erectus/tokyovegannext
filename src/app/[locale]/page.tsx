@@ -38,7 +38,7 @@ export default async function HomePage() {
   const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
 
   return (
-    <div className="flex flex-col gap-12 md:gap-16 lg:gap-20 text-slate-900">
+    <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 text-slate-900">
       {/* Hero Section */}
       <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
         <div className="mx-auto max-w-6xl px-4">
@@ -147,10 +147,10 @@ export default async function HomePage() {
 
       {/* Newsletter + Next Event — Corkboard */}
       <section id="newsletter" className="relative w-full scroll-mt-24">
-        <div className="corkboard py-20 sm:py-24 lg:py-28">
+        <div className="corkboard py-14 sm:py-16 lg:py-20">
           <div className="relative mx-auto w-full max-w-5xl px-4">
             {/* Origami Chicken — perched on the corkboard, above the title */}
-            <div className="absolute -top-16 left-4 sm:-top-20 sm:left-2 lg:left-4 z-30 w-20 sm:w-28 lg:w-36 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
+            <div className="absolute -top-8 left-4 sm:-top-10 sm:left-2 lg:left-4 z-30 w-20 sm:w-28 lg:w-36 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
               <Image
                 src="/images/chicken.webp"
                 alt="Origami Chicken"
@@ -199,7 +199,7 @@ export default async function HomePage() {
       {/* Activities Section (Polaroid cards) */}
       <section id="activities" className="relative mx-auto w-full max-w-6xl px-4 scroll-mt-24">
          {/* Origami Bull */}
-         <div className="absolute -top-8 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
+         <div className="absolute -top-2 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
            <Image
              src="/images/bull.webp"
              alt="Origami Bull"
@@ -308,7 +308,7 @@ export default async function HomePage() {
             </div>
          </div>
 
-         <div className="mt-16 text-center">
+         <div className="mt-12 text-center">
             <PaperButton
                href="/resources"
                type="link"
@@ -381,14 +381,36 @@ export default async function HomePage() {
       </div>
 
       {/* Instagram Section */}
-      <section className="mx-auto w-full max-w-6xl px-4">
+      <section className="relative mx-auto w-full max-w-6xl px-4">
+        {/* Origami Pig — peeking in from the left, mirrored from the hero */}
+        <div className="hidden lg:block absolute -top-1 left-4 z-20 w-32 lg:w-40 -rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
+          <Image
+            src="/images/pig.webp"
+            alt=""
+            aria-hidden="true"
+            width={300}
+            height={300}
+            className="w-full h-auto object-contain"
+          />
+        </div>
         <InstagramFeed />
       </section>
 
       {/* Contact Flyer Section */}
-      <section className="relative w-full pt-12 pb-16 scroll-mt-24" id="contact">
-        <div className="corkboard py-16 sm:py-20">
-          <div className="mx-auto w-full max-w-2xl px-4">
+      <section className="relative w-full pt-6 pb-0 scroll-mt-24" id="contact">
+        <div className="corkboard py-14 sm:py-16">
+          <div className="relative mx-auto w-full max-w-2xl px-4">
+            {/* Origami Bull — perched on the corkboard, mirrored from the activities section */}
+            <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-30 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
+              <Image
+                src="/images/bull.webp"
+                alt=""
+                aria-hidden="true"
+                width={300}
+                height={300}
+                className="w-full h-auto object-contain"
+              />
+            </div>
             <TearOffFlyer
               title={t("contact.title")}
               subtitle={t("contact.subtitle")}
