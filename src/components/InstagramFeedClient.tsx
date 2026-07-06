@@ -3,6 +3,7 @@
 import { InstagramPost } from "@/lib/instagram";
 import { RoughHighlight } from "./RoughHighlight";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
   const t = useTranslations("HomePage.instagram");
@@ -88,9 +89,12 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
                 <div className="tape-top-center" />
                 <div className="flex flex-col items-center justify-center paper-card p-2 md:p-3 paper-shadow-rest transition group-hover:paper-shadow-lift">
                   <div className="w-full overflow-hidden bg-slate-100 flex items-center">
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt={post.caption || "Instagram post"}
+                      width={500}
+                      height={500}
+                      unoptimized
                       className="w-full h-auto object-cover"
                     />
                   </div>
