@@ -93,7 +93,7 @@ export default async function EventsPage(props: {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Social Card */}
-            <div className="bg-white p-6 shadow-md relative group hover:-translate-y-1 transition-transform">
+            <div className="bg-white p-6 shadow-md relative">
               <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
                 <Image
                   src="/images/picnics.webp"
@@ -112,7 +112,7 @@ export default async function EventsPage(props: {
             </div>
 
             {/* Workshops Card */}
-            <div className="bg-white p-6 shadow-md relative group hover:-translate-y-1 transition-transform">
+            <div className="bg-white p-6 shadow-md relative">
               <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
                 <Image
                   src="/images/speaker.webp"
@@ -131,7 +131,7 @@ export default async function EventsPage(props: {
             </div>
 
             {/* Outreach Card */}
-            <div className="bg-white p-6 shadow-md relative group hover:-translate-y-1 transition-transform">
+            <div className="bg-white p-6 shadow-md relative">
               <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
                 <Image
                   src="/images/group.jpg"
