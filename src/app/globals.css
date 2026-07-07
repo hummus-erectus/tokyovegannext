@@ -46,6 +46,14 @@ body {
 
 html[lang="ja"] .font-heading {
   font-family: var(--font-noto-sans-jp), sans-serif;
+  /* Amatic SC is a condensed display font, so headings are sized very large.
+     Noto Sans JP renders much bigger at the same font-size, so scale the used
+     glyph size down (~0.6x) to keep both languages visually consistent.
+     0.33 = Noto Sans JP aspect (~0.545) * 0.6 */
+  font-size-adjust: 0.33;
+  /* line-height is computed from the *specified* (unadjusted) font-size,
+     so compensate: 0.9 * specified ≈ 1.5 * rendered size */
+  line-height: 0.9;
 }
 
 .font-brand {

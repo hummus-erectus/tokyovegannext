@@ -274,9 +274,7 @@ export default async function HomePage() {
 
                  const config = cardConfig[key];
 
-                 const titleClass = isJapanese
-                   ? "font-heading text-xl sm:text-2xl font-bold text-slate-900 whitespace-nowrap"
-                   : "font-heading text-2xl sm:text-3xl font-bold text-slate-900";
+                 const titleClass = "font-heading text-2xl sm:text-3xl font-bold text-slate-900 whitespace-nowrap";
 
                  const content = (
                    <PolaroidCard
@@ -328,13 +326,15 @@ export default async function HomePage() {
       <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative scroll-mt-24" id="blog">
         <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="font-heading text-6xl font-bold text-slate-900 -rotate-1">{t("sections.blog.description")}</h2>
+            <div className="max-w-2xl">
+              <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 -rotate-1">
+                {t("sections.blog.description")}
+              </h2>
             </div>
             <Link
               href="/blog"
               locale={locale}
-              className="group font-decorative text-3xl font-bold text-emerald-700 transition-colors"
+              className="group font-decorative text-2xl md:text-3xl font-bold text-emerald-700 transition-colors"
             >
               <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
                 <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
@@ -342,7 +342,7 @@ export default async function HomePage() {
             </Link>
           </div>
           {latestPosts.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {latestPosts.map((post: {
                 _id: string
                 title: string
@@ -358,6 +358,7 @@ export default async function HomePage() {
                 return (
                   <div key={post._id} className={idx === 3 ? 'lg:hidden' : ''}>
                     <HomeBlogCard
+                      featured={idx === 0}
                       title={post.title}
                       excerpt={post.excerpt || ''}
                       slug={post.slug.current}
