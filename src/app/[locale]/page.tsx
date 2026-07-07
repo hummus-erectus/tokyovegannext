@@ -331,15 +331,17 @@ export default async function HomePage() {
                 {t("sections.blog.description")}
               </h2>
             </div>
-            <Link
+            <PaperButton
               href="/blog"
+              type="link"
               locale={locale}
-              className="group font-decorative text-2xl md:text-3xl font-bold text-emerald-700 transition-colors"
+              variant="solid"
+              color="emerald"
+              size="lg"
+              className="font-bold"
             >
-              <RoughHighlight type="underline" color="#10b981" strokeWidth={3} trigger="hover">
-                <span className="whitespace-nowrap">{t("sections.blog.cta")}</span>
-              </RoughHighlight>
-            </Link>
+              {t("sections.blog.cta")}
+            </PaperButton>
           </div>
           {latestPosts.length > 0 ? (
             <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
