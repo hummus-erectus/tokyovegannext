@@ -272,6 +272,68 @@ html[lang="en"] .font-decorative {
     inset 0 -3px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Full-page corkboard — removes borders and inset shadow from .corkboard */
+.corkboard-page {
+  border-top: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* Large paper sheet — looks like a piece of paper pinned to corkboard */
+.paper-sheet {
+  position: relative;
+  background-color: #f5f0e6;
+  background-image: url("/images/mulberry.jpg");
+  background-repeat: repeat;
+  background-size: 1024px 1024px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* Pushpin elements for paper sheets */
+.paper-pin {
+  position: absolute;
+  z-index: 30;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 6px 4px -4px rgba(0, 0, 0, 0.35);
+}
+
+.paper-pin::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(0.5px);
+}
+
+.paper-pin-red {
+  background: radial-gradient(circle at 35% 30%, #f87171 0%, #dc2626 40%, #991b1b 100%);
+}
+
+.paper-pin-blue {
+  background: radial-gradient(circle at 35% 30%, #60a5fa 0%, #2563eb 40%, #1e3a8a 100%);
+}
+
+.paper-pin-yellow {
+  background: radial-gradient(circle at 35% 30%, #fde047 0%, #eab308 40%, #a16207 100%);
+}
+
+.paper-pin-green {
+  background: radial-gradient(circle at 35% 30%, #4ade80 0%, #16a34a 40%, #14532d 100%);
+}
+
 /* Realistic Paper Texture for Cards */
 .paper-card {
   background-color: #ffffff;

@@ -37,117 +37,139 @@ export default async function HomePage() {
 
   const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
 
-  return (
-    <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 text-slate-900">
-      {/* Hero Section */}
-      <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
-              <div className="space-y-4 flex flex-col items-center lg:items-start">
-                <h1 className="font-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
-                  {t("hero.title")}
-                </h1>
-                <p className="max-w-lg text-lg text-slate-700 sm:text-xl">
-                  {t("hero.description")}
-                </p>
-              </div>
+  const heroText = (
+    <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
+      <div className="space-y-4 flex flex-col items-center lg:items-start">
+        <h1 className="font-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
+          {t("hero.title")}
+        </h1>
+        <p className="max-w-lg text-lg text-slate-700 sm:text-xl">
+          {t("hero.description")}
+        </p>
+      </div>
 
-              <div className="flex flex-wrap gap-4">
-                <PaperButton
-                  href="#newsletter"
-                  type="link"
-                  locale={locale}
-                  variant="solid"
-                  color="emerald"
-                  size="lg"
-                  className="font-bold"
-                >
-                  {t("hero.primaryCta")}
-                </PaperButton>
-                <PaperButton
-                  href="#activities"
-                  type="link"
-                  locale={locale}
-                  variant="solid"
-                  color="yellow"
-                  size="lg"
-                  className="font-bold"
-                >
-                  {t("hero.secondaryCta")}
-                </PaperButton>
-              </div>
+      <div className="flex flex-wrap gap-4">
+        <PaperButton
+          href="#newsletter"
+          type="link"
+          locale={locale}
+          variant="solid"
+          color="emerald"
+          size="lg"
+          className="font-bold"
+        >
+          {t("hero.primaryCta")}
+        </PaperButton>
+        <PaperButton
+          href="#activities"
+          type="link"
+          locale={locale}
+          variant="solid"
+          color="yellow"
+          size="lg"
+          className="font-bold"
+        >
+          {t("hero.secondaryCta")}
+        </PaperButton>
+      </div>
 
-              <div className="flex flex-nowrap items-center justify-center lg:justify-start gap-2 sm:gap-4 lg:gap-6 pt-4 w-full max-w-lg">
-                {entries.map(([key, value]) => {
-                  const imageKeyMap: Record<string, string> = {
-                    founded: "founded",
-                    members: "members",
-                    events: "hosted"
-                  };
-                  const imageKey = imageKeyMap[key] || key;
-                  const langSuffix = isJapanese ? "_jp" : "_en";
-                  const imagePath = `/images/${imageKey}${langSuffix}.webp`;
+      <div className="flex flex-nowrap items-center justify-center lg:justify-start gap-2 sm:gap-4 lg:gap-6 pt-4 w-full max-w-lg">
+        {entries.map(([key, value]) => {
+          const imageKeyMap: Record<string, string> = {
+            founded: "founded",
+            members: "members",
+            events: "hosted"
+          };
+          const imageKey = imageKeyMap[key] || key;
+          const langSuffix = isJapanese ? "_jp" : "_en";
+          const imagePath = `/images/${imageKey}${langSuffix}.webp`;
 
-                  return (
-                    <div key={key} className="relative flex-1 min-w-0 max-w-[120px] sm:max-w-[100px] lg:max-w-[110px]">
-                      <Image
-                        src={imagePath}
-                        alt={`${value.label}: ${value.value}`}
-                        width={200}
-                        height={200}
-                        className="w-full h-auto object-contain drop-shadow-sm"
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+          return (
+            <div key={key} className="relative flex-1 min-w-0 max-w-[120px] sm:max-w-[100px] lg:max-w-[110px]">
+              <Image
+                src={imagePath}
+                alt={`${value.label}: ${value.value}`}
+                width={200}
+                height={200}
+                className="w-full h-auto object-contain drop-shadow-sm"
+              />
             </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 
-            <div className="relative w-[calc(100%-2rem)] sm:w-full max-w-md mx-auto lg:w-[calc(100%-3rem)] xl:w-full lg:max-w-none lg:mx-0 mt-8 lg:mt-0">
-               {/* Origami Pig */}
-               <div className="absolute -top-4 -right-8 lg:-top-6 lg:-right-16 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
-                 <Image
-                   src="/images/pig.webp"
-                   alt="Origami Pig"
-                   width={300}
-                   height={300}
-                   className="w-full h-auto object-contain"
-                 />
-               </div>
+  const heroPhoto = (
+    <div className="relative w-[calc(100%-2rem)] sm:w-full max-w-md mx-auto lg:w-[calc(100%-3rem)] xl:w-full lg:max-w-none lg:mx-0 mt-8 lg:mt-0">
+       {/* Origami Pig */}
+       <div className="absolute -top-4 -right-8 lg:-top-6 lg:-right-16 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+         <Image
+           src="/images/pig.webp"
+           alt="Origami Pig"
+           width={300}
+           height={300}
+           className="w-full h-auto object-contain"
+         />
+       </div>
 
-               <div className="tape-section rotate-2">
-                  <div className="tape-top-center" />
-                  <div className="paper-card p-3 pb-8 paper-shadow-rest">
-                    <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
-                      <Image
-                        src="/images/group.jpg"
-                        alt="Tokyo Vegan Next community group at a meetup event"
-                        width={800}
-                        height={1000}
-                        className="h-full w-full object-cover"
-                        sizes="(min-width: 1024px) 500px, 100vw"
-                        priority
-                      />
-                    </div>
-                    <div className="mt-4 px-3 text-center -rotate-1">
-                      <p className="font-decorative text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
-                        <RoughHighlight type="highlight" multiline={true} color="rgba(167, 243, 208, 0.4)" trigger="hover">
-                          <span>&ldquo;{t("hero.communityBlurb")}&rdquo;</span>
-                        </RoughHighlight>
-                      </p>
-                    </div>
-                  </div>
-               </div>
+       <div className="tape-section rotate-2">
+          <div className="tape-top-center" />
+          <div className="paper-card p-3 pb-8 paper-shadow-rest">
+            <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
+              <Image
+                src="/images/group.jpg"
+                alt="Tokyo Vegan Next community group at a meetup event"
+                width={800}
+                height={1000}
+                className="h-full w-full object-cover"
+                sizes="(min-width: 1024px) 500px, 100vw"
+                priority
+              />
+            </div>
+            <div className="mt-4 px-3 text-center -rotate-1">
+              <p className="font-decorative text-lg sm:text-xl font-bold leading-relaxed text-slate-900 group cursor-default">
+                <RoughHighlight type="highlight" multiline={true} color="rgba(167, 243, 208, 0.4)" trigger="hover">
+                  <span>&ldquo;{t("hero.communityBlurb")}&rdquo;</span>
+                </RoughHighlight>
+              </p>
+            </div>
+          </div>
+       </div>
+    </div>
+  );
 
+  return (
+    <div className="corkboard corkboard-page flex min-h-screen flex-col gap-0 text-slate-900">
+      {/* Hero Section — text on paper sheet, photo on corkboard (mobile) / both on paper (desktop) */}
+      <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
+        {/* Mobile: paper sheet with text only, photo on corkboard below */}
+        <div className="lg:hidden">
+          <div className="paper-sheet relative mx-auto max-w-6xl px-4 sm:px-6 pt-6 pb-8 -rotate-1">
+            <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
+            <div className="paper-pin paper-pin-blue" style={{ top: '8px', right: '16px' }} />
+            {heroText}
+          </div>
+          <div className="mx-auto max-w-md px-4 mt-8">
+            {heroPhoto}
+          </div>
+        </div>
+
+        {/* Desktop: paper sheet encompassing both text and photo */}
+        <div className="hidden lg:block">
+          <div className="paper-sheet relative mx-auto max-w-6xl px-8 pt-8 pb-10 -rotate-1">
+            <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
+            <div className="paper-pin paper-pin-blue" style={{ top: '8px', right: '16px' }} />
+            <div className="grid grid-cols-2 gap-12 items-center">
+              {heroText}
+              {heroPhoto}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter + Next Event — Corkboard */}
-      <section id="newsletter" className="relative w-full scroll-mt-24">
-        <div className="corkboard py-14 sm:py-16 lg:py-20">
+      {/* Newsletter + Next Event — directly on corkboard */}
+      <section id="newsletter" className="relative w-full scroll-mt-24 py-14 sm:py-16 lg:py-20">
           <div className="relative mx-auto w-full max-w-5xl px-4">
             {/* Origami Chicken — perched on the corkboard, above the title */}
             <div className="absolute -top-8 left-4 sm:-top-10 sm:left-2 lg:left-4 z-30 w-20 sm:w-28 lg:w-36 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
@@ -193,11 +215,14 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-        </div>
       </section>
 
-      {/* Activities Section (Polaroid cards) */}
-      <section id="activities" className="relative mx-auto w-full max-w-6xl px-4 scroll-mt-24">
+      {/* Activities Section — paper sheet pinned to corkboard */}
+      <section id="activities" className="relative scroll-mt-24 py-10 lg:py-14">
+        <div className="paper-sheet relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-6 pb-8 rotate-1">
+          {/* Pushpins */}
+          <div className="paper-pin paper-pin-yellow" style={{ top: '8px', left: '16px' }} />
+          <div className="paper-pin paper-pin-green" style={{ top: '8px', right: '16px' }} />
          {/* Origami Bull */}
          <div className="absolute -top-2 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
            <Image
@@ -319,9 +344,10 @@ export default async function HomePage() {
                {t("sections.activities.cta")}
             </PaperButton>
          </div>
+        </div>
       </section>
 
-      {/* Blog Section */}
+      {/* Blog Section — paper sheet with torn edges */}
       <div className="paper-torn-shadow">
       <section className="w-full paper-texture-seamless header-ripped-mask header-ripped-bottom-mask pt-12 md:pt-16 pb-12 relative scroll-mt-24" id="blog">
         <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
@@ -383,8 +409,8 @@ export default async function HomePage() {
       </section>
       </div>
 
-      {/* Instagram Section */}
-      <section className="relative mx-auto w-full max-w-6xl px-4">
+      {/* Instagram Section — directly on corkboard */}
+      <section className="relative mx-auto w-full max-w-6xl px-4 py-10 lg:py-14">
         {/* Origami Pig — peeking in from the left, mirrored from the hero */}
         <div className="hidden lg:block absolute -top-1 left-4 z-20 w-32 lg:w-40 -rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
           <Image
@@ -399,9 +425,8 @@ export default async function HomePage() {
         <InstagramFeed />
       </section>
 
-      {/* Contact Flyer Section */}
-      <section className="relative w-full pt-6 pb-0 scroll-mt-24" id="contact">
-        <div className="corkboard py-14 sm:py-16">
+      {/* Contact Flyer Section — directly on corkboard */}
+      <section className="relative w-full pt-6 pb-14 scroll-mt-24" id="contact">
           <div className="relative mx-auto w-full max-w-2xl px-4">
             {/* Origami Bull — perched on the corkboard, mirrored from the activities section */}
             <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-30 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
@@ -419,7 +444,6 @@ export default async function HomePage() {
               subtitle={t("contact.subtitle")}
             />
           </div>
-        </div>
       </section>
 
     </div>
