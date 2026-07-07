@@ -64,7 +64,7 @@ export function MovieListItem({
       variant="sticker"
       color="yellow"
       size="sm"
-      className={`px-4 py-2 font-bold shadow-md origin-center ${tiltClass}`}
+      className={`px-4 py-2 font-bold origin-center ${tiltClass}`}
     >
       <span className={`inline-block origin-center ${counterTiltClass}`}>
         {watchLabel}

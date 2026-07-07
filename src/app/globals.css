@@ -991,6 +991,123 @@ html[lang="en"] .font-decorative {
   z-index: 20; /* actively hovered card always wins */
 }
 
+/* ─── Peeling Sticker Buttons ─── */
+/* Die-cut sticker with a corner that peels on hover.
+   ::before is the sticker body (background + border) — gets clip-path cut
+   so the real page background shows through the missing corner.
+   ::after is the folded flap — sits on top, NOT clipped by the cut,
+   showing the white sticker underside. A small gap between the flap's
+   fold line and the cut edge ensures the background is visible around the peel. */
+.btn-sticker {
+  position: relative;
+  isolation: isolate;
+  border-radius: 16px 18px 15px 19px / 18px 15px 19px 16px;
+  color: var(--sticker-color, #ffffff);
+  transform: rotate(-0.5deg);
+  /* Default so var() always resolves */
+  --sticker-bg-color: #0ea88b;
+}
+
+/* Sticker body — background, white kiss-cut border, clip-path cut */
+.btn-sticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 3px solid #fffef8;
+  background-color: var(--sticker-bg-color);
+  background-image:
+    /* Glossy glare — pronounced diagonal sheen always visible */
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.28) 35%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.28) 65%,
+      rgba(255, 255, 255, 0.05) 100%
+    ),
+    /* Paper grain texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sg)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-size: 130% 100%, 200px 200px;
+  background-position: 35% 0%, 0 0;
+  /* Full rectangle at rest — border-radius shows normally */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.08);
+  z-index: -2;
+  transition: clip-path 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background-position 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Folded flap — the peeled corner folded back over the sticker.
+   Not clipped by ::before's cut (separate pseudo-element on the parent).
+   Triangle via clip-path; white underside with a subtle gradient for depth.
+   Sits at the bottom-right, slightly smaller than the 30px cut so
+   background is visible in the gap. */
+.btn-sticker::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  background: linear-gradient(225deg, #fffef8 0%, #f0ede0 55%, #d9d4c3 100%);
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.15));
+  border-top-left-radius: 3px;
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Peel: cut the corner on ::before, grow the flap on ::after */
+.btn-sticker:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  /* Shift the glare slightly — light catches the lifted surface */
+  background-position: 65% 0%, 0 0, 0 0;
+}
+
+.btn-sticker:hover::after {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-sticker:active::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-sticker:active::after {
+  width: 0;
+  height: 0;
+}
+
+/* Sticker color fills — flat solid colors (glare provides the shine) */
+.btn-sticker--emerald {
+  --sticker-bg-color: #0ea88b;
+  --sticker-color: #ffffff;
+}
+
+.btn-sticker--yellow {
+  --sticker-bg-color: #fcd34d;
+  --sticker-color: #1e293b;
+}
+
+.btn-sticker--slate {
+  --sticker-bg-color: #334155;
+  --sticker-color: #ffffff;
+}
+
+/* Plain paper sticker (used for outline/secondary actions) */
+.btn-sticker--paper {
+  --sticker-bg-color: #fdfcf7;
+  --sticker-color: #334155;
+}
+
 .washi-tape-top::before {
   content: "";
   position: absolute;

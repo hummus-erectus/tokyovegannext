@@ -45,7 +45,7 @@ function NavItems({direction = "row", locale, translate, onNavigate}: NavItemsPr
             rel="noreferrer"
             className={`transition-colors ${
               !isMobile
-                ? "rounded-full bg-[#FCD34D] px-6 py-2 text-emerald-950 font-bold shadow-sm hover:bg-[#fbbf24] hover:shadow-md"
+                ? "btn-sticker btn-sticker--yellow inline-flex px-6 py-2 font-bold"
                 : "text-emerald-700"
             }`}
             onClick={onNavigate}

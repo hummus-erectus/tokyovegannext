@@ -39,7 +39,7 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
         variant={variant === "solid" ? "solid" : "outline"}
         color="emerald"
         size="md"
-        className="font-bold shadow-sm"
+        className="font-bold"
       >
         {action.label}
       </PaperButton>

@@ -79,7 +79,7 @@ export function FeaturedResourceCard({
               </h2>
               <p className="mb-8 text-lg leading-relaxed text-slate-600">{description}</p>
               <div>
-                <span className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-8 py-4 text-base font-bold text-white shadow-md transition-all duration-150 group-hover:-translate-y-0.5 group-hover:shadow-lg hover:bg-emerald-700">
+                <span className="btn-sticker btn-sticker--emerald inline-flex items-center justify-center px-8 py-4 text-base font-bold">
                   {cta} →
                 </span>
               </div>

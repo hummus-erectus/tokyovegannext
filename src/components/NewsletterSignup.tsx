@@ -93,7 +93,7 @@ export function NewsletterSignup() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-ui text-2xl font-bold py-3.5 px-6 shadow-md hover:shadow-lg transition-all duration-200 active:translate-y-px rounded-sm"
+                className="btn-sticker btn-sticker--emerald w-full font-ui text-2xl font-bold py-3.5 px-6 disabled:opacity-60 disabled:pointer-events-none"
               >
                 {status === "submitting" ? "..." : t("submit")}
               </button>

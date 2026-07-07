@@ -61,7 +61,7 @@ export default async function HomePage() {
                   variant="solid"
                   color="emerald"
                   size="lg"
-                  className="font-bold shadow-md"
+                  className="font-bold"
                 >
                   {t("hero.primaryCta")}
                 </PaperButton>
@@ -72,7 +72,7 @@ export default async function HomePage() {
                   variant="solid"
                   color="yellow"
                   size="lg"
-                  className="font-bold shadow-md"
+                  className="font-bold"
                 >
                   {t("hero.secondaryCta")}
                 </PaperButton>
@@ -314,7 +314,7 @@ export default async function HomePage() {
                variant="solid"
                color="emerald"
                size="lg"
-               className="font-bold shadow-md inline-block transform hover:scale-105 transition-transform"
+               className="font-bold inline-block"
             >
                {t("sections.activities.cta")}
             </PaperButton>

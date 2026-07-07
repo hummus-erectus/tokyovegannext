@@ -171,7 +171,7 @@ export default async function AboutVeganPage() {
                   variant="solid"
                   color="emerald"
                   size="md"
-                  className="font-bold shadow-md"
+                  className="font-bold"
                 >
                   {t("footer.ctaPrimary")}
                 </PaperButton>
