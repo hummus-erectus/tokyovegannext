@@ -7,8 +7,8 @@ const contactItems = [
   {
     key: "email",
     icon: Mail,
-    label: "tokyovegan.org@gmail.com",
-    href: "mailto:tokyovegan.org@gmail.com",
+    label: "info@tokyovegan.org",
+    href: "mailto:info@tokyovegan.org",
   },
   {
     key: "meetup",
