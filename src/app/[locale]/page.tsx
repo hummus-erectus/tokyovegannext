@@ -165,7 +165,7 @@ export default async function HomePage() {
                 locale={locale}
                 highlightColor="#10b981"
                 rotation="-rotate-1"
-                textClassName="text-slate-900"
+                textClassName="text-emerald-700"
               >
                 {t("newsletter.sectionTitle")}
               </SectionLabel>
@@ -214,7 +214,7 @@ export default async function HomePage() {
               locale={locale}
               highlightColor="#10b981"
               rotation="-rotate-1"
-              textClassName="text-slate-900"
+              textClassName="text-emerald-700"
             >
               {t("sections.activities.title")}
             </SectionLabel>
