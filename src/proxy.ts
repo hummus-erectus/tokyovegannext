@@ -5,7 +5,7 @@ import type {NextRequest} from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   if (process.env.MAINTENANCE_MODE === 'true') {
     return NextResponse.redirect(new URL('/coming-soon', request.url));
   }
