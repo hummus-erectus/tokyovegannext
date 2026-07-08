@@ -524,7 +524,9 @@ html[lang="en"] .font-decorative {
 }
 
 .paper-surface--hinge:hover,
-.paper-surface--hinge:focus-within {
+.paper-surface--hinge:focus-within,
+.group:hover > .paper-surface--hinge,
+.group:focus-within > .paper-surface--hinge {
   transform: perspective(800px)
     rotateX(6deg)
     rotateZ(var(--paper-rz, 0deg));
@@ -533,7 +535,9 @@ html[lang="en"] .font-decorative {
 
 /* Hide curled corner shadow during hinge — it shouldn't move with the card */
 .paper-surface--hinge:hover::after,
-.paper-surface--hinge:focus-within::after {
+.paper-surface--hinge:focus-within::after,
+.group:hover > .paper-surface--hinge::after,
+.group:focus-within > .paper-surface--hinge::after {
   opacity: 0;
 }
 
@@ -1372,4 +1376,47 @@ html[lang="en"] .font-decorative {
   z-index: 10;
   /* Tight, subtle shadow to feel like tape stuck on the card, not floating */
   filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35));
+}
+
+/* ─── Footer Washi Tape Strip ───
+   A repeating decorative washi tape that straddles the boundary between
+   the corkboard and the footer, making the footer look taped onto the
+   corkboard. Uses an inline SVG polka-dot pattern on a translucent
+   emerald base with paper-fiber noise and a surface sheen. */
+/* Green-tinted washi paper for the footer */
+.footer-washi {
+  background-color: #6ee7b7;
+  background-image:
+    /* Green tint overlay — emerald gradient at moderate opacity */
+    linear-gradient(135deg, rgba(166, 224, 201, 0.493) 0%, rgba(53, 179, 137, 0.35) 100%),
+    /* Washi paper texture */
+    url("/images/mulberry.jpg");
+  background-repeat: repeat, repeat;
+  background-size: 100% 100%, 1024px 1024px;
+}
+
+.washi-tape-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -22px;
+  height: 44px;
+  background-color: #10b981bd;
+  background-image:
+    /* Subtle vertical sheen — light catches the tape surface */
+    linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.08) 100%),
+    /* Polka-dot pattern — cream circles on translucent emerald */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='44' viewBox='0 0 56 44'%3E%3Ccircle cx='14' cy='11' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='42' cy='11' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='28' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='0' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='56' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='14' cy='33' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='42' cy='33' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='28' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='28' cy='33' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='0' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='56' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='0' cy='33' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='56' cy='33' r='1.2' fill='%23ffffff'/%3E%3C/svg%3E"),
+    /* Paper fiber noise for washi texture */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='44'%3E%3Cfilter id='washiNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='200' height='44' filter='url(%23washiNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat-x, repeat-x, repeat-x;
+  background-size: 100% 100%, 56px 44px, 200px 44px;
+  /* Slightly irregular torn edges top & bottom */
+  clip-path: polygon(
+    0% 6%, 3% 0%, 7% 4%, 12% 1%, 18% 5%, 25% 0%, 32% 4%, 38% 1%, 45% 5%, 52% 0%, 59% 4%, 66% 1%, 73% 5%, 80% 0%, 87% 4%, 93% 1%, 100% 5%,
+    100% 94%, 93% 100%, 87% 96%, 80% 99%, 73% 95%, 66% 100%, 59% 96%, 52% 100%, 45% 95%, 38% 99%, 32% 96%, 25% 100%, 18% 95%, 12% 99%, 7% 96%, 3% 100%, 0% 94%
+  );
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 30;
+  pointer-events: none;
 }
