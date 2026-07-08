@@ -49,7 +49,7 @@ export default async function HomePage() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         <PaperButton
           href="#newsletter"
           type="link"
