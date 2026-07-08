@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { usePaperLift } from '@/hooks/usePaperLift';
+import { PaperSurface } from '@/components/PaperSurface';
 
 interface PolaroidCardProps {
   title: string;
@@ -14,6 +14,8 @@ interface PolaroidCardProps {
   stickyRotation: string;
   titleClass: string;
   isJapanese: boolean;
+  liftedCorner?: 'none' | 'bottom-left' | 'bottom-right' | 'top-right';
+  hover?: boolean | "hinge";
 }
 
 export function PolaroidCard({
@@ -27,16 +29,24 @@ export function PolaroidCard({
   stickyRotation,
   titleClass,
   isJapanese,
+  liftedCorner = 'bottom-right',
+  hover = false,
 }: PolaroidCardProps) {
-  const { containerProps, cardStyle } = usePaperLift();
 
   return (
     <div
       className={`relative group ${marginTop} ${rotation}`}
-      {...containerProps}
     >
       {/* Polaroid Card containing Tape */}
-      <div className="relative paper-card p-4 pb-8" style={cardStyle}>
+      <PaperSurface
+        seed={`polaroid-${image}`}
+        variant="polaroid"
+        shadow="sm"
+        edge="deckle"
+        liftedCorner={liftedCorner}
+        hover={hover}
+        contentClassName="p-4 pb-8"
+      >
         {/* Tape Element */}
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 w-24">
           <div className="tape-section">
@@ -58,7 +68,7 @@ export function PolaroidCard({
               <span className="polaroid-title-highlight px-1">{title}</span>
             </h3>
         </div>
-      </div>
+      </PaperSurface>
 
       {/* Sticky Note Badge */}
       <div className={`absolute ${stickyPos} w-44 md:w-40 z-10 transition duration-300 group-hover:scale-110 group-hover:z-20`}>

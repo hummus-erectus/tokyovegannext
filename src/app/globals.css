@@ -356,6 +356,194 @@ html[lang="en"] .font-decorative {
   border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
+/* ============================================================
+   PaperSurface system — physical paper pinned to the corkboard.
+   All per-instance variation is driven by CSS variables set from
+   the <PaperSurface> component (seeded randomisation):
+   --paper-tint          warm off-white background colour
+   --paper-rx/ry/rz      tiny 3D tilt + rotation (deg)
+   --paper-hover-rz      rotation when picked up
+   --paper-clip          wobbly polygon for deckled/torn edges
+   --paper-grain         grain overlay opacity (0..1)
+   --paper-shadow        layered drop-shadow chain at rest
+   --paper-shadow-hover  deeper chain when lifted
+   --paper-curl-alpha    curled-corner shadow opacity
+   ============================================================ */
+
+.paper-surface {
+  position: relative;
+  transform: perspective(1200px)
+    rotateX(var(--paper-rx, 0deg))
+    rotateY(var(--paper-ry, 0deg))
+    rotateZ(var(--paper-rz, 0deg));
+  /* drop-shadow (not box-shadow) so the shadow follows the
+     irregular clipped edge of the paper */
+  filter: var(--paper-shadow, drop-shadow(0 2px 4px rgba(46, 32, 18, 0.15)));
+}
+
+.paper-surface__inner {
+  position: relative;
+  z-index: 1;
+  background-color: var(--paper-tint, #FFFDF8);
+  clip-path: var(--paper-clip, none);
+  /* Soft lighting sheen + extremely gentle surface waviness */
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(120, 100, 70, 0.025) 55%,
+      rgba(255, 255, 255, 0.12) 100%
+    ),
+    radial-gradient(120% 60% at 30% 18%, rgba(255, 255, 255, 0.22), transparent 60%),
+    radial-gradient(90% 55% at 74% 82%, rgba(60, 45, 25, 0.03), transparent 55%);
+}
+
+/* Subtle paper grain overlay */
+.paper-surface__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='psGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='4' stitchTiles='stitch' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.42 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23psGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 280px 280px;
+  mix-blend-mode: multiply;
+  opacity: var(--paper-grain, 0.35);
+}
+
+/* Washi/mulberry paper variant (large sheets) */
+.paper-surface--washi .paper-surface__inner {
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(120, 100, 70, 0.02) 55%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url("/images/mulberry.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 1024px 1024px;
+}
+
+/* No texture variant */
+.paper-surface--flat .paper-surface__inner::before {
+  display: none;
+}
+
+/* Overlay layer — outside the clipped paper, for decorative elements
+   that should overflow the paper edges (e.g. origami, tape, pins) */
+.paper-surface__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Curled corner shadows — pseudo-elements behind the paper */
+.paper-surface--curl-br::after,
+.paper-surface--curl-bl::after,
+.paper-surface--curl-tr::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 45%;
+  max-width: 220px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.paper-surface--curl-br::after {
+  bottom: 7px;
+  right: 10px;
+  box-shadow: 0 13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(3deg) skewX(6deg);
+}
+
+.paper-surface--curl-bl::after {
+  bottom: 7px;
+  left: 10px;
+  box-shadow: 0 13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(-3deg) skewX(-6deg);
+}
+
+.paper-surface--curl-tr::after {
+  top: 7px;
+  right: 10px;
+  box-shadow: 0 -13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(-3deg) skewX(-6deg);
+}
+
+/* Polaroid variant — glossy, rigid, pure white card stock */
+.paper-surface--polaroid .paper-surface__inner {
+  background-color: var(--paper-tint, #FFFFFF);
+  /* Glossy specular sheen: sharper highlight + cool tone vs. warm matte paper */
+  background-image:
+    linear-gradient(
+      105deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(200, 200, 210, 0.04) 50%,
+      rgba(255, 255, 255, 0.18) 100%
+    ),
+    radial-gradient(100% 50% at 25% 15%, rgba(255, 255, 255, 0.35), transparent 55%);
+  /* Subtle rigid card border */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* No grain on polaroid — glossy surface */
+.paper-surface--polaroid .paper-surface__inner::before {
+  display: none;
+}
+
+/* Hover — "someone could pick this up" */
+.paper-surface--hover {
+  transition: transform 200ms ease-out, filter 200ms ease-out;
+}
+
+.paper-surface--hover:hover,
+.paper-surface--hover:focus-within {
+  transform: perspective(1200px)
+    rotateX(calc(var(--paper-rx, 0deg) * 0.5))
+    rotateY(calc(var(--paper-ry, 0deg) * 0.5))
+    rotateZ(var(--paper-hover-rz, 0deg))
+    translateY(-3px);
+  filter: var(--paper-shadow-hover, drop-shadow(0 6px 12px rgba(46, 32, 18, 0.18)));
+}
+
+/* Hinge hover — for taped/pinned elements that pivot from the top edge */
+.paper-surface--hinge {
+  transform-origin: top center;
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
+}
+
+.paper-surface--hinge::after {
+  transition: opacity 0.3s ease-out;
+}
+
+.paper-surface--hinge:hover,
+.paper-surface--hinge:focus-within {
+  transform: perspective(800px)
+    rotateX(6deg)
+    rotateZ(var(--paper-rz, 0deg));
+  filter: var(--paper-shadow-hover, drop-shadow(0 6px 12px rgba(46, 32, 18, 0.18)));
+}
+
+/* Hide curled corner shadow during hinge — it shouldn't move with the card */
+.paper-surface--hinge:hover::after,
+.paper-surface--hinge:focus-within::after {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-surface--hover,
+  .paper-surface--hinge {
+    transition: none;
+  }
+}
+
 /* Mobile menu ripped edge */
 .header-ripped-edge {
   position: absolute;

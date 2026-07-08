@@ -8,6 +8,7 @@ import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
 import { RoughHighlight } from '@/components/RoughHighlight';
 import { PolaroidCard } from '@/components/PolaroidCard';
+import { PaperSurface } from '@/components/PaperSurface';
 import { SectionLabel } from '@/components/SectionLabel';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
@@ -100,22 +101,34 @@ export default async function HomePage() {
     </div>
   );
 
+  const heroPig = (
+    <div className="absolute -top-4 -right-8 lg:-right-8 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+      <Image
+        src="/images/pig.webp"
+        alt="Origami Pig"
+        width={300}
+        height={300}
+        className="w-full h-auto object-contain"
+      />
+    </div>
+  );
+
   const heroPhoto = (
     <div className="relative w-[calc(100%-2rem)] sm:w-full max-w-md mx-auto lg:w-[calc(100%-3rem)] xl:w-full lg:max-w-none lg:mx-0 mt-8 lg:mt-0">
-       {/* Origami Pig */}
-       <div className="absolute -top-4 -right-8 lg:-top-6 lg:-right-16 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
-         <Image
-           src="/images/pig.webp"
-           alt="Origami Pig"
-           width={300}
-           height={300}
-           className="w-full h-auto object-contain"
-         />
-       </div>
+       {/* Origami Pig — mobile only (desktop pig is in PaperSurface overlay) */}
+       <div className="lg:hidden">{heroPig}</div>
 
        <div className="tape-section rotate-2">
           <div className="tape-top-center" />
-          <div className="paper-card p-3 pb-8 paper-shadow-rest">
+          <PaperSurface
+            seed="hero-photo"
+            variant="polaroid"
+            rotation={0}
+            shadow="sm"
+            edge="deckle"
+            liftedCorner="bottom-right"
+            contentClassName="p-3 pb-8"
+          >
             <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
               <Image
                 src="/images/group.jpg"
@@ -134,7 +147,7 @@ export default async function HomePage() {
                 </RoughHighlight>
               </p>
             </div>
-          </div>
+          </PaperSurface>
        </div>
     </div>
   );
@@ -145,11 +158,20 @@ export default async function HomePage() {
       <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
         {/* Mobile: paper sheet with text only, photo on corkboard below */}
         <div className="lg:hidden">
-          <div className="paper-sheet relative mx-auto max-w-6xl px-4 sm:px-6 pt-6 pb-8 -rotate-1">
+          <PaperSurface
+            seed="hero-sheet-mobile"
+            texture="washi"
+            edge="torn"
+            shadow="md"
+            rotation={-1}
+            liftedCorner="bottom-left"
+            className="mx-auto max-w-6xl px-3 sm:px-4"
+            contentClassName="px-4 sm:px-6 pt-6 pb-8"
+          >
             <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
             <div className="paper-pin paper-pin-blue" style={{ top: '8px', right: '16px' }} />
             {heroText}
-          </div>
+          </PaperSurface>
           <div className="mx-auto max-w-md px-4 mt-8">
             {heroPhoto}
           </div>
@@ -157,14 +179,28 @@ export default async function HomePage() {
 
         {/* Desktop: paper sheet encompassing both text and photo */}
         <div className="hidden lg:block">
-          <div className="paper-sheet relative mx-auto max-w-6xl px-8 pt-8 pb-10 -rotate-1">
+          <PaperSurface
+            seed="hero-sheet-desktop"
+            texture="washi"
+            edge="torn"
+            shadow="md"
+            rotation={-1}
+            liftedCorner="bottom-left"
+            className="mx-auto max-w-6xl"
+            contentClassName="px-8 pt-8 pb-10"
+            overlay={
+              <div className="absolute top-2 right-0 lg:top-4 lg:right-4">
+                {heroPig}
+              </div>
+            }
+          >
             <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
             <div className="paper-pin paper-pin-blue" style={{ top: '8px', right: '16px' }} />
             <div className="grid grid-cols-2 gap-12 items-center">
               {heroText}
               {heroPhoto}
             </div>
-          </div>
+          </PaperSurface>
         </div>
       </section>
 
@@ -219,20 +255,31 @@ export default async function HomePage() {
 
       {/* Activities Section — paper sheet pinned to corkboard */}
       <section id="activities" className="relative scroll-mt-24 py-10 lg:py-14">
-        <div className="paper-sheet relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-6 pb-8 rotate-1">
-          {/* Pushpins */}
-          <div className="paper-pin paper-pin-yellow" style={{ top: '8px', left: '16px' }} />
-          <div className="paper-pin paper-pin-green" style={{ top: '8px', right: '16px' }} />
-         {/* Origami Bull */}
-         <div className="absolute -top-2 right-4 sm:right-4 lg:right-2 z-20 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none">
-           <Image
-             src="/images/bull.webp"
-             alt="Origami Bull"
-             width={300}
-             height={300}
-             className="w-full h-auto object-contain"
-           />
-         </div>
+        <PaperSurface
+          seed="activities-sheet"
+          texture="washi"
+          edge="torn"
+          shadow="md"
+          rotation={1}
+          liftedCorner="bottom-right"
+          className="mx-auto max-w-6xl px-3 sm:px-4"
+          contentClassName="px-4 sm:px-6 lg:px-8 pt-6 pb-8"
+          overlay={
+            <>
+              <div className="paper-pin paper-pin-yellow" style={{ top: '8px', left: '16px' }} />
+              <div className="paper-pin paper-pin-green" style={{ top: '8px', right: '16px' }} />
+              <div className="absolute -top-2 right-8 w-28 sm:w-36 lg:w-44 rotate-12 drop-shadow-sm pointer-events-none z-50">
+                <Image
+                  src="/images/bull.webp"
+                  alt="Origami Bull"
+                  width={300}
+                  height={300}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </>
+          }
+        >
          <div className="mb-4 text-center">
             <SectionLabel
               href="/resources"
@@ -277,7 +324,8 @@ export default async function HomePage() {
                        rotation: "rotate-3",
                        marginTop: "mt-0 md:-mt-4",
                        stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
-                       stickyRotation: "-rotate-6"
+                       stickyRotation: "-rotate-6",
+                       liftedCorner: "bottom-left" as const,
                     },
                     support: {
                        image: "/images/picnics.webp", // Changing to picnic for starter kits (friendly/intro vibe)
@@ -285,7 +333,8 @@ export default async function HomePage() {
                        rotation: "-rotate-2",
                        marginTop: "mt-0 md:mt-10",
                        stickyPos: "-top-6 -left-1 sm:-top-8 sm:-left-2 md:-left-6",
-                       stickyRotation: "-rotate-8"
+                       stickyRotation: "-rotate-8",
+                       liftedCorner: "none" as const,
                     },
                     community: {
                        image: "/images/groceries.webp", // Changing to groceries for shopping
@@ -293,7 +342,8 @@ export default async function HomePage() {
                        rotation: "-rotate-3",
                        marginTop: "mt-0 md:mt-2",
                        stickyPos: "-top-3 -right-0 sm:-top-5 sm:-right-1 md:-right-4",
-                       stickyRotation: "-rotate-4"
+                       stickyRotation: "-rotate-4",
+                       liftedCorner: "bottom-right" as const,
                     },
                  };
 
@@ -313,6 +363,8 @@ export default async function HomePage() {
                      stickyRotation={config.stickyRotation}
                      titleClass={titleClass}
                      isJapanese={isJapanese}
+                     liftedCorner={config.liftedCorner}
+                     hover="hinge"
                    />
                  );
 
@@ -344,7 +396,7 @@ export default async function HomePage() {
                {t("sections.activities.cta")}
             </PaperButton>
          </div>
-        </div>
+        </PaperSurface>
       </section>
 
       {/* Blog Section — paper sheet with torn edges */}
