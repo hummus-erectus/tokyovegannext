@@ -107,7 +107,7 @@ export default async function EventsPage(props: {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Social Card */}
             <div className="bg-white p-6 shadow-md relative">
-              <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
+              <div className="aspect-video relative mb-6 photo-slit">
                 <Image
                   src="/images/picnics.webp"
                   alt="Social Gathering"
@@ -126,7 +126,7 @@ export default async function EventsPage(props: {
 
             {/* Workshops Card */}
             <div className="bg-white p-6 shadow-md relative">
-              <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
+              <div className="aspect-video relative mb-6 photo-slit">
                 <Image
                   src="/images/speaker.webp"
                   alt="Workshop"
@@ -145,7 +145,7 @@ export default async function EventsPage(props: {
 
             {/* Outreach Card */}
             <div className="bg-white p-6 shadow-md relative">
-              <div className="aspect-video relative mb-6 overflow-hidden rounded-sm photo-slit">
+              <div className="aspect-video relative mb-6 photo-slit">
                 <Image
                   src="/images/group.jpg"
                   alt="Outreach"
