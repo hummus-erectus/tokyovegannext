@@ -4,6 +4,8 @@ import {useState} from "react";
 import Image from "next/image";
 import {Modal} from "@/components/Modal";
 import {RoughHighlight} from "@/components/RoughHighlight";
+import {WashiTape} from "@/components/WashiTape";
+import {washiPick} from "@/lib/washiPick";
 import {usePaperLift} from "@/hooks/usePaperLift";
 
 type CardKey = "animals" | "planet" | "health" | "publicHealth" | "humanRights";
@@ -47,7 +49,7 @@ function WhyGoVeganCard({
     <div className="h-full" {...containerProps}>
       <button
         onClick={onSelect}
-        className={`group flex h-full w-full cursor-pointer flex-col overflow-hidden bg-paper-texture text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
+        className={`group flex h-full w-full cursor-pointer flex-col overflow-hidden paper-card text-left text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={cardStyle}
       >
         <div className={`relative h-48 w-full overflow-hidden bg-linear-to-br ${accent}`}>
@@ -88,12 +90,21 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
   const activeReasonMedia = activeReason ? cards.find((card) => card.key === activeReason) : null;
 
   const rotations = ["rotate-2", "-rotate-1", "rotate-1", "-rotate-2", "rotate-1"];
+  const variants = ["sakura", "emerald", "indigo", "mint", "mustard"] as const;
 
   return (
     <>
       <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 pt-4">
         {cards.map(({key, image, accent}, idx) => (
-          <div key={key} className={`relative ${rotations[idx % rotations.length]} washi-tape-top`}>
+          <div key={key} className={`relative card-stack-z ${rotations[idx % rotations.length]}`}>
+            {washiPick(key, 7, 100) < 40 ? (
+              <WashiTape variant={variants[washiPick(key, 0, variants.length)]} placement="top-center" rotation={-2} size="md" widthPct={60} />
+            ) : (
+              <>
+                <WashiTape variant={variants[washiPick(key, 0, variants.length)]} placement="top-left" rotation={-38} size="md" />
+                <WashiTape variant={variants[washiPick(key, 1, variants.length)]} placement="top-right" rotation={38} size="md" />
+              </>
+            )}
             <WhyGoVeganCard
               image={image}
               accent={accent}
@@ -109,7 +120,7 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
         {activeReason && activeReasonCopy && activeReasonMedia ? (
           <div className="tape-section -rotate-1">
             <div className="tape-top-center" />
-            <div className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden bg-white shadow-2xl shadow-slate-400/30">
+            <div className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden paper-card paper-shadow-lift">
               <div className="relative h-56 w-full shrink-0 overflow-hidden bg-slate-100">
                 <Image src={activeReasonMedia.image.src} alt={activeReasonMedia.image.alt} fill className="object-cover" />
                 <button

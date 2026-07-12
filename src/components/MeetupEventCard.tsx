@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations, useFormatter } from "next-intl";
 import { RoughHighlight } from "./RoughHighlight";
+import { WashiTape } from "./WashiTape";
 
 interface MeetupEventCardProps {
   title: string;
@@ -33,15 +34,12 @@ export function MeetupEventCard({
 
   return (
     <div className="relative mx-auto w-full max-w-sm -rotate-1">
-      {/* Tape Element */}
-      <div className="tape-section">
-        <div className="tape-top-center" />
-      </div>
+      <WashiTape variant="indigo" placement="top-left" rotation={-34} size="md" />
 
-      <div className="overflow-hidden bg-white shadow-xl shadow-slate-400/40 border border-slate-200/60 flex flex-col">
+      <div className="overflow-hidden paper-card paper-shadow-rest border border-slate-200/60 flex flex-col">
         
         {/* Top half with paper texture */}
-        <div className="p-6 pt-8 pb-8 text-center bg-paper-texture flex-1 flex flex-col justify-center">
+        <div className="p-6 pt-8 pb-8 text-center paper-card flex-1 flex flex-col justify-center">
           <div className="inline-block mb-4">
             <div className="border-[3px] border-slate-800/20 px-3 py-1 -rotate-2 rounded-sm inline-block">
               <span className="font-decorative text-sm font-bold tracking-widest text-slate-500 uppercase">
@@ -56,7 +54,7 @@ export function MeetupEventCard({
 
         {/* Ticket Perforation */}
         <div className="relative h-0 w-full z-10">
-          <div className="absolute inset-0 flex items-center justify-center -mt-[1.5px]">
+          <div className="absolute inset-0 flex items-center justify-center mt-[-1.5px]">
             <div className="w-full border-t-[3px] border-dashed border-slate-300"></div>
           </div>
         </div>

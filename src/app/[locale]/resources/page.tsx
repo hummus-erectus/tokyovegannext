@@ -1,6 +1,9 @@
 import {ResourceCard} from "@/components/ResourceCard";
 import {PageHero} from "@/components/PageHero";
 import {FeaturedResourceCard} from "@/components/FeaturedResourceCard";
+import {WashiTape} from "@/components/WashiTape";
+import {PaperSurface} from "@/components/PaperSurface";
+import {washiPick} from "@/lib/washiPick";
 import {getLocale, getTranslations} from "next-intl/server";
 
 const sectionKeys = ["essentials", "knowledge"] as const;
@@ -47,13 +50,25 @@ export default async function ResourcesPage() {
         const meta = itemMeta[itemKey] ?? {icon: "", accent: "text-emerald-700"};
 
         const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"];
+        const variants = ["emerald", "sakura", "indigo", "mustard", "mint"] as const;
         const rotation = rotations[idx % rotations.length];
+        const variant = variants[washiPick(itemKey, 0, variants.length)];
+        const variant2 = variants[washiPick(itemKey, 1, variants.length)];
+        const useCenterTape = washiPick(itemKey, 7, 100) < 40;
 
         const isExternal = item.href.startsWith("http");
         const accentColor = accentColorMap[meta.accent] ?? "emerald";
 
         return (
-          <div key={itemKey} className={`relative ${rotation} washi-tape-top`}>
+          <div key={itemKey} className={`relative card-stack-z ${rotation}`}>
+            {useCenterTape ? (
+              <WashiTape variant={variant} placement="top-center" rotation={-2} size="md" widthPct={60} />
+            ) : (
+              <>
+                <WashiTape variant={variant} placement="top-left" rotation={-36} size="md" />
+                <WashiTape variant={variant2} placement="top-right" rotation={36} size="md" />
+              </>
+            )}
             <ResourceCard
               title={item.title}
               description={item.description}
@@ -105,14 +120,25 @@ export default async function ResourcesPage() {
             id={sectionKey}
             className="grid gap-8 lg:grid-cols-[250px_1fr] scroll-mt-32"
           >
-            <div className="space-y-4 lg:self-start pt-8">
-              <h2 className="font-heading text-5xl font-bold text-emerald-700 -rotate-2">
+            <PaperSurface
+              seed={`resources-${sectionKey}`}
+              texture="washi"
+              edge="torn"
+              shadow="sm"
+              rotation={-2}
+              className="lg:max-w-[250px]"
+              contentClassName="px-5 py-5 space-y-4"
+              overlay={
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-7 bg-white/40 backdrop-blur-sm rotate-2 border border-white/20 shadow-sm pointer-events-none z-30" />
+              }
+            >
+              <h2 className="font-heading text-5xl font-bold text-emerald-700">
                 {t(`sections.${sectionKey}.title`)}
               </h2>
               <p className="text-xl text-slate-700 font-decorative">
                 {t(`sections.${sectionKey}.description`)}
               </p>
-            </div>
+            </PaperSurface>
             {renderCards(sectionKey)}
           </section>
         ))}

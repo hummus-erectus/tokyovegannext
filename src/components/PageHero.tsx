@@ -1,5 +1,6 @@
 import {PaperButton} from "@/components/PaperButton";
 import {RoughHighlight} from "@/components/RoughHighlight";
+import {PaperSurface} from "@/components/PaperSurface";
 
 export type HeroAction = {
   label: string;
@@ -39,7 +40,7 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
         variant={variant === "solid" ? "solid" : "outline"}
         color="emerald"
         size="md"
-        className="font-bold shadow-sm"
+        className="font-bold"
       >
         {action.label}
       </PaperButton>
@@ -48,7 +49,17 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
 
   return (
     <section className="relative pt-12 pb-8 px-4" style={style}>
-      <div className="mx-auto max-w-4xl text-center">
+      <PaperSurface
+        seed="page-hero"
+        texture="washi"
+        edge="torn"
+        shadow="md"
+        rotation={-1}
+        className="mx-auto max-w-4xl"
+        contentClassName="px-6 py-8 text-center"
+      >
+        <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
+        <div className="paper-pin paper-pin-blue" style={{ top: '8px', right: '16px' }} />
         <div className="inline-block mb-4">
           <RoughHighlight type="box" color="#10b981" strokeWidth={2} show={true}>
             <p className="text-sm font-semibold uppercase tracking-[0.4em] text-emerald-700 px-3 py-1">{eyebrow}</p>
@@ -58,7 +69,7 @@ export function PageHero({eyebrow, title, description, locale, backgroundImage, 
         <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8 font-medium">{description}</p>
         
         {actions.length > 0 && <div className="flex flex-col sm:flex-row gap-4 justify-center">{actions.map(renderAction)}</div>}
-      </div>
+      </PaperSurface>
     </section>
   );
 }

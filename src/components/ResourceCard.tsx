@@ -51,7 +51,7 @@ export function ResourceCard({
       <Component
         href={href}
         {...linkProps}
-        className={`flex h-full flex-col overflow-hidden bg-paper-texture text-slate-900 ${isActive ? "card-is-active" : ""}`}
+        className={`flex h-full flex-col overflow-hidden paper-card text-slate-900 ${isActive ? "card-is-active" : ""}`}
         style={cardStyle}
       >
       {imageUrl && (

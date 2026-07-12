@@ -11,9 +11,9 @@ export default function Footer() {
   const locale = useLocale();
 
   return (
-    <footer className="relative z-10 mt-8 bg-emerald-50/90 px-4 pb-8 pt-10 text-emerald-900 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-sm">
-      {/* Perforated edge effect */}
-      <div className="absolute left-0 right-0 top-[-4px] border-t-8 border-dotted border-emerald-300/60" />
+    <footer className="footer-washi relative z-20 -mt-1 overflow-visible px-4 pb-8 pt-12 text-emerald-900 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)]">
+      {/* Washi tape strip — straddles the corkboard/footer boundary */}
+      <div className="washi-tape-strip" />
 
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
         {/* Brand / Tagline */}

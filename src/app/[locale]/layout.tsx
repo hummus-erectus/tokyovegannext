@@ -6,6 +6,7 @@ import {Klee_One, Noto_Sans, Noto_Sans_JP, Inter, Amatic_SC, Caveat} from "next/
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {routing} from "@/i18n/routing";
+import {Analytics} from "@vercel/analytics/next";
 import "../globals.css";
 
 const klee = Klee_One({
@@ -71,7 +72,7 @@ export default async function LocaleLayout({children, params}: Props) {
     <html lang={locale}>
       <body className={`${klee.variable} ${notoSans.variable} ${notoSansJp.variable} ${inter.variable} ${amatic.variable} ${caveat.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
+          <div className="corkboard corkboard-page flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
             <Header />
             <main className="flex-1 w-full relative">
               {children}
@@ -79,6 +80,7 @@ export default async function LocaleLayout({children, params}: Props) {
             <Footer />
           </div>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );

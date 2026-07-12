@@ -1,5 +1,7 @@
 import {ResourceDetailLayout} from "@/components/ResourceDetailLayout";
 import {ResourceCard} from "@/components/ResourceCard";
+import {WashiTape} from "@/components/WashiTape";
+import {washiPick} from "@/lib/washiPick";
 import {getResources, type ResourceItem} from "@/lib/google-sheets";
 
 export interface ResourcePageConfig {
@@ -46,13 +48,25 @@ function ResourceGrid({
   accentColor: string;
 }) {
   const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"];
+  const variants = ["emerald", "sakura", "indigo", "mustard", "mint"] as const;
 
   return (
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 pt-4">
       {resources.map((resource, idx) => {
         const rotation = rotations[idx % rotations.length];
+        const variant = variants[washiPick(resource.id, 0, variants.length)];
+        const variant2 = variants[washiPick(resource.id, 1, variants.length)];
+        const useCenterTape = washiPick(resource.id, 7, 100) < 40;
         return (
-          <div key={resource.id} className={`relative ${rotation} washi-tape-top`}>
+          <div key={resource.id} className={`relative card-stack-z ${rotation}`}>
+            {useCenterTape ? (
+              <WashiTape variant={variant} placement="top-center" rotation={-2} size="sm" widthPct={60} />
+            ) : (
+              <>
+                <WashiTape variant={variant} placement="top-left" rotation={-36} size="sm" />
+                <WashiTape variant={variant2} placement="top-right" rotation={36} size="sm" />
+              </>
+            )}
             <ResourceCard
               title={resource.title[locale] || resource.title["en"]}
               description={resource.description[locale] || resource.description["en"]}

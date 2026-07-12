@@ -1,4 +1,5 @@
 import {FallbackImage} from "@/components/FallbackImage";
+import {WashiTape} from "@/components/WashiTape";
 import {type ReactNode} from "react";
 
 type PolaroidCoverProps = {
@@ -14,12 +15,14 @@ function PolaroidCover({title, imageUrl, fallbackImage, reverse}: PolaroidCoverP
 
   return (
     <div className="relative shrink-0 mx-auto md:mx-0 md:self-start">
-      {/* Tape/clip at the top */}
-      <div className="tape-top-center" />
+      {/* Tape on opposite corners — top-left & bottom-right when image is on left,
+          top-right & bottom-left when image is on right */}
+      <WashiTape variant={reverse ? "sakura" : "indigo"} placement={reverse ? "top-right" : "top-left"} rotation={reverse ? 34 : -32} size="sm" offsetXMultiplier={1.5} offsetYMultiplier={0.2} />
+      <WashiTape variant={reverse ? "indigo" : "sakura"} placement={reverse ? "bottom-left" : "bottom-right"} rotation={reverse ? 32 : -34} size="sm" offsetXMultiplier={1.5} offsetYMultiplier={0.2} />
 
       {/* Polaroid-style frame */}
       <div
-        className="relative bg-white p-3 pb-6 shadow-lg"
+        className="relative bg-white p-3 pb-6 paper-shadow-rest"
         style={{
           transform: reverse ? "rotate(2deg)" : "rotate(-2deg)",
         }}
@@ -57,11 +60,11 @@ function IndexCard({title, reverse, meta, children, action}: IndexCardProps) {
         transform: reverse ? "rotate(-1deg)" : "rotate(1deg)",
       }}
     >
-      {/* Tape decorations */}
-      <div className="pointer-events-none absolute right-2 top-2 z-20 h-7 w-28 origin-center translate-x-1/3 -translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
-      <div className="pointer-events-none absolute bottom-2 left-2 z-20 h-7 w-28 origin-center -translate-x-1/3 translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
+      {/* Tape on opposite corners — mirrors the polaroid's tape pattern */}
+      <WashiTape variant={reverse ? "mint" : "mustard"} placement={reverse ? "top-left" : "top-right"} rotation={reverse ? -40 : 40} size="sm" />
+      <WashiTape variant={reverse ? "mustard" : "mint"} placement={reverse ? "bottom-right" : "bottom-left"} rotation={reverse ? -40 : 40} size="sm" />
       <div
-        className="relative overflow-hidden bg-white shadow-md font-mono"
+        className="relative overflow-hidden paper-card paper-shadow-rest font-mono"
         style={{
           backgroundImage:
             "repeating-linear-gradient(#ffffff, #ffffff 25px, #9198e5 26px, #9198e5 27px)",

@@ -3,6 +3,8 @@ import { urlFor } from '@/sanity/image'
 import { BlogPostCard } from '@/components/BlogPostCard'
 import { PageHero } from '@/components/PageHero'
 import { PaperButton } from '@/components/PaperButton'
+import { WashiTape } from '@/components/WashiTape'
+import { washiPick } from '@/lib/washiPick'
 import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 3600
@@ -28,6 +30,7 @@ export default async function BlogListPage({ params }: Props) {
   const posts = await client.fetch(POSTS_QUERY, { language: locale })
 
   const rotations = ['rotate-1', '-rotate-1', 'rotate-2', '-rotate-2']
+  const variants = ['indigo', 'sakura', 'mint', 'mustard', 'emerald'] as const
 
   return (
     <div className="min-h-screen text-slate-900 pb-24">
@@ -53,12 +56,24 @@ export default async function BlogListPage({ params }: Props) {
               authorName?: string
             }, idx: number) => {
               const rotation = rotations[idx % rotations.length]
+              const variant = variants[washiPick(post._id, 0, variants.length)]
+              const variant2 = variants[washiPick(post._id, 1, variants.length)]
               const imageUrl = post.mainImage
                 ? urlFor(post.mainImage).width(600).height(400).url()
                 : undefined
 
+              const useCenterTape = washiPick(post._id, 7, 100) < 40
+
               return (
-                <div key={post._id} className={`relative ${rotation} washi-tape-top`}>
+                <div key={post._id} className={`relative card-stack-z ${rotation}`}>
+                  {useCenterTape ? (
+                    <WashiTape variant={variant} placement="top-center" rotation={-2} size="md" widthPct={60} />
+                  ) : (
+                    <>
+                      <WashiTape variant={variant} placement="top-left" rotation={-36} size="md" />
+                      <WashiTape variant={variant2} placement="top-right" rotation={36} size="md" />
+                    </>
+                  )}
                   <BlogPostCard
                     title={post.title}
                     excerpt={post.excerpt || ''}

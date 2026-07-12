@@ -1,5 +1,6 @@
 import {ReactNode} from "react";
 import {PageHero} from "@/components/PageHero";
+import {PaperSurface} from "@/components/PaperSurface";
 
 interface ResourceDetailLayoutProps {
   eyebrow: string;
@@ -30,8 +31,20 @@ export function ResourceDetailLayout({
         actions={[{label: backLabel, href: backHref, type: "link", variant: "outline"}]}
       />
 
-      <main className="mx-auto max-w-5xl px-4 py-12">
-        {children}
+      <main className="mx-auto max-w-5xl px-4 py-2">
+        <PaperSurface
+          seed="resource-detail-content"
+          texture="washi"
+          edge="torn"
+          shadow="md"
+          rotation={0}
+          className="w-full"
+          contentClassName="px-6 py-8"
+        >
+          <div className="paper-pin paper-pin-yellow" style={{ top: '8px', left: '16px' }} />
+          <div className="paper-pin paper-pin-green" style={{ top: '8px', right: '16px' }} />
+          {children}
+        </PaperSurface>
       </main>
     </div>
   );

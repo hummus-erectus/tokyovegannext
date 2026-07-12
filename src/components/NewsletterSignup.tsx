@@ -37,12 +37,11 @@ export function NewsletterSignup() {
 
   return (
     <div className="relative mx-auto w-full max-w-sm rotate-1">
-      {/* Tape Element */}
-      <div className="tape-section">
-        <div className="tape-top-center" />
-      </div>
+      {/* Pushpins — top corners, pinned to corkboard */}
+      <div className="pushpin pushpin-red" style={{ top: "4px", left: "12px", transform: "none" }} />
+      <div className="pushpin pushpin-blue" style={{ top: "4px", right: "12px", left: "auto", transform: "none" }} />
 
-      <div className="relative bg-emerald-50 p-6 pt-8 pb-7 shadow-xl shadow-slate-400/40 border border-emerald-100/60">
+      <div className="relative bg-emerald-50 p-6 pt-8 pb-7 paper-shadow-rest border border-emerald-100/60">
         {/* Decorative corner fold */}
         <div className="absolute top-0 right-0 w-0 h-0 border-t-28 border-t-white border-l-28 border-l-transparent z-10" />
 
@@ -94,7 +93,7 @@ export function NewsletterSignup() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-ui text-2xl font-bold py-3.5 px-6 shadow-md hover:shadow-lg transition-all duration-200 active:translate-y-px rounded-sm"
+                className="btn-sticker btn-sticker--emerald w-full font-ui text-2xl font-bold py-3.5 px-6 disabled:opacity-60 disabled:pointer-events-none"
               >
                 {status === "submitting" ? "..." : t("submit")}
               </button>

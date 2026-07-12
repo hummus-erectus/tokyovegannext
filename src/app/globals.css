@@ -30,9 +30,6 @@ html {
 
 body {
   background-color: var(--background);
-  background-image: url("/images/mulberry.jpg");
-  background-repeat: repeat;
-  background-size: 1024px 1024px;
   color: var(--foreground);
   font-family: var(--font-noto-sans), var(--font-noto-sans-jp), sans-serif;
   overflow-x: hidden;
@@ -46,6 +43,14 @@ body {
 
 html[lang="ja"] .font-heading {
   font-family: var(--font-noto-sans-jp), sans-serif;
+  /* Amatic SC is a condensed display font, so headings are sized very large.
+     Noto Sans JP renders much bigger at the same font-size, so scale the used
+     glyph size down (~0.6x) to keep both languages visually consistent.
+     0.33 = Noto Sans JP aspect (~0.545) * 0.6 */
+  font-size-adjust: 0.33;
+  /* line-height is computed from the *specified* (unadjusted) font-size,
+     so compensate: 0.9 * specified ≈ 1.5 * rendered size */
+  line-height: 0.9;
 }
 
 .font-brand {
@@ -211,13 +216,333 @@ html[lang="en"] .font-decorative {
   max-width: 100%;
 }
 
+/* Unified Paper Shadow System */
+.paper-shadow-rest {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.paper-shadow-lift {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* Corkboard Background */
+.corkboard {
+  background-color: #ab8a5e;
+  background-image:
+    /* Chunky cork granules — coarse dark blobs */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='corkChunks'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.08' numOctaves='4' stitchTiles='stitch' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.38 0 0 0 0 0.28 0 0 0 0 0.16 0 0 0 0.35 -0.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23corkChunks)'/%3E%3C/svg%3E"),
+    /* Fine cork grain noise */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='corkNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.22 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23corkNoise)'/%3E%3C/svg%3E"),
+    /* Speckle dots — light flecks typical of cork */
+    radial-gradient(circle at 13% 27%, rgba(214, 186, 140, 0.5) 0.5px, transparent 2px),
+    radial-gradient(circle at 67% 11%, rgba(214, 186, 140, 0.4) 1px, transparent 2.5px),
+    radial-gradient(circle at 41% 73%, rgba(90, 65, 40, 0.35) 1px, transparent 2.5px),
+    radial-gradient(circle at 89% 53%, rgba(90, 65, 40, 0.3) 0.5px, transparent 2px),
+    radial-gradient(circle at 29% 91%, rgba(214, 186, 140, 0.45) 1px, transparent 3px),
+    radial-gradient(circle at 79% 83%, rgba(90, 65, 40, 0.35) 1.5px, transparent 3px),
+    /* Soft vignette for depth */
+    radial-gradient(ellipse at center, transparent 50%, rgba(60, 42, 22, 0.12) 100%),
+    /* Real cork texture */
+    url("/images/cork-texture.png");
+  background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, no-repeat, repeat;
+  background-size:
+    500px 500px,
+    400px 400px,
+    97px 89px,
+    83px 101px,
+    109px 79px,
+    73px 113px,
+    127px 97px,
+    103px 127px,
+    100% 100%,
+    512px 512px;
+  border-top: 6px solid #7a5f3e;
+  border-bottom: 6px solid #7a5f3e;
+  box-shadow:
+    inset 0 3px 10px rgba(0, 0, 0, 0.2),
+    inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Full-page corkboard — removes borders and inset shadow from .corkboard */
+.corkboard-page {
+  border-top: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* Large paper sheet — looks like a piece of paper pinned to corkboard */
+.paper-sheet {
+  position: relative;
+  background-color: #f5f0e6;
+  background-image: url("/images/mulberry.jpg");
+  background-repeat: repeat;
+  background-size: 1024px 1024px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* Pushpin elements for paper sheets */
+.paper-pin {
+  position: absolute;
+  z-index: 30;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 6px 4px -4px rgba(0, 0, 0, 0.35);
+}
+
+.paper-pin::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(0.5px);
+}
+
+.paper-pin-red {
+  background: radial-gradient(circle at 35% 30%, #f87171 0%, #dc2626 40%, #991b1b 100%);
+}
+
+.paper-pin-blue {
+  background: radial-gradient(circle at 35% 30%, #60a5fa 0%, #2563eb 40%, #1e3a8a 100%);
+}
+
+.paper-pin-yellow {
+  background: radial-gradient(circle at 35% 30%, #fde047 0%, #eab308 40%, #a16207 100%);
+}
+
+.paper-pin-green {
+  background: radial-gradient(circle at 35% 30%, #4ade80 0%, #16a34a 40%, #14532d 100%);
+}
+
 /* Realistic Paper Texture for Cards */
+.paper-card {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(135deg, rgba(255, 253, 240, 0.4) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='4' stitchTiles='stitch' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.88 0 0 0 0 0.85 0 0 0 0 0.78 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* Legacy alias — to be replaced by .paper-card everywhere */
 .bg-paper-texture {
   background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");
+  background-image:
+    linear-gradient(135deg, rgba(255, 253, 240, 0.4) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='4' stitchTiles='stitch' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.88 0 0 0 0 0.85 0 0 0 0 0.78 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain2)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 200px 200px;
+  background-size: 300px 300px;
   border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* ============================================================
+   PaperSurface system — physical paper pinned to the corkboard.
+   All per-instance variation is driven by CSS variables set from
+   the <PaperSurface> component (seeded randomisation):
+   --paper-tint          warm off-white background colour
+   --paper-rx/ry/rz      tiny 3D tilt + rotation (deg)
+   --paper-hover-rz      rotation when picked up
+   --paper-clip          wobbly polygon for deckled/torn edges
+   --paper-grain         grain overlay opacity (0..1)
+   --paper-shadow        layered drop-shadow chain at rest
+   --paper-shadow-hover  deeper chain when lifted
+   --paper-curl-alpha    curled-corner shadow opacity
+   ============================================================ */
+
+.paper-surface {
+  position: relative;
+  transform: perspective(1200px)
+    rotateX(var(--paper-rx, 0deg))
+    rotateY(var(--paper-ry, 0deg))
+    rotateZ(var(--paper-rz, 0deg));
+  /* drop-shadow (not box-shadow) so the shadow follows the
+     irregular clipped edge of the paper */
+  filter: var(--paper-shadow, drop-shadow(0 2px 4px rgba(46, 32, 18, 0.15)));
+}
+
+.paper-surface__inner {
+  position: relative;
+  z-index: 1;
+  background-color: var(--paper-tint, #FFFDF8);
+  clip-path: var(--paper-clip, none);
+  /* Soft lighting sheen + extremely gentle surface waviness */
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(120, 100, 70, 0.025) 55%,
+      rgba(255, 255, 255, 0.12) 100%
+    ),
+    radial-gradient(120% 60% at 30% 18%, rgba(255, 255, 255, 0.22), transparent 60%),
+    radial-gradient(90% 55% at 74% 82%, rgba(60, 45, 25, 0.03), transparent 55%);
+}
+
+/* Subtle paper grain overlay */
+.paper-surface__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='psGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='4' stitchTiles='stitch' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.5 0 0 0 0 0.42 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23psGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 280px 280px;
+  mix-blend-mode: multiply;
+  opacity: var(--paper-grain, 0.35);
+}
+
+/* Washi/mulberry paper variant (large sheets) */
+.paper-surface--washi .paper-surface__inner {
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(120, 100, 70, 0.02) 55%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url("/images/mulberry.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 1024px 1024px;
+}
+
+/* No texture variant */
+.paper-surface--flat .paper-surface__inner::before {
+  display: none;
+}
+
+/* Overlay layer — outside the clipped paper, for decorative elements
+   that should overflow the paper edges (e.g. origami, tape, pins) */
+.paper-surface__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Curled corner shadows — pseudo-elements behind the paper */
+.paper-surface--curl-br::after,
+.paper-surface--curl-bl::after,
+.paper-surface--curl-tr::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 45%;
+  max-width: 220px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.paper-surface--curl-br::after {
+  bottom: 7px;
+  right: 10px;
+  box-shadow: 0 13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(3deg) skewX(6deg);
+}
+
+.paper-surface--curl-bl::after {
+  bottom: 7px;
+  left: 10px;
+  box-shadow: 0 13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(-3deg) skewX(-6deg);
+}
+
+.paper-surface--curl-tr::after {
+  top: 7px;
+  right: 10px;
+  box-shadow: 0 -13px 8px rgba(50, 35, 18, var(--paper-curl-alpha, 0.2));
+  transform: rotate(-3deg) skewX(-6deg);
+}
+
+/* Polaroid variant — glossy, rigid, pure white card stock */
+.paper-surface--polaroid .paper-surface__inner {
+  background-color: var(--paper-tint, #FFFFFF);
+  /* Glossy specular sheen: sharper highlight + cool tone vs. warm matte paper */
+  background-image:
+    linear-gradient(
+      105deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(200, 200, 210, 0.04) 50%,
+      rgba(255, 255, 255, 0.18) 100%
+    ),
+    radial-gradient(100% 50% at 25% 15%, rgba(255, 255, 255, 0.35), transparent 55%);
+  /* Subtle rigid card border */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* No grain on polaroid — glossy surface */
+.paper-surface--polaroid .paper-surface__inner::before {
+  display: none;
+}
+
+/* Hover — "someone could pick this up" */
+.paper-surface--hover {
+  transition: transform 200ms ease-out, filter 200ms ease-out;
+}
+
+.paper-surface--hover:hover,
+.paper-surface--hover:focus-within {
+  transform: perspective(1200px)
+    rotateX(calc(var(--paper-rx, 0deg) * 0.5))
+    rotateY(calc(var(--paper-ry, 0deg) * 0.5))
+    rotateZ(var(--paper-hover-rz, 0deg))
+    translateY(-3px);
+  filter: var(--paper-shadow-hover, drop-shadow(0 6px 12px rgba(46, 32, 18, 0.18)));
+}
+
+/* Hinge hover — for taped/pinned elements that pivot from the top edge */
+.paper-surface--hinge {
+  transform-origin: top center;
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
+}
+
+.paper-surface--hinge::after {
+  transition: opacity 0.3s ease-out;
+}
+
+.paper-surface--hinge:hover,
+.paper-surface--hinge:focus-within,
+.group:hover > .paper-surface--hinge,
+.group:focus-within > .paper-surface--hinge {
+  transform: perspective(800px)
+    rotateX(6deg)
+    rotateZ(var(--paper-rz, 0deg));
+  filter: var(--paper-shadow-hover, drop-shadow(0 6px 12px rgba(46, 32, 18, 0.18)));
+}
+
+/* Hide curled corner shadow during hinge — it shouldn't move with the card */
+.paper-surface--hinge:hover::after,
+.paper-surface--hinge:focus-within::after,
+.group:hover > .paper-surface--hinge::after,
+.group:focus-within > .paper-surface--hinge::after {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-surface--hover,
+  .paper-surface--hinge {
+    transition: none;
+  }
 }
 
 /* Mobile menu ripped edge */
@@ -432,6 +757,31 @@ html[lang="en"] .font-decorative {
   --flyer-accent: #10b981;
 }
 
+/* Wooden bulletin bar — a horizontal rail behind the flyer */
+.bulletin-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem 2rem;
+  background-color: #8b6f47;
+  background-image:
+    /* Wood grain streaks */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 600 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='woodGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.4' numOctaves='3' stitchTiles='stitch' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0 0.12 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23woodGrain)'/%3E%3C/svg%3E"),
+    /* Fine wood texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='woodFine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch' seed='8'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23woodFine)'/%3E%3C/svg%3E"),
+    /* Base wood gradient */
+    linear-gradient(180deg, #9b7e5a 0%, #8b6f47 50%, #7a5f3e 100%);
+  background-repeat: repeat;
+  background-size: 600px 200px, 300px 300px, 100% 100%;
+  border-radius: 6px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .flyer-container {
   display: flex;
   flex-direction: column;
@@ -446,40 +796,54 @@ html[lang="en"] .font-decorative {
   padding: 1.5rem 1rem;
   width: 100%;
   min-height: 120px;
-  background: linear-gradient(
-    135deg,
-    var(--flyer-paper),
-    85%,
-    var(--flyer-shadow-light)
-  );
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+  background-color: #fdfcf7;
+  background-image:
+    linear-gradient(135deg, rgba(255, 253, 240, 0.4) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='flyerGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.32' numOctaves='4' stitchTiles='stitch' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.88 0 0 0 0 0.85 0 0 0 0 0.78 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23flyerGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.03);
   text-align: center;
   border-radius: 2px;
 }
 
-/* Thumbtacks */
+/* Realistic pushpins — replace old thumbtacks */
 .flyer-paper::before {
   content: "";
   position: absolute;
-  left: 8px;
-  top: 8px;
-  width: 12px;
-  height: 12px;
+  left: 10px;
+  top: 4px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background: radial-gradient(circle at 35% 30%, #f87171 0%, #dc2626 40%, #991b1b 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 6px 4px -4px rgba(0, 0, 0, 0.35);
+  z-index: 20;
 }
 
 .flyer-paper::after {
   content: "";
   position: absolute;
-  right: 8px;
-  top: 8px;
-  width: 12px;
-  height: 12px;
+  right: 10px;
+  top: 4px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #6ee7b7, #059669);
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background: radial-gradient(circle at 35% 30%, #60a5fa 0%, #2563eb 40%, #1e3a8a 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 6px 4px -4px rgba(0, 0, 0, 0.35);
+  z-index: 20;
 }
 
 .flyer-strips {
@@ -667,10 +1031,78 @@ html[lang="en"] .font-decorative {
   transform: rotate(-2.5deg);
 }
 
-/* Pushpin — realistic with stem shadow */
+/* Generalized reusable pushpin */
+.pushpin {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f87171 0%, #dc2626 40%, #991b1b 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 6px 4px -4px rgba(0, 0, 0, 0.35);
+}
+
+.pushpin::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(0.5px);
+}
+
+.pushpin-blue {
+  background: radial-gradient(circle at 35% 30%, #60a5fa 0%, #2563eb 40%, #1e3a8a 100%);
+}
+
+.pushpin-yellow {
+  background: radial-gradient(circle at 35% 30%, #fde047 0%, #eab308 40%, #a16207 100%);
+}
+
+.pushpin-green {
+  background: radial-gradient(circle at 35% 30%, #4ade80 0%, #16a34a 40%, #14532d 100%);
+}
+
+/* Paper strip — a torn piece of paper for section headings */
+.paper-strip {
+  position: relative;
+  display: inline-block;
+  padding: 1.25rem 2.25rem 1.5rem;
+  background-color: #fdfcf7;
+  background-image:
+    /* Warm tint gradient */
+    linear-gradient(135deg, rgba(255, 250, 230, 0.5) 0%, transparent 50%, rgba(240, 235, 220, 0.3) 100%),
+    /* Fine grain */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stripFine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.82 0 0 0 0 0.79 0 0 0 0 0.72 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stripFine)'/%3E%3C/svg%3E"),
+    /* Coarser grain for paper fiber texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stripCoarse'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18' numOctaves='2' stitchTiles='stitch' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.75 0 0 0 0 0.72 0 0 0 0 0.65 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stripCoarse)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px, 300px 300px, 400px 400px;
+  /* Torn top and bottom edges */
+  clip-path: polygon(
+    0% 4%, 3% 0%, 8% 3%, 15% 1%, 22% 4%, 30% 0%, 38% 3%, 45% 1%, 52% 4%, 60% 0%, 68% 3%, 75% 1%, 82% 4%, 90% 0%, 96% 3%, 100% 1%,
+    100% 96%, 96% 100%, 90% 97%, 82% 99%, 75% 96%, 68% 100%, 60% 97%, 52% 99%, 45% 96%, 38% 100%, 30% 97%, 22% 99%, 15% 96%, 8% 100%, 3% 97%, 0% 99%
+  );
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Legacy event-flyer-pin — kept for backward compat */
 .event-flyer-pin {
   position: absolute;
-  top: -9px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -706,28 +1138,26 @@ html[lang="en"] .font-decorative {
   overflow: hidden;
   border-radius: 2px;
   container-type: inline-size;
-  /* 5-layer shadow for realistic depth */
-  box-shadow:
-    0 1px 1px rgba(0, 0, 0, 0.08),
-    0 2px 2px rgba(0, 0, 0, 0.07),
-    0 4px 4px rgba(0, 0, 0, 0.06),
-    0 8px 8px rgba(0, 0, 0, 0.05),
-    0 16px 16px rgba(0, 0, 0, 0.04);
   /* 3D transforms */
   transform-origin: 50% 0%; /* Pivot exactly at the top center, under the pin */
   transform-style: preserve-3d;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Unified paper shadow — resting on board */
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.03);
 }
 
 /* 3D Hover Lift - Bottom lifts towards viewer */
 .event-flyer-wrapper:hover .event-flyer {
-  transform: rotateX(8deg) rotateY(-2deg);
+  transform: rotateX(6deg) rotateY(-2deg);
+  /* Unified paper shadow — lifted off board */
   box-shadow:
-    0 2px 3px rgba(0, 0, 0, 0.04),
-    0 8px 12px rgba(0, 0, 0, 0.05),
-    0 16px 20px rgba(0, 0, 0, 0.05),
-    0 24px 32px rgba(0, 0, 0, 0.06),
-    8px 36px 48px rgba(0, 0, 0, 0.09);
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.06),
+    4px 24px 40px rgba(0, 0, 0, 0.05);
 }
 
 /* Paper grain texture overlay */
@@ -812,20 +1242,250 @@ html[lang="en"] .font-decorative {
   z-index: 20; /* actively hovered card always wins */
 }
 
+/* Z-index only — for cards with corner WashiTape pieces that need
+   hover stacking without the center tape pseudo-element */
+.card-stack-z {
+  position: relative;
+  z-index: 0;
+}
+
+.card-stack-z:has(.card-is-active) {
+  z-index: 10;
+}
+
+.card-stack-z:hover {
+  z-index: 20;
+}
+
+/* ─── Peeling Sticker Buttons ─── */
+/* Die-cut sticker with a corner that peels on hover.
+   ::before is the sticker body (background + border) — gets clip-path cut
+   so the real page background shows through the missing corner.
+   ::after is the folded flap — sits on top, NOT clipped by the cut,
+   showing the white sticker underside. A small gap between the flap's
+   fold line and the cut edge ensures the background is visible around the peel. */
+.btn-sticker {
+  position: relative;
+  isolation: isolate;
+  border-radius: 16px 18px 15px 19px / 18px 15px 19px 16px;
+  color: var(--sticker-color, #ffffff);
+  transform: rotate(-0.5deg);
+  /* Default so var() always resolves */
+  --sticker-bg-color: #0ea88b;
+}
+
+/* Sticker body — background, white kiss-cut border, clip-path cut */
+.btn-sticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 3px solid #fffef8;
+  background-color: var(--sticker-bg-color);
+  background-image:
+    /* Glossy glare — pronounced diagonal sheen always visible */
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.28) 35%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0.28) 65%,
+      rgba(255, 255, 255, 0.05) 100%
+    ),
+    /* Paper grain texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sg)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-size: 130% 100%, 200px 200px;
+  background-position: 35% 0%, 0 0;
+  /* Full rectangle at rest — border-radius shows normally */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.08);
+  z-index: -2;
+  transition: clip-path 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background-position 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Folded flap — the peeled corner folded back over the sticker.
+   Not clipped by ::before's cut (separate pseudo-element on the parent).
+   Fixed 24px triangle with a rounded tip (clip-path: path), scaled from the
+   bottom-right corner so the fold line always meets the cut edge exactly. */
+.btn-sticker::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+  clip-path: path("M 9 0 H 24 L 0 24 V 9 Q 0 0 9 0 Z");
+  background: linear-gradient(225deg, #fffef8 0%, #f0ede0 55%, #d9d4c3 100%);
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.15));
+  transform: scale(0);
+  transform-origin: 100% 100%;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Peel: cut the corner on ::before, grow the flap on ::after */
+.btn-sticker:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+  /* Shift the glare slightly — light catches the lifted surface */
+  background-position: 65% 0%, 0 0, 0 0;
+}
+
+.btn-sticker:hover::after {
+  transform: scale(1);
+}
+
+.btn-sticker:active::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-sticker:active::after {
+  transform: scale(0);
+}
+
+/* Sticker color fills — flat solid colors (glare provides the shine) */
+.btn-sticker--emerald {
+  --sticker-bg-color: #0ea88b;
+  --sticker-color: #ffffff;
+}
+
+.btn-sticker--yellow {
+  --sticker-bg-color: #fcd34d;
+  --sticker-color: #1e293b;
+}
+
+.btn-sticker--slate {
+  --sticker-bg-color: #334155;
+  --sticker-color: #ffffff;
+}
+
+/* Plain paper sticker (used for outline/secondary actions) */
+.btn-sticker--paper {
+  --sticker-bg-color: #fdfcf7;
+  --sticker-color: #334155;
+}
+
+.washi-tape-top {
+  --washi-color: rgba(52, 138, 111, 0.82);
+  --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.82) 0 2px, transparent 2.5px);
+  --washi-pattern-size: 18px 18px;
+}
+
+.washi-tape-top::before,
+.washi-piece {
+  background-color: var(--washi-color);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 42%, rgba(40, 35, 25, 0.1)),
+    var(--washi-pattern),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='40'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-position: center, center, center;
+  background-repeat: no-repeat, repeat, repeat;
+  background-size: 100% 100%, var(--washi-pattern-size), 160px 40px;
+  clip-path: polygon(2% 0, 34% 2%, 67% 0, 98% 3%, 96% 11%, 100% 19%, 97% 28%, 100% 39%, 97% 51%, 100% 63%, 96% 74%, 99% 84%, 96% 93%, 98% 100%, 65% 98%, 33% 100%, 2% 97%, 4% 88%, 0 79%, 3% 68%, 0 57%, 3% 46%, 0 35%, 4% 25%, 1% 14%, 4% 7%);
+  /* Tight, subtle shadow to feel like tape stuck on the card, not floating */
+  filter: drop-shadow(0 1px 1px rgba(43, 35, 24, 0.28));
+  opacity: 0.92;
+  pointer-events: none;
+}
+
 .washi-tape-top::before {
   content: "";
   position: absolute;
-  top: -26px;
+  top: -17px;
   left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  width: 140px;
-  height: 48px;
-  background-image: url("/images/corgi-washi.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  pointer-events: none;
   z-index: 10;
-  /* Tight, subtle shadow to feel like tape stuck on the card, not floating */
-  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35));
+  width: 122px;
+  height: 34px;
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.washi-piece {
+  --washi-color: rgba(52, 138, 111, 0.82);
+  --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.82) 0 2px, transparent 2.5px);
+  --washi-pattern-size: 18px 18px;
+  position: absolute;
+  z-index: 20;
+  display: block;
+  width: 112px;
+  height: 30px;
+}
+
+.washi-emerald {
+  --washi-color: rgba(52, 138, 111, 0.82);
+  --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.82) 0 2px, transparent 2.5px);
+  --washi-pattern-size: 18px 18px;
+}
+
+.washi-indigo {
+  --washi-color: rgba(78, 89, 137, 0.78);
+  --washi-pattern: repeating-linear-gradient(45deg, transparent 0 7px, rgba(255, 248, 225, 0.42) 7px 9px, transparent 9px 15px);
+  --washi-pattern-size: 22px 22px;
+}
+
+.washi-sakura {
+  --washi-color: rgba(190, 101, 108, 0.72);
+  --washi-pattern: radial-gradient(ellipse at 30% 50%, rgba(255, 244, 226, 0.72) 0 2px, transparent 2.5px), radial-gradient(ellipse at 65% 50%, rgba(255, 244, 226, 0.58) 0 1.5px, transparent 2px);
+  --washi-pattern-size: 24px 15px;
+}
+
+.washi-mustard {
+  --washi-color: rgba(205, 158, 53, 0.78);
+  --washi-pattern: repeating-linear-gradient(115deg, transparent 0 8px, rgba(255, 249, 218, 0.5) 8px 11px, transparent 11px 18px);
+  --washi-pattern-size: 24px 24px;
+}
+
+.washi-mint {
+  --washi-color: rgba(90, 154, 139, 0.72);
+  --washi-pattern: linear-gradient(45deg, rgba(255, 250, 229, 0.55) 25%, transparent 25% 75%, rgba(255, 250, 229, 0.55) 75%), linear-gradient(-45deg, rgba(255, 250, 229, 0.32) 25%, transparent 25% 75%, rgba(255, 250, 229, 0.32) 75%);
+  --washi-pattern-size: 16px 16px;
+}
+
+/* ─── Footer Washi Tape Strip ───
+   A repeating decorative washi tape that straddles the boundary between
+   the corkboard and the footer, making the footer look taped onto the
+   corkboard. Uses an inline SVG polka-dot pattern on a translucent
+   emerald base with paper-fiber noise and a surface sheen. */
+/* Green-tinted washi paper for the footer */
+.footer-washi {
+  background-color: #6ee7b7;
+  background-image:
+    /* Green tint overlay — emerald gradient at moderate opacity */
+    linear-gradient(135deg, rgba(166, 224, 201, 0.493) 0%, rgba(53, 179, 137, 0.35) 100%),
+    /* Washi paper texture */
+    url("/images/mulberry.jpg");
+  background-repeat: repeat, repeat;
+  background-size: 100% 100%, 1024px 1024px;
+}
+
+.washi-tape-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -22px;
+  height: 44px;
+  background-color: #10b981bd;
+  background-image:
+    /* Subtle vertical sheen — light catches the tape surface */
+    linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.08) 100%),
+    /* Polka-dot pattern — cream circles on translucent emerald */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='44' viewBox='0 0 56 44'%3E%3Ccircle cx='14' cy='11' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='42' cy='11' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='28' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='0' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='56' cy='22' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='14' cy='33' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='42' cy='33' r='3' fill='%23fef3c7'/%3E%3Ccircle cx='28' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='28' cy='33' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='0' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='56' cy='11' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='0' cy='33' r='1.2' fill='%23ffffff'/%3E%3Ccircle cx='56' cy='33' r='1.2' fill='%23ffffff'/%3E%3C/svg%3E"),
+    /* Paper fiber noise for washi texture */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='44'%3E%3Cfilter id='washiNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='200' height='44' filter='url(%23washiNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat-x, repeat-x, repeat-x;
+  background-size: 100% 100%, 56px 44px, 200px 44px;
+  /* Mostly straight edges with minimal irregularity — like cleanly cut tape */
+  clip-path: polygon(
+    0% 2%, 25% 0%, 50% 2%, 75% 0%, 100% 2%,
+    100% 98%, 75% 100%, 50% 98%, 25% 100%, 0% 98%
+  );
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 30;
+  pointer-events: none;
 }
