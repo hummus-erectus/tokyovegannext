@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {PaperButton} from "@/components/PaperButton";
+import {WashiTape} from "@/components/WashiTape";
 
 type FeaturedResourceCardProps = {
   locale: "en" | "ja";
@@ -27,8 +28,9 @@ export function FeaturedResourceCard({
   imageAlt
 }: FeaturedResourceCardProps) {
   return (
-    <div className="tape-section -rotate-1">
-      <div className="tape-top-center" />
+    <div className="relative -rotate-1">
+      <WashiTape variant="emerald" placement="top-left" rotation={-34} size="lg" />
+      <WashiTape variant="mint" placement="bottom-right" rotation={-42} size="lg" />
       <div className="paper-card p-6 sm:p-8 md:p-10">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10 lg:gap-12">
           <div className="relative w-full max-w-[320px] shrink-0 sm:max-w-[400px] md:max-w-sm lg:max-w-md">

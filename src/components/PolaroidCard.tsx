@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { PaperSurface } from '@/components/PaperSurface';
+import { WashiTape } from '@/components/WashiTape';
 
 interface PolaroidCardProps {
   title: string;
@@ -33,11 +34,23 @@ export function PolaroidCard({
   hover = false,
 }: PolaroidCardProps) {
 
+  const variant = color.includes('green')
+    ? 'sakura'
+    : color.includes('yellow')
+      ? 'indigo'
+      : 'emerald';
+
+  const stickyIsRight = stickyPos.includes('-right-');
+  const tapePlacement = stickyIsRight ? 'top-left' : 'top-right';
+  const tapeRotation = stickyIsRight ? -38 : 38;
+
   return (
     <div
       className={`relative group ${marginTop} ${rotation}`}
     >
-      {/* Polaroid Card containing Tape */}
+      <WashiTape variant={variant} placement={tapePlacement} rotation={tapeRotation} size="md" />
+
+      {/* Polaroid Card */}
       <PaperSurface
         seed={`polaroid-${image}`}
         variant="polaroid"
@@ -47,13 +60,6 @@ export function PolaroidCard({
         hover={hover}
         contentClassName="p-4 pb-8"
       >
-        {/* Tape Element */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 w-24">
-          <div className="tape-section">
-            <div className="tape-top-center" />
-          </div>
-        </div>
-
         <div className="relative aspect-square w-full overflow-hidden bg-slate-100 mt-2">
             <Image
               src={image}

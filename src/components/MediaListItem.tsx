@@ -1,4 +1,5 @@
 import {FallbackImage} from "@/components/FallbackImage";
+import {WashiTape} from "@/components/WashiTape";
 import {type ReactNode} from "react";
 
 type PolaroidCoverProps = {
@@ -15,7 +16,7 @@ function PolaroidCover({title, imageUrl, fallbackImage, reverse}: PolaroidCoverP
   return (
     <div className="relative shrink-0 mx-auto md:mx-0 md:self-start">
       {/* Tape/clip at the top */}
-      <div className="tape-top-center" />
+      <WashiTape variant={reverse ? "sakura" : "indigo"} placement="top-left" rotation={reverse ? 34 : -32} size="sm" />
 
       {/* Polaroid-style frame */}
       <div
@@ -58,8 +59,8 @@ function IndexCard({title, reverse, meta, children, action}: IndexCardProps) {
       }}
     >
       {/* Tape decorations */}
-      <div className="pointer-events-none absolute right-2 top-2 z-20 h-7 w-28 origin-center translate-x-1/3 -translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
-      <div className="pointer-events-none absolute bottom-2 left-2 z-20 h-7 w-28 origin-center -translate-x-1/3 translate-y-1/3 rotate-40 rounded-sm bg-amber-200/70 shadow-sm" />
+      <WashiTape variant={reverse ? "mint" : "mustard"} placement="top-right" rotation={40} size="sm" />
+      <WashiTape variant={reverse ? "mustard" : "mint"} placement="bottom-left" rotation={40} size="sm" />
       <div
         className="relative overflow-hidden paper-card paper-shadow-rest font-mono"
         style={{

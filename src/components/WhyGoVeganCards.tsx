@@ -4,6 +4,8 @@ import {useState} from "react";
 import Image from "next/image";
 import {Modal} from "@/components/Modal";
 import {RoughHighlight} from "@/components/RoughHighlight";
+import {WashiTape} from "@/components/WashiTape";
+import {washiPick} from "@/lib/washiPick";
 import {usePaperLift} from "@/hooks/usePaperLift";
 
 type CardKey = "animals" | "planet" | "health" | "publicHealth" | "humanRights";
@@ -88,12 +90,21 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
   const activeReasonMedia = activeReason ? cards.find((card) => card.key === activeReason) : null;
 
   const rotations = ["rotate-2", "-rotate-1", "rotate-1", "-rotate-2", "rotate-1"];
+  const variants = ["sakura", "emerald", "indigo", "mint", "mustard"] as const;
 
   return (
     <>
       <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 pt-4">
         {cards.map(({key, image, accent}, idx) => (
-          <div key={key} className={`relative ${rotations[idx % rotations.length]} washi-tape-top`}>
+          <div key={key} className={`relative card-stack-z ${rotations[idx % rotations.length]}`}>
+            {washiPick(key, 7, 100) < 40 ? (
+              <WashiTape variant={variants[washiPick(key, 0, variants.length)]} placement="top-center" rotation={-2} size="md" widthPct={60} />
+            ) : (
+              <>
+                <WashiTape variant={variants[washiPick(key, 0, variants.length)]} placement="top-left" rotation={-38} size="md" />
+                <WashiTape variant={variants[washiPick(key, 1, variants.length)]} placement="top-right" rotation={38} size="md" />
+              </>
+            )}
             <WhyGoVeganCard
               image={image}
               accent={accent}

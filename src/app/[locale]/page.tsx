@@ -10,6 +10,7 @@ import { RoughHighlight } from '@/components/RoughHighlight';
 import { PolaroidCard } from '@/components/PolaroidCard';
 import { PaperSurface } from '@/components/PaperSurface';
 import { SectionLabel } from '@/components/SectionLabel';
+import { WashiTape } from '@/components/WashiTape';
 import Image from "next/image";
 import {getNextMeetupEvent} from "@/lib/meetup";
 import {client} from "@/sanity/client";
@@ -118,15 +119,16 @@ export default async function HomePage() {
        {/* Origami Pig — mobile only (desktop pig is in PaperSurface overlay) */}
        <div className="lg:hidden">{heroPig}</div>
 
-       <div className="tape-section rotate-2">
-          <div className="tape-top-center" />
+       <div className="relative rotate-2">
+          <WashiTape variant="sakura" placement="top-left" rotation={-32} size="lg" />
+          <WashiTape variant="emerald" placement="bottom-right" rotation={-42} size="lg" />
           <PaperSurface
             seed="hero-photo"
             variant="polaroid"
             rotation={0}
             shadow="sm"
             edge="deckle"
-            liftedCorner="bottom-right"
+            liftedCorner="bottom-left"
             contentClassName="p-3 pb-8"
           >
             <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
@@ -165,7 +167,7 @@ export default async function HomePage() {
             shadow="md"
             rotation={-1}
             liftedCorner="bottom-left"
-            className="mx-auto max-w-6xl px-3 sm:px-4"
+            className="relative z-40 mx-auto max-w-6xl px-3 sm:px-4"
             contentClassName="px-4 sm:px-6 pt-6 pb-8"
           >
             <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
