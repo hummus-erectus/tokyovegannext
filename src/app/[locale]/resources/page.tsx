@@ -2,6 +2,7 @@ import {ResourceCard} from "@/components/ResourceCard";
 import {PageHero} from "@/components/PageHero";
 import {FeaturedResourceCard} from "@/components/FeaturedResourceCard";
 import {WashiTape} from "@/components/WashiTape";
+import {PaperSurface} from "@/components/PaperSurface";
 import {washiPick} from "@/lib/washiPick";
 import {getLocale, getTranslations} from "next-intl/server";
 
@@ -119,14 +120,25 @@ export default async function ResourcesPage() {
             id={sectionKey}
             className="grid gap-8 lg:grid-cols-[250px_1fr] scroll-mt-32"
           >
-            <div className="space-y-4 lg:self-start pt-8">
-              <h2 className="font-heading text-5xl font-bold text-emerald-700 -rotate-2">
+            <PaperSurface
+              seed={`resources-${sectionKey}`}
+              texture="washi"
+              edge="torn"
+              shadow="sm"
+              rotation={-2}
+              className="lg:max-w-[250px]"
+              contentClassName="px-5 py-5 space-y-4"
+              overlay={
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-7 bg-white/40 backdrop-blur-sm rotate-2 border border-white/20 shadow-sm pointer-events-none z-30" />
+              }
+            >
+              <h2 className="font-heading text-5xl font-bold text-emerald-700">
                 {t(`sections.${sectionKey}.title`)}
               </h2>
               <p className="text-xl text-slate-700 font-decorative">
                 {t(`sections.${sectionKey}.description`)}
               </p>
-            </div>
+            </PaperSurface>
             {renderCards(sectionKey)}
           </section>
         ))}

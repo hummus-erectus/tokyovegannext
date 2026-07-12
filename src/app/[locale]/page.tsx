@@ -155,7 +155,7 @@ export default async function HomePage() {
   );
 
   return (
-    <div className="corkboard corkboard-page flex min-h-screen flex-col gap-0 text-slate-900">
+    <div className="flex min-h-screen flex-col gap-0 text-slate-900">
       {/* Hero Section — text on paper sheet, photo on corkboard (mobile) / both on paper (desktop) */}
       <section className="relative overflow-visible pt-8 pb-0 lg:pt-10 lg:pb-0">
         {/* Mobile: paper sheet with text only, photo on corkboard below */}

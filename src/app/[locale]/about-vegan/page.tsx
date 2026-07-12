@@ -3,6 +3,8 @@ import {WhyGoVeganCards} from "@/components/WhyGoVeganCards";
 import {RoughHighlight} from "@/components/RoughHighlight";
 import {PageHero} from "@/components/PageHero";
 import {PaperButton} from "@/components/PaperButton";
+import {PaperSurface} from "@/components/PaperSurface";
+import {WashiTape} from "@/components/WashiTape";
 import {getLocale, getTranslations} from "next-intl/server";
 
 export type ReasonCopy = {
@@ -94,10 +96,19 @@ export default async function AboutVeganPage() {
         {/* What is Veganism? — taped paper with blockquote */}
         <section id="what-is-veganism" className="scroll-mt-32">
           <div className="grid gap-12 lg:grid-cols-[250px_1fr] items-start">
-            <div className="space-y-4 lg:self-start pt-4">
-              <h2 className="font-heading text-5xl font-bold text-emerald-700 rotate-1">{t("whatIsVeganism.title")}</h2>
+            <PaperSurface
+              seed="about-veganism-heading"
+              texture="washi"
+              edge="torn"
+              shadow="sm"
+              rotation={1}
+              className="lg:max-w-[250px]"
+              contentClassName="px-5 py-5 space-y-4"
+            >
+              <div className="paper-pin paper-pin-red" style={{ top: '8px', left: '16px' }} />
+              <h2 className="font-heading text-5xl font-bold text-emerald-700">{t("whatIsVeganism.title")}</h2>
               <p className="text-lg text-slate-700">{t("whatIsVeganism.definition")}</p>
-            </div>
+            </PaperSurface>
             <div className="tape-section rotate-1">
               <div className="tape-top-center" />
               <figure className="bg-white p-8 md:p-10 shadow-xl shadow-slate-300/60">
@@ -118,10 +129,21 @@ export default async function AboutVeganPage() {
 
         {/* Why Go Vegan? */}
         <section id="why-go-vegan" className="scroll-mt-32 space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="font-heading text-6xl font-bold text-emerald-800 -rotate-1">{t("whyGoVegan.title")}</h2>
+          <PaperSurface
+            seed="about-why-go-vegan-heading"
+            texture="washi"
+            edge="torn"
+            shadow="sm"
+            rotation={-1}
+            className="mx-auto max-w-xl"
+            contentClassName="px-6 py-5 text-center space-y-2"
+            overlay={
+              <WashiTape variant="sakura" placement="top-center" rotation={2} size="md" widthPct={45} />
+            }
+          >
+            <h2 className="font-heading text-6xl font-bold text-emerald-800">{t("whyGoVegan.title")}</h2>
             <p className="font-decorative text-2xl text-slate-600">{t("whyGoVegan.subtitle")}</p>
-          </div>
+          </PaperSurface>
           <WhyGoVeganCards
             cards={whyGoVeganCards}
             reasons={reasons}
@@ -150,10 +172,21 @@ export default async function AboutVeganPage() {
 
         {/* FAQs */}
         <section id="faqs" className="scroll-mt-32 space-y-2">
-          <div className="text-center space-y-2">
-            <h2 className="font-heading text-6xl font-bold text-slate-900 rotate-1">{t("faqs.title")}</h2>
+          <PaperSurface
+            seed="about-faqs-heading"
+            texture="washi"
+            edge="torn"
+            shadow="sm"
+            rotation={1}
+            className="mx-auto max-w-xl"
+            contentClassName="px-6 py-5 text-center space-y-2"
+            overlay={
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-8 bg-white/40 backdrop-blur-sm -rotate-2 border border-white/20 shadow-sm pointer-events-none z-30" />
+            }
+          >
+            <h2 className="font-heading text-6xl font-bold text-slate-900">{t("faqs.title")}</h2>
             <p className="font-decorative text-2xl text-slate-600">{t("faqs.subtitle")}</p>
-          </div>
+          </PaperSurface>
           <FaqAccordion items={faqItems} />
         </section>
 

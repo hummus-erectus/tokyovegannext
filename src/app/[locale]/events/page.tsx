@@ -3,6 +3,8 @@ import {PageHero} from "@/components/PageHero";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
 import {EventFlyer} from "@/components/EventFlyer";
 import { getNextMeetupEvent } from "@/lib/meetup";
+import {PaperSurface} from "@/components/PaperSurface";
+import {WashiTape} from "@/components/WashiTape";
 import Image from "next/image";
 
 export default async function EventsPage(props: {
@@ -27,7 +29,7 @@ export default async function EventsPage(props: {
     : undefined;
 
   return (
-    <main className="flex-1 bg-[url('/images/mulberry.jpg')] bg-repeat">
+    <main className="flex-1">
       <PageHero
         eyebrow={t("hero.eyebrow")}
         title={t("hero.title")}
@@ -82,14 +84,25 @@ export default async function EventsPage(props: {
 
         {/* Event Types Grid */}
         <section className="mb-24 space-y-12">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <PaperSurface
+            seed="events-types-heading"
+            texture="washi"
+            edge="torn"
+            shadow="sm"
+            rotation={1}
+            className="mx-auto max-w-2xl"
+            contentClassName="px-6 py-6 text-center"
+            overlay={
+              <WashiTape variant="emerald" placement="top-center" rotation={-3} size="md" widthPct={50} />
+            }
+          >
             <h2 className="font-heading text-4xl sm:text-5xl font-bold text-emerald-900 mb-6 tracking-wide">
               {t("types.title")}
             </h2>
             <p className="text-emerald-800/80 text-lg font-medium">
               {t("types.description")}
             </p>
-          </div>
+          </PaperSurface>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Social Card */}

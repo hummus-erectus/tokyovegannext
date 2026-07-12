@@ -15,8 +15,10 @@ function PolaroidCover({title, imageUrl, fallbackImage, reverse}: PolaroidCoverP
 
   return (
     <div className="relative shrink-0 mx-auto md:mx-0 md:self-start">
-      {/* Tape/clip at the top */}
-      <WashiTape variant={reverse ? "sakura" : "indigo"} placement="top-left" rotation={reverse ? 34 : -32} size="sm" />
+      {/* Tape on opposite corners — top-left & bottom-right when image is on left,
+          top-right & bottom-left when image is on right */}
+      <WashiTape variant={reverse ? "sakura" : "indigo"} placement={reverse ? "top-right" : "top-left"} rotation={reverse ? 34 : -32} size="sm" offsetXMultiplier={1.5} offsetYMultiplier={0.2} />
+      <WashiTape variant={reverse ? "indigo" : "sakura"} placement={reverse ? "bottom-left" : "bottom-right"} rotation={reverse ? 32 : -34} size="sm" offsetXMultiplier={1.5} offsetYMultiplier={0.2} />
 
       {/* Polaroid-style frame */}
       <div
@@ -58,9 +60,9 @@ function IndexCard({title, reverse, meta, children, action}: IndexCardProps) {
         transform: reverse ? "rotate(-1deg)" : "rotate(1deg)",
       }}
     >
-      {/* Tape decorations */}
-      <WashiTape variant={reverse ? "mint" : "mustard"} placement="top-right" rotation={40} size="sm" />
-      <WashiTape variant={reverse ? "mustard" : "mint"} placement="bottom-left" rotation={40} size="sm" />
+      {/* Tape on opposite corners — mirrors the polaroid's tape pattern */}
+      <WashiTape variant={reverse ? "mint" : "mustard"} placement={reverse ? "top-left" : "top-right"} rotation={reverse ? -40 : 40} size="sm" />
+      <WashiTape variant={reverse ? "mustard" : "mint"} placement={reverse ? "bottom-right" : "bottom-left"} rotation={reverse ? -40 : 40} size="sm" />
       <div
         className="relative overflow-hidden paper-card paper-shadow-rest font-mono"
         style={{

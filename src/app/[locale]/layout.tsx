@@ -72,7 +72,7 @@ export default async function LocaleLayout({children, params}: Props) {
     <html lang={locale}>
       <body className={`${klee.variable} ${notoSans.variable} ${notoSansJp.variable} ${inter.variable} ${amatic.variable} ${caveat.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
+          <div className="corkboard corkboard-page flex min-h-screen flex-col text-slate-900 overflow-x-hidden w-full relative">
             <Header />
             <main className="flex-1 w-full relative">
               {children}

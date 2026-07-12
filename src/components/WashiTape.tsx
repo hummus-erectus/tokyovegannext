@@ -12,6 +12,10 @@ interface WashiTapeProps {
   className?: string;
   /** Override width as a percentage of the parent (e.g. 60 for 60%) */
   widthPct?: number;
+  /** Scale horizontal offset (>1 pushes further out from the corner) */
+  offsetXMultiplier?: number;
+  /** Scale vertical offset (>1 pushes further out from the corner) */
+  offsetYMultiplier?: number;
 }
 
 const variantMap: Record<WashiTapeVariant, string> = {
@@ -43,6 +47,8 @@ export function WashiTape({
   size = "md",
   className = "",
   widthPct,
+  offsetXMultiplier = 1,
+  offsetYMultiplier = 1,
 }: WashiTapeProps) {
   const { width: defaultWidth, height } = sizeMap[size];
   const width = widthPct ? `${widthPct}%` : defaultWidth;
@@ -54,8 +60,8 @@ export function WashiTape({
   const halfWidth = defaultWidth / 2;
   const halfHeight = height / 2;
   // Slightly less than half so the tape sits a little more on the card and a little closer to the center
-  const offsetX = halfWidth * 0.45;
-  const offsetY = halfHeight * 0.45;
+  const offsetX = halfWidth * 0.45 * offsetXMultiplier;
+  const offsetY = halfHeight * 0.45 * offsetYMultiplier;
 
   // When stretched wide, use fixed-pixel torn edges so they don't stretch
   const wideClipPath =
