@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function ComingSoonPage() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-16 text-slate-900">
+    <div className="paper-sheet relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-16 text-slate-900">
       <div className="mx-auto w-full max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* ─── Left column: text + CTA ─── */}
