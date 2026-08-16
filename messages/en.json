@@ -51,10 +51,11 @@
       "sectionTitle": "Join the Community",
       "title": "Never Miss a Meetup!",
       "description": "Get event announcements and community updates straight to your inbox.",
+      "emailLabel": "Email address",
       "emailPlaceholder": "your@email.com",
       "submit": "Count me in!",
       "successTitle": "You're in!",
-      "successMessage": "Check your inbox to confirm your subscription.",
+      "successMessage": "You're subscribed! A welcome email is on its way. If it doesn't arrive soon, check your spam folder and mark us as \"not spam\" so you don't miss future updates.",
       "errorMessage": "Something went wrong. Please try again.",
       "privacy": "We respect your privacy. Unsubscribe anytime."
     },
