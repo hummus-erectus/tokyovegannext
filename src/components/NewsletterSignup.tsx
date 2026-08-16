@@ -149,18 +149,18 @@ export function NewsletterSignupCard({
 
           {/* ── Success state (success title + message, no icon, no form) ── */}
           <div
-            className={status === "success" ? "" : "invisible"}
+            className={`${status === "success" ? "" : "invisible"} ${compact ? "" : "h-full flex flex-col justify-center gap-4"}`}
             style={{ gridArea: "1 / 1" }}
             role="status"
             aria-live="polite"
           >
-            <div className={`text-center ${compact ? "mb-2" : "mb-4"}`}>
+            <div className={`text-center ${compact ? "mb-2" : ""}`}>
               <h3 className="font-heading text-5xl font-bold text-emerald-800 leading-none">
                 {labels.successTitle}
               </h3>
             </div>
 
-            <div className={`text-center text-slate-600 text-sm leading-relaxed ${compact ? "mb-3" : "mb-5"}`}>
+            <div className={`text-center text-slate-600 text-sm leading-relaxed ${compact ? "mb-3" : ""}`}>
               {labels.successMessage}
             </div>
           </div>
