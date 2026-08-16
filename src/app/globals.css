@@ -53,6 +53,22 @@ html[lang="ja"] .font-heading {
   line-height: 0.9;
 }
 
+/* Bilingual blocks (e.g. the coming-soon page): an element's own lang
+   attribute wins over the document language. */
+html[lang="ja"] [lang="en"].font-heading,
+html[lang="ja"] [lang="en"] .font-heading {
+  font-family: var(--font-amatic), cursive;
+  font-size-adjust: none;
+  line-height: normal;
+}
+
+html[lang="en"] [lang="ja"].font-heading,
+html[lang="en"] [lang="ja"] .font-heading {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size-adjust: 0.33;
+  line-height: 0.9;
+}
+
 .font-brand {
   font-family: var(--font-amatic), cursive;
 }
@@ -1420,6 +1436,15 @@ html[lang="en"] .font-decorative {
 .washi-emerald {
   --washi-color: rgba(52, 138, 111, 0.82);
   --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.82) 0 2px, transparent 2.5px);
+  --washi-pattern-size: 18px 18px;
+}
+
+/* Softer emerald — same hue as .washi-emerald but dialed back to match the
+   transparency of .washi-sakura (0.72) for layouts where the tape sits over
+   a busy surface and shouldn't compete with the content underneath. */
+.washi-emerald-soft {
+  --washi-color: rgba(52, 138, 111, 0.55);
+  --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.55) 0 2px, transparent 2.5px);
   --washi-pattern-size: 18px 18px;
 }
 

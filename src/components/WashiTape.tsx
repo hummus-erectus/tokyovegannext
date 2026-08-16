@@ -1,6 +1,6 @@
 "use client";
 
-export type WashiTapeVariant = "emerald" | "indigo" | "sakura" | "mustard" | "mint";
+export type WashiTapeVariant = "emerald" | "emerald-soft" | "indigo" | "sakura" | "mustard" | "mint";
 export type WashiTapePlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right" | "top-center";
 export type WashiTapeSize = "sm" | "md" | "lg";
 
@@ -20,6 +20,7 @@ interface WashiTapeProps {
 
 const variantMap: Record<WashiTapeVariant, string> = {
   emerald: "washi-emerald",
+  "emerald-soft": "washi-emerald-soft",
   indigo: "washi-indigo",
   sakura: "washi-sakura",
   mustard: "washi-mustard",
