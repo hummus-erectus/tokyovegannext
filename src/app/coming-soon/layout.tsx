@@ -39,7 +39,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "Tokyo Vegan — 準備中 / Coming Soon",
-  description: "東京ヴィーガンの新しいウェブサイトを制作中です。Meetupグループにご参加ください！",
+  description: "東京ヴィーガンの新しいウェブサイトを制作中です。メーリングリストにご登録ください！",
 };
 
 export const viewport: Viewport = {
