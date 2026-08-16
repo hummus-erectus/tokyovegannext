@@ -134,7 +134,7 @@ export default async function HomePage() {
             <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
               <Image
                 src="/images/group.jpg"
-                alt="Tokyo Vegan Next community group at a meetup event"
+                alt="Tokyo Vegan community with Ed Winters at our 2025 World Vegan Day event"
                 width={800}
                 height={1000}
                 className="h-full w-full object-cover"

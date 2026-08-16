@@ -175,7 +175,7 @@ export default function ComingSoonPage() {
                 <div className="relative h-[340px] w-full overflow-hidden">
                   <Image
                     src="/images/group.jpg"
-                    alt="Tokyo Vegan community group at a meetup event"
+                    alt="Tokyo Vegan community with Ed Winters at our 2025 World Vegan Day event"
                     width={800}
                     height={1000}
                     className="h-full w-full object-cover"
