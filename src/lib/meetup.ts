@@ -48,15 +48,28 @@ export async function getNextMeetupEvent(): Promise<MeetupEvent | null> {
       .map((vevent) => {
         const event = new ICAL.Event(vevent);
 
+        // Meetup descriptions often contain Markdown links like [https://...](https://...)
+        // or [text](https://...), or plain URLs. Match clean URL characters only.
+        const peatixUrlMatch = event.description?.match(
+          /https?:\/\/[a-zA-Z0-9_.-]*peatix\.com(?:\/[a-zA-Z0-9_.~%!$&'()*+,;=:@/-]*)?/i
+        )?.[0];
+        const peatixUrlFromDescription = peatixUrlMatch
+          ? peatixUrlMatch.replace(/[.,;:!?。、\s\])]+$/, '')
+          : undefined;
+
         const urlFromProperty =
           (vevent as { getFirstPropertyValue?: (name: string) => string | null })
             .getFirstPropertyValue?.("url") ?? undefined;
 
-        const urlFromDescription = event.description?.match(
+        const meetupUrlFromDescription = event.description?.match(
           /https:\/\/www\.meetup\.com\/[^/]+\/events\/[a-zA-Z0-9_]+\/?/
         )?.[0];
 
-        const url = urlFromProperty ?? urlFromDescription ?? "https://www.meetup.com/tokyovegan/";
+        const url =
+          peatixUrlFromDescription ??
+          urlFromProperty ??
+          meetupUrlFromDescription ??
+          "https://peatix.com/group/16486093";
 
         return {
           title: event.summary,

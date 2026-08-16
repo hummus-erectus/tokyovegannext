@@ -14,21 +14,21 @@
     "hero": {
       "eyebrow": "Tokyo Vegan",
       "title": "Welcome to Tokyo Vegan!",
-      "description": "リソースを探し、バイリンガルのミートアップに参加して、日本各地でプラントベースの暮らしを広げる活気あるコミュニティの一員になりませんか。",
+      "description": "リソースを探し、バイリンガルのイベントに参加して、日本各地でプラントベースの暮らしを広げる活気あるコミュニティの一員になりませんか。",
       "primaryCta": "イベントに参加",
       "secondaryCta": "リソースを見る",
       "communityBlurb": "2006年から続く、ヴィーガンライフを楽しむ温かいコミュニティ。"
     },
     "meetup": {
       "nextEvent": "次回のイベント",
-      "rsvp": "Meetupで申し込む",
+      "rsvp": "Peatixで申し込む",
       "going": "参加予定"
     },
     "meetupFlyer": {
-      "title": "Meetupに参加しよう！",
+      "title": "イベントに参加しよう！",
       "description": "東京で開催されるバイリンガルのディナーやトークイベントなど。",
       "members": "9,000人以上のメンバー",
-      "cta": "グループに参加"
+      "cta": "Peatixを見る"
     },
     "instagram": {
       "followUs": "Instagramをフォロー",
@@ -38,7 +38,7 @@
       "tagline": "東京でプラントベースの喜びを広げています！",
       "copyright": "野菜とコードで作られました。",
       "links": {
-        "meetup": "Meetup",
+        "peatix": "Peatix",
         "instagram": "Instagram",
         "resources": "リソース"
       }
@@ -49,7 +49,7 @@
     },
     "newsletter": {
       "sectionTitle": "コミュニティに参加",
-      "title": "ミートアップを見逃さない！",
+      "title": "最新情報をメールで",
       "description": "イベントのお知らせやコミュニティの最新情報をメールでお届けします。",
       "emailLabel": "メールアドレス",
       "emailPlaceholder": "your@email.com",
@@ -306,7 +306,7 @@
     "hero": {
       "eyebrow": "イベント",
       "title": "開催予定のイベント",
-      "description": "誰もが参加できるバイリンガルのミートアップで、プラントベースの暮らしを楽しむコミュニティとつながりましょう。"
+      "description": "誰もが参加できるバイリンガルのイベントで、プラントベースの暮らしを楽しむコミュニティとつながりましょう。"
     },
     "types": {
       "title": "主な活動",
@@ -324,16 +324,10 @@
         "description": "ヴィーガニズムやアニマルウェルフェアの認知を高めるための平和的な街頭活動、クリーンアップ、キャンペーン。"
       }
     },
-    "meetup": {
-      "title": "Meetupグループに参加する",
-      "description": "ほとんどのイベントはMeetup.comを通じて企画しています。9,000人以上のメンバーがいるグループに参加して、最新の活動情報をゲットしましょう！",
-      "cta": "Tokyo Vegan Meetupを見る"
-    },
-    "newsletter": {
-      "title": "ミートアップを見逃さない！",
-      "description": "イベントのお知らせやコミュニティの最新情報をメールでお届けします。",
-      "emailPlaceholder": "your@email.com",
-      "submit": "登録する！"
+    "peatix": {
+      "title": "Peatixでフォローする",
+      "description": "イベントはPeatixを通じて企画しています。グループをフォローして、交流会やワークショップなどの最新情報をチェックしましょう！",
+      "cta": "Tokyo VeganのPeatixを見る"
     }
   }
 }

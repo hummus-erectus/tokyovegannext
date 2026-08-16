@@ -1,30 +1,30 @@
 "use client";
 
-import { Mail, Instagram, Facebook } from "lucide-react";
-import { FaMeetup, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { PeatixIcon } from "@/components/PeatixIcon";
 
 const contactItems = [
   {
     key: "email",
-    icon: Mail,
+    icon: FaEnvelope,
     label: "info@tokyovegan.org",
     href: "mailto:info@tokyovegan.org",
   },
   {
-    key: "meetup",
-    icon: FaMeetup,
-    label: "Tokyo Vegan Meetup",
-    href: "https://www.meetup.com/tokyovegan/",
+    key: "peatix",
+    icon: PeatixIcon,
+    label: "Tokyo Vegan",
+    href: "https://peatix.com/group/16486093",
   },
   {
     key: "instagram",
-    icon: Instagram,
+    icon: FaInstagram,
     label: "@tokyoveganofficial",
     href: "https://www.instagram.com/tokyoveganofficial/",
   },
   {
     key: "facebook",
-    icon: Facebook,
+    icon: FaFacebook,
     label: "Tokyo Vegan",
     href: "https://www.facebook.com/tokyoveganmeetup",
   },

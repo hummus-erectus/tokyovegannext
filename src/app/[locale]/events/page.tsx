@@ -5,6 +5,7 @@ import {EventFlyer} from "@/components/EventFlyer";
 import { getNextMeetupEvent } from "@/lib/meetup";
 import {PaperSurface} from "@/components/PaperSurface";
 import {WashiTape} from "@/components/WashiTape";
+import {PeatixIcon} from "@/components/PeatixIcon";
 import Image from "next/image";
 
 export default async function EventsPage(props: {
@@ -46,30 +47,35 @@ export default async function EventsPage(props: {
                 <EventFlyer event={event} />
               </div>
               <div className="flex-1 w-full space-y-6">
-                <div className="text-center md:text-left space-y-6">
-                  <h3 className="text-2xl font-bold text-emerald-900 font-heading">
-                    <a
-                      href="https://www.meetup.com/tokyovegan/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline-hand hover:text-emerald-700 transition-colors"
-                    >
-                      {t("meetup.title")}
-                    </a>
+                <div className="text-center md:text-left space-y-4">
+                  <h3 className="text-3xl font-bold text-emerald-900 font-heading">
+                    {t("peatix.title")}
                   </h3>
                   <p className="text-emerald-800/80 leading-relaxed font-medium">
-                    {t("meetup.description")}
+                    {t("peatix.description")}
                   </p>
+                  <div>
+                    <a
+                      href="https://peatix.com/group/16486093"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-sticker btn-sticker--yellow group/cta inline-flex items-center gap-2 px-5 py-2.5 font-ui text-lg font-bold"
+                    >
+                      <PeatixIcon className="h-5 w-5" aria-hidden="true" />
+                      <span>{t("peatix.cta")}</span>
+                      <span aria-hidden="true" className="transition-transform group-hover/cta:translate-x-1">→</span>
+                    </a>
+                  </div>
                 </div>
                 <a
-                  href="https://www.meetup.com/tokyovegan/"
+                  href="https://peatix.com/group/16486093"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="photo-slit relative block"
                 >
                   <Image
                     src="/images/group.jpg"
-                    alt="Tokyo Vegan Meetup group"
+                    alt="Tokyo Vegan community with Ed Winters at our 2025 World Vegan Day event"
                     width={600}
                     height={400}
                     className="w-full h-auto"

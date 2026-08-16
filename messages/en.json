@@ -14,21 +14,21 @@
     "hero": {
       "eyebrow": "Tokyo Vegan",
       "title": "Welcome to Tokyo Vegan!",
-      "description": "Discover resources, join our bilingual meetups, and become part of a vibrant community empowering plant-based living across Japan.",
+      "description": "Discover resources, join our bilingual events, and become part of a vibrant community empowering plant-based living across Japan.",
       "primaryCta": "Join an event",
       "secondaryCta": "Explore resources",
       "communityBlurb": "A welcoming community celebrating vegan life since 2006."
     },
     "meetup": {
       "nextEvent": "Next Event",
-      "rsvp": "RSVP on Meetup",
+      "rsvp": "RSVP on Peatix",
       "going": "going"
     },
     "meetupFlyer": {
-      "title": "Join Us on Meetup!",
+      "title": "Join Our Events!",
       "description": "Bilingual dinners, talks and more in Tokyo.",
       "members": "9,000+ members",
-      "cta": "Join the group"
+      "cta": "View on Peatix"
     },
     "instagram": {
       "followUs": "Follow us on Instagram",
@@ -38,7 +38,7 @@
       "tagline": "Spreading plant-based joy in Tokyo!",
       "copyright": "Made with veggies & code.",
       "links": {
-        "meetup": "Meetup",
+        "peatix": "Peatix",
         "instagram": "Instagram",
         "resources": "Resources"
       }
@@ -49,7 +49,7 @@
     },
     "newsletter": {
       "sectionTitle": "Join the Community",
-      "title": "Never Miss a Meetup!",
+      "title": "Get updates by email",
       "description": "Get event announcements and community updates straight to your inbox.",
       "emailLabel": "Email address",
       "emailPlaceholder": "your@email.com",
@@ -305,15 +305,15 @@
   "EventsPage": {
     "hero": {
       "eyebrow": "Get involved",
-      "title": "Upcoming Events & Meetups",
-      "description": "Join our inclusive, bilingual meetups and connect with a vibrant community celebrating plant-based living in Tokyo and beyond."
+      "title": "Upcoming Events",
+      "description": "Join our inclusive, bilingual events and connect with a vibrant community celebrating plant-based living in Tokyo and beyond."
     },
     "types": {
       "title": "What we do",
       "description": "We host a variety of events for vegans, vegetarians, and the veg-curious.",
       "social": {
         "title": "Social Gatherings",
-        "description": "Casual meetups at vegan-friendly restaurants and parks. Perfect for meeting new people and enjoying great food together."
+        "description": "Casual gatherings at vegan-friendly restaurants and parks. Perfect for meeting new people and enjoying great food together."
       },
       "workshops": {
         "title": "Workshops & Talks",
@@ -324,16 +324,10 @@
         "description": "Peaceful street outreach, cleanups, and campaigns to raise awareness about veganism and animal welfare."
       }
     },
-    "meetup": {
-      "title": "Join our Meetup Group",
-      "description": "We organize most of our events through Meetup.com. Join our group of over 9,000 members to stay updated on our latest activities!",
-      "cta": "View Tokyo Vegan Meetup"
-    },
-    "newsletter": {
-      "title": "Never Miss a Meetup!",
-      "description": "Get event announcements and community updates straight to your inbox.",
-      "emailPlaceholder": "your@email.com",
-      "submit": "Count me in!"
+    "peatix": {
+      "title": "Follow us on Peatix",
+      "description": "We organize our events through Peatix. Follow our group to get notified of upcoming gatherings, workshops, and potlucks!",
+      "cta": "View Tokyo Vegan on Peatix"
     }
   }
 }
