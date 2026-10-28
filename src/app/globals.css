@@ -1258,20 +1258,6 @@ html[lang="en"] .font-decorative {
   transform: rotateX(-8deg);
 }
 
-/* Corgi Washi Tape for cards */
-.washi-tape-top {
-  position: relative;
-  z-index: 0; /* stacking context per card */
-}
-
-.washi-tape-top:has(.card-is-active) {
-  z-index: 10; /* transitioning-out card: above default but below active */
-}
-
-.washi-tape-top:hover {
-  z-index: 20; /* actively hovered card always wins */
-}
-
 /* Z-index only — for cards with corner WashiTape pieces that need
    hover stacking without the center tape pseudo-element */
 .card-stack-z {
@@ -1402,13 +1388,6 @@ html[lang="en"] .font-decorative {
   --sticker-color: #334155;
 }
 
-.washi-tape-top {
-  --washi-color: rgba(52, 138, 111, 0.82);
-  --washi-pattern: radial-gradient(circle at center, rgba(255, 248, 220, 0.82) 0 2px, transparent 2.5px);
-  --washi-pattern-size: 18px 18px;
-}
-
-.washi-tape-top::before,
 .washi-piece {
   background-color: var(--washi-color);
   background-image:
@@ -1423,17 +1402,6 @@ html[lang="en"] .font-decorative {
   filter: drop-shadow(0 1px 1px rgba(43, 35, 24, 0.28));
   opacity: 0.92;
   pointer-events: none;
-}
-
-.washi-tape-top::before {
-  content: "";
-  position: absolute;
-  top: -17px;
-  left: 50%;
-  z-index: 10;
-  width: 122px;
-  height: 34px;
-  transform: translateX(-50%) rotate(-2deg);
 }
 
 .washi-piece {
