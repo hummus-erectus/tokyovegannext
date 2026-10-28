@@ -9,7 +9,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
   const t = useTranslations("HomePage.instagram");
 
   return (
-    <div className="space-y-6 md:space-y-12">
+    <div className="space-y-6 md:space-y-8">
       <div className="flex flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center">
         <div className="relative inline-block sm:pl-6 lg:pl-0 lg:mx-auto">
           {/* Desktop annotation — right of handle, arrow pointing left */}
@@ -77,7 +77,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
         const verticalOffsets = ["translate-y-0", "translate-y-4", "translate-y-2", "translate-y-0", "translate-y-0", "translate-y-4"];
 
         return (
-          <div className="grid grid-cols-2 items-center gap-4 md:gap-8 md:grid-cols-3 lg:gap-12">
+          <div className="mx-auto grid max-w-4xl grid-cols-2 items-center gap-4 md:gap-8 md:grid-cols-3 lg:gap-10">
             {posts.map((post, index) => (
               <a
                 key={post.id}
