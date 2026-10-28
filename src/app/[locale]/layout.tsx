@@ -1,11 +1,12 @@
 import type {Metadata, Viewport} from "next";
 import {NextIntlClientProvider} from "next-intl";
-import {getMessages} from "next-intl/server";
+import {getMessages, getTranslations} from "next-intl/server";
 import {notFound} from "next/navigation";
 import {Klee_One, Noto_Sans, Noto_Sans_JP, Inter, Amatic_SC, Caveat} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {routing} from "@/i18n/routing";
+import {SITE_URL} from "@/lib/site";
 import {Analytics} from "@vercel/analytics/next";
 import "../globals.css";
 
@@ -44,10 +45,28 @@ const caveat = Caveat({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Tokyo Vegan",
-  description: "Connecting and supporting the Tokyo vegan community",
-};
+export async function generateMetadata({params}: Omit<Props, "children">): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "HomePage"});
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: "Tokyo Vegan",
+      template: "%s | Tokyo Vegan",
+    },
+    description: t("hero.description"),
+    openGraph: {
+      siteName: "Tokyo Vegan",
+      type: "website",
+      locale: locale === "ja" ? "ja_JP" : "en_US",
+      images: [{url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Tokyo Vegan community"}],
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",

@@ -36,6 +36,15 @@ body {
   width: 100%;
 }
 
+/* Avoid orphaned last words/characters in headings (e.g. a lone "で" in Japanese) */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+html[lang="ja"] :is(h1, h2, h3) {
+  word-break: auto-phrase;
+}
+
 /* Custom Utilities */
 .font-heading {
   font-family: var(--font-amatic), cursive;
@@ -1231,6 +1240,11 @@ html[lang="en"] .font-decorative {
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
+}
+
+/* Top band sits under the pushpin — push its text below the pin */
+.event-flyer-band--top {
+  padding-top: 32px;
 }
 
 /* 3D Card Lift Effect - lifts from tape hinge at top */

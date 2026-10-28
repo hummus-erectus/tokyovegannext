@@ -1,8 +1,11 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
 import {EventFlyer} from "@/components/EventFlyer";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
-import {InstagramFeed} from "@/components/InstagramFeed";
+import {InstagramFeedClient} from "@/components/InstagramFeedClient";
+import {getLatestInstagramPosts} from "@/lib/instagram";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
@@ -28,6 +31,11 @@ const LATEST_POSTS_QUERY = `*[_type == "post" && language == $language && define
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
 
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  return {alternates: localeAlternates(locale)};
+}
+
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
   const locale = await getLocale();
@@ -37,7 +45,9 @@ export default async function HomePage() {
 
   const nextEvent = await getNextMeetupEvent();
 
-  const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
+  // Don't let a Sanity outage take down the home page — the blog section has an empty state
+  const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale }).catch(() => []);
+  const instagramPosts = await getLatestInstagramPosts(6);
 
   const heroText = (
     <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
@@ -103,7 +113,7 @@ export default async function HomePage() {
   );
 
   const heroPig = (
-    <div className="absolute -top-4 -right-8 lg:-right-8 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+    <div className="absolute -top-10 -right-3 sm:-right-8 z-30 w-36 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
       <Image
         src="/images/pig.webp"
         alt="Origami Pig"
@@ -463,7 +473,8 @@ export default async function HomePage() {
       </section>
       </div>
 
-      {/* Instagram Section — directly on corkboard */}
+      {/* Instagram Section — directly on corkboard (hidden if the feed is unavailable) */}
+      {instagramPosts.length > 0 && (
       <section className="relative mx-auto w-full max-w-6xl px-4 py-10 lg:py-14">
         {/* Origami Pig — peeking in from the left, mirrored from the hero */}
         <div className="hidden lg:block absolute -top-1 left-4 z-20 w-32 lg:w-40 -rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
@@ -476,8 +487,9 @@ export default async function HomePage() {
             className="w-full h-auto object-contain"
           />
         </div>
-        <InstagramFeed />
+        <InstagramFeedClient posts={instagramPosts} />
       </section>
+      )}
 
       {/* Contact Flyer Section — directly on corkboard */}
       <section className="relative w-full pt-6 pb-14 scroll-mt-24" id="contact">

@@ -59,7 +59,7 @@ function NextEventFlyer({
         <div className="event-flyer-inner-border" />
 
         {/* Top accent band */}
-        <div className="event-flyer-band bg-emerald-600 pt-6 pb-3 sm:pt-7">
+        <div className="event-flyer-band event-flyer-band--top bg-emerald-600">
           <span className="font-decorative text-xl font-bold uppercase tracking-[0.2em] text-white/95 sm:text-2xl">
             ★ {t('nextEvent')} ★
           </span>

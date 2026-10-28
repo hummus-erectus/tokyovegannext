@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  // The old site used /jp/... for Japanese pages
+  async redirects() {
+    return [
+      {source: '/jp', destination: '/ja', permanent: true},
+      {source: '/jp/:path*', destination: '/ja/:path*', permanent: true},
+    ];
+  },
   images: {
     remotePatterns: [
       {

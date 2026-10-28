@@ -7,8 +7,9 @@ import {RoughHighlight} from "@/components/RoughHighlight";
 import {WashiTape} from "@/components/WashiTape";
 import {washiPick} from "@/lib/washiPick";
 import {usePaperLift} from "@/hooks/usePaperLift";
+import {reasonSources, type ReasonKey} from "@/lib/veganSources";
 
-type CardKey = "animals" | "planet" | "health" | "publicHealth" | "humanRights";
+type CardKey = ReasonKey;
 
 type WhyGoVeganCardData = {
   key: CardKey;
@@ -28,6 +29,7 @@ type WhyGoVeganCardsProps = {
   readMoreLabel: string;
   sectionTitle: string;
   closeLabel: string;
+  sourcesLabel: string;
 };
 
 function WhyGoVeganCard({
@@ -84,7 +86,7 @@ function WhyGoVeganCard({
   );
 }
 
-export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, closeLabel}: WhyGoVeganCardsProps) {
+export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, closeLabel, sourcesLabel}: WhyGoVeganCardsProps) {
   const [activeReason, setActiveReason] = useState<CardKey | null>(null);
   const activeReasonCopy = activeReason ? reasons[activeReason] : null;
   const activeReasonMedia = activeReason ? cards.find((card) => card.key === activeReason) : null;
@@ -139,6 +141,23 @@ export function WhyGoVeganCards({cards, reasons, readMoreLabel, sectionTitle, cl
                   <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-600">{sectionTitle}</p>
                   <h3 className="font-heading text-3xl font-bold text-slate-900">{activeReasonCopy.title}</h3>
                   <p className="whitespace-pre-line leading-relaxed">{activeReasonCopy.full}</p>
+                </div>
+                <div className="mt-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{sourcesLabel}</p>
+                  <ol className="mt-2 list-decimal space-y-1 pl-5 text-xs leading-relaxed text-slate-500">
+                    {reasonSources[activeReason].map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-slate-300 underline-offset-2 transition-colors hover:text-emerald-700"
+                        >
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
                 <div className="mt-8 border-t border-slate-200 pt-4">
                   <button

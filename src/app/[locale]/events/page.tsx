@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import {getTranslations, setRequestLocale} from "next-intl/server";
 import {PageHero} from "@/components/PageHero";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
@@ -7,6 +9,16 @@ import {PaperSurface} from "@/components/PaperSurface";
 import {WashiTape} from "@/components/WashiTape";
 import {PeatixIcon} from "@/components/PeatixIcon";
 import Image from "next/image";
+
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "EventsPage"});
+  return {
+    title: t("hero.title"),
+    description: t("hero.description"),
+    alternates: localeAlternates(locale, "/events"),
+  };
+}
 
 export default async function EventsPage(props: {
   params: Promise<{locale: string}>;

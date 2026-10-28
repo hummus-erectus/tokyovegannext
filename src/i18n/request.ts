@@ -12,6 +12,8 @@ export default getRequestConfig(async ({requestLocale}) => {
 
   return {
     locale,
+    // Events are in Tokyo; without this, dates render in the server's timezone (UTC on Vercel)
+    timeZone: 'Asia/Tokyo',
     messages: (await import(`../../messages/${locale}.json`)).default
   };
 });
