@@ -5,6 +5,7 @@ export interface InstagramPost {
   imageUrl: string;
   caption: string;
   permalink: string;
+  isVideo: boolean;
 }
 
 const FEEDFRAMER_API_KEY = process.env.FEEDFRAMER_API_KEY;
@@ -22,6 +23,10 @@ interface FeedframerResponse {
   posts: FeedframerPost[];
 }
 
+function isVideo(item: FeedframerPost): boolean {
+  return item.mediaType === "VIDEO" || item.mediaType === "REELS";
+}
+
 export async function getLatestInstagramPosts(limit = 4): Promise<InstagramPost[]> {
   if (!FEEDFRAMER_API_KEY) {
     if (process.env.NODE_ENV !== "production") {
@@ -32,7 +37,6 @@ export async function getLatestInstagramPosts(limit = 4): Promise<InstagramPost[
 
   const params = new URLSearchParams({
     api_key: FEEDFRAMER_API_KEY!,
-    "filter[type]": "CAROUSEL_ALBUM",
     "page[size]": String(limit),
   });
 
@@ -51,13 +55,15 @@ export async function getLatestInstagramPosts(limit = 4): Promise<InstagramPost[
     }
 
     const json = (await response.json()) as FeedframerResponse;
+    // FeedFramer only serves the latest few posts, so include reels (via their cover image)
+    // rather than filtering down to carousels. Skip videos without a thumbnail — mediaUrl is the video file.
     const items = (json.posts ?? []).filter(
-      (item) => item.mediaType === "CAROUSEL_ALBUM",
+      (item) => !isVideo(item) || !!item.thumbnailUrl,
     );
 
     const getImageUrl = (item: FeedframerPost): string => {
       // Prefer thumbnail for video/reel content, main media URL for images
-      if ((item.mediaType === "VIDEO" || item.mediaType === "REELS") && item.thumbnailUrl) {
+      if (isVideo(item) && item.thumbnailUrl) {
         return item.thumbnailUrl;
       }
 
@@ -73,6 +79,7 @@ export async function getLatestInstagramPosts(limit = 4): Promise<InstagramPost[
       imageUrl: getImageUrl(item),
       caption: item.caption ?? "",
       permalink: item.permalink,
+      isVideo: isVideo(item),
     }));
   } catch (error) {
     if (process.env.NODE_ENV !== "production") {
