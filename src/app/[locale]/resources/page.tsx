@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import {ResourceCard} from "@/components/ResourceCard";
 import {PageHero} from "@/components/PageHero";
 import {FeaturedResourceCard} from "@/components/FeaturedResourceCard";
@@ -33,6 +35,16 @@ const accentColorMap: Record<string, string> = {
 };
 
 type SectionKey = (typeof sectionKeys)[number];
+
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "ResourcesPage"});
+  return {
+    title: t("hero.title"),
+    description: t("hero.description"),
+    alternates: localeAlternates(locale, "/resources"),
+  };
+}
 
 export default async function ResourcesPage() {
   const t = await getTranslations("ResourcesPage");

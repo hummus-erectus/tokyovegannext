@@ -7,6 +7,17 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  // The old site used /jp/... for Japanese pages
+  async redirects() {
+    return [
+      {source: '/jp', destination: '/ja', permanent: true},
+      {source: '/jp/:path*', destination: '/ja/:path*', permanent: true},
+      // Once launched, send anyone with an old "coming soon" link to the real site
+      ...(process.env.MAINTENANCE_MODE === 'true'
+        ? []
+        : [{source: '/coming-soon', destination: '/', permanent: false}]),
+    ];
+  },
   images: {
     remotePatterns: [
       {
@@ -28,6 +39,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.feedframer.com', // Instagram feed images
       }
     ]
   }

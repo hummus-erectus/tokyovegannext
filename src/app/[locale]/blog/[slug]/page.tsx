@@ -1,6 +1,7 @@
 import { client } from '@/sanity/client'
 import { urlFor } from '@/sanity/image'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -100,6 +101,27 @@ function buildPtComponents(): PortableTextComponents {
   }
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params
+  const post = await client.fetch(POST_QUERY, { slug, language: locale })
+  if (!post) return {}
+
+  const imageUrl = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/${locale}/blog/${slug}` },
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description: post.excerpt,
+      publishedTime: post.publishedAt,
+      ...(imageUrl ? { images: [{ url: imageUrl, width: 1200, height: 630 }] } : {}),
+    },
+  }
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params
   const t = await getTranslations('BlogPostPage')
@@ -115,6 +137,7 @@ export default async function BlogPostPage({ params }: Props) {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
+        timeZone: 'Asia/Tokyo',
       })
     : null
 

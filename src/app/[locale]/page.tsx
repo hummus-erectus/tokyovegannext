@@ -1,8 +1,11 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import {Link} from "@/i18n/routing";
 import {getLocale, getTranslations} from "next-intl/server";
 import {EventFlyer} from "@/components/EventFlyer";
 import {NewsletterSignup} from "@/components/NewsletterSignup";
-import {InstagramFeed} from "@/components/InstagramFeed";
+import {InstagramFeedClient} from "@/components/InstagramFeedClient";
+import {getLatestInstagramPosts} from "@/lib/instagram";
 import {TearOffFlyer} from "@/components/TearOffFlyer";
 import {PaperButton} from "@/components/PaperButton";
 import {HomeBlogCard} from "@/components/HomeBlogCard";
@@ -28,6 +31,11 @@ const LATEST_POSTS_QUERY = `*[_type == "post" && language == $language && define
 
 const activityCardKeys = ["outreach", "support", "community"] as const;
 
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  return {alternates: localeAlternates(locale)};
+}
+
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
   const locale = await getLocale();
@@ -37,12 +45,14 @@ export default async function HomePage() {
 
   const nextEvent = await getNextMeetupEvent();
 
-  const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale });
+  // Don't let a Sanity outage take down the home page — the blog section has an empty state
+  const latestPosts = await client.fetch(LATEST_POSTS_QUERY, { language: locale }).catch(() => []);
+  const instagramPosts = await getLatestInstagramPosts(6);
 
   const heroText = (
     <div className="flex flex-col justify-center space-y-8 text-center lg:text-left lg:items-start items-center">
       <div className="space-y-4 flex flex-col items-center lg:items-start">
-        <h1 className="font-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl lg:text-9xl">
+        <h1 className="font-brand -rotate-2 text-7xl font-bold text-emerald-600 sm:text-8xl">
           {t("hero.title")}
         </h1>
         <p className="max-w-lg text-lg text-slate-700 sm:text-xl">
@@ -103,7 +113,7 @@ export default async function HomePage() {
   );
 
   const heroPig = (
-    <div className="absolute -top-4 -right-8 lg:-right-8 z-30 w-48 sm:w-60 lg:w-72 rotate-16 drop-shadow-sm pointer-events-none">
+    <div className="absolute -top-10 -right-3 sm:-right-8 lg:-top-2 z-30 w-36 sm:w-60 lg:w-56 rotate-16 drop-shadow-sm pointer-events-none">
       <Image
         src="/images/pig.webp"
         alt="Origami Pig"
@@ -131,7 +141,7 @@ export default async function HomePage() {
             liftedCorner="bottom-left"
             contentClassName="p-3 pb-8"
           >
-            <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[460px] w-full overflow-hidden">
+            <div className="relative h-[320px] sm:h-[360px] md:h-[400px] lg:h-[400px] w-full overflow-hidden">
               <Image
                 src="/images/group.jpg"
                 alt="Tokyo Vegan community with Ed Winters at our 2025 World Vegan Day event"
@@ -207,30 +217,33 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter + Next Event — directly on corkboard */}
-      <section id="newsletter" className="relative w-full scroll-mt-24 py-14 sm:py-16 lg:py-20">
-          <div className="relative mx-auto w-full max-w-5xl px-4">
-            {/* Origami Chicken — perched on the corkboard, above the title */}
-            <div className="absolute -top-8 left-4 sm:-top-10 sm:left-2 lg:left-4 z-30 w-20 sm:w-28 lg:w-36 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none">
-              <Image
-                src="/images/chicken.webp"
-                alt="Origami Chicken"
-                width={300}
-                height={300}
-                className="w-full h-auto object-contain"
-              />
+      <section id="newsletter" className="relative w-full scroll-mt-24 py-10 lg:py-12">
+          <div className="relative mx-auto w-full max-w-4xl px-4">
+            <div className="mb-8 text-center">
+              <div className="relative inline-block">
+                {/* Origami Chicken — perched beside the section label */}
+                <div className="absolute -left-6 -top-12 z-10 w-16 -rotate-12 -scale-x-100 drop-shadow-sm pointer-events-none sm:left-auto sm:right-full sm:top-1/2 sm:mr-3 sm:w-20 sm:-translate-y-1/2 lg:w-24">
+                  <Image
+                    src="/images/chicken.webp"
+                    alt=""
+                    aria-hidden="true"
+                    width={300}
+                    height={300}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+                <SectionLabel
+                  href="/events"
+                  locale={locale}
+                  highlightColor="#10b981"
+                  rotation="-rotate-1"
+                  textClassName="text-emerald-700"
+                >
+                  {t("newsletter.sectionTitle")}
+                </SectionLabel>
+              </div>
             </div>
-            <div className="mb-14 text-center">
-              <SectionLabel
-                href="/events"
-                locale={locale}
-                highlightColor="#10b981"
-                rotation="-rotate-1"
-                textClassName="text-emerald-700"
-              >
-                {t("newsletter.sectionTitle")}
-              </SectionLabel>
-            </div>
-            <div className="grid gap-12 md:gap-16 lg:gap-24 md:grid-cols-2 md:items-center">
+            <div className="grid gap-10 md:gap-12 md:grid-cols-2 md:items-center">
               {/* Next Event — second on mobile, LEFT on desktop */}
               <div className="order-2 md:order-1 px-4 sm:px-6 md:px-0">
                 <div className="flex flex-col items-center mx-auto w-full">
@@ -407,7 +420,7 @@ export default async function HomePage() {
         <div className="mx-auto w-full max-w-6xl space-y-8 px-4 overflow-x-clip">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 -rotate-1">
+              <h2 className="font-heading text-4xl sm:text-5xl font-bold text-slate-900 -rotate-1">
                 {t("sections.blog.description")}
               </h2>
             </div>
@@ -463,7 +476,8 @@ export default async function HomePage() {
       </section>
       </div>
 
-      {/* Instagram Section — directly on corkboard */}
+      {/* Instagram Section — directly on corkboard (hidden if the feed is unavailable) */}
+      {instagramPosts.length > 0 && (
       <section className="relative mx-auto w-full max-w-6xl px-4 py-10 lg:py-14">
         {/* Origami Pig — peeking in from the left, mirrored from the hero */}
         <div className="hidden lg:block absolute -top-1 left-4 z-20 w-32 lg:w-40 -rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
@@ -476,14 +490,15 @@ export default async function HomePage() {
             className="w-full h-auto object-contain"
           />
         </div>
-        <InstagramFeed />
+        <InstagramFeedClient posts={instagramPosts} />
       </section>
+      )}
 
       {/* Contact Flyer Section — directly on corkboard */}
       <section className="relative w-full pt-6 pb-14 scroll-mt-24" id="contact">
           <div className="relative mx-auto w-full max-w-2xl px-4">
             {/* Origami Bull — perched on the corkboard, mirrored from the activities section */}
-            <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-30 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
+            <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-20 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
               <Image
                 src="/images/bull.webp"
                 alt=""

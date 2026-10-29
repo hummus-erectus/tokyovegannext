@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useFormatter } from 'next-intl';
-import { FaMeetup } from 'react-icons/fa';
+import { PeatixIcon } from '@/components/PeatixIcon';
 import { RoughHighlight } from './RoughHighlight';
 
 interface EventFlyerProps {
@@ -59,7 +59,7 @@ function NextEventFlyer({
         <div className="event-flyer-inner-border" />
 
         {/* Top accent band */}
-        <div className="event-flyer-band bg-emerald-600 pt-6 pb-3 sm:pt-7">
+        <div className="event-flyer-band event-flyer-band--top bg-emerald-600">
           <span className="font-decorative text-xl font-bold uppercase tracking-[0.2em] text-white/95 sm:text-2xl">
             ★ {t('nextEvent')} ★
           </span>
@@ -107,7 +107,7 @@ function NextEventFlyer({
             rel="noreferrer"
             className="group/cta relative z-6 inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-ui text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-emerald-600 hover:border-emerald-600 hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
           >
-            <FaMeetup className="h-5 w-5" />
+            <PeatixIcon className="h-5 w-5" />
             <span>{t('rsvp')}</span>
             <span className="transition-transform group-hover/cta:translate-x-1">→</span>
           </a>
@@ -140,13 +140,11 @@ function MeetupFlyer() {
 
         {/* Body */}
         <div className="relative z-2 flex flex-1 flex-col items-center justify-center px-6 py-8 text-center">
-          {/* Large Meetup logo */}
-          <div className="mb-6 flex flex-col items-center justify-center text-[#ED1C40]">
-            <FaMeetup className="h-32 w-32 drop-shadow-sm" />
+          {/* Large Peatix logo */}
+          <div className="mb-6 flex flex-col items-center justify-center text-emerald-600">
+            <PeatixIcon className="h-28 w-28 drop-shadow-sm" />
             <span className="mt-1 block font-brand text-3xl font-bold leading-tight text-emerald-800">
               Tokyo Vegan
-              <br />
-              Meetup Group
             </span>
           </div>
 
@@ -160,12 +158,12 @@ function MeetupFlyer() {
 
           {/* CTA */}
           <a
-            href="https://www.meetup.com/tokyovegan/"
+            href="https://peatix.com/group/16486093"
             target="_blank"
             rel="noreferrer"
-            className="group/cta relative z-6 mt-auto inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-ui text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-[#ED1C40] hover:border-[#ED1C40] hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
+            className="group/cta relative z-6 mt-auto inline-flex items-center gap-2 border-2 border-slate-800 bg-white/70 px-5 py-2 font-ui text-xl font-bold text-slate-800 shadow-sm transition-all hover:bg-emerald-600 hover:border-emerald-600 hover:text-white hover:shadow-md active:translate-y-px sm:px-6 sm:py-2.5 sm:text-2xl"
           >
-            <FaMeetup className="h-5 w-5" />
+            <PeatixIcon className="h-5 w-5" />
             <span>{t('cta')}</span>
             <span className="transition-transform group-hover/cta:translate-x-1">→</span>
           </a>

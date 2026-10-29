@@ -9,7 +9,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
   const t = useTranslations("HomePage.instagram");
 
   return (
-    <div className="space-y-6 md:space-y-12">
+    <div className="space-y-6 md:space-y-8">
       <div className="flex flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center">
         <div className="relative inline-block sm:pl-6 lg:pl-0 lg:mx-auto">
           {/* Desktop annotation — right of handle, arrow pointing left */}
@@ -77,7 +77,7 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
         const verticalOffsets = ["translate-y-0", "translate-y-4", "translate-y-2", "translate-y-0", "translate-y-0", "translate-y-4"];
 
         return (
-          <div className="grid grid-cols-2 items-center gap-4 md:gap-8 md:grid-cols-3 lg:gap-12">
+          <div className="mx-auto grid max-w-4xl grid-cols-2 items-center gap-4 md:gap-8 md:grid-cols-3 lg:gap-10">
             {posts.map((post, index) => (
               <a
                 key={post.id}
@@ -88,15 +88,28 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
               >
                 <div className="tape-top-center" />
                 <div className="flex flex-col items-center justify-center paper-card p-2 md:p-3 paper-shadow-rest transition group-hover:paper-shadow-lift">
-                  <div className="w-full overflow-hidden bg-slate-100 flex items-center">
+                  {/* Fixed 4:5 (Instagram's portrait post shape) so reel covers (9:16) don't stretch the grid */}
+                  <div className="relative w-full aspect-4/5 overflow-hidden bg-slate-100">
                     <Image
                       src={post.imageUrl}
                       alt={post.caption || "Instagram post"}
                       width={500}
-                      height={500}
-                      unoptimized
-                      className="w-full h-auto object-cover"
+                      height={625}
+                      sizes="(min-width: 768px) 280px, 45vw"
+                      // Only optimize hosts allowed in next.config images.remotePatterns
+                      unoptimized={!post.imageUrl.startsWith("https://cdn.feedframer.com/")}
+                      className="h-full w-full object-cover"
                     />
+                    {post.isVideo && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white"
+                      >
+                        <svg viewBox="0 0 24 24" className="ml-0.5 h-3.5 w-3.5" fill="currentColor">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    )}
                   </div>
                 </div>
               </a>
