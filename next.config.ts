@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
     return [
       {source: '/jp', destination: '/ja', permanent: true},
       {source: '/jp/:path*', destination: '/ja/:path*', permanent: true},
+      // Once launched, send anyone with an old "coming soon" link to the real site
+      ...(process.env.MAINTENANCE_MODE === 'true'
+        ? []
+        : [{source: '/coming-soon', destination: '/', permanent: false}]),
     ];
   },
   images: {

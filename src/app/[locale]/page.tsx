@@ -498,7 +498,7 @@ export default async function HomePage() {
       <section className="relative w-full pt-6 pb-14 scroll-mt-24" id="contact">
           <div className="relative mx-auto w-full max-w-2xl px-4">
             {/* Origami Bull — perched on the corkboard, mirrored from the activities section */}
-            <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-30 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
+            <div className="absolute -top-12 right-0 sm:-top-16 sm:-right-8 lg:-right-20 z-20 w-24 sm:w-32 lg:w-40 rotate-6 -scale-x-100 drop-shadow-sm pointer-events-none">
               <Image
                 src="/images/bull.webp"
                 alt=""

@@ -1,5 +1,6 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
+import { unstable_cache } from "next/cache";
 
 export interface ResourceItem {
   id: string;
@@ -41,18 +42,38 @@ const serviceAccountAuth = new JWT({
 
 export async function getResources(sheetId: string): Promise<ResourceItem[]> {
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+    // Never show placeholder entries on the live site
+    if (process.env.NODE_ENV === "production") {
+      console.error("Google Sheets credentials missing.");
+      return [];
+    }
     console.warn("Google Sheets credentials missing. Returning mock data.");
     return getMockResources();
   }
 
   try {
-    const doc = new GoogleSpreadsheet(sheetId, serviceAccountAuth);
-    await doc.loadInfo();
-    
-    const sheet = doc.sheetsByIndex[0];
-    const rows = await sheet.getRows();
+    return await getCachedResources(sheetId);
+  } catch (error) {
+    console.error("Error fetching from Google Sheets:", error);
+    return [];
+  }
+}
 
-    return rows
+// The resource pages render per request and google-spreadsheet doesn't go through Next's fetch
+// cache, so cache sheet contents here to stay well under the Sheets API read quota.
+// Errors are thrown (not returned as []) so a failed fetch isn't cached for the full window.
+const getCachedResources = unstable_cache(fetchResources, ["google-sheet-resources"], {
+  revalidate: 600,
+});
+
+async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
+  const doc = new GoogleSpreadsheet(sheetId, serviceAccountAuth);
+  await doc.loadInfo();
+
+  const sheet = doc.sheetsByIndex[0];
+  const rows = await sheet.getRows();
+
+  return rows
       .map((row: SheetRow): ResourceItem => {
         const id = row.get("id") as string;
         const active = row.get("active") === "TRUE";
@@ -128,10 +149,6 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
         };
       })
       .filter((item) => item.active && !!item.id);
-  } catch (error) {
-    console.error("Error fetching from Google Sheets:", error);
-    return [];
-  }
 }
 
 function getMockResources(): ResourceItem[] {
