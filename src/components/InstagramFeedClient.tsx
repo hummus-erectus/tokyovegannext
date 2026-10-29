@@ -95,7 +95,9 @@ export function InstagramFeedClient({ posts }: { posts: InstagramPost[] }) {
                       alt={post.caption || "Instagram post"}
                       width={500}
                       height={625}
-                      unoptimized
+                      sizes="(min-width: 768px) 280px, 45vw"
+                      // Only optimize hosts allowed in next.config images.remotePatterns
+                      unoptimized={!post.imageUrl.startsWith("https://cdn.feedframer.com/")}
                       className="h-full w-full object-cover"
                     />
                     {post.isVideo && (

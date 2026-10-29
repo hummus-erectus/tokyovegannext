@@ -39,6 +39,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.feedframer.com', // Instagram feed images
       }
     ]
   }

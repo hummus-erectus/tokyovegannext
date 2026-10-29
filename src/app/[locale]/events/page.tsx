@@ -75,7 +75,7 @@ export default async function EventsPage(props: {
                     >
                       <PeatixIcon className="h-5 w-5" aria-hidden="true" />
                       <span>{t("peatix.cta")}</span>
-                      <span aria-hidden="true" className="transition-transform group-hover/cta:translate-x-1">→</span>
+                      <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </div>

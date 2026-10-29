@@ -1,7 +1,13 @@
+import type {Metadata} from "next";
 import {getLocale, getTranslations} from "next-intl/server";
 import Image from "next/image";
 import {PaperSurface} from "@/components/PaperSurface";
 import {PaperButton} from "@/components/PaperButton";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("NotFoundPage");
+  return {title: t("metaTitle")};
+}
 
 export default async function NotFoundPage() {
   const t = await getTranslations("NotFoundPage");

@@ -71,7 +71,7 @@
         "cards": {
           "outreach": {
             "title": "Vegan 101",
-            "description": "We amplify the benefits of vegan living through street outreach, talks, and media collaborations that spotlight health, sustainability, and animal protection.",
+            "description": "An introduction to veganism: why people choose it, what vegans eat, and answers to common questions.",
             "linkLabel": "Learn about Vegan 101",
             "stickyLabel": "What's 'vegan'?"
           },
@@ -321,8 +321,8 @@
         "description": "Educational sessions covering topics like cooking, nutrition, animal rights, and sustainable living."
       },
       "outreach": {
-        "title": "Outreach & Activism",
-        "description": "Peaceful street outreach, cleanups, and campaigns to raise awareness about veganism and animal welfare."
+        "title": "Outreach & Advocacy",
+        "description": "Info booths at festivals like Earth Day, where we share what veganism is all about, and advocacy with lawmakers and government ministries through Vege Council Japan."
       }
     },
     "peatix": {
@@ -332,6 +332,7 @@
     }
   },
   "NotFoundPage": {
+    "metaTitle": "Page not found",
     "title": "This page has flown the coop",
     "description": "We couldn't find the page you were looking for. It may have moved when we redesigned the site.",
     "cta": "Back to home"
