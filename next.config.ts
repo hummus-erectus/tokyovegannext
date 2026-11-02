@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
+import {optimizedImageHosts} from './src/lib/remoteImages';
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -19,32 +20,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com"
-      },
-      {
-        protocol: "https",
-        hostname: "books.google.co.jp"
-      },
-      {
-        protocol: "https",
-        hostname: "lanternpub.wpenginepowered.com"
-      },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com', // Allow Cloudinary images
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.feedframer.com', // Instagram feed images
-      }
-    ]
+    remotePatterns: optimizedImageHosts.map((hostname) => ({protocol: 'https' as const, hostname}))
   }
 };
 

@@ -30,6 +30,7 @@ export interface ResourceItem {
 }
 
 type SheetRow = {
+  rowNumber: number;
   get: (key: string) => unknown;
 };
 
@@ -75,8 +76,9 @@ async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
 
   return rows
       .map((row: SheetRow): ResourceItem => {
-        const id = row.get("id") as string;
-        const active = row.get("active") === "TRUE";
+        // Only used for React keys and picking washi tape, so editors don't have to maintain one
+        const id = String(row.rowNumber);
+        const active = ((row.get("active") as string | undefined) ?? "").toString().trim().toUpperCase() === "TRUE";
 
         const displayOnRaw = ((row.get("display_on") as string | undefined) ?? "")
           .toString()
@@ -93,9 +95,9 @@ async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
         const descriptionEn = row.get("description_en") as string;
         const descriptionJa = row.get("description_ja") as string;
         const url = row.get("url") as string;
-        const imageUrl = row.get("image_url") as string | undefined;
-        const imageUrlEn = row.get("image_url_en") as string | undefined;
-        const imageUrlJa = row.get("image_url_ja") as string | undefined;
+        const imageUrl = imageUrlFrom(row, "image_url");
+        const imageUrlEn = imageUrlFrom(row, "image_url_en");
+        const imageUrlJa = imageUrlFrom(row, "image_url_ja");
         const authorEn = row.get("author_en") as string | undefined;
         const authorJa = row.get("author_ja") as string | undefined;
         const category = row.get("category") as string | undefined;
@@ -131,8 +133,8 @@ async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
           active,
           displayOn,
           title: {
-            en: titleEn,
-            ja: titleJa,
+            en: titleEn || titleJa,
+            ja: titleJa || titleEn,
           },
           description: {
             en: descriptionEn,
@@ -148,7 +150,13 @@ async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
           languages,
         };
       })
-      .filter((item) => item.active && !!item.id);
+      .filter((item) => item.active && !!item.title.en && !!item.url);
+}
+
+// A cell can hold stray whitespace or a note instead of a link, which would break the image
+function imageUrlFrom(row: SheetRow, key: string): string | undefined {
+  const value = ((row.get(key) as string | undefined) ?? "").toString().trim();
+  return /^https?:\/\//i.test(value) ? value : undefined;
 }
 
 function getMockResources(): ResourceItem[] {
