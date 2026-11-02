@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {useState} from "react";
+import {skipImageOptimization} from "@/lib/remoteImages";
 
 interface FallbackImageProps {
   src: string;
@@ -31,6 +32,7 @@ export function FallbackImage({
       alt={alt}
       fill={fill}
       className={activeClass}
+      unoptimized={skipImageOptimization(activeSrc)}
       onError={() => {
         if (!errored) setErrored(true);
       }}

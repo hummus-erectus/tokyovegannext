@@ -35,14 +35,14 @@ export default function Footer() {
         {/* Links */}
         <div className="flex flex-wrap justify-center gap-6 font-ui text-xl font-bold text-emerald-700">
           <a
-            href="https://www.meetup.com/tokyovegan/"
+            href="https://peatix.com/group/16486093"
             target="_blank"
             rel="noreferrer"
             className="group relative transition-transform"
           >
             <RoughHighlight type="underline" color="#10b981" strokeWidth={2} trigger="hover">
               <span className="relative z-10">
-                {t("footer.links.meetup")}
+                {t("footer.links.peatix")}
               </span>
             </RoughHighlight>
           </a>

@@ -35,6 +35,7 @@ export function HomeBlogCard({
         year: 'numeric',
         month: 'long',
         day: 'numeric',
+        timeZone: 'Asia/Tokyo',
       })
     : null
 

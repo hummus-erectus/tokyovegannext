@@ -1,5 +1,6 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
+import { unstable_cache } from "next/cache";
 
 export interface ResourceItem {
   id: string;
@@ -29,6 +30,7 @@ export interface ResourceItem {
 }
 
 type SheetRow = {
+  rowNumber: number;
   get: (key: string) => unknown;
 };
 
@@ -41,21 +43,42 @@ const serviceAccountAuth = new JWT({
 
 export async function getResources(sheetId: string): Promise<ResourceItem[]> {
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+    // Never show placeholder entries on the live site
+    if (process.env.NODE_ENV === "production") {
+      console.error("Google Sheets credentials missing.");
+      return [];
+    }
     console.warn("Google Sheets credentials missing. Returning mock data.");
     return getMockResources();
   }
 
   try {
-    const doc = new GoogleSpreadsheet(sheetId, serviceAccountAuth);
-    await doc.loadInfo();
-    
-    const sheet = doc.sheetsByIndex[0];
-    const rows = await sheet.getRows();
+    return await getCachedResources(sheetId);
+  } catch (error) {
+    console.error("Error fetching from Google Sheets:", error);
+    return [];
+  }
+}
 
-    return rows
+// The resource pages render per request and google-spreadsheet doesn't go through Next's fetch
+// cache, so cache sheet contents here to stay well under the Sheets API read quota.
+// Errors are thrown (not returned as []) so a failed fetch isn't cached for the full window.
+const getCachedResources = unstable_cache(fetchResources, ["google-sheet-resources"], {
+  revalidate: 600,
+});
+
+async function fetchResources(sheetId: string): Promise<ResourceItem[]> {
+  const doc = new GoogleSpreadsheet(sheetId, serviceAccountAuth);
+  await doc.loadInfo();
+
+  const sheet = doc.sheetsByIndex[0];
+  const rows = await sheet.getRows();
+
+  return rows
       .map((row: SheetRow): ResourceItem => {
-        const id = row.get("id") as string;
-        const active = row.get("active") === "TRUE";
+        // Only used for React keys and picking washi tape, so editors don't have to maintain one
+        const id = String(row.rowNumber);
+        const active = ((row.get("active") as string | undefined) ?? "").toString().trim().toUpperCase() === "TRUE";
 
         const displayOnRaw = ((row.get("display_on") as string | undefined) ?? "")
           .toString()
@@ -72,9 +95,9 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
         const descriptionEn = row.get("description_en") as string;
         const descriptionJa = row.get("description_ja") as string;
         const url = row.get("url") as string;
-        const imageUrl = row.get("image_url") as string | undefined;
-        const imageUrlEn = row.get("image_url_en") as string | undefined;
-        const imageUrlJa = row.get("image_url_ja") as string | undefined;
+        const imageUrl = imageUrlFrom(row, "image_url");
+        const imageUrlEn = imageUrlFrom(row, "image_url_en");
+        const imageUrlJa = imageUrlFrom(row, "image_url_ja");
         const authorEn = row.get("author_en") as string | undefined;
         const authorJa = row.get("author_ja") as string | undefined;
         const category = row.get("category") as string | undefined;
@@ -110,8 +133,8 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
           active,
           displayOn,
           title: {
-            en: titleEn,
-            ja: titleJa,
+            en: titleEn || titleJa,
+            ja: titleJa || titleEn,
           },
           description: {
             en: descriptionEn,
@@ -127,11 +150,13 @@ export async function getResources(sheetId: string): Promise<ResourceItem[]> {
           languages,
         };
       })
-      .filter((item) => item.active && !!item.id);
-  } catch (error) {
-    console.error("Error fetching from Google Sheets:", error);
-    return [];
-  }
+      .filter((item) => item.active && !!item.title.en && !!item.url);
+}
+
+// A cell can hold stray whitespace or a note instead of a link, which would break the image
+function imageUrlFrom(row: SheetRow, key: string): string | undefined {
+  const value = ((row.get(key) as string | undefined) ?? "").toString().trim();
+  return /^https?:\/\//i.test(value) ? value : undefined;
 }
 
 function getMockResources(): ResourceItem[] {

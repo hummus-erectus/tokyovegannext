@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import { client } from '@/sanity/client'
 import { urlFor } from '@/sanity/image'
 import { BlogPostCard } from '@/components/BlogPostCard'
@@ -21,6 +23,16 @@ const POSTS_QUERY = `*[_type == "post" && language == $language && defined(slug.
 
 type Props = {
   params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "BlogPage"});
+  return {
+    title: t("hero.title"),
+    description: t("hero.description"),
+    alternates: localeAlternates(locale, "/blog"),
+  };
 }
 
 export default async function BlogListPage({ params }: Props) {

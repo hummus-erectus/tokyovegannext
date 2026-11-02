@@ -4,6 +4,7 @@ import {Link} from "@/i18n/routing";
 import Image from "next/image";
 import {RoughHighlight} from "@/components/RoughHighlight";
 import {usePaperLift} from "@/hooks/usePaperLift";
+import {skipImageOptimization} from "@/lib/remoteImages";
 
 interface ResourceCardProps {
   title: string;
@@ -56,7 +57,7 @@ export function ResourceCard({
       >
       {imageUrl && (
         <div className="relative h-48 w-full overflow-hidden bg-slate-100">
-          <Image src={imageUrl} alt={title} fill className="object-cover" />
+          <Image src={imageUrl} alt={title} fill className="object-cover" unoptimized={skipImageOptimization(imageUrl)} />
         </div>
       )}
       

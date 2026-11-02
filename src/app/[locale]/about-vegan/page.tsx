@@ -1,3 +1,5 @@
+import type {Metadata} from "next";
+import {localeAlternates} from "@/lib/site";
 import {FaqAccordion} from "@/components/FaqAccordion";
 import {WhyGoVeganCards} from "@/components/WhyGoVeganCards";
 import {RoughHighlight} from "@/components/RoughHighlight";
@@ -64,6 +66,16 @@ const whyGoVeganCards = [
 
 const reasonKeys = ["animals", "planet", "health", "publicHealth", "humanRights"] as const;
 const faqKeys = ["difficult", "eat", "nutrition", "religion", "unsure"] as const;
+
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "AboutVeganPage"});
+  return {
+    title: t("hero.title"),
+    description: t("hero.subtitle"),
+    alternates: localeAlternates(locale, "/about-vegan"),
+  };
+}
 
 export default async function AboutVeganPage() {
   const t = await getTranslations("AboutVeganPage");
@@ -150,6 +162,7 @@ export default async function AboutVeganPage() {
             readMoreLabel={t("whyGoVegan.readMore")}
             sectionTitle={t("whyGoVegan.title")}
             closeLabel={t("modal.close")}
+            sourcesLabel={t("whyGoVegan.sourcesLabel")}
           />
 
           {/* Kindness callout — sticky note style */}
